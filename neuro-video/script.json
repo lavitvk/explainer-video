@@ -1,0 +1,102 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part two: Neurology."},
+  {"say":"नया part शुरू करने से पहले, Part one वापस बुलाओ।"},
+  {"say":"Morning periorbital swelling, normal BP: nephrotic।"},
+  {"say":"Well infant with UTI: oral cephalexin।"},
+  {"say":"Renal scar: DMSA।"},
+  {"say":"अब, brain, nerve, और muscle।"}]},
+ {"id":"q4case","lines":[
+  {"say":"Case four. Kernicterus और CP का type।"},
+  {"say":"Kernicterus मतलब, bilirubin brain में जम गया।"},
+  {"say":"कहाँ? Basal ganglia में। Globus pallidus।"},
+  {"say":"Bilirubin, basal ganglia पर toxic है।"}]},
+ {"id":"q4ans","lines":[
+  {"say":"तो कौन सा CP बनता है? Dyskinetic, यानी athetoid।"},
+  {"say":"Kernicterus, basal ganglia, dyskinetic CP।"}]},
+ {"id":"q4why","lines":[
+  {"say":"Spastic CP सबसे common है overall, पर वह prematurity और PVL से होता है, यानी white matter damage।"},
+  {"say":"Spastic किससे? Prematurity।"},
+  {"say":"Ataxic CP, cerebellum के damage से होता है।"},
+  {"say":"Hypotonia शुरू में दिख सकती है, पर final type dyskinetic बनता है।"}]},
+ {"id":"q4rem","lines":[
+  {"say":"So remember: kernicterus, basal ganglia, dyskinetic CP।"}]},
+ {"id":"q5case","lines":[
+  {"say":"पहले दोहरा लो: kernicterus, dyskinetic CP।"},
+  {"say":"Case five. दो साल का बच्चा।"},
+  {"say":"तीन minute का generalized tonic-clonic seizure।"},
+  {"say":"अब drowsy है, पर responsive।"},
+  {"say":"Temperature 39, sore throat, runny nose।"},
+  {"say":"Family में febrile seizure की history है।"}]},
+ {"id":"q5ans","lines":[
+  {"say":"यह क्या है? Simple febrile seizure।"},
+  {"say":"Simple क्यों? पंद्रह minute से कम, generalized, एक ही बार, और age छह महीने से पाँच साल।"},
+  {"say":"यह benign है।"},
+  {"say":"Parents को क्या बोलना है? Reassure करो, और fever का source ढूँढो।"}]},
+ {"id":"q5why","lines":[
+  {"say":"Prophylactic antiepileptic नहीं। Side effects, benefit से ज़्यादा हैं।"},
+  {"say":"CT नहीं। EEG नहीं।"},
+  {"say":"Simple febrile seizure में imaging और EEG की ज़रूरत नहीं।"}]},
+ {"id":"q5rem","lines":[
+  {"say":"So remember: simple febrile seizure, reassure। No CT, no EEG, no prophylaxis।"}]},
+ {"id":"q6case","lines":[
+  {"say":"पिछला एक line में: simple febrile seizure, reassure।"},
+  {"say":"Case six. बच्चे की थकान और weakness, दिन के end तक बढ़ती जाती है।"},
+  {"say":"शाम को आँखें खुली रखना मुश्किल। दोनों तरफ ptosis।"},
+  {"say":"Wasting नहीं, reflexes normal, sensation normal।"}]},
+ {"id":"q6ans","lines":[
+  {"say":"Fatigable weakness, plus ptosis, जो दिन भर में बढ़ती है। यह क्या है?"},
+  {"say":"Myasthenia gravis।"},
+  {"say":"Test कौन सा? Acetylcholine receptor antibodies, यानी AChR antibodies।"}]},
+ {"id":"q6why","lines":[
+  {"say":"CK और muscle biopsy, myopathy के लिए हैं। Myasthenia में CK normal होता है।"},
+  {"say":"Routine nerve conduction भी normal आता है।"},
+  {"say":"Repetitive nerve stimulation में decrement दिखता है, पर पहले serology।"}]},
+ {"id":"q6rem","lines":[
+  {"say":"So remember: शाम तक बढ़ती weakness, plus ptosis: myasthenia gravis, AChR antibodies।"}]},
+ {"id":"q7case","lines":[
+  {"say":"पहले दोहरा लो: fatigable weakness, ptosis, myasthenia, AChR antibodies।"},
+  {"say":"Case seven. नौ साल की लड़की। दो महीने से weakness बढ़ रही है।"},
+  {"say":"सीढ़ी चढ़ना मुश्किल, chair से उठना मुश्किल, हाथ ऊपर नहीं उठते।"},
+  {"say":"यह कौन सी weakness है? Proximal।"},
+  {"say":"अब skin देखो। Eyelids पर reddish-purple rash। इसको कहते हैं heliotrope rash।"},
+  {"say":"Knuckles पर भी rash। Gottron papules।"}]},
+ {"id":"q7ans","lines":[
+  {"say":"Proximal weakness, heliotrope rash, Gottron papules: juvenile dermatomyositis।"}]},
+ {"id":"q7why","lines":[
+  {"say":"SLE में malar rash, arthritis, और kidney involvement होता है। Proximal myositis main feature नहीं।"},
+  {"say":"Muscular dystrophy में rash नहीं होता, और Duchenne mostly boys में होता है।"},
+  {"say":"JIA में joint swelling होती है, muscle weakness नहीं।"}]},
+ {"id":"q7rem","lines":[
+  {"say":"So remember: weakness, plus eyelid rash, plus knuckle rash: juvenile dermatomyositis।"}]},
+ {"id":"q8case","lines":[
+  {"say":"पिछला: proximal weakness, heliotrope rash, Gottron papules, dermatomyositis।"},
+  {"say":"इस part का last case। Case eight. पाँच महीने का infant।"},
+  {"say":"Surroundings में interest खो दिया। Smile नहीं करता, माँ को follow नहीं करता।"},
+  {"say":"यह developmental regression है।"},
+  {"say":"और झटके आते हैं: head, trunk, और limbs का sudden flexion, फिर arms का extension।"},
+  {"say":"दस से पंद्रह second, लगभग बीस बार, clusters में।"}]},
+ {"id":"q8ans","lines":[
+  {"say":"यह क्या है? Infantile spasms, यानी West syndrome।"},
+  {"say":"EEG में क्या? Hypsarrhythmia।"},
+  {"say":"Chaotic, slow background, with multifocal spikes।"},
+  {"say":"Treatment: ACTH, या vigabatrin।"}]},
+ {"id":"q8why","lines":[
+  {"say":"बाकी EEG patterns: slow spike-wave, 2.5 hertz से कम, Lennox-Gastaut में।"},
+  {"say":"Three hertz spike-wave, absence में।"},
+  {"say":"चार से छह hertz polyspike, juvenile myoclonic epilepsy में।"},
+  {"say":"Focal discharges, rolandic या focal epilepsy में।"}]},
+ {"id":"q8rem","lines":[
+  {"say":"So remember: flexion spasms, plus regression: West syndrome, hypsarrhythmia, ACTH या vigabatrin।"}]},
+ {"id":"recap","lines":[
+  {"say":"Part two का recap। पाँचों एक साथ।"},
+  {"say":"Kernicterus, basal ganglia, dyskinetic CP।"},
+  {"say":"Simple febrile seizure: reassure। No CT, no EEG।"},
+  {"say":"शाम तक बढ़ती weakness और ptosis: myasthenia, AChR antibodies।"},
+  {"say":"Proximal weakness, heliotrope rash, Gottron papules: dermatomyositis।"},
+  {"say":"Infantile spasms: hypsarrhythmia, ACTH या vigabatrin।"}]},
+ {"id":"think","lines":[
+  {"say":"Think about it: myasthenia और dermatomyositis, दोनों में weakness है। फ़र्क कैसे?"},
+  {"say":"Myasthenia में weakness दिन भर में बढ़ती है, ptosis होता है, और CK normal।"},
+  {"say":"Dermatomyositis में proximal weakness के साथ rash होता है।"}]}
+]
