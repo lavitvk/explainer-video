@@ -1,0 +1,641 @@
+[
+ {
+  "id": "title",
+  "lines": [
+   {
+    "say": "Revision notes: measurement of time, rest and motion, और Indian farming।"
+   }
+  ]
+ },
+ {
+  "id": "t1",
+  "lines": [
+   {
+    "say": "Part one. Science: measurement of time।"
+   },
+   {
+    "say": "Time को किस unit में नापते हैं? Second।"
+   },
+   {
+    "say": "SI unit of time is second।"
+   },
+   {
+    "say": "और second का symbol क्या है? s। छोटा s।"
+   },
+   {
+    "say": "तो time का SI unit, second। Symbol, s।"
+   }
+  ]
+ },
+ {
+  "id": "t2",
+  "lines": [
+   {
+    "say": "पहले वाला याद है? SI unit of time, second, symbol s। अब बड़े units।"
+   },
+   {
+    "say": "10 years को क्या कहते हैं? 1 decade।"
+   },
+   {
+    "say": "अब 100 years: 1 century। 100 years, या 10 decades।"
+   },
+   {
+    "say": "और 1000 years: 1 millennium। 1000 years, या 10 centuries।"
+   },
+   {
+    "say": "हर बार 10 से multiply हो रहा है। 10, 100, 1000।"
+   },
+   {
+    "say": "So remember: 10 years, decade। 100 years, century। 1000 years, millennium।"
+   }
+  ]
+ },
+ {
+  "id": "t3",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: 10 years decade, 100 years century, 1000 years millennium। अब second से छोटे units।"
+   },
+   {
+    "say": "1 millisecond, symbol m s। यह second का one thousandth है, यानी 10 की power minus 3 second। Milli मतलब thousandth।"
+   },
+   {
+    "say": "1 microsecond, symbol mu s। यह second का one millionth है, यानी 10 की power minus 6 second। Micro मतलब millionth।"
+   },
+   {
+    "say": "और 1 nanosecond, symbol n s। यह second का one billionth है, यानी 10 की power minus 9 second। Nano मतलब billionth।"
+   }
+  ]
+ },
+ {
+  "id": "t3w",
+  "lines": [
+   {
+    "say": "अब ध्यान से। Milli और micro mix मत करना। Notebook में यह दोनों mix हो गए थे।"
+   },
+   {
+    "say": "Milli क्या है? Thousandth, 10 की power minus 3। Micro क्या है? Millionth, 10 की power minus 6।"
+   },
+   {
+    "say": "Power देखो: minus 3, minus 6, minus 9। तीन-तीन बढ़ रहा है।"
+   },
+   {
+    "say": "So remember: milli, thousandth, minus 3। Micro, millionth, minus 6। Nano, billionth, minus 9।"
+   }
+  ]
+ },
+ {
+  "id": "p1recap",
+  "lines": [
+   {
+    "say": "Part one का recap। सब एक साथ।"
+   },
+   {
+    "say": "SI unit of time, second, symbol s।"
+   },
+   {
+    "say": "10 years decade, 100 years century, 1000 years millennium।"
+   },
+   {
+    "say": "Millisecond 10 की power minus 3, microsecond minus 6, nanosecond minus 9।"
+   }
+  ]
+ },
+ {
+  "id": "p1think",
+  "lines": [
+   {
+    "say": "Think about it: 1 century में कितने decades होते हैं?"
+   },
+   {
+    "say": "10।"
+   },
+   {
+    "say": "और 1 millennium में कितनी centuries?"
+   },
+   {
+    "say": "10।"
+   }
+  ]
+ },
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two. Science: rest and motion।"
+   },
+   {
+    "say": "नया part शुरू करने से पहले, Part one वापस बुलाओ।"
+   },
+   {
+    "say": "SI unit of time: second। 100 years: century। Millisecond: one thousandth, 10 की power minus 3।"
+   },
+   {
+    "say": "अब, rest और motion।"
+   }
+  ]
+ },
+ {
+  "id": "m4",
+  "lines": [
+   {
+    "say": "एक object rest में कब होता है? जब वह अपनी position change नहीं करता, time के साथ, या अपनी surroundings के respect में।"
+   },
+   {
+    "say": "Position change नहीं, तो rest।"
+   },
+   {
+    "say": "और motion में कब? जब उसकी position change होती है, time के साथ, या surroundings के respect में।"
+   },
+   {
+    "say": "Position change, तो motion।"
+   },
+   {
+    "say": "तो फ़र्क सिर्फ एक चीज़ का है: position। Position same है तो rest, position बदल रही है तो motion।"
+   },
+   {
+    "say": "Table पर रखी book rest में है। चलती हुई car motion में है।"
+   },
+   {
+    "say": "So remember: no change in position, rest। Change in position, motion।"
+   }
+  ]
+ },
+ {
+  "id": "m5",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: position change नहीं, rest। Position change, motion। अब speed।"
+   },
+   {
+    "say": "Speed क्या है? एक moving object, unit time में जितना distance travel करता है, वह speed है।"
+   },
+   {
+    "say": "Unit time क्या हो सकता है? 1 second, 1 minute, या 1 hour।"
+   },
+   {
+    "say": "Formula: speed equals total distance covered, divided by total time taken। S equals D divided by T।"
+   },
+   {
+    "say": "Distance ऊपर, time नीचे।"
+   }
+  ]
+ },
+ {
+  "id": "m5b",
+  "lines": [
+   {
+    "say": "एक example: car 100 km गई, 2 hours में। Speed कितनी? 100 divided by 2, यानी 50 km per hour।"
+   },
+   {
+    "say": "Speed का SI unit: metre per second, m by s। और दूसरा unit: kilometre per hour, km by h।"
+   },
+   {
+    "say": "So remember: speed is distance divided by time। SI unit m by s, और km by h में भी लिख सकते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "m6",
+  "lines": [
+   {
+    "say": "पिछला एक line में: speed equals distance divided by time, SI unit m by s।"
+   },
+   {
+    "say": "कोई भी object पूरी journey में same speed से नहीं चलता। कभी fast, कभी slow।"
+   },
+   {
+    "say": "इसलिए हम average speed निकालते हैं।"
+   },
+   {
+    "say": "Average speed equals total distance travelled, divided by total time taken। पूरी journey का total लेना है।"
+   },
+   {
+    "say": "So remember: speed बदलती रहती है, इसलिए average speed: total distance divided by total time।"
+   }
+  ]
+ },
+ {
+  "id": "m7",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: average speed, total distance divided by total time। अब दो instruments।"
+   },
+   {
+    "say": "Speedometer क्या नापता है? Vehicle की speed। और km per hour में दिखाता है।"
+   },
+   {
+    "say": "Odometer, vehicle का total distance travelled नापता है, और km में दिखाता है।"
+   },
+   {
+    "say": "Confuse मत होना। Speedometer: speed, km per hour। Odometer: distance, km।"
+   },
+   {
+    "say": "So remember: speedometer speed बताता है, odometer distance बताता है।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। सब एक साथ।"
+   },
+   {
+    "say": "Position change नहीं, rest। Position change, motion।"
+   },
+   {
+    "say": "Speed is distance divided by time, SI unit m by s।"
+   },
+   {
+    "say": "Average speed is total distance divided by total time।"
+   },
+   {
+    "say": "Speedometer: speed, km per hour। Odometer: distance, km।"
+   }
+  ]
+ },
+ {
+  "id": "p2think",
+  "lines": [
+   {
+    "say": "Think about it: एक cyclist 30 km जाता है, 3 hours में। Average speed कितनी?"
+   },
+   {
+    "say": "30 divided by 3, यानी 10 km per hour।"
+   }
+  ]
+ },
+ {
+  "id": "p3intro",
+  "lines": [
+   {
+    "say": "Part three. Social science: the story of Indian farming।"
+   },
+   {
+    "say": "Social science से पहले, science वापस बुलाओ।"
+   },
+   {
+    "say": "SI unit of time: second। 1000 years: millennium।"
+   },
+   {
+    "say": "Speed: distance divided by time। Speedometer: speed। Odometer: distance।"
+   },
+   {
+    "say": "अब, farming।"
+   }
+  ]
+ },
+ {
+  "id": "f8",
+  "lines": [
+   {
+    "say": "Agriculture की definition: the science and art of cultivating the soil, raising crops, and rearing livestock।"
+   },
+   {
+    "say": "तीन काम याद रखो: soil cultivate करना, crops उगाना, और livestock पालना।"
+   },
+   {
+    "say": "Soil, crops, livestock। और यह science भी है, और art भी।"
+   },
+   {
+    "say": "So remember: agriculture is the science and art of cultivating soil, raising crops, and rearing livestock।"
+   }
+  ]
+ },
+ {
+  "id": "f9",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: agriculture में तीन काम, soil, crops, livestock। अब branches।"
+   },
+   {
+    "say": "यहाँ हर नाम के end में culture है। बस पहला हिस्सा याद रखना है।"
+   },
+   {
+    "say": "Horticulture: flowers, fruits और vegetables उगाना, बेचने के लिए। Horti, यानी garden।"
+   },
+   {
+    "say": "Sericulture: silkworms पालना, silk के लिए। Seri, यानी silk।"
+   },
+   {
+    "say": "Apiculture: honey bees रखना, honey और beeswax के लिए। Api, यानी bees।"
+   }
+  ]
+ },
+ {
+  "id": "f9b",
+  "lines": [
+   {
+    "say": "अब तीन और।"
+   },
+   {
+    "say": "Pisciculture: fish breed करना। Pisci, यानी fish।"
+   },
+   {
+    "say": "Viticulture: grapes उगाना। Viti, यानी grapes।"
+   },
+   {
+    "say": "Floriculture: flowering plants और flowers उगाना। Flori, यानी flowers।"
+   }
+  ]
+ },
+ {
+  "id": "f9quiz",
+  "lines": [
+   {
+    "say": "अब एक बार उल्टा पूछो।"
+   },
+   {
+    "say": "Silk किसमें?"
+   },
+   {
+    "say": "Sericulture।"
+   },
+   {
+    "say": "Honey किसमें?"
+   },
+   {
+    "say": "Apiculture।"
+   },
+   {
+    "say": "Fish किसमें?"
+   },
+   {
+    "say": "Pisciculture।"
+   },
+   {
+    "say": "Grapes किसमें?"
+   },
+   {
+    "say": "Viticulture।"
+   },
+   {
+    "say": "Flowers किसमें?"
+   },
+   {
+    "say": "Floriculture।"
+   },
+   {
+    "say": "Fruits और vegetables किसमें?"
+   },
+   {
+    "say": "Horticulture।"
+   },
+   {
+    "say": "So remember: seri silk, api bees, pisci fish, viti grapes, flori flowers, horti fruits and vegetables।"
+   }
+  ]
+ },
+ {
+  "id": "f10",
+  "lines": [
+   {
+    "say": "पिछला एक line में: seri silk, api bees, pisci fish, viti grapes। अब last one।"
+   },
+   {
+    "say": "Zaid crop को और क्या कहते हैं? Summer crop। Zaid मतलब summer।"
+   },
+   {
+    "say": "Example क्या है? Watermelon।"
+   },
+   {
+    "say": "So remember: zaid, summer crop, example watermelon।"
+   }
+  ]
+ },
+ {
+  "id": "p3recap",
+  "lines": [
+   {
+    "say": "Part three का recap। सब एक साथ।"
+   },
+   {
+    "say": "Agriculture: soil, crops, livestock।"
+   },
+   {
+    "say": "Horticulture fruits, vegetables, flowers। Sericulture silk। Apiculture honey bees।"
+   },
+   {
+    "say": "Pisciculture fish। Viticulture grapes। Floriculture flowers।"
+   },
+   {
+    "say": "Zaid crop: summer crop, watermelon।"
+   }
+  ]
+ },
+ {
+  "id": "p3think",
+  "lines": [
+   {
+    "say": "Think about it: एक farmer honey बेचता है, और दूसरा silk। दोनों कौन सी branch में हैं?"
+   },
+   {
+    "say": "Honey वाला, apiculture। Silk वाला, sericulture।"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, पूरा chapter एक साथ। कुछ नया नहीं, सिर्फ वही जो पढ़ा है।"
+   },
+   {
+    "say": "Time: SI unit second, symbol s। 10 years decade, 100 years century, 1000 years millennium।"
+   },
+   {
+    "say": "Millisecond thousandth, 10 की power minus 3। Microsecond millionth, minus 6। Nanosecond billionth, minus 9।"
+   },
+   {
+    "say": "Rest and motion: position change नहीं, rest। Position change, motion।"
+   },
+   {
+    "say": "Speed is distance divided by time। SI unit m by s, और km by h भी।"
+   },
+   {
+    "say": "Average speed is total distance divided by total time।"
+   },
+   {
+    "say": "Speedometer speed बताता है, km per hour में। Odometer distance बताता है, km में।"
+   },
+   {
+    "say": "Farming: agriculture, science and art of cultivating soil, raising crops, rearing livestock।"
+   },
+   {
+    "say": "Horticulture fruits, vegetables, flowers। Sericulture silk। Apiculture honey bees।"
+   },
+   {
+    "say": "Pisciculture fish। Viticulture grapes। Floriculture flowers। Zaid crop, summer crop, watermelon।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "SI unit of time?"
+   },
+   {
+    "say": "Second।"
+   },
+   {
+    "say": "उसका symbol?"
+   },
+   {
+    "say": "s।"
+   },
+   {
+    "say": "10 years?"
+   },
+   {
+    "say": "Decade।"
+   },
+   {
+    "say": "100 years?"
+   },
+   {
+    "say": "Century।"
+   },
+   {
+    "say": "1000 years?"
+   },
+   {
+    "say": "Millennium।"
+   },
+   {
+    "say": "One thousandth of a second?"
+   },
+   {
+    "say": "Millisecond।"
+   },
+   {
+    "say": "One millionth?"
+   },
+   {
+    "say": "Microsecond।"
+   },
+   {
+    "say": "One billionth?"
+   },
+   {
+    "say": "Nanosecond।"
+   },
+   {
+    "say": "10 की power minus 6 second कौन सा है?"
+   },
+   {
+    "say": "Microsecond।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "Position change नहीं हो रही?"
+   },
+   {
+    "say": "Rest।"
+   },
+   {
+    "say": "Position change हो रही है?"
+   },
+   {
+    "say": "Motion।"
+   },
+   {
+    "say": "Speed का formula?"
+   },
+   {
+    "say": "Distance divided by time।"
+   },
+   {
+    "say": "Speed का SI unit?"
+   },
+   {
+    "say": "m by s।"
+   },
+   {
+    "say": "Average speed?"
+   },
+   {
+    "say": "Total distance divided by total time।"
+   },
+   {
+    "say": "Speed कौन नापता है?"
+   },
+   {
+    "say": "Speedometer।"
+   },
+   {
+    "say": "Total distance कौन नापता है?"
+   },
+   {
+    "say": "Odometer।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "Agriculture में कौन से तीन काम?"
+   },
+   {
+    "say": "Soil, crops, livestock।"
+   },
+   {
+    "say": "Silkworms?"
+   },
+   {
+    "say": "Sericulture।"
+   },
+   {
+    "say": "Honey bees?"
+   },
+   {
+    "say": "Apiculture।"
+   },
+   {
+    "say": "Fish?"
+   },
+   {
+    "say": "Pisciculture।"
+   },
+   {
+    "say": "Grapes?"
+   },
+   {
+    "say": "Viticulture।"
+   },
+   {
+    "say": "Flowers?"
+   },
+   {
+    "say": "Floriculture।"
+   },
+   {
+    "say": "Fruits और vegetables?"
+   },
+   {
+    "say": "Horticulture।"
+   },
+   {
+    "say": "Zaid crop का दूसरा नाम?"
+   },
+   {
+    "say": "Summer crop।"
+   },
+   {
+    "say": "Example?"
+   },
+   {
+    "say": "Watermelon।"
+   }
+  ]
+ }
+]
