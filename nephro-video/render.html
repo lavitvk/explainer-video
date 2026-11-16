@@ -1,0 +1,1153 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080;
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+const FONT = 'Inter, "DejaVu Sans", sans-serif';
+
+/* ---------- palette ---------- */
+const C = {
+  bg1: '#F7F9FC', bg2: '#E8EEF7', ink: '#0F172A', sub: '#475569', mute: '#94A3B8',
+  navy: '#1E3A8A', active: '#DC2626', activeSoft: '#FEE2E2', latent: '#059669', latentSoft: '#D1FAE5',
+  warn: '#D97706', warnSoft: '#FEF3C7', blue: '#2563EB', blueSoft: '#DBEAFE',
+  H: '#0EA5E9', R: '#F97316', Z: '#A855F7', E: '#EAB308', bac: '#E11D48', cell: '#60A5FA'
+};
+
+/* ---------- math / easing ---------- */
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eo = x => 1 - Math.pow(1 - clamp(x), 3);
+const eio = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const eback = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const P = (t, s, d = .5) => clamp((t - s) / d);
+const lerp = (a, b, k) => a + (b - a) * k;
+
+/* ---------- primitives ---------- */
+function rr(x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function txt(s, x, y, o = {}) {
+  ctx.save();
+  ctx.font = `${o.weight || 600} ${o.size || 40}px ${FONT}`;
+  ctx.fillStyle = o.color || C.ink;
+  ctx.textAlign = o.align || 'center';
+  ctx.textBaseline = o.base || 'middle';
+  if (o.alpha !== undefined) ctx.globalAlpha *= o.alpha;
+  if (o.ls) ctx.letterSpacing = o.ls + 'px';
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function card(x, y, w, h, o = {}) {
+  ctx.save();
+  ctx.shadowColor = 'rgba(15,23,42,0.10)'; ctx.shadowBlur = o.blur ?? 30; ctx.shadowOffsetY = 10;
+  rr(x, y, w, h, o.r ?? 28); ctx.fillStyle = o.fill || '#fff'; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  if (o.stroke) { ctx.lineWidth = o.lw || 4; ctx.strokeStyle = o.stroke; ctx.stroke(); }
+  ctx.restore();
+}
+// scale-pop an element around (cx,cy)
+function pop(k, cx, cy, fn, back = true) {
+  if (k <= 0) return;
+  const s = back ? eback(k) : eo(k);
+  ctx.save(); ctx.globalAlpha *= clamp(k * 2.5);
+  ctx.translate(cx, cy); ctx.scale(s, s); ctx.translate(-cx, -cy);
+  fn(); ctx.restore();
+}
+function fadeUp(k, fn, dy = 30) {
+  if (k <= 0) return;
+  ctx.save(); ctx.globalAlpha *= eo(k); ctx.translate(0, (1 - eo(k)) * dy); fn(); ctx.restore();
+}
+function check(cx, cy, s, color, k) {
+  if (k <= 0) return;
+  ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI * 2); ctx.fillStyle = color; ctx.globalAlpha *= clamp(k * 3); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = s * .22;
+  const pts = [[-.45, .02], [-.12, .35], [.48, -.32]];
+  const kk = eo(k);
+  ctx.beginPath(); ctx.moveTo(cx + pts[0][0] * s, cy + pts[0][1] * s);
+  const seg1 = clamp(kk * 2), seg2 = clamp(kk * 2 - 1);
+  ctx.lineTo(cx + lerp(pts[0][0], pts[1][0], seg1) * s, cy + lerp(pts[0][1], pts[1][1], seg1) * s);
+  if (seg2 > 0) ctx.lineTo(cx + lerp(pts[1][0], pts[2][0], seg2) * s, cy + lerp(pts[1][1], pts[2][1], seg2) * s);
+  ctx.stroke(); ctx.restore();
+}
+function cross(cx, cy, s, color, k) {
+  if (k <= 0) return;
+  ctx.save(); ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI * 2); ctx.fillStyle = color; ctx.globalAlpha *= clamp(k * 3); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = s * .22; const a = s * .38, kk = eo(k);
+  ctx.beginPath(); ctx.moveTo(cx - a, cy - a); ctx.lineTo(cx - a + 2 * a * clamp(kk * 2), cy - a + 2 * a * clamp(kk * 2)); ctx.stroke();
+  if (kk > .5) { const k2 = clamp(kk * 2 - 1); ctx.beginPath(); ctx.moveTo(cx + a, cy - a); ctx.lineTo(cx + a - 2 * a * k2, cy - a + 2 * a * k2); ctx.stroke(); }
+  ctx.restore();
+}
+function stamp(label, cx, cy, color, k, rot = -0.08, size = 110) {
+  if (k <= 0) return;
+  const s = k < 1 ? lerp(2.2, 1, eo(k)) : 1;
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.globalAlpha *= clamp(k * 2);
+  ctx.font = `900 ${size}px ${FONT}`; const w = ctx.measureText(label).width + size * .9, h = size * 1.55;
+  rr(-w / 2, -h / 2, w, h, 26); ctx.lineWidth = 14; ctx.strokeStyle = color; ctx.stroke();
+  rr(-w / 2 + 16, -h / 2 + 16, w - 32, h - 32, 16); ctx.lineWidth = 4; ctx.stroke();
+  ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, 0, 6);
+  ctx.restore();
+}
+function arrow(x1, y1, x2, y2, k, color = C.sub, lw = 8) {
+  if (k <= 0) return;
+  const kk = eo(k), x = lerp(x1, x2, kk), y = lerp(y1, y2, kk);
+  ctx.save(); ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();
+  const a = Math.atan2(y2 - y1, x2 - x1), hs = lw * 3;
+  ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * hs * .4, y + Math.sin(a) * hs * .4);
+  ctx.lineTo(x - Math.cos(a - .5) * hs, y - Math.sin(a - .5) * hs);
+  ctx.lineTo(x - Math.cos(a + .5) * hs, y - Math.sin(a + .5) * hs); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- illustrations ---------- */
+function bacillus(x, y, len, ang, color = C.bac, alpha = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.globalAlpha *= alpha;
+  const w = len * .32; rr(-len / 2, -w / 2, len, w, w / 2);
+  ctx.fillStyle = color; ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.35)'; rr(-len / 2 + w * .3, -w / 2 + w * .18, len * .55, w * .22, w * .11); ctx.fill();
+  ctx.restore();
+}
+function immuneCell(x, y, r, t, color = C.cell) {
+  ctx.save();
+  ctx.beginPath();
+  for (let i = 0; i <= 40; i++) {
+    const a = i / 40 * Math.PI * 2;
+    const rr2 = r * (1 + .06 * Math.sin(a * 5 + t * 3) + .04 * Math.sin(a * 3 - t * 2));
+    const px = x + Math.cos(a) * rr2, py = y + Math.sin(a) * rr2;
+    i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+  }
+  ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  ctx.beginPath(); ctx.arc(x + r * .1, y - r * .05, r * .42, 0, Math.PI * 2); ctx.fillStyle = 'rgba(30,58,138,.55)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(x - r * .35, y - r * .4, r * .16, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,.45)'; ctx.fill();
+  ctx.restore();
+}
+function child(cx, cy, s, shirt = C.blue, mood = 'ok', t = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // body
+  rr(-62, -10, 124, 150, 52); ctx.fillStyle = shirt; ctx.fill();
+  // neck/head
+  ctx.beginPath(); ctx.arc(0, -70, 58, 0, Math.PI * 2); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  // hair
+  ctx.beginPath(); ctx.arc(0, -82, 60, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(48, -95); ctx.quadraticCurveTo(0, -112, -50, -92); ctx.closePath();
+  ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // eyes
+  ctx.fillStyle = C.ink;
+  ctx.beginPath(); ctx.arc(-20, -70, 6, 0, 7); ctx.arc(20, -70, 6, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath();
+  if (mood === 'sick') { ctx.moveTo(-14, -38); ctx.quadraticCurveTo(0, -48, 14, -38); }
+  else { ctx.moveTo(-16, -44); ctx.quadraticCurveTo(0, -30, 16, -44); }
+  ctx.stroke();
+  if (mood === 'sick') { // flushed cheeks + sweat
+    ctx.fillStyle = 'rgba(239,68,68,.35)'; ctx.beginPath(); ctx.ellipse(-34, -52, 12, 7, 0, 0, 7); ctx.ellipse(34, -52, 12, 7, 0, 0, 7); ctx.fill();
+    const dy = (t * 40) % 40;
+    ctx.fillStyle = '#7DD3FC'; ctx.globalAlpha *= 1 - dy / 40;
+    ctx.beginPath(); ctx.moveTo(56, -100 + dy); ctx.quadraticCurveTo(66, -84 + dy, 56, -78 + dy); ctx.quadraticCurveTo(46, -84 + dy, 56, -100 + dy); ctx.fill();
+  }
+  ctx.restore();
+}
+function adult(cx, cy, s, shirt = '#64748B', t = 0, cough = false) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-80, -10, 160, 210, 64); ctx.fillStyle = shirt; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -78, 64, 0, 7); ctx.fillStyle = '#D9A877'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -92, 66, Math.PI * 1.08, Math.PI * 1.92); ctx.closePath(); ctx.fillStyle = '#1F2937'; ctx.fill();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-22, -78, 6, 0, 7); ctx.arc(22, -78, 6, 0, 7); ctx.fill();
+  if (cough) {
+    ctx.beginPath(); ctx.ellipse(8, -44, 12, 10, 0, 0, 7); ctx.fillStyle = C.ink; ctx.fill();
+    // droplets with bacilli
+    for (let i = 0; i < 6; i++) {
+      const ph = ((t * .9 + i / 6) % 1);
+      const dx = 80 + ph * 260, dy = -50 + Math.sin(i * 2.1) * 60 * ph;
+      ctx.globalAlpha = (1 - ph) * .9;
+      bacillus(dx, dy, 34, i, C.bac);
+      ctx.globalAlpha = 1;
+    }
+  } else {
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(-16, -46); ctx.lineTo(16, -46); ctx.stroke();
+  }
+  ctx.restore();
+}
+function thermometer(cx, cy, s, level, hot = true) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-18, -110, 36, 170, 18); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 70, 34, 0, 7); ctx.fillStyle = hot ? C.active : C.blue; ctx.fill(); ctx.stroke();
+  const top = lerp(50, -90, level);
+  rr(-8, top, 16, 70 - top, 8); ctx.fillStyle = hot ? C.active : C.blue; ctx.fill();
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(18, -80 + i * 28); ctx.lineTo(4, -80 + i * 28); ctx.lineWidth = 4; ctx.stroke(); }
+  ctx.restore();
+}
+function scaleIcon(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-90, -60, 180, 140, 30); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, -10, 48, Math.PI, 0); ctx.fillStyle = '#F1F5F9'; ctx.fill(); ctx.stroke();
+  const a = Math.PI + lerp(1.9, .9, eo(k));
+  ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(Math.cos(a) * 40, -10 + Math.sin(a) * 40); ctx.strokeStyle = C.active; ctx.lineWidth = 6; ctx.stroke();
+  ctx.restore();
+  arrow(cx + 120 * s, cy - 60 * s, cx + 120 * s, cy + 50 * s, k, C.active, 9 * s);
+}
+function lungsPath(side, x, y, w, h) {
+  // side: -1 = viewer-left lung (patient's RIGHT), +1 = viewer-right lung (patient's LEFT)
+  const cx = x + w / 2, o = side;
+  const inner = cx + o * w * .07, outer = cx + o * w * .40;
+  const top = y + h * .12, bot = y + h * .86;
+  ctx.beginPath();
+  ctx.moveTo(inner, top + h * .06);
+  ctx.bezierCurveTo(inner + o * w * .02, top - h * .05, outer - o * w * .10, top - h * .02, outer - o * w * .03, top + h * .25);
+  ctx.bezierCurveTo(outer + o * w * .02, top + h * .45, outer + o * w * .02, bot - h * .10, outer - o * w * .01, bot);
+  ctx.quadraticCurveTo(cx + o * w * .22, bot - h * (side < 0 ? .10 : .07), inner + o * w * (side > 0 ? .10 : .02), bot - h * .05);
+  if (side > 0) ctx.quadraticCurveTo(inner + o * w * .12, y + h * .55, inner + o * w * .02, y + h * .45);
+  ctx.lineTo(inner, top + h * .06);
+  ctx.closePath();
+}
+function xray(x, y, w, h, o = {}) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#05080F'; ctx.fill();
+  ctx.save(); rr(x, y, w, h, 18); ctx.clip();
+  // soft tissue glow
+  const g = ctx.createRadialGradient(x + w / 2, y + h * .55, w * .1, x + w / 2, y + h * .55, w * .62);
+  g.addColorStop(0, '#5B6472'); g.addColorStop(.7, '#2A303A'); g.addColorStop(1, '#0B0F16');
+  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+  // lungs (dark = air)
+  for (const sd of [-1, 1]) {
+    lungsPath(sd, x, y, w, h);
+    const lg = ctx.createLinearGradient(0, y, 0, y + h);
+    lg.addColorStop(0, '#11151C'); lg.addColorStop(1, '#1B212B');
+    ctx.fillStyle = lg; ctx.fill();
+  }
+  // vascular markings
+  ctx.strokeStyle = 'rgba(160,170,185,.18)'; ctx.lineWidth = 2;
+  for (const sd of [-1, 1]) for (let i = 0; i < 7; i++) {
+    const hx = x + w / 2 + sd * w * .1, hy = y + h * .48;
+    ctx.beginPath(); ctx.moveTo(hx, hy);
+    const a = (-.9 + i * .3);
+    ctx.quadraticCurveTo(hx + sd * w * .12, hy + a * h * .15, hx + sd * w * (.18 + .05 * (i % 3)), hy + a * h * .32); ctx.stroke();
+  }
+  // ribs
+  ctx.strokeStyle = 'rgba(210,215,225,.28)'; ctx.lineWidth = Math.max(3, w * .012);
+  for (let i = 0; i < 9; i++) {
+    const ry = y + h * (.16 + i * .078);
+    for (const sd of [-1, 1]) {
+      ctx.beginPath();
+      ctx.moveTo(x + w / 2 + sd * w * .05, ry);
+      ctx.bezierCurveTo(x + w / 2 + sd * w * .30, ry - h * .06, x + w / 2 + sd * w * .44, ry + h * .02, x + w / 2 + sd * w * .40, ry + h * .12);
+      ctx.stroke();
+    }
+  }
+  // clavicles
+  ctx.strokeStyle = 'rgba(225,230,238,.55)'; ctx.lineWidth = w * .02;
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.moveTo(x + w / 2 + sd * w * .04, y + h * .13); ctx.quadraticCurveTo(x + w / 2 + sd * w * .22, y + h * .07, x + w / 2 + sd * w * .38, y + h * .11); ctx.stroke(); }
+  // spine + mediastinum
+  const sg = ctx.createLinearGradient(x + w * .42, 0, x + w * .58, 0);
+  sg.addColorStop(0, 'rgba(200,205,215,0)'); sg.addColorStop(.5, 'rgba(200,205,215,.55)'); sg.addColorStop(1, 'rgba(200,205,215,0)');
+  ctx.fillStyle = sg; ctx.fillRect(x + w * .42, y, w * .16, h);
+  // heart
+  ctx.beginPath(); ctx.ellipse(x + w * .56, y + h * .66, w * .17, h * .16, -.35, 0, 7);
+  ctx.fillStyle = 'rgba(200,205,215,.30)'; ctx.fill();
+  // consolidation in patient's RIGHT upper lobe (viewer's LEFT, upper zone)
+  const cons = o.cons || 0;
+  if (cons > 0) {
+    ctx.save(); lungsPath(-1, x, y, w, h); ctx.clip();
+    const pulse = o.pulse ? (0.85 + .15 * Math.sin(o.t * 4)) : 1;
+    const cxx = x + w * .30, cyy = y + h * .27;
+    const rg = ctx.createRadialGradient(cxx, cyy, 4, cxx, cyy, w * .20 * eo(cons));
+    rg.addColorStop(0, `rgba(240,242,246,${.85 * pulse})`); rg.addColorStop(.6, `rgba(215,220,228,${.55 * pulse})`); rg.addColorStop(1, 'rgba(200,205,215,0)');
+    ctx.fillStyle = rg; ctx.fillRect(x, y, w, h);
+    // horizontal fissure line hint
+    ctx.strokeStyle = `rgba(235,238,242,${.5 * eo(cons)})`; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(x + w * .13, y + h * .40); ctx.quadraticCurveTo(x + w * .28, y + h * .42, x + w * .42, y + h * .40); ctx.stroke();
+    ctx.restore();
+  }
+  ctx.restore();
+  // marker
+  txt('R', x + 34, y + 38, { size: Math.max(22, w * .06), weight: 800, color: '#FDE68A' });
+  ctx.restore();
+}
+function forearm(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-190, -55, 380, 110, 55); ctx.fillStyle = '#E8B98C'; ctx.fill();
+  ctx.fillStyle = 'rgba(0,0,0,.06)'; rr(-190, 10, 380, 45, 30); ctx.fill();
+  // induration
+  const r = 44 * eo(k);
+  if (r > 0) {
+    ctx.beginPath(); ctx.ellipse(0, -5, r, r * .8, 0, 0, 7); ctx.fillStyle = 'rgba(220,38,38,.35)'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0, -5, r * .55, r * .45, 0, 0, 7); ctx.fillStyle = 'rgba(220,38,38,.45)'; ctx.fill();
+    // ruler
+    ctx.globalAlpha *= clamp(k * 2 - 1);
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(-r, -78); ctx.lineTo(r, -78); ctx.moveTo(-r, -90); ctx.lineTo(-r, -66); ctx.moveTo(r, -90); ctx.lineTo(r, -66); ctx.stroke();
+    txt('≥ 10 mm', 0, -112, { size: 30, weight: 700, color: C.ink });
+  }
+  ctx.restore();
+}
+function tube(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-34, -150, 68, 40, 10); ctx.fillStyle = '#7C3AED'; ctx.fill();
+  rr(-28, -115, 56, 230, 28); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = '#94A3B8'; ctx.stroke();
+  const lvl = lerp(110, -40, eo(k));
+  ctx.save(); rr(-28, -115, 56, 230, 28); ctx.clip();
+  ctx.fillStyle = '#B91C1C'; ctx.fillRect(-30, lvl, 60, 200);
+  ctx.fillStyle = '#FCD34D'; ctx.fillRect(-30, lvl, 60, 40 * eo(k));
+  ctx.restore();
+  rr(-30, -40, 60, 70, 6); ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fill();
+  txt('IFN-γ', 0, -5, { size: 17, weight: 800, color: C.navy });
+  ctx.restore();
+}
+function pill(cx, cy, letter, color, s = 1) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.shadowColor = 'rgba(0,0,0,.15)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 5;
+  ctx.beginPath(); ctx.arc(0, 0, 42, 0, 7); ctx.fillStyle = color; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.beginPath(); ctx.arc(-12, -14, 12, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fill();
+  txt(letter, 0, 3, { size: 44, weight: 900, color: '#fff' });
+  ctx.restore();
+}
+function iconBadge(cx, cy, r, color, soft, draw) {
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = soft; ctx.fill();
+  ctx.lineWidth = 5; ctx.strokeStyle = color; ctx.stroke(); ctx.restore(); draw && draw();
+}
+function bodySilhouette(cx, cy, s, glow) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#CBD5E1';
+  ctx.beginPath(); ctx.arc(0, -250, 70, 0, 7); ctx.fill();
+  rr(-34, -190, 68, 50, 20); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(-150, -150); ctx.quadraticCurveTo(0, -175, 150, -150);
+  ctx.lineTo(170, 70); ctx.quadraticCurveTo(150, 120, 120, 80);
+  ctx.lineTo(100, -40); ctx.lineTo(95, 250); ctx.lineTo(-95, 250); ctx.lineTo(-100, -40);
+  ctx.lineTo(-120, 80); ctx.quadraticCurveTo(-150, 120, -170, 70); ctx.closePath(); ctx.fill();
+  // lungs
+  for (const sd of [-1, 1]) {
+    ctx.beginPath(); ctx.ellipse(sd * 48, -60, 40, 75, sd * .1, 0, 7);
+    ctx.fillStyle = `rgba(251,113,133,${.55 + .3 * glow})`; ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* ---------- background, header, subtitles ---------- */
+function background(T) {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.bg1); g.addColorStop(1, C.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(30,58,138,.05)';
+  for (let x = 40; x < W; x += 60) for (let y = 40; y < H; y += 60) { ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); }
+  // floating decorative bacilli very faint
+  for (let i = 0; i < 6; i++) {
+    const bx = (i * 377 + T * 12) % (W + 200) - 100, by = 160 + (i * 211) % 700 + Math.sin(T * .6 + i) * 20;
+    bacillus(bx, by, 50, i + T * .2, 'rgba(225,29,72,.05)');
+  }
+}
+function header(label, accent = C.navy) {
+  rr(60, 44, 18, 54, 9); ctx.fillStyle = accent; ctx.fill();
+  txt(label, 96, 72, { size: 34, weight: 800, color: C.ink, align: 'left' });
+  if (!window.REPEAT) txt('Nephrology · Part 1', W - 60, 72, { size: 24, weight: 600, color: C.mute, align: 'right' });
+}
+function wrap(s, maxW) {
+  const words = s.split(' '), lines = []; let cur = '';
+  for (const w of words) { const t2 = cur ? cur + ' ' + w : w; if (ctx.measureText(t2).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t2; }
+  if (cur) lines.push(cur); return lines;
+}
+function subtitle(s, k) {
+  if (!s || k <= 0) return;
+  ctx.save(); ctx.globalAlpha *= eo(k);
+  ctx.font = `600 38px ${FONT}`;
+  const lines = wrap(s, 1500), lh = 50, bh = lines.length * lh + 36;
+  const by = H - 40 - bh;
+  ctx.fillStyle = 'rgba(15,23,42,.86)'; rr(W / 2 - 800, by, 1600, bh, 22); ctx.fill();
+  lines.forEach((l, i) => txt(l, W / 2, by + 18 + lh / 2 + i * lh, { size: 38, weight: 600, color: '#F8FAFC' }));
+  ctx.restore();
+}
+
+/* ================= NEPHROLOGY: extra palette + illustrations ================= */
+C.kid = '#7C3AED'; C.kidSoft = '#EDE9FE';
+C.ok = '#059669'; C.okSoft = '#D1FAE5';
+C.bad = '#DC2626'; C.badSoft = '#FEE2E2';
+
+// background without TB bacilli: soft drifting kidney-pink circles
+function background(T) {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.bg1); g.addColorStop(1, C.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(30,58,138,.05)';
+  for (let x = 40; x < W; x += 60) for (let y = 40; y < H; y += 60) { ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); }
+  for (let i = 0; i < 5; i++) {
+    const bx = (i * 431 + T * 10) % (W + 200) - 100, by = 180 + (i * 233) % 700 + Math.sin(T * .5 + i) * 20;
+    ctx.beginPath(); ctx.arc(bx, by, 40 + i * 6, 0, 7); ctx.fillStyle = 'rgba(124,58,237,.035)'; ctx.fill();
+  }
+}
+
+// seeded random for deterministic textures
+function rng(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+
+function para(lines, x, y, o = {}) {
+  lines.forEach((l, i) => txt(l, x, y + i * (o.lh || (o.size || 32) * 1.35), o));
+}
+
+function kidneyPath(cx, cy, s, flip = 1) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s * flip, s);
+  ctx.beginPath();
+  ctx.moveTo(0, -70);
+  ctx.bezierCurveTo(72, -74, 72, 74, 0, 70);
+  ctx.bezierCurveTo(-45, 68, -52, 30, -22, 12);
+  ctx.quadraticCurveTo(-10, 0, -22, -12);
+  ctx.bezierCurveTo(-52, -30, -45, -68, 0, -70);
+  ctx.closePath();
+  ctx.restore();
+}
+function kidney(cx, cy, s, flip = 1, fill = '#C2410C', stroke = '#7C2D12') {
+  ctx.save();
+  kidneyPath(cx, cy, s, flip);
+  const g = ctx.createRadialGradient(cx + 10 * s * flip, cy - 20 * s, 5, cx, cy, 80 * s);
+  g.addColorStop(0, '#FB923C'); g.addColorStop(1, fill);
+  ctx.fillStyle = g; ctx.fill(); ctx.lineWidth = 5 * s; ctx.strokeStyle = stroke; ctx.stroke();
+  // hilum vessels
+  ctx.strokeStyle = '#1D4ED8'; ctx.lineWidth = 7 * s; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy - 4 * s); ctx.lineTo(cx - 60 * s * flip, cy - 10 * s); ctx.stroke();
+  ctx.strokeStyle = '#DC2626';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy + 6 * s); ctx.lineTo(cx - 60 * s * flip, cy + 4 * s); ctx.stroke();
+  ctx.strokeStyle = '#FDE68A';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy + 14 * s); ctx.quadraticCurveTo(cx - 40 * s * flip, cy + 40 * s, cx - 36 * s * flip, cy + 90 * s); ctx.stroke();
+  ctx.restore();
+}
+
+// big child face with periorbital puffiness (puff 0..1)
+function face(cx, cy, s, puff, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // ears
+  ctx.fillStyle = '#EDBF93';
+  ctx.beginPath(); ctx.ellipse(-150, 10, 26, 40, 0, 0, 7); ctx.ellipse(150, 10, 26, 40, 0, 0, 7); ctx.fill();
+  // head
+  ctx.beginPath(); ctx.ellipse(0, 0, 150, 170, 0, 0, 7); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  // hair
+  ctx.beginPath(); ctx.ellipse(0, -60, 158, 125, 0, Math.PI * 1.02, Math.PI * 1.98);
+  ctx.quadraticCurveTo(80, -110, 0, -95); ctx.quadraticCurveTo(-80, -110, -150, -70); ctx.closePath();
+  ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // periorbital puffiness: swollen lids above & below eyes
+  for (const sd of [-1, 1]) {
+    const ex = sd * 58, ey = 0;
+    const p = eo(puff);
+    if (p > 0) {
+      ctx.fillStyle = `rgba(236,160,150,${.55 * p})`;
+      ctx.beginPath(); ctx.ellipse(ex, ey - 16, 48 + 8 * p, 18 + 14 * p, 0, Math.PI, 0); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(ex, ey + 14, 46 + 10 * p, 14 + 18 * p, 0, 0, Math.PI); ctx.fill();
+      ctx.strokeStyle = `rgba(190,110,100,${.5 * p})`; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.ellipse(ex, ey + 18, 40 + 8 * p, 10 + 16 * p, 0, .2, Math.PI - .2); ctx.stroke();
+    }
+    // eye: narrower as puff increases
+    const open = lerp(14, 5, p);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.ellipse(ex, ey, 26, open, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.ellipse(ex, ey, 10, Math.min(10, open), 0, 0, 7); ctx.fill();
+    // brow
+    ctx.strokeStyle = '#3F2A1D'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(ex - 28, -50 - 6 * p); ctx.quadraticCurveTo(ex, -60 - 6 * p, ex + 28, -50 - 6 * p); ctx.stroke();
+  }
+  // nose + mouth
+  ctx.strokeStyle = '#C08A62'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, 30); ctx.quadraticCurveTo(10, 55, -4, 62); ctx.stroke();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.moveTo(-28, 100); ctx.quadraticCurveTo(0, 116, 28, 100); ctx.stroke();
+  ctx.restore();
+}
+
+function sun(cx, cy, r, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(t * .4);
+  ctx.strokeStyle = '#F59E0B'; ctx.lineWidth = r * .14; ctx.lineCap = 'round';
+  for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 1.3, Math.sin(a) * r * 1.3); ctx.lineTo(Math.cos(a) * r * 1.65, Math.sin(a) * r * 1.65); ctx.stroke(); }
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fillStyle = '#FBBF24'; ctx.fill();
+  ctx.restore();
+}
+
+// BP gauge: v = 0..1 needle position; label text under
+function gauge(cx, cy, s, v, value, label, color) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const zones = [['#10B981', 0, .45], ['#F59E0B', .45, .7], ['#EF4444', .7, 1]];
+  ctx.lineWidth = 34;
+  zones.forEach(([c, a, b]) => { ctx.strokeStyle = c; ctx.beginPath(); ctx.arc(0, 0, 120, Math.PI + a * Math.PI + .02, Math.PI + b * Math.PI - .02); ctx.stroke(); });
+  const a = Math.PI + clamp(v) * Math.PI;
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 9; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * 100, Math.sin(a) * 100); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, 16, 0, 7); ctx.fillStyle = C.ink; ctx.fill();
+  txt(value, 0, 55, { size: 52, weight: 900, color: C.ink });
+  if (label) txt(label, 0, 105, { size: 34, weight: 800, color: color || C.ok });
+  ctx.restore();
+}
+
+// urine cup: color, foam 0..1 (frothy = proteinuria), bugs (E. coli rods)
+function cup(cx, cy, s, o = {}) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const path = () => { ctx.beginPath(); ctx.moveTo(-70, -90); ctx.lineTo(70, -90); ctx.lineTo(56, 100); ctx.quadraticCurveTo(0, 112, -56, 100); ctx.closePath(); };
+  path(); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill();
+  ctx.save(); path(); ctx.clip();
+  ctx.fillStyle = o.color || '#FCD34D'; ctx.fillRect(-80, -40, 160, 160);
+  if (o.foam) {
+    const r = rng(7);
+    for (let i = 0; i < 26; i++) { const x = -64 + r() * 128, y = -44 - r() * 26 * o.foam, rr2 = 8 + r() * 12; ctx.beginPath(); ctx.arc(x, y, rr2 * o.foam, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.fill(); ctx.strokeStyle = 'rgba(203,213,225,.9)'; ctx.lineWidth = 2; ctx.stroke(); }
+  }
+  if (o.bugs) {
+    for (let i = 0; i < 6; i++) bacillus(-40 + (i % 3) * 40 + Math.sin(o.t * 2 + i) * 6, 0 + Math.floor(i / 3) * 45 + Math.cos(o.t * 2 + i) * 5, 30, i + o.t * .6, '#16A34A', o.bugs);
+  }
+  ctx.restore();
+  path(); ctx.lineWidth = 6; ctx.strokeStyle = '#94A3B8'; ctx.stroke();
+  rr(-78, -110, 156, 26, 10); ctx.fillStyle = '#64748B'; ctx.fill();
+  ctx.restore();
+}
+
+function baby(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // body + diaper
+  rr(-70, 10, 140, 120, 55); ctx.fillStyle = '#93C5FD'; ctx.fill();
+  rr(-60, 85, 120, 60, 28); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 4; ctx.stroke();
+  // arms
+  ctx.fillStyle = '#F2C9A0';
+  ctx.beginPath(); ctx.ellipse(-82, 50, 20, 34, .4, 0, 7); ctx.ellipse(82, 50, 20, 34, -.4, 0, 7); ctx.fill();
+  // head
+  ctx.beginPath(); ctx.arc(0, -70, 82, 0, 7); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -138, 14, 0, 7); ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // flushed cheeks (fever)
+  ctx.fillStyle = 'rgba(239,68,68,.35)'; ctx.beginPath(); ctx.ellipse(-46, -48, 16, 10, 0, 0, 7); ctx.ellipse(46, -48, 16, 10, 0, 0, 7); ctx.fill();
+  // alert eyes (blink)
+  const blink = (t % 3.2) < .12 ? .15 : 1;
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.ellipse(-28, -75, 9, 11 * blink, 0, 0, 7); ctx.ellipse(28, -75, 9, 11 * blink, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-12, -36); ctx.quadraticCurveTo(0, -30, 12, -36); ctx.stroke();
+  ctx.restore();
+}
+
+function bottle(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-14, -100); ctx.quadraticCurveTo(0, -130, 14, -100); ctx.closePath(); ctx.fillStyle = '#F59E0B'; ctx.fill();
+  rr(-30, -100, 60, 22, 8); ctx.fillStyle = '#60A5FA'; ctx.fill();
+  rr(-34, -78, 68, 160, 26); ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.save(); rr(-34, -78, 68, 160, 26); ctx.clip(); ctx.fillStyle = '#FEF3C7'; ctx.fillRect(-40, -20, 80, 120); ctx.restore();
+  ctx.restore();
+}
+
+function ivBag(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, -140); ctx.lineTo(0, -120); ctx.stroke();
+  rr(-60, -120, 120, 150, 26); ctx.fillStyle = 'rgba(219,234,254,.95)'; ctx.fill(); ctx.strokeStyle = '#60A5FA'; ctx.lineWidth = 5; ctx.stroke();
+  txt('IV', 0, -45, { size: 40, weight: 900, color: C.blue });
+  rr(-10, 30, 20, 30, 6); ctx.fillStyle = '#60A5FA'; ctx.fill();
+  ctx.strokeStyle = '#60A5FA'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(0, 60); ctx.quadraticCurveTo(10, 110, -30, 140); ctx.stroke();
+  const d = (t * 1.5) % 1; ctx.fillStyle = C.blue; ctx.globalAlpha *= 1 - d;
+  ctx.beginPath(); ctx.arc(0, 36 + d * 20, 4, 0, 7); ctx.fill();
+  ctx.restore();
+}
+
+function syrup(cx, cy, s, label = 'Cephalexin') {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-30, -150, 60, 36, 8); ctx.fillStyle = '#F8FAFC'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-26, -114); ctx.lineTo(26, -114); ctx.quadraticCurveTo(80, -90, 80, -40); ctx.lineTo(80, 110); ctx.quadraticCurveTo(80, 130, 60, 130);
+  ctx.lineTo(-60, 130); ctx.quadraticCurveTo(-80, 130, -80, 110); ctx.lineTo(-80, -40); ctx.quadraticCurveTo(-80, -90, -26, -114); ctx.closePath();
+  ctx.fillStyle = '#B45309'; ctx.fill();
+  rr(-66, -20, 132, 100, 14); ctx.fillStyle = '#fff'; ctx.fill();
+  txt(label, 0, 14, { size: 22, weight: 900, color: C.ink });
+  txt('oral', 0, 48, { size: 22, weight: 700, color: C.sub });
+  ctx.restore();
+}
+
+function capsule(cx, cy, s, rot = -.5, c1 = '#F97316', c2 = '#FDE68A') {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.save(); rr(-60, -24, 120, 48, 24); ctx.clip();
+  ctx.fillStyle = c1; ctx.fillRect(-60, -24, 60, 48); ctx.fillStyle = c2; ctx.fillRect(0, -24, 60, 48); ctx.restore();
+  rr(-60, -24, 120, 48, 24); ctx.strokeStyle = 'rgba(0,0,0,.15)'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.restore();
+}
+
+// DMSA scan panel: posterior view, two kidneys with radiotracer; scars = photopenic cortical defects
+function dmsa(x, y, w, h, scarK = 0, t = 0) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#020617'; ctx.fill();
+  ctx.save(); rr(x, y, w, h, 18); ctx.clip();
+  const s = Math.min(w, h) / 360;
+  const ks = [[x + w * .32, y + h * .5, -1], [x + w * .68, y + h * .5, 1]];
+  ks.forEach(([kx, ky, f], i) => {
+    ctx.save(); kidneyPath(kx, ky, s * 1.35, f);
+    const g = ctx.createRadialGradient(kx, ky, 4, kx, ky, 95 * s * 1.35);
+    g.addColorStop(0, '#7C2D12'); g.addColorStop(.45, '#F97316'); g.addColorStop(.8, '#FDE047'); g.addColorStop(1, '#FEF9C3');
+    ctx.fillStyle = g; ctx.fill(); ctx.clip();
+    // speckle noise
+    const r = rng(11 + i); ctx.fillStyle = 'rgba(0,0,0,.18)';
+    for (let k = 0; k < 160; k++) { ctx.beginPath(); ctx.arc(kx - 90 * s + r() * 180 * s, ky - 110 * s + r() * 220 * s, 2 + r() * 2, 0, 7); ctx.fill(); }
+    if (i === 0 && scarK > 0) {
+      // scars at upper & lower pole (outer cortex)
+      ctx.fillStyle = `rgba(2,6,23,${.92 * eo(scarK)})`;
+      ctx.beginPath(); ctx.ellipse(kx + 34 * s * 1.35 * f, ky - 60 * s * 1.35, 52 * s, 36 * s, .5, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(kx + 46 * s * 1.35 * f, ky + 48 * s * 1.35, 40 * s, 30 * s, -.5, 0, 7); ctx.fill();
+    }
+    ctx.restore();
+  });
+  ctx.restore();
+  txt('L', x + 30, y + 34, { size: 26, weight: 800, color: '#FDE68A' });
+  txt('R', x + w - 30, y + 34, { size: 26, weight: 800, color: '#FDE68A' });
+  txt('posterior', x + w / 2, y + h - 26, { size: 22, weight: 600, color: '#94A3B8' });
+  ctx.restore();
+}
+
+// Ultrasound fan image with kidney (hydronephrosis optional)
+function ultrasound(x, y, w, h, hydro = 0) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#000'; ctx.fill();
+  const ax = x + w / 2, ay = y + 20, R = h - 40;
+  ctx.save();
+  ctx.beginPath(); ctx.moveTo(ax, ay); ctx.arc(ax, ay, R, Math.PI / 2 - .62, Math.PI / 2 + .62); ctx.closePath(); ctx.clip();
+  ctx.fillStyle = '#2B2B2B'; ctx.fillRect(x, y, w, h);
+  const r = rng(5);
+  for (let i = 0; i < 1400; i++) { ctx.fillStyle = `rgba(220,220,220,${r() * .35})`; ctx.fillRect(x + r() * w, y + r() * h, 2 + r() * 3, 1 + r() * 2); }
+  // kidney: hypoechoic cortex ring, echogenic sinus
+  const kx = ax, ky = ay + R * .58;
+  ctx.beginPath(); ctx.ellipse(kx, ky, w * .26, h * .16, -.15, 0, 7); ctx.fillStyle = 'rgba(70,70,70,.95)'; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(kx, ky, w * .14, h * .07, -.15, 0, 7); ctx.fillStyle = 'rgba(225,225,225,.8)'; ctx.fill();
+  if (hydro > 0) { ctx.beginPath(); ctx.ellipse(kx, ky, w * .10 * hydro, h * .05 * hydro, -.15, 0, 7); ctx.fillStyle = '#050505'; ctx.fill(); }
+  ctx.restore();
+  ctx.restore();
+}
+
+// MCU: bladder + ureters + kidneys; contrast refluxes up (k 0..1)
+function mcu(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // kidneys outline
+  for (const sd of [-1, 1]) { kidneyPath(sd * 120, -170, .75, sd); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 6; ctx.stroke(); }
+  // ureters
+  for (const sd of [-1, 1]) {
+    ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 16; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(sd * 100, -150); ctx.bezierCurveTo(sd * 90, -40, sd * 60, 20, sd * 40, 80); ctx.stroke();
+  }
+  // bladder
+  ctx.beginPath(); ctx.ellipse(0, 130, 110, 80, 0, 0, 7); ctx.fillStyle = '#1E3A8A'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-14, 205); ctx.lineTo(14, 205); ctx.lineTo(8, 250); ctx.lineTo(-8, 250); ctx.closePath(); ctx.fill();
+  txt('contrast', 0, 132, { size: 26, weight: 700, color: '#DBEAFE' });
+  // reflux up left ureter
+  if (k > 0) {
+    ctx.strokeStyle = '#1E3A8A'; ctx.lineWidth = 14;
+    const N = 40, kk = eo(k);
+    ctx.beginPath();
+    for (let i = 0; i <= N * kk; i++) {
+      const u = 1 - i / N; // from bladder (u=1) upward (u=0)
+      const bx = (1 - u) ** 3 * -100 + 3 * (1 - u) ** 2 * u * -90 + 3 * (1 - u) * u * u * -60 + u ** 3 * -40;
+      const by = (1 - u) ** 3 * -150 + 3 * (1 - u) ** 2 * u * -40 + 3 * (1 - u) * u * u * 20 + u ** 3 * 80;
+      i ? ctx.lineTo(bx, by) : ctx.moveTo(bx, by);
+    }
+    ctx.stroke();
+    if (kk > .95) { ctx.save(); kidneyPath(-120, -170, .75, -1); ctx.clip(); ctx.beginPath(); ctx.ellipse(-110, -170, 30, 44, 0, 0, 7); ctx.fillStyle = 'rgba(30,58,138,.8)'; ctx.fill(); ctx.restore(); }
+  }
+  ctx.restore();
+}
+
+function family(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  [[-40, 0, 26, '#64748B'], [40, 0, 26, '#A855F7'], [0, 20, 18, '#0EA5E9']].forEach(([x, y, r, c]) => {
+    ctx.beginPath(); ctx.arc(x, y - r * 1.6, r * .8, 0, 7); ctx.fillStyle = '#E2B48A'; ctx.fill();
+    rr(x - r, y - r * .6, r * 2, r * 2.4, r); ctx.fillStyle = c; ctx.fill();
+  });
+  ctx.restore();
+}
+function gut(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#FB7185'; ctx.lineWidth = 16; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(-50, -40);
+  ctx.bezierCurveTo(50, -60, 60, -10, -10, -10); ctx.bezierCurveTo(-70, -10, -60, 40, 0, 35); ctx.bezierCurveTo(50, 30, 60, 60, 20, 60);
+  ctx.stroke(); ctx.restore();
+}
+function bulb(cx, cy, s, glow) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  if (glow > 0) { const g = ctx.createRadialGradient(0, -20, 10, 0, -20, 120); g.addColorStop(0, `rgba(253,224,71,${.6 * glow})`); g.addColorStop(1, 'rgba(253,224,71,0)'); ctx.fillStyle = g; ctx.fillRect(-130, -150, 260, 260); }
+  ctx.beginPath(); ctx.arc(0, -20, 56, Math.PI * .8, Math.PI * .2); ctx.lineTo(22, 50); ctx.lineTo(-22, 50); ctx.closePath();
+  ctx.fillStyle = '#FDE047'; ctx.fill(); ctx.strokeStyle = '#CA8A04'; ctx.lineWidth = 6; ctx.stroke();
+  rr(-24, 52, 48, 34, 8); ctx.fillStyle = '#64748B'; ctx.fill();
+  ctx.restore();
+}
+
+/* ---- layout helpers ---- */
+// "why wrong" row
+function optRow(y, k, o, t) {
+  fadeUp(k, () => {
+    card(140, y, 1640, o.h || 200, { fill: '#fff', r: 26, blur: 16 });
+    rr(140, y, 16, o.h || 200, 8); ctx.fillStyle = o.color || C.bad; ctx.fill();
+    o.icon && o.icon(270, y + (o.h || 200) / 2);
+    txt(o.title, 390, y + 58, { size: 46, weight: 900, align: 'left', color: C.ink });
+    para(o.lines, 390, y + 118, { size: 32, weight: 600, align: 'left', color: C.sub, lh: 42 });
+  }, 24);
+}
+function recapStrip(k, label, text) {
+  fadeUp(k, () => {
+    card(260, 130, 1400, 100, { fill: C.kidSoft, r: 50, blur: 8 });
+    txt(label, 330, 180, { size: 30, weight: 800, align: 'left', color: C.kid });
+    txt(text, 560, 180, { size: 32, weight: 700, align: 'left', color: C.ink });
+  }, 16);
+}
+function factRow(x, y, w, k, label, color, soft, icon, checkK) {
+  fadeUp(k, () => {
+    card(x, y - 58, w, 116, { fill: soft, r: 24, blur: 10 });
+    icon && icon(x + 62, y);
+    txt(label, x + (icon ? 120 : 34), y, { size: 36, weight: 800, align: 'left' });
+  }, 20);
+  if (checkK !== undefined) check(x + w - 46, y, 28, color, checkK);
+}
+function answerCard(cx, y, k, title, color, sub) {
+  pop(k, cx, y + 70, () => {
+    card(cx - 560, y, 1120, 140, { fill: color, r: 36 });
+    txt(title, cx, y + 72, { size: 70, weight: 900, color: '#fff' });
+  });
+}
+function remember(t, items, title = 'So remember') {
+  fadeUp(P(t, 0, .5), () => {
+    bulb(260, 220, .8, .6 + .4 * Math.sin(t * 2));
+    txt(title, 360, 220, { size: 70, weight: 900, color: C.navy, align: 'left' });
+  });
+  items.forEach((it, i) => it(i));
+}
+
+/* ================= SCENES ================= */
+const SC = {};
+
+SC.intro = (t, D, Q) => {
+  header('Nephrology · Part 1', C.kid);
+  pop(P(t, .1, .7), W / 2, 250, () => {
+    kidney(W / 2 - 520, 250, 1.05, -1); kidney(W / 2 + 520, 250, 1.05, 1);
+    txt('NEPHROLOGY', W / 2, 220, { size: 110, weight: 900, color: C.kid });
+    txt('Part 1 · Case-based', W / 2, 315, { size: 44, weight: 700, color: C.sub });
+  });
+  fadeUp(P(t, Q(0) + .6, .5), () => txt('Har case = ek sawal', W / 2, 430, { size: 56, weight: 800, color: C.ink }));
+  const steps = [['1', 'Picture pehchano', C.blue], ['2', 'Answer', C.ok], ['3', 'Baaki options kyun galat', C.bad]];
+  steps.forEach(([n, label, c], i) => {
+    const x = 260 + i * 480, k = P(t, Q(1) + i * 1.4, .55);
+    pop(k, x + 200, 660, () => {
+      card(x, 540, 400, 240, { fill: '#fff' });
+      ctx.beginPath(); ctx.arc(x + 200, 610, 44, 0, 7); ctx.fillStyle = c; ctx.fill();
+      txt(n, x + 200, 613, { size: 50, weight: 900, color: '#fff' });
+      para(label.length > 18 ? ['Baaki options', 'kyun galat'] : [label], x + 200, label.length > 18 ? 700 : 715, { size: 36, weight: 800, lh: 44 });
+    });
+    if (i < 2) arrow(x + 410, 660, x + 470, 660, P(t, Q(1) + i * 1.4 + .6, .4), C.mute, 7);
+  });
+  pop(P(t, Q(2), .5), W / 2, 900, () => {
+    card(W / 2 - 260, 855, 520, 90, { fill: C.kid, r: 45, blur: 0 });
+    txt('Shuru karte hain  →', W / 2, 902, { size: 40, weight: 800, color: '#fff' });
+  });
+};
+
+SC.q1case = (t, D, Q) => {
+  header('Case 1 · Q152 · Picture pehchano', C.kid);
+  fadeUp(P(t, 0, .6), () => {
+    card(90, 140, 720, 800, { fill: '#fff' });
+    face(450, 560, 1.45, P(t, Q(2) + .4, 2.2), t);
+    txt('5 saal', 450, 210, { size: 44, weight: 900, color: C.navy });
+  });
+  pop(P(t, Q(2), .6), 700, 250, () => { sun(700, 250, 40, t); });
+  fadeUp(P(t, Q(2) + .2, .5), () => txt('Subah', 700, 330, { size: 30, weight: 800, color: C.warn }));
+  // dashed highlight around eyes
+  const hk = P(t, Q(3), .6);
+  if (hk > 0) {
+    ctx.save(); ctx.globalAlpha *= eo(hk); ctx.strokeStyle = C.kid; ctx.lineWidth = 6; ctx.setLineDash([16, 12]);
+    ctx.beginPath(); ctx.ellipse(450, 560, 210, 90, 0, 0, 7); ctx.stroke(); ctx.setLineDash([]);
+    card(250, 790, 400, 70, { fill: C.kid, r: 35, blur: 0 });
+    txt('Periorbital puffiness', 450, 826, { size: 32, weight: 800, color: '#fff' });
+    ctx.restore();
+  }
+  const X = 880, Wd = 940;
+  factRow(X, 250, Wd, P(t, Q(0) + .4, .5), '5 saal ka bachcha', C.navy, C.blueSoft, null);
+  factRow(X, 400, Wd, P(t, Q(1), .5), '2 hafte pehle: flu jaisi illness', C.warn, C.warnSoft, null);
+  factRow(X, 550, Wd, P(t, Q(2), .5), '1 hafte se: subah aankhon ke paas swelling', C.kid, C.kidSoft, null);
+  fadeUp(P(t, Q(4), .5), () => {
+    card(X, 650, Wd, 300, { fill: C.okSoft, r: 24, blur: 10 });
+    txt('Bachcha well hai', X + 40, 720, { size: 40, weight: 800, align: 'left' });
+    txt('BP normal', X + 40, 790, { size: 40, weight: 800, align: 'left', color: C.ok });
+    gauge(X + 700, 830, .82, lerp(0, .3, eo(P(t, Q(4) + .5, 1.2))), '100/70', 'Normal', C.ok);
+  }, 20);
+};
+
+SC.q1ans = (t, D, Q) => {
+  header('Case 1 · Answer', C.kid);
+  const chips = [['Morning periorbital swelling', C.kid], ['BP normal', C.ok], ['Chhota bachcha', C.blue]];
+  let cx = 220;
+  chips.forEach(([c, col], i) => {
+    ctx.font = `800 34px ${FONT}`; const w = ctx.measureText(c).width + 70;
+    const x = cx; cx += w + 40;
+    fadeUp(P(t, Q(0) + i * .9, .45), () => {
+      card(x, 150, w, 80, { fill: '#fff', stroke: col, lw: 4, r: 40, blur: 6 });
+      txt(c, x + w / 2, 191, { size: 34, weight: 800, color: col });
+    }, 14);
+  });
+  fadeUp(P(t, Q(0) + 3, .5), () => txt('?', 1720, 192, { size: 80, weight: 900, color: C.warn }));
+  answerCard(W / 2, 290, P(t, Q(1), .6), 'NEPHROTIC SYNDROME', C.kid);
+  // MCD
+  fadeUp(P(t, Q(2), .6), () => {
+    card(140, 500, 760, 420, { fill: '#fff' });
+    txt('Is age mein:', 520, 570, { size: 36, weight: 700, color: C.sub });
+    kidney(300, 740, 1.1, 1);
+    txt('Minimal', 600, 700, { size: 64, weight: 900, color: C.kid });
+    txt('change', 600, 770, { size: 64, weight: 900, color: C.kid });
+    txt('disease', 600, 840, { size: 64, weight: 900, color: C.kid });
+  });
+  // protein vs albumin
+  const k3 = P(t, Q(3), .6);
+  fadeUp(k3, () => {
+    card(1000, 500, 780, 420, { fill: '#fff' });
+    cup(1180, 720, 1.05, { color: '#FDE68A', foam: eo(P(t, Q(3) + .4, 1.2)) });
+    txt('Urine', 1180, 580, { size: 34, weight: 800, color: C.sub });
+    txt('Protein', 1180, 860, { size: 38, weight: 900, color: C.bad });
+    arrow(1290, 780, 1290, 640, P(t, Q(3) + .8, .5), C.bad, 10);
+    tube(1560, 740, .85, 1);
+    txt('Blood', 1560, 580, { size: 34, weight: 800, color: C.sub });
+    txt('Albumin', 1560, 880, { size: 38, weight: 900, color: C.blue });
+    arrow(1660, 640, 1660, 790, P(t, Q(3) + 1.8, .5), C.blue, 10);
+  });
+  const k4 = P(t, Q(4), .5);
+  pop(k4, 1390, 960, () => {
+    card(1060, 930, 660, 70, { fill: C.ink, r: 35, blur: 0 });
+    txt('Protein bahut · Albumin kam', 1390, 966, { size: 34, weight: 800, color: '#fff' });
+  });
+};
+
+SC.q1why = (t, D, Q) => {
+  header('Case 1 · Baaki options kyun galat?', C.bad);
+  optRow(160, P(t, Q(0), .5), {
+    title: 'Nephritic syndrome', h: 240,
+    lines: ['Hematuria · Hypertension · Oliguria'],
+    icon: (x, y) => cup(x, y, .62, { color: '#B91C1C' })
+  });
+  fadeUp(P(t, Q(1), .5), () => {
+    card(390, 330, 820, 56, { fill: C.okSoft, r: 28, blur: 0 });
+    txt('Yahan BP normal → nephritic NAHI', 800, 359, { size: 32, weight: 800, color: C.ok });
+    gauge(1460, 300, .5, .3, '', '', C.ok);
+  }, 10);
+  cross(1700, 280, 38, C.bad, P(t, Q(1) + .6, .5));
+  optRow(430, P(t, Q(2), .5), {
+    title: 'Hereditary angioedema', h: 220,
+    lines: ['Episodic · Non-pitting swelling', 'Abdominal pain · Family history'],
+    icon: (x, y) => family(x, y + 20, 1.1)
+  });
+  cross(1700, 540, 38, C.bad, P(t, Q(2) + 1.5, .5));
+  optRow(680, P(t, Q(3), .5), {
+    title: 'Protein-losing enteropathy', h: 220,
+    lines: ['GI symptoms: diarrhea', 'Urine mein protein NAHI'],
+    icon: (x, y) => gut(x, y, 1.1)
+  });
+  cross(1700, 790, 38, C.bad, P(t, Q(3) + 1.5, .5));
+};
+
+SC.q1rem = (t, D, Q) => {
+  header('Case 1 · Yaad rakho', C.kid);
+  remember(t, [() => {
+    fadeUp(P(t, Q(0) + .3, .5), () => {
+      card(160, 360, 700, 480, { fill: '#fff' });
+      face(360, 600, .85, 1, t);
+      gauge(700, 640, .7, .3, '100/70', 'Normal', C.ok);
+      txt('Morning puffiness + Normal BP', 510, 800, { size: 34, weight: 800 });
+    });
+    arrow(900, 600, 1030, 600, P(t, Q(0) + 2.5, .5), C.kid, 12);
+    pop(P(t, Q(0) + 3.5, .6), 1420, 600, () => {
+      card(1070, 380, 700, 440, { fill: C.kid, r: 36 });
+      txt('Nephrotic', 1420, 500, { size: 80, weight: 900, color: '#fff' });
+      txt('syndrome', 1420, 590, { size: 80, weight: 900, color: '#fff' });
+      rr(1150, 660, 540, 90, 45); ctx.fillStyle = '#fff'; ctx.fill();
+      txt('Minimal change', 1420, 706, { size: 46, weight: 900, color: C.kid });
+    });
+  }]);
+};
+
+SC.q2case = (t, D, Q) => {
+  header('Case 2 · Q153 · Picture pehchano', C.blue);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pichhla case:', 'Subah aankhon ki swelling + BP normal → Nephrotic');
+  if (t < Q(1) - .4) {
+    pop(P(t, .3, .6), W / 2, 560, () => { face(W / 2 - 300, 600, .9, 1, t); gauge(W / 2 + 280, 640, .9, .3, '100/70', 'Normal', C.ok); });
+    return;
+  }
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 140, 600, 800, { fill: '#fff' });
+    txt('4 mahine', 390, 210, { size: 46, weight: 900, color: C.navy });
+    txt('uncircumcised boy', 390, 262, { size: 32, weight: 700, color: C.sub });
+    baby(390, 560, 1.6, t);
+  });
+  pop(P(t, Q(2), .5), 600, 380, () => { thermometer(600, 400, .55, .9); });
+  const X = 760, Wd = 620;
+  factRow(X, 260, Wd, P(t, Q(2), .5), 'Fever 2 din · 39.1 °C', C.bad, C.badSoft, null);
+  factRow(X, 410, Wd, P(t, Q(3), .5), 'Vomiting nahi', C.ok, C.okSoft, null, P(t, Q(3) + .3, .5));
+  factRow(X, 560, Wd, P(t, Q(3) + 1.2, .5), 'Feeding normal', C.ok, C.okSoft, (x, y) => bottle(x, y + 8, .45), P(t, Q(3) + 1.5, .5));
+  factRow(X, 710, Wd, P(t, Q(4), .5), 'Mildly ill, par alert', C.blue, C.blueSoft, null, P(t, Q(4) + .3, .5));
+  fadeUp(P(t, Q(5), .6), () => {
+    card(1430, 200, 400, 640, { fill: '#fff' });
+    txt('Catheter urine', 1630, 260, { size: 34, weight: 800, color: C.sub });
+    cup(1630, 500, 1.2, { color: '#FDE68A', bugs: eo(P(t, Q(5) + .6, .8)), t });
+    rr(1500, 700, 260, 80, 40); ctx.fillStyle = C.bad; ctx.fill();
+    txt('UTI', 1630, 742, { size: 46, weight: 900, color: '#fff' });
+  });
+};
+
+SC.q2ans = (t, D, Q) => {
+  header('Case 2 · Answer', C.blue);
+  answerCard(W / 2, 150, P(t, Q(0) + 1, .6), 'ORAL CEPHALEXIN', C.ok);
+  pop(P(t, Q(0) + 1.4, .6), 260, 230, () => { syrup(240, 230, .6); capsule(1680, 210, .9); });
+  const crit = ['> 2 mahine', 'Well dikh raha', 'Feeding achhi'];
+  crit.forEach((c, i) => {
+    const x = 160 + i * 540, k = P(t, Q(1) + 1 + i * 1.6, .5);
+    fadeUp(k, () => {
+      card(x, 360, 500, 130, { fill: C.okSoft, r: 30, blur: 10 });
+      txt(c, x + 220, 425, { size: 44, weight: 900, color: C.ink });
+    }, 18);
+    check(x + 440, 425, 32, C.ok, P(t, Q(1) + 1.3 + i * 1.6, .5));
+  });
+  fadeUp(P(t, Q(2), .6), () => {
+    card(360, 560, 1200, 360, { fill: '#fff' });
+    syrup(620, 760, .95);
+    txt('=', W / 2, 740, { size: 160, weight: 900, color: C.ok });
+    ivBag(1300, 740, 1.1, t);
+    txt('IV jitna hi effective', W / 2, 870, { size: 40, weight: 800, color: C.ok });
+  });
+};
+
+SC.q2why = (t, D, Q) => {
+  header('Case 2 · Baaki options kyun galat?', C.bad);
+  // IV ceftriaxone: "only when"
+  fadeUp(P(t, Q(0), .5), () => {
+    card(140, 150, 1640, 300, { fill: '#fff', r: 26, blur: 16 });
+    rr(140, 150, 16, 300, 8); ctx.fillStyle = C.warn; ctx.fill();
+    ivBag(270, 310, .85, t);
+    txt('IV Ceftriaxone — kab?', 390, 215, { size: 46, weight: 900, align: 'left' });
+    rr(1440, 185, 300, 64, 32); ctx.fillStyle = C.warn; ctx.fill();
+    txt('Sirf tab', 1590, 218, { size: 32, weight: 900, color: '#fff' });
+  }, 24);
+  const when = ['Toxic', 'Vomiting', '< 2 mahine', 'Oral na le sake'];
+  let x = 390;
+  when.forEach((w, i) => {
+    ctx.font = `800 36px ${FONT}`; const ww = ctx.measureText(w).width + 60, xx = x; x += ww + 24;
+    fadeUp(P(t, Q(0) + 1.6 + i * 1.1, .4), () => {
+      card(xx, 300, ww, 90, { fill: C.warnSoft, stroke: C.warn, lw: 3, r: 45, blur: 0 });
+      txt(w, xx + ww / 2, 346, { size: 36, weight: 800, color: '#92400E' });
+    }, 14);
+  });
+  optRow(500, P(t, Q(1), .5), {
+    title: 'Azithromycin', h: 200,
+    lines: ['E. coli ko cover NAHI karta'],
+    icon: (x, y) => { for (let i = 0; i < 3; i++) bacillus(x - 40 + i * 40, y - 10 + (i % 2) * 24, 40, .6 + i, '#16A34A'); }
+  });
+  cross(1700, 600, 38, C.bad, P(t, Q(1) + 1.5, .5));
+  optRow(740, P(t, Q(2), .5), {
+    title: 'Cefepime', h: 200,
+    lines: ['Pseudomonas / hospital infections ke liye', 'Yahan OVERKILL'],
+    icon: (x, y) => { ctx.save(); ctx.translate(x, y); rr(-50, -50, 100, 100, 20); ctx.fillStyle = C.badSoft; ctx.fill(); txt('H', 0, 4, { size: 60, weight: 900, color: C.bad }); ctx.restore(); }
+  });
+  cross(1700, 840, 38, C.bad, P(t, Q(2) + 1.5, .5));
+};
+
+SC.q2rem = (t, D, Q) => {
+  header('Case 2 · Yaad rakho', C.blue);
+  remember(t, [() => {
+    fadeUp(P(t, Q(0) + .3, .5), () => {
+      card(160, 360, 700, 480, { fill: '#fff' });
+      baby(380, 600, 1.05, t);
+      cup(700, 600, .8, { color: '#FDE68A', bugs: 1, t });
+      txt('Well infant > 2 mahine + UTI', 510, 800, { size: 34, weight: 800 });
+    });
+    arrow(900, 600, 1030, 600, P(t, Q(0) + 3, .5), C.ok, 12);
+    pop(P(t, Q(0) + 4, .6), 1420, 600, () => {
+      card(1070, 380, 700, 440, { fill: C.ok, r: 36 });
+      txt('ORAL', 1420, 520, { size: 96, weight: 900, color: '#fff' });
+      txt('Cephalexin', 1420, 630, { size: 76, weight: 900, color: '#fff' });
+      capsule(1420, 735, .9, 0);
+    });
+  }]);
+};
+
+SC.q3case = (t, D, Q) => {
+  header('Case 3 · Q154 · Picture pehchano', C.kid);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pichhla case:', 'Well infant + UTI → Oral cephalexin');
+  if (t < Q(1) - .4) {
+    pop(P(t, .3, .6), W / 2, 560, () => { baby(W / 2 - 300, 620, 1.2, t); syrup(W / 2 + 260, 600, .9); });
+    return;
+  }
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 140, 600, 800, { fill: '#fff' });
+    child(390, 560, 1.6, '#8B5CF6', 'sick', t);
+    txt('Recurrent UTI', 390, 210, { size: 46, weight: 900, color: C.bad });
+  });
+  // repeated UTI episodes on a calendar strip
+  for (let i = 0; i < 3; i++) {
+    const k = P(t, Q(1) + .8 + i * .5, .4);
+    pop(k, 860 + i * 260, 280, () => {
+      card(760 + i * 260, 200, 200, 160, { fill: '#fff', r: 20, blur: 10 });
+      rr(760 + i * 260, 200, 200, 44, 20); ctx.fillStyle = C.bad; ctx.fill();
+      txt(`UTI #${i + 1}`, 860 + i * 260, 222, { size: 26, weight: 800, color: '#fff' });
+      cup(860 + i * 260, 310, .35, { color: '#FDE68A', bugs: 1, t });
+    });
+  }
+  fadeUp(P(t, Q(2), .6), () => {
+    card(760, 420, 1060, 500, { fill: '#fff' });
+    kidney(1060, 670, 1.9, 1);
+    // suspected scars
+    ctx.save(); kidneyPath(1060, 670, 1.9, 1); ctx.clip();
+    ctx.fillStyle = 'rgba(68,20,6,.75)';
+    ctx.beginPath(); ctx.ellipse(1060 + 50 * 1.9, 670 - 52 * 1.9, 30, 22, .5, 0, 7); ctx.fill();
+    ctx.restore();
+    // magnifier
+    const mx = 1500, my = 620;
+    ctx.save(); ctx.lineWidth = 14; ctx.strokeStyle = C.ink;
+    ctx.beginPath(); ctx.arc(mx, my, 90, 0, 7); ctx.stroke(); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(mx + 64, my + 64); ctx.lineTo(mx + 150, my + 150); ctx.stroke(); ctx.restore();
+    txt('?', mx, my + 6, { size: 100, weight: 900, color: C.kid });
+    txt('Scar bana ya nahi?', 1290, 870, { size: 42, weight: 900, color: C.kid });
+  });
+};
+
+SC.q3ans = (t, D, Q) => {
+  header('Case 3 · Answer', C.kid);
+  answerCard(W / 2, 140, P(t, Q(0) + 1.4, .6), 'DMSA SCAN', C.kid);
+  fadeUp(P(t, Q(0) + 1.8, .6), () => {
+    dmsa(140, 330, 760, 600, P(t, Q(1), 1), t);
+  });
+  const sk = P(t, Q(1) + .9, .5);
+  if (sk > 0) {
+    ctx.save(); ctx.globalAlpha *= eo(sk); ctx.strokeStyle = '#38BDF8'; ctx.lineWidth = 5; ctx.setLineDash([12, 9]);
+    const s = 600 / 360 * 1.35, kx = 140 + 760 * .32, ky = 330 + 300;
+    ctx.beginPath(); ctx.arc(kx - 30 * s, ky - 62 * s, 50, 0, 7); ctx.stroke();
+    ctx.beginPath(); ctx.arc(kx - 42 * s, ky + 50 * s, 44, 0, 7); ctx.stroke(); ctx.setLineDash([]);
+    ctx.restore();
+  }
+  fadeUp(P(t, Q(1), .5), () => {
+    card(980, 330, 800, 200, { fill: C.kidSoft, r: 26, blur: 10 });
+    txt('Cortical scars', 1380, 400, { size: 56, weight: 900, color: C.kid });
+    txt('= photopenic defects (tracer nahi pakadta)', 1380, 468, { size: 30, weight: 700, color: C.sub });
+  });
+  // timing
+  const q = Q(2);
+  fadeUp(P(t, q, .5), () => {
+    card(980, 580, 800, 350, { fill: '#fff' });
+    txt('Kab?', 1380, 640, { size: 40, weight: 800, color: C.sub });
+    const y = 770;
+    pop(P(t, q + .6, .4), 1080, y, () => { ctx.beginPath(); ctx.arc(1080, y, 56, 0, 7); ctx.fillStyle = C.bad; ctx.fill(); txt('UTI', 1080, y + 2, { size: 34, weight: 900, color: '#fff' }); });
+    const ak = P(t, q + 1.2, 1.4);
+    rr(1150, y - 10, 460 * eo(ak), 20, 10); ctx.fillStyle = C.kid; ctx.fill();
+    txt('4–6 mahine baad', 1380, y - 60, { size: 46, weight: 900, color: C.kid, alpha: P(t, q + 1.6, .5) });
+    pop(P(t, q + 2.4, .4), 1680, y, () => { ctx.beginPath(); ctx.arc(1680, y, 64, 0, 7); ctx.fillStyle = C.kid; ctx.fill(); txt('DMSA', 1680, y + 2, { size: 30, weight: 900, color: '#fff' }); });
+  });
+};
+
+SC.q3why = (t, D, Q) => {
+  header('Case 3 · Baaki options kyun galat?', C.bad);
+  fadeUp(P(t, Q(0), .5), () => {
+    card(140, 150, 1640, 360, { fill: '#fff', r: 26, blur: 16 });
+    rr(140, 150, 16, 360, 8); ctx.fillStyle = C.bad; ctx.fill();
+    ultrasound(200, 180, 400, 300, eo(P(t, Q(0) + 3, 1)));
+    txt('Ultrasound', 660, 230, { size: 50, weight: 900, align: 'left' });
+    txt('Dekhta hai: anatomy + hydronephrosis', 660, 310, { size: 36, weight: 700, align: 'left', color: C.ok, alpha: P(t, Q(0) + 2.2, .5) });
+    txt('Scars MISS kar deta hai', 660, 380, { size: 40, weight: 900, align: 'left', color: C.bad, alpha: P(t, Q(0) + 4.5, .5) });
+  }, 24);
+  cross(1700, 330, 40, C.bad, P(t, Q(0) + 5, .5));
+  fadeUp(P(t, Q(1), .5), () => {
+    card(140, 560, 1640, 380, { fill: '#fff', r: 26, blur: 16 });
+    rr(140, 560, 16, 380, 8); ctx.fillStyle = C.bad; ctx.fill();
+    mcu(400, 770, .62, P(t, Q(1) + 1, 2));
+    txt('MCU (micturating cystourethrogram)', 660, 640, { size: 44, weight: 900, align: 'left' });
+    txt('Kiske liye? Reflux → VUR', 660, 720, { size: 40, weight: 800, align: 'left', color: C.blue, alpha: P(t, Q(1) + 1.5, .5) });
+    txt('Scarring ke liye NAHI', 660, 800, { size: 40, weight: 900, align: 'left', color: C.bad, alpha: P(t, Q(1) + 3.5, .5) });
+  }, 24);
+  cross(1700, 750, 40, C.bad, P(t, Q(1) + 3.8, .5));
+};
+
+SC.q3rem = (t, D, Q) => {
+  header('Case 3 · Yaad rakho', C.kid);
+  remember(t, [() => {
+    const cols = [
+      ['Scar dekhna hai', 'DMSA', C.kid, (x, y) => dmsa(x - 170, y - 130, 340, 260, 1, t)],
+      ['Reflux dekhna hai', 'MCU', C.blue, (x, y) => mcu(x, y + 10, .45, 1)],
+      ['Anatomy dekhni hai', 'Ultrasound', C.ok, (x, y) => ultrasound(x - 170, y - 130, 340, 260, .6)],
+    ];
+    cols.forEach(([q, a, c, ic], i) => {
+      const x = 140 + i * 560, k = P(t, Q(i), .6);
+      pop(k, x + 260, 620, () => {
+        card(x, 340, 520, 600, { fill: '#fff', stroke: c, lw: 5 });
+        txt(q, x + 260, 400, { size: 40, weight: 800, color: C.ink });
+        ic(x + 260, 600);
+        rr(x + 60, 800, 400, 100, 50); ctx.fillStyle = c; ctx.fill();
+        txt(a, x + 260, 852, { size: 56, weight: 900, color: '#fff' });
+      });
+    });
+  }]);
+};
+
+SC.recap = (t, D, Q) => {
+  header('Part 1 · Recap', C.navy);
+  fadeUp(P(t, 0, .5), () => txt('Teeno ek saath', W / 2, 180, { size: 70, weight: 900, color: C.navy }));
+  const rows = [
+    ['1', 'Morning periorbital swelling + normal BP', 'Nephrotic · Minimal change', C.kid, (x, y) => face(x, y, .4, 1, t)],
+    ['2', 'Well infant > 2 mahine + UTI', 'Oral cephalexin', C.ok, (x, y) => baby(x, y + 10, .55, t)],
+    ['3', 'Renal scarring → DMSA (4–6 mahine baad)', 'Reflux → MCU', C.blue, (x, y) => kidney(x, y, .8, 1)],
+  ];
+  rows.forEach(([n, q, a, c, ic], i) => {
+    const y = 270 + i * 230, k = P(t, Q(i + 1), .5);
+    fadeUp(k, () => {
+      card(140, y, 1640, 200, { fill: '#fff', r: 26 });
+      rr(140, y, 16, 200, 8); ctx.fillStyle = c; ctx.fill();
+      ic(290, y + 100);
+      txt(q, 420, y + 70, { size: 40, weight: 800, align: 'left' });
+      txt('→ ' + a, 420, y + 140, { size: 46, weight: 900, align: 'left', color: c });
+    }, 20);
+  });
+};
+
+SC.think = (t, D, Q) => {
+  header('Think about it', C.warn);
+  fadeUp(P(t, 0, .5), () => {
+    bulb(300, 230, 1, .5 + .5 * Math.sin(t * 2.5));
+    txt('Nephrotic vs Nephritic:', 420, 200, { size: 60, weight: 900, color: C.navy, align: 'left' });
+    txt('BP kaisa hota hai?', 420, 280, { size: 56, weight: 800, color: C.warn, align: 'left' });
+  });
+  pop(P(t, Q(1), .6), 540, 640, () => {
+    card(160, 380, 760, 560, { fill: C.okSoft, stroke: C.ok, lw: 5 });
+    txt('NEPHROTIC', 540, 450, { size: 60, weight: 900, color: C.kid });
+    gauge(540, 680, 1.15, lerp(0, .3, eo(P(t, Q(1) + .4, 1))), '', '', C.ok);
+    txt('Aksar NORMAL', 540, 850, { size: 54, weight: 900, color: C.ok });
+  });
+  pop(P(t, Q(2), .6), 1380, 640, () => {
+    card(1000, 380, 760, 560, { fill: C.badSoft, stroke: C.bad, lw: 5 });
+    txt('NEPHRITIC', 1380, 450, { size: 60, weight: 900, color: C.bad });
+    gauge(1260, 680, 1, lerp(0, .88, eo(P(t, Q(2) + .4, 1))), '', '', C.bad);
+    cup(1590, 650, .75, { color: '#B91C1C' });
+    txt('HIGH + Hematuria', 1380, 850, { size: 54, weight: 900, color: C.bad });
+  });
+};
+
+SC.end = (t, D) => {
+  fadeUp(P(t, 0, .6), () => {
+    kidney(W / 2 - 150, 330, 1, -1); kidney(W / 2 + 150, 330, 1, 1);
+    txt('Nephrology · Part 1', W / 2, 520, { size: 72, weight: 900, color: C.navy });
+  });
+  fadeUp(P(t, .8, .6), () => {
+    txt('For education only · Follow current guidelines (IAP / AAP / NICE)', W / 2, 640, { size: 32, weight: 600, color: C.mute });
+  });
+};
+
+/* ---------- timeline ---------- */
+let TL = [];
+window.setup = (timeline) => {
+  let acc = 0;
+  TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
+  return acc;
+};
+window.renderFrame = (T) => {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  background(T);
+  let sc = TL[TL.length - 1];
+  for (const s of TL) if (T >= s.start && T < s.start + s.dur) { sc = s; break; }
+  const t = T - sc.start, D = sc.dur;
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
+  const fin = clamp(t / .35), fout = clamp((D - t) / .3);
+  ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
+  let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
+  window.REPEAT = !!(cue && cue.of > 1);
+  SC[sc.id](t, D, Q, R);
+  ctx.restore();
+};
+</script>
+</body></html>
