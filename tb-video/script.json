@@ -3,28 +3,28 @@
    {"say":"TB exposure के बाद, PPD या IGRA positive आया।","rep":1},
    {"say":"इसका मतलब क्या है?","rep":1}]},
  {"id":"s02","lines":[
-   {"say":"सिर्फ इतना, कि body ने TB को देखा है।","rep":3},
+   {"say":"सिर्फ इतना, कि body ने TB को देखा है।","rep":1},
    {"say":"Immune system ने इसे पहचान लिया है।","rep":1}]},
  {"id":"s03","lines":[
    {"say":"TB active है, या latent?","rep":1},
-   {"say":"Test अकेला यह नहीं बताता।","rep":3}]},
+   {"say":"Test अकेला यह नहीं बताता।","rep":1}]},
  {"id":"s04","lines":[
    {"say":"तो कौन बताता है?","rep":1},
-   {"say":"Symptoms, और chest X-ray।","rep":3}]},
+   {"say":"Symptoms, और chest X-ray।","rep":1}]},
  {"id":"s05","lines":[
    {"say":"पहला बच्चा।","rep":1},
    {"say":"बच्चे को fever है।","rep":1},
    {"say":"Weight loss है।","rep":1},
    {"say":"और X-ray में, right upper lobe consolidation है।","rep":1}]},
  {"id":"s06","lines":[
-   {"say":"यह active TB है।","rep":3}]},
+   {"say":"यह active TB है।","rep":1}]},
  {"id":"s07","lines":[
-   {"say":"Treatment: पहले 2 months HRZE, फिर 4 months HR।","rep":3},
-   {"say":"HRZE मतलब, Isoniazid, Rifampicin, Pyrazinamide, और Ethambutol।","rep":3}]},
+   {"say":"Treatment: पहले 2 months HRZE, फिर 4 months HR।","rep":1},
+   {"say":"HRZE मतलब, Isoniazid, Rifampicin, Pyrazinamide, और Ethambutol।","rep":1}]},
  {"id":"s08","lines":[
-   {"say":"यानी, 2 HRZE plus 4 HR।","rep":3},
-   {"say":"सिर्फ rifampicin, या सिर्फ 3 months HR, active TB के लिए काफी नहीं है।","rep":3},
-   {"say":"अधूरा इलाज, मतलब resistance का risk।","rep":3}]},
+   {"say":"यानी, 2 HRZE plus 4 HR।","rep":1},
+   {"say":"सिर्फ rifampicin, या सिर्फ 3 months HR, active TB के लिए काफी नहीं है।","rep":1},
+   {"say":"अधूरा इलाज, मतलब resistance का risk।","rep":1}]},
  {"id":"s09","lines":[
    {"say":"दूसरा बच्चा।","rep":1},
    {"say":"TB contact है।","rep":1},
@@ -32,13 +32,13 @@
    {"say":"पर, no symptoms।","rep":1},
    {"say":"और X-ray normal है।","rep":1}]},
  {"id":"s10","lines":[
-   {"say":"यह latent TB है।","rep":3},
-   {"say":"Treatment: 3 months isoniazid और rifampicin, यानी 3 HR।","rep":3},
+   {"say":"यह latent TB है।","rep":1},
+   {"say":"Treatment: 3 months isoniazid और rifampicin, यानी 3 HR।","rep":1},
    {"say":"छोटा course है, तो बच्चा पूरा कर लेता है।","rep":1}]},
  {"id":"s11","lines":[
-   {"say":"6 months isoniazid भी चलता है, पर वह लंबा है।","rep":3}]},
+   {"say":"6 months isoniazid भी चलता है, पर वह लंबा है।","rep":1}]},
  {"id":"s12","lines":[
    {"say":"तो याद रखिए।","rep":1},
-   {"say":"Symptoms plus consolidation, मतलब active TB, 2 HRZE plus 4 HR।","rep":3},
-   {"say":"No symptoms और normal X-ray, मतलब latent TB, 3 HR।","rep":3}]}
+   {"say":"Symptoms plus consolidation, मतलब active TB, 2 HRZE plus 4 HR।","rep":1},
+   {"say":"No symptoms और normal X-ray, मतलब latent TB, 3 HR।","rep":1}]}
 ]
