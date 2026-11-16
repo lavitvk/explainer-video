@@ -3,7 +3,7 @@ const fs = require('fs'), { spawn } = require('child_process');
 const mode = process.argv[2] || 'preview';
 (async () => {
   const tl = JSON.parse(fs.readFileSync('timeline.json'));
-  tl.push({ id: 'end', dur: 4, sub: '' });
+  tl.push({ id: 'end', dur: 4, cues: [] });
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
   p.on('pageerror', e => console.error('PAGEERR', e.message));

@@ -1,86 +1,480 @@
 [
  {
   "id": "s01",
-  "say": "TB exposure के बाद, PPD या IGRA positive आया। इसका मतलब क्या है?",
-  "sub": "TB exposure ke baad PPD ya IGRA positive aaya... iska matlab kya?",
-  "audio": 6.721,
-  "dur": 7.421
+  "dur": 13.111,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 4.154
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 1,
+    "t": 8.254,
+    "d": 1.356
+   }
+  ]
  },
  {
   "id": "s02",
-  "say": "सिर्फ इतना, कि body ने TB को देखा है। Immune system ने इसे पहचान लिया है।",
-  "sub": "Sirf itna ki body ne TB dekha hai.",
-  "audio": 7.334,
-  "dur": 8.034
+  "dur": 26.255,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 3.028
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 7.128,
+    "d": 3.028
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 13.657,
+    "d": 3.028
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 1,
+    "t": 20.185,
+    "d": 2.57
+   }
+  ]
  },
  {
   "id": "s03",
-  "say": "TB active है, या latent? Test अकेला यह नहीं बताता।",
-  "sub": "Active hai ya latent... test akela nahi batata.",
-  "audio": 5.272,
-  "dur": 5.972
+  "dur": 22.493,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 2.086
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 6.186,
+    "d": 1.935
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 11.622,
+    "d": 1.935
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 17.057,
+    "d": 1.935
+   }
+  ]
  },
  {
   "id": "s04",
-  "say": "तो कौन बताता है? Symptoms, और chest X-ray। Symptoms, और chest X-ray।",
-  "sub": "Toh kaun batata hai? Symptoms aur chest X-ray.",
-  "audio": 7.961,
-  "dur": 8.661
+  "dur": 21.768,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 1.245
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 5.345,
+    "d": 1.974
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 10.819,
+    "d": 1.974
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 16.294,
+    "d": 1.974
+   }
+  ]
  },
  {
   "id": "s05",
-  "say": "पहला बच्चा। Fever है, weight loss है, और X-ray में right upper lobe consolidation है।",
-  "sub": "Bachche ko fever hai, weight loss hai, X-ray mein right upper lobe consolidation.",
-  "audio": 7.637,
-  "dur": 8.337
+  "dur": 21.495,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 0.816
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 1,
+    "t": 4.916,
+    "d": 1.401
+   },
+   {
+    "line": 2,
+    "rep": 1,
+    "of": 1,
+    "t": 9.817,
+    "d": 1.029
+   },
+   {
+    "line": 3,
+    "rep": 1,
+    "of": 1,
+    "t": 14.346,
+    "d": 3.649
+   }
+  ]
  },
  {
   "id": "s06",
-  "say": "यह active TB है।",
-  "sub": "Yeh ACTIVE TB hai.",
-  "audio": 1.647,
-  "dur": 2.347
+  "dur": 15.451,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 1.45
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 5.55,
+    "d": 1.45
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 10.5,
+    "d": 1.45
+   }
+  ]
  },
  {
   "id": "s07",
-  "say": "Treatment: पहले 2 months HRZE, फिर 4 months HR। HRZE मतलब, Isoniazid, Rifampicin, Pyrazinamide, और Ethambutol।",
-  "sub": "Treatment: 2 months HRZE, phir 4 months HR. HRZE = Isoniazid, Rifampicin, Pyrazinamide, Ethambutol.",
-  "audio": 12.608,
-  "dur": 13.308
+  "dur": 56.325,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 5.08
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 9.18,
+    "d": 5.08
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 17.76,
+    "d": 5.08
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 26.34,
+    "d": 6.495
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 36.335,
+    "d": 6.495
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 46.33,
+    "d": 6.495
+   }
+  ]
  },
  {
   "id": "s08",
-  "say": "यानी, 2 HRZE plus 4 HR। सिर्फ rifampicin, या सिर्फ 3 months HR, active TB के लिए काफी नहीं है। अधूरा इलाज, मतलब resistance का risk।",
-  "sub": "2HRZE + 4HR. Sirf rifampicin ya sirf 3 months HR kaafi nahi... adhura ilaaj = resistance ka risk.",
-  "audio": 15.12,
-  "dur": 15.82
+  "dur": 69.726,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 3.315
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 7.415,
+    "d": 3.315
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 14.229,
+    "d": 3.315
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 21.044,
+    "d": 6.385
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 30.929,
+    "d": 6.385
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 40.815,
+    "d": 6.385
+   },
+   {
+    "line": 2,
+    "rep": 1,
+    "of": 3,
+    "t": 50.7,
+    "d": 2.842
+   },
+   {
+    "line": 2,
+    "rep": 2,
+    "of": 3,
+    "t": 57.042,
+    "d": 2.842
+   },
+   {
+    "line": 2,
+    "rep": 3,
+    "of": 3,
+    "t": 63.384,
+    "d": 2.842
+   }
+  ]
  },
  {
   "id": "s09",
-  "say": "दूसरा बच्चा। TB contact है, test positive है। पर no symptoms, और X-ray normal है।",
-  "sub": "Doosra bachcha... TB contact, test positive... par no symptoms, X-ray normal.",
-  "audio": 9.412,
-  "dur": 10.112
+  "dur": 24.441,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 1.033
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 1,
+    "t": 5.133,
+    "d": 1.232
+   },
+   {
+    "line": 2,
+    "rep": 1,
+    "of": 1,
+    "t": 9.864,
+    "d": 1.129
+   },
+   {
+    "line": 3,
+    "rep": 1,
+    "of": 1,
+    "t": 14.493,
+    "d": 1.387
+   },
+   {
+    "line": 4,
+    "rep": 1,
+    "of": 1,
+    "t": 19.38,
+    "d": 1.561
+   }
+  ]
  },
  {
   "id": "s10",
-  "say": "यह latent TB है। Treatment: 3 months isoniazid और rifampicin, यानी 3 HR। छोटा course है, तो बच्चा पूरा कर लेता है।",
-  "sub": "Yeh LATENT TB hai. Treatment: 3 months isoniazid + rifampicin = 3HR. Chhota hai, toh bachcha poora kar leta hai.",
-  "audio": 13.053,
-  "dur": 13.753
+  "dur": 49.893,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 1.552
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 5.652,
+    "d": 1.552
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 10.703,
+    "d": 1.552
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 15.755,
+    "d": 5.655
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 24.909,
+    "d": 5.655
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 34.064,
+    "d": 5.655
+   },
+   {
+    "line": 2,
+    "rep": 1,
+    "of": 1,
+    "t": 43.219,
+    "d": 3.174
+   }
+  ]
  },
  {
   "id": "s11",
-  "say": "6 months isoniazid भी चलता है, पर वह लंबा है।",
-  "sub": "6 months isoniazid (6H) bhi chalta hai... par lamba hai.",
-  "audio": 4.134,
-  "dur": 4.834
+  "dur": 23.149,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 3,
+    "t": 0.6,
+    "d": 4.016
+   },
+   {
+    "line": 0,
+    "rep": 2,
+    "of": 3,
+    "t": 8.116,
+    "d": 4.016
+   },
+   {
+    "line": 0,
+    "rep": 3,
+    "of": 3,
+    "t": 15.632,
+    "d": 4.016
+   }
+  ]
  },
  {
   "id": "s12",
-  "say": "तो याद रखिए। Symptoms plus consolidation, मतलब active TB, 2 HRZE plus 4 HR। No symptoms और normal X-ray, मतलब latent TB, 3 HR।",
-  "sub": "So remember: Symptoms + consolidation = ACTIVE → 2HRZE + 4HR.  No symptoms + normal X-ray = LATENT → 3HR.",
-  "audio": 15.057,
-  "dur": 15.757
+  "dur": 62.1,
+  "cues": [
+   {
+    "line": 0,
+    "rep": 1,
+    "of": 1,
+    "t": 0.6,
+    "d": 1.006
+   },
+   {
+    "line": 1,
+    "rep": 1,
+    "of": 3,
+    "t": 5.106,
+    "d": 6.737
+   },
+   {
+    "line": 1,
+    "rep": 2,
+    "of": 3,
+    "t": 15.343,
+    "d": 6.737
+   },
+   {
+    "line": 1,
+    "rep": 3,
+    "of": 3,
+    "t": 25.581,
+    "d": 6.737
+   },
+   {
+    "line": 2,
+    "rep": 1,
+    "of": 3,
+    "t": 35.818,
+    "d": 5.261
+   },
+   {
+    "line": 2,
+    "rep": 2,
+    "of": 3,
+    "t": 44.579,
+    "d": 5.261
+   },
+   {
+    "line": 2,
+    "rep": 3,
+    "of": 3,
+    "t": 53.339,
+    "d": 5.261
+   }
+  ]
  }
 ]

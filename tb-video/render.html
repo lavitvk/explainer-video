@@ -348,7 +348,7 @@ function background(T) {
 function header(label, accent = C.navy) {
   rr(60, 44, 18, 54, 9); ctx.fillStyle = accent; ctx.fill();
   txt(label, 96, 72, { size: 34, weight: 800, color: C.ink, align: 'left' });
-  txt('TB in Children · Quick Revision', W - 60, 72, { size: 24, weight: 600, color: C.mute, align: 'right' });
+  if (!window.REPEAT) txt('TB in Children · Quick Revision', W - 60, 72, { size: 24, weight: 600, color: C.mute, align: 'right' });
 }
 function wrap(s, maxW) {
   const words = s.split(' '), lines = []; let cur = '';
@@ -366,16 +366,16 @@ function subtitle(s, k) {
   ctx.restore();
 }
 
-/* ---------- scenes ---------- */
+/* ---------- scenes ----------
+   Each scene gets (t, D, Q, R): Q(i) = first time line i is spoken, R(i) = all its repetition times */
 const SC = {};
 
-SC.s01 = (t, D) => {
+SC.s01 = (t, D, Q) => {
   header('TB Test Positive');
   fadeUp(P(t, .1, .6), () => {
     txt('PPD / IGRA', W / 2, 220, { size: 96, weight: 900, color: C.navy });
-    txt('positive aaya… iska matlab kya?', W / 2, 310, { size: 52, weight: 600, color: C.sub });
+    txt('positive aaya… iska matlab kya?', W / 2, 310, { size: 52, weight: 600, color: C.sub, alpha: P(t, Q(1), .5) });
   });
-  // PPD card
   pop(P(t, .8, .6), 560, 600, () => {
     card(300, 420, 520, 380);
     txt('PPD / Mantoux (TST)', 560, 470, { size: 34, weight: 800 });
@@ -388,22 +388,19 @@ SC.s01 = (t, D) => {
   });
   check(800, 440, 34, C.active, P(t, 3, .5));
   check(1600, 440, 34, C.active, P(t, 3.3, .5));
-  // question mark
-  const q = P(t, 4.3, .6);
-  pop(q, W / 2, 610, () => {
+  pop(P(t, Q(1), .6), W / 2, 610, () => {
     ctx.beginPath(); ctx.arc(W / 2, 610, 80, 0, 7); ctx.fillStyle = C.warn; ctx.fill();
     txt('?', W / 2, 616, { size: 110, weight: 900, color: '#fff' });
   });
 };
 
-SC.s02 = (t, D) => {
+SC.s02 = (t, D, Q) => {
   header('Positive test = Body ne TB dekha hai');
   const cx = 640, cy = 560;
   fadeUp(P(t, 0, .6), () => {
     card(240, 160, 800, 760, { fill: '#fff' });
     bodySilhouette(cx, cy + 40, 1.15, .5 + .5 * Math.sin(t * 3));
   });
-  // bacilli drifting into lungs then immune cells surround them
   const bin = P(t, .5, 2);
   const bs = [[-80, -60], [60, -30], [-30, 10], [50, -95]];
   bs.forEach(([bx, by], i) => {
@@ -418,25 +415,24 @@ SC.s02 = (t, D) => {
     const tx = cx + bx * 1.15 + Math.cos(a) * 34 * eo(ic), ty = cy - 20 + by * 1.15 + Math.sin(a) * 30 * eo(ic);
     ctx.save(); ctx.globalAlpha = eo(ic) * .95; immuneCell(tx, ty, 24, t); ctx.restore();
   });
-  // right side explanation
   fadeUp(P(t, 1, .6), () => {
     txt('Matlab:', 1130, 260, { size: 44, weight: 700, color: C.sub, align: 'left' });
     txt('Body ne TB', 1130, 350, { size: 84, weight: 900, color: C.navy, align: 'left' });
     txt('“dekha” hai', 1130, 445, { size: 84, weight: 900, color: C.navy, align: 'left' });
   });
-  fadeUp(P(t, 3, .6), () => {
+  fadeUp(P(t, Q(1), .6), () => {
     card(1130, 530, 600, 220, { fill: C.blueSoft });
     immuneCell(1210, 640, 40, t);
     txt('Immune memory', 1280, 600, { size: 40, weight: 800, align: 'left', color: C.navy });
     txt('of TB infection', 1280, 655, { size: 34, weight: 600, align: 'left', color: C.sub });
     txt('= exposure / infection', 1280, 705, { size: 30, weight: 600, align: 'left', color: C.sub });
   });
-  fadeUp(P(t, 5, .6), () => {
+  fadeUp(P(t, Q(1) + 2.5, .6), () => {
     txt('Disease ka proof nahi', 1130, 820, { size: 40, weight: 800, align: 'left', color: C.active });
   });
 };
 
-SC.s03 = (t, D) => {
+SC.s03 = (t, D, Q) => {
   header('Active ya Latent?');
   pop(P(t, .1, .6), W / 2, 330, () => {
     card(W / 2 - 230, 210, 460, 230, { fill: '#fff' });
@@ -453,26 +449,26 @@ SC.s03 = (t, D) => {
     card(1180, 610, 440, 190, { fill: C.latentSoft, stroke: C.latent });
     txt('LATENT ?', 1400, 705, { size: 64, weight: 900, color: C.latent });
   });
-  const k = P(t, 2.8, .5);
-  pop(k, W / 2, 705, () => {
+  pop(P(t, Q(1), .5), W / 2, 705, () => {
     card(W / 2 - 190, 640, 380, 130, { fill: C.ink, r: 65 });
     txt('Test akela', W / 2, 688, { size: 36, weight: 800, color: '#fff' });
     txt('NAHI batata', W / 2, 734, { size: 36, weight: 800, color: '#FCA5A5' });
   });
 };
 
-SC.s04 = (t, D) => {
+SC.s04 = (t, D, Q, R) => {
   header('Toh kaun batata hai?');
   fadeUp(P(t, 0, .6), () => txt('Toh kaun batata hai?', W / 2, 200, { size: 80, weight: 900, color: C.navy }));
   const beat = (s) => 1 + .05 * Math.max(0, Math.sin(clamp((t - s) / .5) * Math.PI));
-  const k1 = P(t, 1.3, .6), k2 = P(t, 2.5, .6);
-  const b1 = beat(4.6), b2 = beat(5.8);
+  const beats = (off) => R(1).slice(1).reduce((m, s) => Math.max(m, beat(s + off)), 1);
+  const k1 = P(t, Q(1), .6), k2 = P(t, Q(1) + 1.1, .6);
+  const b1 = beats(0), b2 = beats(1.1);
   pop(k1, 560, 560, () => {
     ctx.save(); ctx.translate(560, 560); ctx.scale(b1, b1); ctx.translate(-560, -560);
     card(260, 320, 600, 500);
     txt('1. SYMPTOMS', 560, 380, { size: 50, weight: 900, color: C.active });
-    thermometer(400, 600, .95, .4 + .5 * eo(P(t, 1.6, 1.2)));
-    scaleIcon(640, 590, .9, P(t, 1.8, 1));
+    thermometer(400, 600, .95, .4 + .5 * eo(P(t, Q(1) + .3, 1.2)));
+    scaleIcon(640, 590, .9, P(t, Q(1) + .5, 1));
     txt('Fever · Weight loss · Cough', 560, 770, { size: 32, weight: 600, color: C.sub });
     ctx.restore();
   });
@@ -483,7 +479,7 @@ SC.s04 = (t, D) => {
     xray(1215, 420, 290, 320, {});
     ctx.restore();
   });
-  txt('+', W / 2, 570, { size: 120, weight: 900, color: C.mute, alpha: P(t, 2.6, .4) });
+  txt('+', W / 2, 570, { size: 120, weight: 900, color: C.mute, alpha: P(t, Q(1) + 1.2, .4) });
 };
 
 function caseCard(t, label, shirt, mood) {
@@ -492,13 +488,12 @@ function caseCard(t, label, shirt, mood) {
   child(340, 470, 1.35, shirt, mood, t);
 }
 
-SC.s05 = (t, D) => {
+SC.s05 = (t, D, Q) => {
   header('Case 1 · Pehla bachcha', C.active);
   fadeUp(P(t, 0, .6), () => caseCard(t, 'Child 1', '#F59E0B', 'sick'));
-  // findings list
   const items = [
-    { s: 1.6, label: 'Fever', draw: (x, y) => thermometer(x, y, .45, .85) },
-    { s: 2.7, label: 'Weight loss', draw: (x, y) => scaleIcon(x - 10, y, .42, 1) },
+    { s: Q(1), label: 'Fever', draw: (x, y) => thermometer(x, y, .45, .85) },
+    { s: Q(2), label: 'Weight loss', draw: (x, y) => scaleIcon(x - 10, y, .42, 1) },
   ];
   items.forEach((it, i) => {
     const y = 300 + i * 160;
@@ -509,16 +504,16 @@ SC.s05 = (t, D) => {
     }, 20);
     check(1130, y, 30, C.active, P(t, it.s + .3, .5));
   });
-  fadeUp(P(t, 3.8, .5), () => {
+  const xs = Q(3);
+  fadeUp(P(t, xs + .3, .5), () => {
     card(660, 560, 520, 130, { fill: C.activeSoft, r: 24, blur: 10 });
     txt('X-ray: RUL', 700, 605, { size: 42, weight: 800, align: 'left', color: C.ink });
     txt('consolidation', 700, 652, { size: 40, weight: 700, align: 'left', color: C.active });
   }, 20);
-  check(1130, 625, 30, C.active, P(t, 4.6, .5));
-  // X-ray
-  fadeUp(P(t, 3.6, .6), () => {
-    xray(1240, 160, 620, 700, { cons: P(t, 4.4, 1.6), pulse: true, t });
-    const k = P(t, 5.6, .6);
+  check(1130, 625, 30, C.active, P(t, xs + 1.5, .5));
+  fadeUp(P(t, xs, .6), () => {
+    xray(1240, 160, 620, 700, { cons: P(t, xs + .9, 1.6), pulse: true, t });
+    const k = P(t, xs + 2.2, .6);
     if (k > 0) {
       ctx.save(); ctx.globalAlpha *= eo(k);
       ctx.strokeStyle = '#FDE68A'; ctx.lineWidth = 5; ctx.setLineDash([14, 10]);
@@ -538,19 +533,16 @@ SC.s06 = (t, D) => {
   ctx.restore();
   ctx.save(); ctx.globalAlpha = P(t, 0, .4); card(W / 2 - 360, 280, 720, 100, { r: 50 }); ctx.restore();
   txt('Symptoms + Consolidation', W / 2, 330, { size: 50, weight: 800, color: C.ink, alpha: P(t, 0, .4) });
-  stamp('ACTIVE TB', W / 2, 560, C.active, P(t, .25, .45), -0.07, 150);
+  stamp('ACTIVE TB', W / 2, 560, C.active, P(t, .5, .45), -0.07, 150);
 };
 
 function phaseBar(t, x, y, unit, segs, startT) {
-  // segs: [{months, pills:[...], label, color}]
   let cx = x;
   segs.forEach((sg, i) => {
     const k = P(t, startT + i * sg.delay, .9);
     const w = sg.months * unit * eo(k);
     if (k > 0) {
-      ctx.save();
       rr(cx, y, Math.max(w, 1), 110, 22); ctx.fillStyle = sg.color; ctx.fill();
-      ctx.restore();
       ctx.save(); ctx.globalAlpha *= clamp(k * 2 - 1);
       txt(sg.label, cx + sg.months * unit / 2, y - 40, { size: 32, weight: 700, color: C.sub });
       txt(`${sg.months} months`, cx + sg.months * unit / 2, y + 160, { size: 40, weight: 800, color: C.ink });
@@ -563,24 +555,21 @@ function phaseBar(t, x, y, unit, segs, startT) {
     }
     cx += sg.months * unit;
   });
-  // month ticks
 }
 
-SC.s07 = (t, D) => {
+SC.s07 = (t, D, Q) => {
   header('Active TB · Treatment', C.active);
   fadeUp(P(t, 0, .5), () => txt('6 months total', W / 2, 190, { size: 46, weight: 700, color: C.sub }));
   const unit = 260, x0 = (W - unit * 6) / 2;
   phaseBar(t, x0, 300, unit, [
     { months: 2, pills: ['H', 'R', 'Z', 'E'], label: 'Intensive phase', color: '#FECACA', delay: 0 },
-    { months: 4, pills: ['H', 'R'], label: 'Continuation phase', color: '#FED7AA', delay: 2.3 },
-  ], .8);
-  // legend
+    { months: 4, pills: ['H', 'R'], label: 'Continuation phase', color: '#FED7AA', delay: 2.0 },
+  ], Q(0) + .8);
   const L = [['H', 'Isoniazid'], ['R', 'Rifampicin'], ['Z', 'Pyrazinamide'], ['E', 'Ethambutol']];
-  const s0 = D * .48, step = D * .105;
+  const s0 = Q(1) + 1.2, step = 1.0;
   L.forEach(([l, name], i) => {
-    const k = P(t, s0 + i * step, .45);
     const x = 190 + i * 400, y = 760;
-    fadeUp(k, () => {
+    fadeUp(P(t, s0 + i * step, .45), () => {
       card(x, y - 70, 360, 140, { r: 70, blur: 14 });
       pill(x + 72, y, l, C[l], .95);
       txt(name, x + 132, y, { size: 36, weight: 800, align: 'left' });
@@ -588,51 +577,48 @@ SC.s07 = (t, D) => {
   });
 };
 
-SC.s08 = (t, D) => {
+SC.s08 = (t, D, Q) => {
   header('Active TB · Poora course zaroori', C.active);
   pop(P(t, .1, .6), W / 2, 250, () => {
     card(W / 2 - 520, 160, 1040, 180, { fill: '#fff', stroke: C.latent, lw: 6 });
     txt('2HRZE  +  4HR', W / 2 - 40, 250, { size: 96, weight: 900, color: C.navy });
-    check(W / 2 + 420, 250, 46, C.latent, P(t, .8, .5));
+    check(W / 2 + 420, 250, 46, C.latent, P(t, 1.2, .5));
   });
-  const opts = [['Sirf Rifampicin', D * .25], ['Sirf 3 months HR', D * .35]];
+  const opts = [['Sirf Rifampicin', Q(1) + .3], ['Sirf 3 months HR', Q(1) + 1.6]];
   opts.forEach(([o, s], i) => {
     const x = 330 + i * 660;
     fadeUp(P(t, s, .5), () => {
       card(x, 410, 600, 150, { fill: '#fff' });
-      txt(o, x + 300 - 30, 485, { size: 46, weight: 800, color: C.ink });
-      // strike
-      const sk = P(t, s + .5, .4);
+      txt(o, x + 270, 485, { size: 46, weight: 800, color: C.ink });
+      const sk = P(t, s + .9, .4);
       if (sk > 0) { ctx.save(); ctx.strokeStyle = C.active; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(x + 50, 487); ctx.lineTo(x + 50 + 440 * eo(sk), 487); ctx.stroke(); ctx.restore(); }
     });
-    cross(x + 560, 485, 34, C.active, P(t, s + .6, .5));
+    cross(x + 560, 485, 34, C.active, P(t, s + 1, .5));
   });
-  fadeUp(P(t, D * .43, .5), () => txt('Active TB ke liye kaafi NAHI', W / 2, 615, { size: 44, weight: 800, color: C.active }));
-  // resistance animation
-  const k = P(t, D * .62, .6);
-  fadeUp(k, () => {
+  fadeUp(P(t, Q(1) + 3.2, .5), () => txt('Active TB ke liye kaafi NAHI', W / 2, 615, { size: 44, weight: 800, color: C.active }));
+  const q = Q(2);
+  fadeUp(P(t, q, .6), () => {
     card(260, 680, 1400, 210, { fill: C.warnSoft, stroke: C.warn });
     txt('Adhura ilaaj', 560, 785, { size: 54, weight: 900, color: C.warn });
-    arrow(800, 785, 960, 785, P(t, D * .66, .5), C.warn, 9);
-    // bacteria turning resistant with shields
+    arrow(800, 785, 960, 785, P(t, q + .5, .5), C.warn, 9);
     for (let i = 0; i < 4; i++) {
       const bx = 990 + i * 60, by = 765 + (i % 2) * 40;
-      const rk = P(t, D * .7 + i * .25, .5);
+      const rk = P(t, q + 1 + i * .25, .5);
       bacillus(bx, by, 54, .5 + i * .7 + Math.sin(t * 2 + i) * .1, rk > 0 ? '#7F1D1D' : C.bac);
       if (rk > 0) { ctx.save(); ctx.globalAlpha *= eo(rk); ctx.strokeStyle = C.warn; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(bx, by, 40, 0, 7); ctx.stroke(); ctx.restore(); }
     }
-    txt('Resistance ka risk', 1470, 785, { size: 40, weight: 900, color: C.active, alpha: P(t, D * .75, .5) });
+    txt('Resistance ka risk', 1470, 785, { size: 40, weight: 900, color: C.active, alpha: P(t, q + 1.6, .5) });
   });
 };
 
-SC.s09 = (t, D) => {
+SC.s09 = (t, D, Q) => {
   header('Case 2 · Doosra bachcha', C.latent);
   fadeUp(P(t, 0, .6), () => caseCard(t, 'Child 2', '#10B981', 'ok'));
   const rows = [
-    { s: D * .14, label: 'TB contact (ghar mein)', ok: true, color: C.warn, soft: C.warnSoft },
-    { s: D * .30, label: 'Test positive (PPD/IGRA)', ok: true, color: C.warn, soft: C.warnSoft },
-    { s: D * .52, label: 'No symptoms', ok: true, color: C.latent, soft: C.latentSoft },
-    { s: D * .70, label: 'X-ray normal', ok: true, color: C.latent, soft: C.latentSoft },
+    { s: Q(1), label: 'TB contact (ghar mein)', color: C.warn, soft: C.warnSoft },
+    { s: Q(2), label: 'Test positive (PPD/IGRA)', color: C.warn, soft: C.warnSoft },
+    { s: Q(3), label: 'No symptoms', color: C.latent, soft: C.latentSoft },
+    { s: Q(4), label: 'X-ray normal', color: C.latent, soft: C.latentSoft },
   ];
   rows.forEach((r, i) => {
     const y = 250 + i * 150;
@@ -642,36 +628,33 @@ SC.s09 = (t, D) => {
     }, 20);
     check(1205, y, 28, r.color, P(t, r.s + .3, .5));
   });
-  // contact adult coughing appears near the child briefly
-  const ak = P(t, D * .1, .6);
-  if (t < D * .5) fadeUp(ak * (1 - P(t, D * .45, .4)), () => adult(1500, 520, 1.1, '#64748B', t, true));
-  fadeUp(P(t, D * .66, .6), () => {
+  const ak = P(t, Q(1), .6) * (1 - P(t, Q(4) - .6, .5));
+  fadeUp(ak, () => adult(1550, 520, 1.1, '#64748B', t, true));
+  fadeUp(P(t, Q(4), .6), () => {
     xray(1300, 170, 560, 640, { cons: 0 });
     card(1440, 740, 280, 70, { fill: C.latent, r: 35, blur: 0 });
     txt('NORMAL', 1580, 776, { size: 34, weight: 900, color: '#fff' });
   });
 };
 
-SC.s10 = (t, D) => {
+SC.s10 = (t, D, Q) => {
   header('Latent TB · Treatment', C.latent);
-  stamp('LATENT TB', W / 2, 230, C.latent, P(t, .1, .45), -0.05, 110);
+  stamp('LATENT TB', W / 2, 230, C.latent, P(t, .4, .45), -0.05, 110);
   const unit = 260, x0 = (W - unit * 6) / 2;
-  // 3HR bar
-  phaseBar(t, x0, 480, unit, [{ months: 3, pills: ['H', 'R'], label: 'Isoniazid + Rifampicin (daily)', color: C.latentSoft, delay: 0 }], D * .22);
-  pop(P(t, D * .45, .5), x0 + unit * 4.6, 535, () => {
+  phaseBar(t, x0, 480, unit, [{ months: 3, pills: ['H', 'R'], label: 'Isoniazid + Rifampicin (daily)', color: C.latentSoft, delay: 0 }], Q(1) + .5);
+  pop(P(t, Q(1) + 3, .5), x0 + unit * 4.6, 535, () => {
     card(x0 + unit * 3.5, 455, 560, 160, { fill: C.latent, r: 30 });
     txt('= 3HR', x0 + unit * 4.6, 535, { size: 90, weight: 900, color: '#fff' });
   });
-  // adherence
-  const k = P(t, D * .66, .5);
-  fadeUp(k, () => {
+  const q = Q(2);
+  fadeUp(P(t, q, .5), () => {
     card(360, 760, 1200, 130, { fill: '#fff' });
     txt('Chhota course →', 400, 825, { size: 40, weight: 800, align: 'left', color: C.ink });
-    const pw = 520 * eo(P(t, D * .72, 1.6));
+    const pw = 520 * eo(P(t, q + .4, 1.8));
     rr(760, 805, 520, 40, 20); ctx.fillStyle = '#E2E8F0'; ctx.fill();
     rr(760, 805, Math.max(pw, 1), 40, 20); ctx.fillStyle = C.latent; ctx.fill();
-    txt('poora!', 1390, 825, { size: 40, weight: 900, color: C.latent, alpha: P(t, D * .85, .4) });
-    check(1500, 825, 30, C.latent, P(t, D * .87, .5));
+    txt('poora!', 1390, 825, { size: 40, weight: 900, color: C.latent, alpha: P(t, q + 2.2, .4) });
+    check(1500, 825, 30, C.latent, P(t, q + 2.4, .5));
   });
 };
 
@@ -688,10 +671,10 @@ SC.s11 = (t, D) => {
     });
   };
   row(270, '3HR', 3, C.latent, .2, 'Chhota · preferred in children', C.latent);
-  row(560, '6H', 6, C.H, D * .12, 'Isoniazid alone · chalta hai, par lamba hai', C.warn);
+  row(560, '6H', 6, C.H, 1.0, 'Isoniazid alone · chalta hai, par lamba hai', C.warn);
 };
 
-SC.s12 = (t, D) => {
+SC.s12 = (t, D, Q) => {
   header('So remember!', C.navy);
   fadeUp(P(t, 0, .5), () => txt('Yaad rakho', W / 2, 175, { size: 70, weight: 900, color: C.navy }));
   const col = (x, s, title, color, soft, l1, l2, rx) => {
@@ -699,15 +682,15 @@ SC.s12 = (t, D) => {
       card(x, 250, 800, 640, { fill: soft, stroke: color, lw: 6 });
       txt(l1, x + 400, 340, { size: 44, weight: 800, color: C.ink });
       txt(l2, x + 400, 400, { size: 44, weight: 800, color: C.ink });
-      arrow(x + 400, 450, x + 400, 520, P(t, s + .6, .4), color, 9);
+      arrow(x + 400, 450, x + 400, 520, P(t, s + 1, .4), color, 9);
       card(x + 120, 545, 560, 130, { fill: color, r: 30, blur: 0 });
       txt(title, x + 400, 612, { size: 64, weight: 900, color: '#fff' });
-      arrow(x + 400, 700, x + 400, 760, P(t, s + 1.2, .4), color, 9);
+      arrow(x + 400, 700, x + 400, 760, P(t, s + 2, .4), color, 9);
       txt(rx, x + 400, 820, { size: 76, weight: 900, color });
     });
   };
-  col(110, .5, 'ACTIVE TB', C.active, C.activeSoft, 'Symptoms', '+ Consolidation', '2HRZE + 4HR');
-  col(1010, D * .48, 'LATENT TB', C.latent, C.latentSoft, 'No symptoms', '+ Normal X-ray', '3HR');
+  col(110, Q(1), 'ACTIVE TB', C.active, C.activeSoft, 'Symptoms', '+ Consolidation', '2HRZE + 4HR');
+  col(1010, Q(2), 'LATENT TB', C.latent, C.latentSoft, 'No symptoms', '+ Normal X-ray', '3HR');
 };
 
 SC.end = (t, D) => {
@@ -720,11 +703,25 @@ SC.end = (t, D) => {
   });
 };
 
+/* repetition badge: shows "Phir se 2/3" while an important line is being repeated */
+function repeatBadge(cue, t) {
+  if (!cue || cue.of < 2) return;
+  const k = clamp((t - cue.t) / .3);
+  ctx.save(); ctx.globalAlpha = k;
+  const x = W - 60, y = 72;
+  ctx.font = `800 28px ${FONT}`;
+  const label = `Yaad rakho · ${cue.rep}/${cue.of}`, w = ctx.measureText(label).width + 56;
+  rr(x - w, y - 30, w, 60, 30); ctx.fillStyle = cue.rep === 1 ? C.navy : C.warn; ctx.fill();
+  for (let i = 0; i < cue.of; i++) { ctx.beginPath(); ctx.arc(x - w - 30 - i * 26, y, 8, 0, 7); ctx.fillStyle = i < cue.rep ? (cue.rep === 1 ? C.navy : C.warn) : '#CBD5E1'; ctx.fill(); }
+  txt(label, x - w / 2, y + 2, { size: 28, weight: 800, color: '#fff' });
+  ctx.restore();
+}
+
 /* ---------- timeline ---------- */
 let TL = [];
 window.setup = (timeline) => {
   let acc = 0;
-  TL = timeline.map(s => { const o = { ...s, start: acc }; acc += s.dur; return o; });
+  TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
   return acc;
 };
 window.renderFrame = (T) => {
@@ -733,11 +730,15 @@ window.renderFrame = (T) => {
   let sc = TL[TL.length - 1];
   for (const s of TL) if (T >= s.start && T < s.start + s.dur) { sc = s; break; }
   const t = T - sc.start, D = sc.dur;
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
   const fin = clamp(t / .35), fout = clamp((D - t) / .3);
   ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
-  SC[sc.id](t, D);
+  let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
+  window.REPEAT = !!(cue && cue.of > 1);
+  SC[sc.id](t, D, Q, R);
+  if (window.REPEAT) repeatBadge(cue, t);
   ctx.restore();
-  subtitle(sc.sub, Math.min(clamp((t - .15) / .3), fout));
 };
 </script>
 </body></html>
