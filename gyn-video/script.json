@@ -1,0 +1,258 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part one: ovarian torsion, और endometriosis।"
+   },
+   {
+    "say": "इस chapter में, हर case एक सवाल है।"
+   },
+   {
+    "say": "पहले picture पहचानो। फिर answer। फिर, बाकी options क्यों गलत हैं।"
+   },
+   {
+    "say": "चलिए, शुरू करते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "q1case",
+  "lines": [
+   {
+    "say": "Case one. पच्चीस साल की female।"
+   },
+   {
+    "say": "Left ovarian cyst, पहले से पता है।"
+   },
+   {
+    "say": "अब तीन घंटे से, severe left lower pain, और nausea। Sudden, severe pain।"
+   },
+   {
+    "say": "Doppler में, left ovary का blood flow कम।"
+   },
+   {
+    "say": "Known cyst, sudden pain, flow कम। यह क्या है? Ovarian torsion। Ovary घूम गई है।"
+   }
+  ]
+ },
+ {
+  "id": "q1ans",
+  "lines": [
+   {
+    "say": "Next step क्या? Laparoscopic surgery। Detorsion, plus cystectomy।"
+   },
+   {
+    "say": "Torsion, surgical emergency है।"
+   },
+   {
+    "say": "इतनी जल्दी क्यों? जल्दी detorsion से, ovary बच जाती है।"
+   },
+   {
+    "say": "और ovary dark दिखे, तब भी उसे preserve करने की कोशिश करते हैं। Dark ovary भी बचाओ।"
+   }
+  ]
+ },
+ {
+  "id": "q1why",
+  "lines": [
+   {
+    "say": "Conservative, या 24 घंटे बाद repeat ultrasound क्यों नहीं? Wait किया, तो ovary necrose हो जाएगी।"
+   },
+   {
+    "say": "और एक important point: Doppler normal हो, तब भी torsion exclude नहीं होता।"
+   },
+   {
+    "say": "Cyst drainage क्यों नहीं? Drain करने से twist नहीं खुलता।"
+   },
+   {
+    "say": "So remember: known cyst, plus sudden severe pain: torsion। Laparoscopy, detorsion, ovary बचाओ।"
+   }
+  ]
+ },
+ {
+  "id": "q2case",
+  "lines": [
+   {
+    "say": "पहले वाला याद है? Sudden pain, known cyst: torsion, laparoscopy।"
+   },
+   {
+    "say": "Case two. तीस साल की female। छह साल से infertility।"
+   },
+   {
+    "say": "Severe dysmenorrhea, जो naproxen से नहीं जाता। NSAID से नहीं जाता।"
+   },
+   {
+    "say": "Dysmenorrhea, infertility, NSAID-resistant pain। यह क्या है? Endometriosis।"
+   },
+   {
+    "say": "यह classic picture है। Dyspareunia भी हो सकती है।"
+   }
+  ]
+ },
+ {
+  "id": "q2why",
+  "lines": [
+   {
+    "say": "Endometritis में fever और discharge होता है, और usually delivery या procedure के बाद।"
+   },
+   {
+    "say": "Fibroids का main complaint, heavy bleeding है।"
+   },
+   {
+    "say": "Pelvic congestion में dull pain, जो खड़े रहने पर बढ़ता है, और infertility typical नहीं।"
+   },
+   {
+    "say": "So remember: dysmenorrhea, plus infertility, plus NSAID से relief नहीं: endometriosis।"
+   }
+  ]
+ },
+ {
+  "id": "q3case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: dysmenorrhea, infertility: endometriosis।"
+   },
+   {
+    "say": "Case three. Cyclic pelvic pain, जो menses से just पहले बढ़ता है। Endometriosis का शक है।"
+   },
+   {
+    "say": "Diagnose कैसे करें? Diagnostic laparoscopy। Gold standard।"
+   },
+   {
+    "say": "क्यों? Lesions सीधे दिखते हैं, और biopsy भी हो जाती है। देखो, और biopsy लो।"
+   }
+  ]
+ },
+ {
+  "id": "q3why",
+  "lines": [
+   {
+    "say": "MRI और ultrasound, endometrioma या deep disease दिखा देते हैं।"
+   },
+   {
+    "say": "पर superficial peritoneal lesions miss हो जाते हैं।"
+   },
+   {
+    "say": "Endometrial biopsy क्यों नहीं? वह uterus के अंदर देखती है, और disease uterus के बाहर है।"
+   },
+   {
+    "say": "So remember: endometriosis का gold standard, diagnostic laparoscopy।"
+   }
+  ]
+ },
+ {
+  "id": "q4case",
+  "lines": [
+   {
+    "say": "पिछला एक line में: endometriosis diagnosis, laparoscopy।"
+   },
+   {
+    "say": "Case four. तैंतीस साल की nulliparous female। Cyclic pelvic pain, और dyschezia।"
+   },
+   {
+    "say": "Dyschezia मतलब, stool pass करते वक्त pain।"
+   },
+   {
+    "say": "Laparoscopy में dark lesions दिखते हैं। इनको कहते हैं, powder-burn implants।"
+   },
+   {
+    "say": "यह क्या है? Endometriosis। Dyschezia क्यों? Pouch of Douglas involved है।"
+   }
+  ]
+ },
+ {
+  "id": "q4why",
+  "lines": [
+   {
+    "say": "Pelvic TB में tubercles, caseation, adhesions, और systemic symptoms।"
+   },
+   {
+    "say": "Adenomyosis, myometrium के अंदर होता है। Surface पर नहीं दिखता।"
+   },
+   {
+    "say": "PID में pus, inflamed tubes, और fever।"
+   },
+   {
+    "say": "So remember: dark powder-burn lesions, plus cyclic pain, plus dyschezia: endometriosis।"
+   }
+  ]
+ },
+ {
+  "id": "q5case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: powder-burn lesions, endometriosis। इस part का last one।"
+   },
+   {
+    "say": "Case five. पैंतालीस साल की patient, endometriosis।"
+   },
+   {
+    "say": "Medical treatment fail हो चुका, और fertility नहीं चाहिए।"
+   },
+   {
+    "say": "Definitive management क्या? Hysterectomy, with bilateral oophorectomy।"
+   },
+   {
+    "say": "Ovaries भी क्यों? Estrogen का source हटाना है। Estrogen गया, तो recurrence सबसे कम।"
+   },
+   {
+    "say": "और visible lesions भी साथ में excise करते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "q5why",
+  "lines": [
+   {
+    "say": "Laparoscopic ablation, conservative surgery है। Recurrence common।"
+   },
+   {
+    "say": "Endometrial ablation, uterine lining के लिए है, heavy bleeding के लिए। Endometriosis तो uterus के बाहर है।"
+   },
+   {
+    "say": "COCP medical treatment है, जो already fail हो चुका।"
+   },
+   {
+    "say": "So remember: medical fail, family complete: hysterectomy, plus oophorectomy।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "Part one का recap। पाँचों एक साथ।"
+   },
+   {
+    "say": "Known cyst, sudden pain: torsion। Laparoscopy और detorsion।"
+   },
+   {
+    "say": "Dysmenorrhea, infertility, NSAID fail: endometriosis।"
+   },
+   {
+    "say": "Gold standard: diagnostic laparoscopy।"
+   },
+   {
+    "say": "Dark powder-burn lesions, dyschezia: endometriosis।"
+   },
+   {
+    "say": "Definitive: hysterectomy, plus oophorectomy।"
+   }
+  ]
+ },
+ {
+  "id": "think",
+  "lines": [
+   {
+    "say": "Think about it: endometriosis और adenomyosis, दोनों में endometrial tissue गलत जगह है। फ़र्क क्या है?"
+   },
+   {
+    "say": "Endometriosis, uterus के बाहर।"
+   },
+   {
+    "say": "Adenomyosis, myometrium के अंदर।"
+   }
+  ]
+ }
+]
