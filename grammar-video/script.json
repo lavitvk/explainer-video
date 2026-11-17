@@ -1,0 +1,641 @@
+[
+ {
+  "id": "title",
+  "lines": [
+   {
+    "say": "Revision notes. Chapter nineteen: relative pronouns।"
+   }
+  ]
+ },
+ {
+  "id": "r1",
+  "lines": [
+   {
+    "say": "Part one: relative pronoun क्या है। Who, whom, whose।"
+   },
+   {
+    "say": "पहले pronoun का recap। Pronoun क्या करता है? Noun की जगह आता है। Noun replace करता है।"
+   },
+   {
+    "say": "Example: Ram is a tall boy. He is a basketball player. यहाँ He ने Ram की जगह ली।"
+   },
+   {
+    "say": "Pronouns कौन से? I, we, you, he, she, it, they।"
+   },
+   {
+    "say": "फिर me, us, him, her, them।"
+   },
+   {
+    "say": "और possessive: mine, ours, yours, his, hers, theirs।"
+   },
+   {
+    "say": "So pronoun, noun की जगह।"
+   }
+  ]
+ },
+ {
+  "id": "r2",
+  "lines": [
+   {
+    "say": "पहले वाला याद है? Pronoun noun की जगह आता है। अब relative pronoun अलग है, ध्यान से।"
+   },
+   {
+    "say": "Relative pronouns कौन से? Who, which, और that। और उनके forms, whom और whose।"
+   },
+   {
+    "say": "अब फ़र्क क्या है? Relative pronoun, noun को replace नहीं करता।"
+   },
+   {
+    "say": "तो करता क्या है? Noun के बारे में एक clause शुरू करता है, जो उस noun के बारे में information देता है।"
+   },
+   {
+    "say": "Example: This is the girl who won the first prize. Girl वही है। Who ने उसे हटाया नहीं।"
+   },
+   {
+    "say": "Who के बाद वाला हिस्सा, girl के बारे में बता रहा है।"
+   },
+   {
+    "say": "So remember: relative pronoun noun को replace नहीं करता। Noun के बारे में information देता है।"
+   }
+  ]
+ },
+ {
+  "id": "r3",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: relative pronoun, replace नहीं करता, information देता है। अब एक-एक करके।"
+   },
+   {
+    "say": "Who किसके लिए? Persons के लिए। लोग।"
+   },
+   {
+    "say": "और कब? जब वह person sentence का subject हो। काम वह खुद कर रहा हो। Singular और plural, दोनों में।"
+   },
+   {
+    "say": "This is the girl who won the first prize. Girl ने prize जीता।"
+   },
+   {
+    "say": "These are the students who have passed the exams. Students ने pass किया।"
+   },
+   {
+    "say": "So remember: who, persons, subject। काम करने वाला।"
+   }
+  ]
+ },
+ {
+  "id": "r4",
+  "lines": [
+   {
+    "say": "पिछला एक line में: who, person, subject। अब whom।"
+   },
+   {
+    "say": "Whom क्या है? Who का objective form। कब use करते हैं? जब person sentence का object हो। उसके साथ कुछ किया गया हो।"
+   },
+   {
+    "say": "She is the teacher whom all the students like. Teacher को students like करते हैं। Teacher पर काम हो रहा है, तो whom।"
+   },
+   {
+    "say": "The workers whom he employs are poorly paid. Workers को वह employ करता है। Whom।"
+   },
+   {
+    "say": "एक आसान trick: whom के बाद कोई और subject आता है। Whom all the students। Whom he। Whom we।"
+   },
+   {
+    "say": "तो who या whom कैसे पहचानो? अगर बाद में सीधा verb आए, who। अगर बाद में नया subject आए, whom।"
+   },
+   {
+    "say": "और एक बात: आजकल बोलने में whom की जगह अक्सर who बोल देते हैं। Whom formal है। पर exam में, object हो तो whom।"
+   },
+   {
+    "say": "So remember: whom, person, object। बाद में नया subject।"
+   }
+  ]
+ },
+ {
+  "id": "r5",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: who subject, whom object। अब तीसरा।"
+   },
+   {
+    "say": "Whose क्या है? Who का possessive form। किसका, किसकी।"
+   },
+   {
+    "say": "These are my friends whose parents are in Spain. Parents किसके? Friends के।"
+   },
+   {
+    "say": "The boy, whose legs were broken in the accident, had to undergo three surgeries. Legs किसकी? Boy की।"
+   },
+   {
+    "say": "Whose किस word की जगह आता है? His, her, their की जगह।"
+   },
+   {
+    "say": "This is the woman. Her child was hurt. बन गया: This is the woman whose child was hurt. Her गया, whose आया।"
+   },
+   {
+    "say": "Book का rule: whose सिर्फ persons के लिए, objects और animals के लिए नहीं।"
+   },
+   {
+    "say": "So remember: whose, possession। His, her, their की जगह।"
+   }
+  ]
+ },
+ {
+  "id": "p1recap",
+  "lines": [
+   {
+    "say": "Part one का recap। सब एक साथ।"
+   },
+   {
+    "say": "Pronoun noun की जगह आता है। Relative pronoun replace नहीं करता, information देता है।"
+   },
+   {
+    "say": "Who: person, subject। Whom: person, object, बाद में नया subject।"
+   },
+   {
+    "say": "Whose: possession। His, her, their की जगह।"
+   }
+  ]
+ },
+ {
+  "id": "p1think",
+  "lines": [
+   {
+    "say": "Think about it: The doctor, blank, we consulted is very well known. Who या whom?"
+   },
+   {
+    "say": "बाद में we है, नया subject। तो whom।"
+   }
+  ]
+ },
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two: which, that, और what।"
+   },
+   {
+    "say": "नया part शुरू करने से पहले, Part one वापस बुलाओ।"
+   },
+   {
+    "say": "Who: person, subject। Whom: person, object। Whose: possession।"
+   },
+   {
+    "say": "अब, चीज़ों वाले pronouns।"
+   }
+  ]
+ },
+ {
+  "id": "r6",
+  "lines": [
+   {
+    "say": "Which किसके लिए? Animals और non-living things। चीज़ें और जानवर।"
+   },
+   {
+    "say": "Singular और plural दोनों। और object या possessive के लिए भी वही which। Form नहीं बदलता।"
+   },
+   {
+    "say": "This is the pen which I lost yesterday. Pen, चीज़, which।"
+   },
+   {
+    "say": "Children like books which have pictures. Books, which।"
+   },
+   {
+    "say": "The house, which my uncle built, is being sold. House, which।"
+   },
+   {
+    "say": "So remember: who लोगों के लिए। Which, चीज़ों और जानवरों के लिए।"
+   }
+  ]
+ },
+ {
+  "id": "r7",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: who लोग, which चीज़ें। अब that, यह दोनों के लिए।"
+   },
+   {
+    "say": "That किसके लिए? Persons और things, दोनों। Singular और plural दोनों। Form कभी नहीं बदलता।"
+   },
+   {
+    "say": "I know the house that they live in. House, that।"
+   },
+   {
+    "say": "The two rabbits that you have bought are females. Rabbits, that।"
+   },
+   {
+    "say": "The young woman that I was talking to yesterday is engaged to my cousin. Woman, that।"
+   },
+   {
+    "say": "और एक बात: ऐसे sentences में, that अक्सर हटा देते हैं।"
+   },
+   {
+    "say": "I have lost the book you gave me. That छुपा हुआ है।"
+   },
+   {
+    "say": "The salesperson you have employed is very pushy. वहाँ भी that छुपा हुआ है।"
+   },
+   {
+    "say": "So remember: that, लोग और चीज़ें दोनों। और कभी-कभी छुपा हुआ।"
+   }
+  ]
+ },
+ {
+  "id": "r8",
+  "lines": [
+   {
+    "say": "पिछला एक line में: that, लोग और चीज़ें दोनों। अब कुछ जगह, जहाँ that ही लगता है। चार जगह याद रखो।"
+   },
+   {
+    "say": "पहली जगह: superlative के बाद। Finest, most, best।"
+   },
+   {
+    "say": "She is the finest woman that I have ever met. Finest के बाद that।"
+   },
+   {
+    "say": "दूसरी जगह: all, same, any, none, nothing, only के बाद।"
+   },
+   {
+    "say": "All that glitters is not gold. Humans are the only animals that can talk।"
+   },
+   {
+    "say": "तीसरी जगह: who और what के बाद। Who am I that should object? What is it that troubles you so much?"
+   },
+   {
+    "say": "चौथी जगह: it is के बाद। It is the teacher that decides what is to be taught।"
+   },
+   {
+    "say": "So remember: superlative, all-same-only, who-what, it is। इन चारों के बाद that।"
+   }
+  ]
+ },
+ {
+  "id": "r9",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: that की चार जगह। अब what।"
+   },
+   {
+    "say": "What सिर्फ चीज़ों के लिए। और इसका मतलब है, that which।"
+   },
+   {
+    "say": "What cannot be cured must be endured. जो ठीक नहीं हो सकता, उसे सहना पड़ेगा।"
+   },
+   {
+    "say": "He found what he was looking for. जो ढूँढ रहा था, वह मिला।"
+   },
+   {
+    "say": "So remember: what, सिर्फ चीज़ें। मतलब, that which।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। सब एक साथ।"
+   },
+   {
+    "say": "Which: animals और things।"
+   },
+   {
+    "say": "That: लोग और चीज़ें दोनों, कभी छुपा हुआ।"
+   },
+   {
+    "say": "That की चार जगह: superlative, all-same-only, who-what, it is।"
+   },
+   {
+    "say": "What: सिर्फ चीज़ें, मतलब that which।"
+   }
+  ]
+ },
+ {
+  "id": "p2think",
+  "lines": [
+   {
+    "say": "Think about it: Where is the shop, blank, sells picture postcards?"
+   },
+   {
+    "say": "Shop चीज़ है। तो which या that, दोनों चलेंगे।"
+   },
+   {
+    "say": "और: It is the best book, blank, I have read?"
+   },
+   {
+    "say": "Best, superlative है। तो that।"
+   }
+  ]
+ },
+ {
+  "id": "p3intro",
+  "lines": [
+   {
+    "say": "Part three: sentences जोड़ना, और सही जगह।"
+   },
+   {
+    "say": "इस part से पहले, एक चक्कर पीछे का।"
+   },
+   {
+    "say": "Who लोग subject। Whom लोग object। Whose possession।"
+   },
+   {
+    "say": "Which चीज़ें। That दोनों। What, that which।"
+   },
+   {
+    "say": "अब, दो sentences को एक बनाना।"
+   }
+  ]
+ },
+ {
+  "id": "r10",
+  "lines": [
+   {
+    "say": "दो sentences हैं: There is the mechanic. He repaired our television set."
+   },
+   {
+    "say": "दूसरे sentence में He कौन है? Mechanic। तो He हटाओ, who लगाओ।"
+   },
+   {
+    "say": "There is the mechanic who repaired our television set. एक sentence बन गया।"
+   },
+   {
+    "say": "चीज़ हो तो: This is the picture. It was painted by my sister."
+   },
+   {
+    "say": "It कौन है? Picture। It हटाओ, which लगाओ। This is the picture which was painted by my sister।"
+   },
+   {
+    "say": "Rule क्या है? दूसरे sentence का pronoun हटाओ, उसकी जगह relative pronoun लगाओ। लोगों के लिए who, चीज़ के लिए which।"
+   }
+  ]
+ },
+ {
+  "id": "r11",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: He हटाओ, who लगाओ। It हटाओ, which लगाओ। अब whom और whose।"
+   },
+   {
+    "say": "This is an acrobat. We met her at a talent show. Her object है। Her हटाओ, whom लगाओ।"
+   },
+   {
+    "say": "This is the acrobat whom we met at a talent show. ध्यान दो: her गया, पूरी तरह। दोबारा नहीं लिखना।"
+   },
+   {
+    "say": "The gardener chased the boys. He found them in his garden. Them हटाओ: The gardener chased the boys whom he found in his garden।"
+   },
+   {
+    "say": "अब whose: This is the woman. Her child was hurt. Her child, possession। Her हटाओ, whose लगाओ: This is the woman whose child was hurt।"
+   },
+   {
+    "say": "We met the sailors. Their ship was wrecked. Their हटाओ: We met the sailors whose ship was wrecked।"
+   },
+   {
+    "say": "So remember: him, her, them हटाओ, तो whom। His, her, their हटाओ, तो whose।"
+   }
+  ]
+ },
+ {
+  "id": "r12",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: him her them, whom। His her their, whose। अब सबसे important rule।"
+   },
+   {
+    "say": "Who, which, whom, whose: हमेशा उस noun के बिल्कुल पास रखो, जिसके बारे में बात हो रही है। Immediately after the noun।"
+   },
+   {
+    "say": "वरना sentence का मतलब उल्टा-पुल्टा हो जाता है।"
+   },
+   {
+    "say": "The shopkeeper served Isha who was a polite man. अब लगता है Isha polite man है। गलत।"
+   },
+   {
+    "say": "सही: The shopkeeper, who was a polite man, served Isha. Who, shopkeeper के बिल्कुल बाद।"
+   },
+   {
+    "say": "एक और: The little cottage stands in a very pretty valley which belongs to my uncle. लगता है valley uncle की है।"
+   },
+   {
+    "say": "सही: The little cottage, which belongs to my uncle, stands in a very pretty valley. Which, cottage के बिल्कुल बाद।"
+   },
+   {
+    "say": "So remember: relative pronoun, noun के बिल्कुल बाद। वरना मतलब बदल जाता है।"
+   }
+  ]
+ },
+ {
+  "id": "r13",
+  "lines": [
+   {
+    "say": "पिछला एक line में: relative pronoun, noun के बिल्कुल बाद। अब last one। यह किताब में हाथ से लिखा हुआ note है।"
+   },
+   {
+    "say": "Defining clause में information ज़रूरी है, necessary। उसको हटा दो, तो पता ही नहीं चलेगा कौन सा noun।"
+   },
+   {
+    "say": "The boy who fell off his bicycle has hurt his leg. कौन सा boy? जो cycle से गिरा। यह information ज़रूरी है। कोई comma नहीं।"
+   },
+   {
+    "say": "Non-defining clause में information extra है। हटा दो तो भी sentence का मतलब साफ़ रहता है। और यह commas के बीच आता है।"
+   },
+   {
+    "say": "The house, which my uncle built, is being sold. Which my uncle built, extra है। House पहले से पता है।"
+   },
+   {
+    "say": "So remember: defining, information necessary, no commas। Non-defining, information extra, commas के बीच।"
+   }
+  ]
+ },
+ {
+  "id": "p3recap",
+  "lines": [
+   {
+    "say": "Part three का recap। सब एक साथ।"
+   },
+   {
+    "say": "दूसरे sentence का pronoun हटाओ, relative pronoun लगाओ।"
+   },
+   {
+    "say": "He या she हटाओ, who। It हटाओ, which। Him, her, them हटाओ, whom। His, her, their हटाओ, whose।"
+   },
+   {
+    "say": "Relative pronoun, noun के बिल्कुल बाद।"
+   },
+   {
+    "say": "Defining: information necessary, no commas। Non-defining: information extra, commas के बीच।"
+   }
+  ]
+ },
+ {
+  "id": "p3think",
+  "lines": [
+   {
+    "say": "Think about it: We met a beggar. He was a private detective in disguise. जोड़ो।"
+   },
+   {
+    "say": "He हटाओ, who लगाओ: We met a beggar who was a private detective in disguise।"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, पूरा chapter एक साथ। कुछ नया नहीं, सिर्फ वही जो पढ़ा है।"
+   },
+   {
+    "say": "Relative pronoun noun को replace नहीं करता, उसके बारे में information देता है।"
+   },
+   {
+    "say": "Who: लोग, subject। Whom: लोग, object, बाद में नया subject। Whose: possession, his her their की जगह।"
+   },
+   {
+    "say": "Which: चीज़ें और जानवर। That: लोग और चीज़ें दोनों, कभी छुपा हुआ।"
+   },
+   {
+    "say": "That की चार जगह: superlative, all-same-only, who-what, it is। What: सिर्फ चीज़ें, मतलब that which।"
+   },
+   {
+    "say": "जोड़ना: pronoun हटाओ, relative pronoun लगाओ। Relative pronoun, noun के बिल्कुल बाद।"
+   },
+   {
+    "say": "Defining: information necessary, no commas। Non-defining: information extra, commas के बीच।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "Relative pronoun, noun को replace करता है?"
+   },
+   {
+    "say": "नहीं। Information देता है।"
+   },
+   {
+    "say": "लोगों के लिए, subject में?"
+   },
+   {
+    "say": "Who।"
+   },
+   {
+    "say": "लोगों के लिए, object में?"
+   },
+   {
+    "say": "Whom।"
+   },
+   {
+    "say": "Possession के लिए?"
+   },
+   {
+    "say": "Whose।"
+   },
+   {
+    "say": "चीज़ों के लिए?"
+   },
+   {
+    "say": "Which।"
+   },
+   {
+    "say": "लोग और चीज़ें दोनों के लिए?"
+   },
+   {
+    "say": "That।"
+   },
+   {
+    "say": "What का मतलब?"
+   },
+   {
+    "say": "That which।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "She is the finest woman, blank, I have ever met."
+   },
+   {
+    "say": "That। Superlative के बाद।"
+   },
+   {
+    "say": "This is the woman, blank, child was hurt."
+   },
+   {
+    "say": "Whose।"
+   },
+   {
+    "say": "The book, blank, you lent me is very interesting."
+   },
+   {
+    "say": "Which या that।"
+   },
+   {
+    "say": "The man, blank, you met yesterday has just left."
+   },
+   {
+    "say": "Whom। बाद में you।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "Relative pronoun कहाँ रखते हैं?"
+   },
+   {
+    "say": "Noun के बिल्कुल बाद।"
+   },
+   {
+    "say": "Commas के बीच वाला clause?"
+   },
+   {
+    "say": "Non-defining। Information extra।"
+   },
+   {
+    "say": "बिना comma वाला, ज़रूरी information?"
+   },
+   {
+    "say": "Defining।"
+   }
+  ]
+ },
+ {
+  "id": "workbook",
+  "lines": [
+   {
+    "say": "Workbook answers का check।"
+   },
+   {
+    "say": "Page 115 और 116 के fill in the blanks, और page 116, 117 के joining sentences, सब सही हैं।"
+   },
+   {
+    "say": "Page 118, सवाल 4 में sentence सही है, पर किताब whom वाला answer चाहती है।"
+   },
+   {
+    "say": "Napoleon, whom the French admire, died at St Helena."
+   },
+   {
+    "say": "Original sentence में admire present tense है, इसलिए was admired की जगह admire रखो।"
+   },
+   {
+    "say": "Page 118, सवाल 7 में, by the police गलत जगह चला गया। Police ने arrest किया था। Recognise किसने किया, यह नहीं बताया गया।"
+   },
+   {
+    "say": "सही: The leader of the gang of robbers, who had been recognised, was arrested by the police."
+   },
+   {
+    "say": "Page 119, सवाल 2 में which सही जगह है, पर main बात बदल गई। Original में main बात यह है, कि घर posh colony में है।"
+   },
+   {
+    "say": "सही: The house, which belongs to my grandparents, is situated in a posh colony of Delhi."
+   }
+  ]
+ }
+]
