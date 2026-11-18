@@ -1,0 +1,257 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part three: infections, और vaccines।"
+   },
+   {
+    "say": "पिछले parts वापस बुलाओ। HIE, normal CSF।"
+   },
+   {
+    "say": "PPHN: nitric oxide।"
+   },
+   {
+    "say": "6 months: stranger anxiety। 18 months: body parts।"
+   },
+   {
+    "say": "ठीक है। अब, infections।"
+   }
+  ]
+ },
+ {
+  "id": "t19a",
+  "lines": [
+   {
+    "say": "Topic nineteen: meningitis, prophylaxis और complication।"
+   },
+   {
+    "say": "Meningitis के बाद सबसे common complication, papilledema के बिना: hearing loss। Hearing loss।"
+   },
+   {
+    "say": "Meningococcal contact, जैसे भाई-बहन: ciprofloxacin single dose, या oral rifampicin।"
+   },
+   {
+    "say": "Hib contact, gram-negative coccobacilli: rifampicin।"
+   },
+   {
+    "say": "Penicillin, carriage खत्म नहीं करता।"
+   }
+  ]
+ },
+ {
+  "id": "t19b",
+  "lines": [
+   {
+    "say": "Treatment। Gram-positive diplococci, यानी pneumococcus: बड़े बच्चे में ceftriaxone plus vancomycin।"
+   },
+   {
+    "say": "Newborn में: ampicillin plus gentamicin।"
+   },
+   {
+    "say": "Newborn में ceftriaxone क्यों नहीं? Biliary sludging, और kernicterus का risk।"
+   },
+   {
+    "say": "So remember: contact, cipro या rifampicin। Complication, hearing loss। Neonate, amp plus gent।"
+   }
+  ]
+ },
+ {
+  "id": "t20",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: meningitis complication, hearing loss। Contact, cipro। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty: TB contact।"
+   },
+   {
+    "say": "2 साल का बच्चा, BCG लगा है। घर में दादा को open TB। बच्चा asymptomatic।"
+   },
+   {
+    "say": "Recall answer: PPD, और chest X-ray।"
+   },
+   {
+    "say": "BCG होने से कुछ ना करना, गलत है।"
+   },
+   {
+    "say": "5 साल से छोटे contact में, window prophylaxis की बात, अपनी current guidelines में ज़रूर देखो।"
+   }
+  ]
+ },
+ {
+  "id": "t21a",
+  "lines": [
+   {
+    "say": "पिछला: TB contact, PPD और X-ray। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-one: varicella। Vaccine, chemo, और eczema।"
+   },
+   {
+    "say": "बड़ा बच्चा, कभी vaccine नहीं, कभी chickenpox नहीं: 2 doses, 4 weeks gap।"
+   },
+   {
+    "say": "एक dose हो चुका, एक साल पहले: second dose दो। Series repeat नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "t21b",
+  "lines": [
+   {
+    "say": "Leukemia, chemo और steroids। Chickenpox contact हुआ, पर बीमारी नहीं: varicella zoster immunoglobulin, VZIG।"
+   },
+   {
+    "say": "अगर chickenpox हो गया: acyclovir।"
+   },
+   {
+    "say": "Contact: VZIG। Disease: acyclovir।"
+   },
+   {
+    "say": "Eczema पर topical steroid, ऊपर grape-like vesicles: eczema herpeticum।"
+   },
+   {
+    "say": "Organism: herpes simplex।"
+   },
+   {
+    "say": "So remember: contact VZIG, disease acyclovir। Eczema पर grape vesicles: HSV।"
+   }
+  ]
+ },
+ {
+  "id": "t22",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: contact VZIG, disease acyclovir। Eczema herpeticum, HSV। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-two: pertussis।"
+   },
+   {
+    "say": "Classic pertussis, gold standard investigation: recall answer, respiratory culture।"
+   },
+   {
+    "say": "आजकल सबसे ज़्यादा nasopharyngeal PCR use होता है।"
+   },
+   {
+    "say": "Unvaccinated child में सबसे common complication: pneumonia।"
+   },
+   {
+    "say": "So remember: pertussis, culture gold standard। Complication, pneumonia।"
+   }
+  ]
+ },
+ {
+  "id": "t23",
+  "lines": [
+   {
+    "say": "पिछला: pertussis, pneumonia। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-three: rubella, और rash।"
+   },
+   {
+    "say": "Rash जो 3 दिन में चला गया, plus lymph nodes: rubella।"
+   },
+   {
+    "say": "Face से शुरू होकर body पर। Posterior auricular, और occipital nodes: rubella।"
+   },
+   {
+    "say": "Measles में 3 Cs, और Koplik spots।"
+   },
+   {
+    "say": "Recall कहता है, options में measles नहीं था।"
+   },
+   {
+    "say": "So remember: 3 दिन का rash, occipital nodes: rubella।"
+   }
+  ]
+ },
+ {
+  "id": "t24",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: rubella, occipital nodes। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-four: pneumonia के organisms।"
+   },
+   {
+    "say": "12 साल का बच्चा, pneumonia। Common cause: Mycoplasma pneumoniae।"
+   },
+   {
+    "say": "13 months, bilateral infiltrate, mildly ill: Streptococcus pneumoniae।"
+   },
+   {
+    "say": "School age: Mycoplasma। छोटा बच्चा: pneumococcus।"
+   }
+  ]
+ },
+ {
+  "id": "t25",
+  "lines": [
+   {
+    "say": "पिछला: school age, Mycoplasma। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-five: transfusion और immunoglobulin के बाद vaccines।"
+   },
+   {
+    "say": "Sickle cell, 3 हफ्ते पहले transfusion। अब hepatitis A vaccine: schedule पर दो।"
+   },
+   {
+    "say": "क्यों? Hep A, inactivated है।"
+   },
+   {
+    "say": "18 months, 2 महीने पहले immunoglobulin मिला। क्या दो? DTaP, inactivated।"
+   },
+   {
+    "say": "MMR और varicella live हैं। इन्हें delay करो।"
+   },
+   {
+    "say": "So remember: blood या immunoglobulin के बाद, inactivated vaccine अभी। Live vaccine, बाद में।"
+   }
+  ]
+ },
+ {
+  "id": "t26",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: inactivated अभी, live बाद में। ठीक है, next।"
+   },
+   {
+    "say": "Topic twenty-six: giardia, और pharyngitis।"
+   },
+   {
+    "say": "Giardiasis confirm कैसे? 3 stool samples, अलग-अलग दिन।"
+   },
+   {
+    "say": "छोटा baby, sore throat, निगल नहीं पा रहा, lymph nodes: recall answer, Strep pyogenes।"
+   },
+   {
+    "say": "पर 3 साल से छोटे में, strep pharyngitis rare है।"
+   }
+  ]
+ },
+ {
+  "id": "p3recap",
+  "lines": [
+   {
+    "say": "Part three का recap। सब एक साथ।"
+   },
+   {
+    "say": "Meningitis complication: hearing loss। Contact: cipro या rifampicin। Neonate: amp plus gent।"
+   },
+   {
+    "say": "Varicella: 2 doses। Contact VZIG, disease acyclovir। Eczema herpeticum: HSV।"
+   },
+   {
+    "say": "Pertussis: culture। Complication: pneumonia। 3 दिन का rash: rubella।"
+   },
+   {
+    "say": "School age: Mycoplasma। Transfusion के बाद: inactivated अभी। Giardia: 3 samples, अलग दिन। ठीक है।"
+   }
+  ]
+ }
+]
