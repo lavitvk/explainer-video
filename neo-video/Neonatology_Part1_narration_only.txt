@@ -1,0 +1,89 @@
+Part one: Neonatology।
+यह recall file है। हर case में, picture पहचानो, answer, और so remember।
+चलिए, शुरू करते हैं।
+Case one. दो दिन का baby। Seizures, और feeding कम।
+Inactive, generalized increased tone। CSF normal।
+CSF normal, तो meningitis नहीं। Day 2 है, तो tetanus नहीं। वह तीन से चौदह दिन में आता है।
+So: seizures, plus tone, plus normal CSF, on day 2: hypoxic ischemic encephalopathy। HIE।
+पहले दोहरा लो: day 2 seizures, normal CSF: HIE।
+Case two. Forceps गलत जगह लगी। Stylomastoid foramen पर चोट।
+वहाँ से कौन निकलता है? Facial nerve।
+Result क्या? Baby आँख बंद नहीं कर पाता।
+Taste क्यों बचा? Chorda tympani, foramen से पहले ही निकल जाती है।
+So remember: stylomastoid foramen, facial nerve। Eye closure गया, taste बचा।
+पिछला एक line में: stylomastoid, facial nerve।
+Case three. Ventouse के बाद सिर पर swelling।
+Periosteum के नीचे। Sutures की line के अंदर, cross नहीं करती।
+यह क्या है? Cephalohematoma।
+Caput क्या है? Skin के नीचे, sutures cross करता है।
+So remember: sutures cross करे, caput। Sutures के अंदर, subperiosteal, cephalohematoma।
+पहले दोहरा लो: sutures के अंदर, cephalohematoma।
+Case four. Baby sleepy है, jaundice लंबा चल रहा है, feeding poor।
+Umbilical hernia, पेट फूला।
+यह congenital hypothyroidism की picture है।
+Next step: baby का TSH और T4। माँ का नहीं, baby का।
+So remember: sleepy, plus prolonged jaundice, plus umbilical hernia: baby का TSH और T4।
+पिछला: sleepy jaundiced baby, TSH, T4।
+Case five. 38 weeks, weight 1.8 kg। Small baby।
+Jittery, hypotonic, छोटे seizures। बाकी labs normal, glucose 2.5।
+क्या करें? Glucose दो। Diazepam नहीं, antibiotics नहीं।
+Cause hypoglycemia है, तो treatment glucose।
+So remember: small baby, jittery, seizure, low glucose: glucose पहले।
+पहले दोहरा लो: jittery small baby, glucose।
+Case six. Diabetic माँ का baby। Ruddy, लाल सा, irritable, cyanosis।
+Hb बहुत high, hematocrit 75 percent।
+यह क्या है? Polycythemia। Hematocrit 65 percent से ऊपर।
+Management: next step, hydration और monitor। Best treatment, symptomatic हो तो, partial exchange transfusion।
+So remember: ruddy baby, hematocrit 75: polycythemia। Symptomatic में, partial exchange।
+पिछला: ruddy baby, polycythemia।
+Case seven. Meconium aspiration।
+Preductal saturation 88 percent, postductal 77 percent। ऊपर वाला ज़्यादा, नीचे वाला कम।
+यह क्या है? Persistent pulmonary hypertension, PPHN।
+Best treatment: inhaled nitric oxide।
+So remember: preductal ज़्यादा, postductal कम: PPHN। Inhaled nitric oxide।
+पहले दोहरा लो: PPHN, nitric oxide।
+Case eight. Congenital diaphragmatic hernia।
+Stabilization के बाद पहला काम? Large NG tube।
+क्यों? पेट और आँतों की हवा निकालो, ताकि lung पर दबाव कम हो।
+Surgery तुरंत नहीं। पहले stabilize।
+So remember: CDH, large NGT for decompression।
+पिछला: CDH, large NGT।
+Case nine. Newborn में complete heart block। माँ की कौन सी बीमारी? SLE।
+Anti-Ro antibodies, baby के heart का conduction खराब करती हैं।
+So remember: congenital heart block, maternal SLE।
+पहले दोहरा लो: heart block, maternal SLE।
+Case ten. Apgar score।
+Heart rate 120: 2।
+Irregular breathing: 1।
+थोड़ा flexion: 1।
+Cough: 2।
+Body rosy, extremities blue: 1।
+Total: 7।
+So remember: Apgar, पाँच चीज़ें। Heart rate, breathing, tone, reflex, colour। हर एक, 0 से 2।
+पिछला: Apgar, 7।
+Case eleven. लड़का है। Pectus excavatum या carinatum, wide-set nipples, short webbed neck।
+Turner जैसा दिखता है, पर लड़का है। तो क्या? Noonan syndrome।
+So remember: Turner जैसा लड़का, Noonan। लड़की, Turner।
+पहले दोहरा लो: Turner जैसा लड़का, Noonan।
+Case twelve. Pregnancy में polyhydramnios। Baby निगल नहीं पा रहा, या GI obstruction।
+Options में से: trisomy 21। Duodenal atresia की वजह से।
+Renal agenesis और IUGR में, oligohydramnios होता है।
+So remember: polyhydramnios, trisomy 21। Renal agenesis, oligo।
+पिछला: polyhydramnios, trisomy 21।
+Case thirteen. Baby पर लाल round patches। एक बड़ा, eyelid पर।
+Reassure कर दें? नहीं। Eyelid वाला आँख बंद कर सकता है। Amblyopia हो सकता है।
+तो refer to ophthalmologist। और cheek पर vascular lesion: hemangioma।
+So remember: eyelid hemangioma, ophthalmology refer।
+Part one का recap। सब एक साथ।
+Day 2 seizure, normal CSF: HIE।
+Stylomastoid: facial nerve, आँख बंद नहीं।
+Sutures के अंदर: cephalohematoma।
+Sleepy, jaundiced, hernia: baby का TSH, T4।
+Jittery, low glucose: glucose दो।
+Ruddy, hematocrit 75: polycythemia।
+Pre-post ductal gap: PPHN, nitric oxide।
+CDH: large NGT।
+Heart block: maternal SLE।
+Turner जैसा लड़का: Noonan।
+Polyhydramnios: trisomy 21।
+Eyelid hemangioma: ophthalmology।
