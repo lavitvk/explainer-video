@@ -1,0 +1,193 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part eight: infertility, PCOS, amenorrhea, और contraception।"
+   },
+   {
+    "say": "पिछला part एक line में: submucosal fibroid में hysteroscopic। Endometriosis का gold standard, laparoscopy। 45 से ऊपर AUB में biopsy।"
+   },
+   {
+    "say": "ठीक है? अब hormones, और fertility।"
+   }
+  ]
+ },
+ {
+  "id": "t34a",
+  "lines": [
+   {
+    "say": "Topic thirty-four: ovulation, और infertility का workup।"
+   },
+   {
+    "say": "पहले ovulation समझो, क्योंकि infertility के आधे सवाल इसी पर हैं।"
+   },
+   {
+    "say": "Cycle के बीच LH surge होता है, और उसके लगभग 36 घंटे बाद ovulation।"
+   },
+   {
+    "say": "Ovulation के बाद corpus luteum progesterone बनाता है। इसलिए ovulation हुआ या नहीं, यह confirm करने के लिए कौन सा test? Day 21 progesterone। Progesterone, progesterone।"
+   },
+   {
+    "say": "Infertility क्या है? साल भर regular unprotected intercourse के बाद भी pregnancy ना होना।"
+   },
+   {
+    "say": "सिर्फ 3 महीने से try कर रहे हैं? Continue trying, अभी workup नहीं। 12 महीने हो गए? दोनों partners की investigation।"
+   },
+   {
+    "say": "सबसे पहला और सस्ता test कौन सा? Semen analysis, क्योंकि लगभग एक-तिहाई cases male factor के होते हैं।"
+   },
+   {
+    "say": "Wife PCOS पर है, clomid fail, husband smoker: semen analysis। Wife obese, husband athlete: wife का weight loss, और दोनों की testing।"
+   }
+  ]
+ },
+ {
+  "id": "t34b",
+  "lines": [
+   {
+    "say": "अब tubes। Fallopian tubes खुली हैं या नहीं, यह देखने का first-line test? Hysterosalpingogram, HSG।"
+   },
+   {
+    "say": "Endometriosis जैसे case में best? Laparoscopy with dye।"
+   },
+   {
+    "say": "Result के हिसाब से treatment: एक tube बंद, तो दूसरी से काम चल सकता है, clomiphene से ovulation induction।"
+   },
+   {
+    "say": "दोनों tubes बंद, तो egg और sperm मिल ही नहीं सकते, तो IVF।"
+   },
+   {
+    "say": "दोनों tubes में hydrosalpinx, तो पहले salpingectomy, फिर IVF, क्योंकि hydrosalpinx का fluid embryo के लिए toxic है।"
+   },
+   {
+    "say": "Clomiphene के बाद भी pregnancy नहीं: IVF। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: ovulation confirm, day 21 progesterone। पहला test, semen analysis। एक tube बंद, clomiphene। दोनों tubes बंद, IVF।"
+   }
+  ]
+ },
+ {
+  "id": "t35",
+  "lines": [
+   {
+    "say": "Topic thirty-five: PCOS।"
+   },
+   {
+    "say": "PCOS, polycystic ovary syndrome, एक hormonal disorder है, जिसमें ovulation regularly नहीं होता, androgens बढ़े होते हैं, और ovaries में कई छोटे follicles दिखते हैं। इसमें insulin resistance भी होता है।"
+   },
+   {
+    "say": "Picture: obese, acne, चेहरे पर बाल, यानी hirsutism, irregular periods, और testosterone high।"
+   },
+   {
+    "say": "Treatment एक सवाल पर: pregnancy चाहिए या नहीं?"
+   },
+   {
+    "say": "नहीं चाहिए: OCP, जो cycle regular करती है, और androgens कम करती है।"
+   },
+   {
+    "say": "चाहिए: weight loss, metformin, और ovulation के लिए clomiphene या letrozole।"
+   },
+   {
+    "say": "Teenager, obese, irregular cycle: पहले weight loss और exercise।"
+   },
+   {
+    "say": "PCOS में screening किस चीज़ की? Insulin resistance की वजह से glucose tolerance test, और lipid profile। Hirsutism assess करना हो तो? Testosterone level।"
+   },
+   {
+    "say": "Clinical hook: PCOS में anovulation से unopposed estrogen, इसलिए endometrial cancer का risk बढ़ता है, जो Part seven में पढ़ा। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: PCOS, pregnancy नहीं चाहिए तो OCP, चाहिए तो clomiphene। Screen, OGTT और lipids।"
+   }
+  ]
+ },
+ {
+  "id": "t36",
+  "lines": [
+   {
+    "say": "Topic thirty-six: amenorrhea।"
+   },
+   {
+    "say": "Amenorrhea मतलब periods का ना आना। Secondary amenorrhea में पहले period आते थे, अब बंद हैं।"
+   },
+   {
+    "say": "हर amenorrhea में पहला सवाल: pregnant तो नहीं? इसलिए पहले pregnancy test, और पूरी history।"
+   },
+   {
+    "say": "फिर hormones के हिसाब से सोचो। FSH और LH बहुत high, उमर 40 से कम: ovaries जवाब नहीं दे रहीं, premature ovarian insufficiency। High FSH, high FSH।"
+   },
+   {
+    "say": "Menopause में भी सबसे पहले कौन सा hormone बढ़ता है? FSH। 45 साल, 6 महीने से period नहीं: FSH और LH।"
+   },
+   {
+    "say": "D and C के बाद periods बंद, और FSH normal: uterus के अंदर scarring, Asherman syndrome।"
+   },
+   {
+    "say": "Galactorrhea plus amenorrhea: prolactin, पर पहले pregnancy test। Prolactin बहुत high और infertility: bromocriptine। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: पहले pregnancy test। Young में high FSH, POI। D and C के बाद, Asherman। Prolactin high, bromocriptine।"
+   }
+  ]
+ },
+ {
+  "id": "t37",
+  "lines": [
+   {
+    "say": "Topic thirty-seven: contraception।"
+   },
+   {
+    "say": "Contraception चुनते वक्त सवाल होता है: इस औरत के लिए क्या safe है?"
+   },
+   {
+    "say": "Breastfeeding माँ: progestogen-only pill या IUD। Combined pill नहीं, क्योंकि estrogen दूध कम करता है।"
+   },
+   {
+    "say": "IUD कब नहीं लगाते? Unexplained genital bleeding, active pelvic infection, pregnancy, या cavity का बहुत बिगड़ा shape।"
+   },
+   {
+    "say": "पुराना, ठीक हो चुका PID, या पिछली IUD failure, contraindication नहीं है।"
+   },
+   {
+    "say": "HTN, heavy bleeding और anemia हो, तो levonorgestrel IUD, जो bleeding भी कम करता है। Fibroid के साथ recall answer OCP है।"
+   },
+   {
+    "say": "OCP के फायदे: ovarian और endometrial cancer का risk कम।"
+   },
+   {
+    "say": "Azithromycin से combined pill affect होती है? Recall कहता है हाँ। इसका explanation final revision video के आखिर में है।"
+   },
+   {
+    "say": "और जिसे हर बार intercourse के बाद UTI हो, उसे क्या? Intercourse के बाद एक dose antibiotic, postcoital prophylaxis।"
+   },
+   {
+    "say": "याद रखना है: breastfeeding में progestogen-only या IUD। IUD का CI, unexplained bleeding। OCP से ovarian और endometrial cancer कम।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "LH surge के 36 घंटे बाद ovulation। Confirm, day 21 progesterone।"
+   },
+   {
+    "say": "पहला test semen analysis। एक tube बंद, clomiphene। दोनों बंद, IVF।"
+   },
+   {
+    "say": "PCOS में pregnancy नहीं चाहिए, तो OCP। चाहिए, तो clomiphene। Screen, OGTT।"
+   },
+   {
+    "say": "Amenorrhea में पहले pregnancy test। Young में high FSH, POI। D and C के बाद Asherman। Prolactin high, bromocriptine।"
+   },
+   {
+    "say": "Breastfeeding में progestogen-only या IUD। IUD का CI, unexplained bleeding।"
+   }
+  ]
+ }
+]

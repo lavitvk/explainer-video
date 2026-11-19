@@ -1,0 +1,261 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part nine: infections, vulva, prolapse, ovary, cervix, और breast।"
+   },
+   {
+    "say": "पिछला part एक line में: पहला infertility test semen analysis। दोनों tubes बंद, तो IVF। Young में high FSH, तो POI। IUD का CI, unexplained bleeding।"
+   },
+   {
+    "say": "ठीक है? अब बचे हुए gynae topics।"
+   }
+  ]
+ },
+ {
+  "id": "t38a",
+  "lines": [
+   {
+    "say": "Topic thirty-eight: vaginal discharge, और STIs।"
+   },
+   {
+    "say": "Vaginal discharge के तीन common causes हैं, और discharge का रंग और गंध ही diagnosis बता देते हैं।"
+   },
+   {
+    "say": "पहला, candida, यानी fungal infection: white, cheesy, दही जैसा discharge, और बहुत खुजली। Microscope पर pseudohyphae।"
+   },
+   {
+    "say": "Treatment? Azole। Pregnancy में topical, non-pregnant में oral fluconazole भी। Diabetes में candida ज़्यादा होता है, क्योंकि sugar fungus का खाना है।"
+   },
+   {
+    "say": "दूसरा, bacterial vaginosis: grey-white, पतला, मछली जैसी बदबू। Treatment metronidazole।"
+   },
+   {
+    "say": "तीसरा, trichomonas: yellow-green, झागदार discharge, और partner को भी urethral discharge, क्योंकि यह sexually transmitted है। Treatment भी metronidazole।"
+   }
+  ]
+ },
+ {
+  "id": "t38b",
+  "lines": [
+   {
+    "say": "Sample कहाँ से लें? Gonorrhea के लिए endocervical swab, क्योंकि gonorrhea cervix को infect करता है। Candida के लिए high vaginal swab।"
+   },
+   {
+    "say": "Ulcers: painful vesicles, herpes।"
+   },
+   {
+    "say": "Painless ulcer, और दो हफ्ते बाद हाथ-पैर के तलवों पर rash: syphilis।"
+   },
+   {
+    "say": "Painful ulcer, और बड़े inguinal nodes: chancroid। Pregnancy में बड़ा genital wart: cryotherapy। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: cheesy, candida, azole। Fishy, BV, metronidazole। Yellow-green, trich, metronidazole। Gonorrhea, endocervical swab।"
+   }
+  ]
+ },
+ {
+  "id": "t39",
+  "lines": [
+   {
+    "say": "Topic thirty-nine: pelvic inflammatory disease।"
+   },
+   {
+    "say": "PID क्या है? Upper genital tract का infection: uterus, tubes, और ovaries। अक्सर cervix से ऊपर चढ़ने वाला sexually transmitted infection, जैसे gonorrhea और chlamydia।"
+   },
+   {
+    "say": "Tubes का infection, salpingitis। Salpingitis।"
+   },
+   {
+    "say": "Picture: suprapubic दर्द, purulent discharge, और exam पर fornices tender, cervical motion tenderness। IUD लगने के कुछ दिन बाद दर्द और discharge हो, तो भी PID।"
+   },
+   {
+    "say": "अब एक favourite सवाल। Ceftriaxone किस organism को cover करता है? Gonorrhea। अगर ceftriaxone के बाद भी patient ठीक नहीं हुई, तो कौन बचा? Chlamydia, जिसके लिए doxycycline या azithromycin चाहिए।"
+   },
+   {
+    "say": "इसलिए PID में दोनों साथ देते हैं। उल्टा, doxycycline के बाद भी ठीक नहीं, तो gonorrhea।"
+   },
+   {
+    "say": "Clinical hook: PID से tubes में scarring होती है, जो बाद में ectopic और infertility का cause बनती है।"
+   },
+   {
+    "say": "याद रखना है: ceftriaxone fail, chlamydia। Doxycycline fail, gonorrhea।"
+   }
+  ]
+ },
+ {
+  "id": "t40",
+  "lines": [
+   {
+    "say": "Topic forty: vulva।"
+   },
+   {
+    "say": "Bartholin glands vaginal opening के दोनों तरफ, 5 और 7 o'clock पर होती हैं।"
+   },
+   {
+    "say": "इनका duct बंद हो जाए, तो cyst। और infect हो जाए, तो abscess: tender, fluctuant, लाल सूजन, चलने और intercourse में दर्द। 5 और 7 o'clock, याद रखो।"
+   },
+   {
+    "say": "Postmenopausal औरत, साल भर से खुजली, कभी खून की लकीर, अब labia पर छोटा mass: vulvar squamous cell carcinoma।"
+   },
+   {
+    "say": "Lichen sclerosus किस cancer से जुड़ा है? SCC। Labia पर dysplasia या carcinoma in situ: local excision।"
+   },
+   {
+    "say": "Postmenopausal औरत में urethra के मुँह पर लाल, soft mass, जो छूने पर खून दे: urethral caruncle।"
+   },
+   {
+    "say": "चिकना, चमकदार cyst, जिसमें jelly जैसा fluid: mucinous cyst। Vulvar psoriasis confirm करने के लिए recall answer biopsy है। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: Bartholin, 5 और 7 o'clock। Lichen sclerosus, SCC। VIN, local excision।"
+   }
+  ]
+ },
+ {
+  "id": "t41a",
+  "lines": [
+   {
+    "say": "Topic forty-one: pelvic organ prolapse, और fistula।"
+   },
+   {
+    "say": "Pelvic organ prolapse क्या है? Pelvic floor कमज़ोर होने से pelvic organs vagina की तरफ नीचे खिसक आते हैं। कौन सा organ खिसकता है, वही नाम।"
+   },
+   {
+    "say": "Bladder आगे की दीवार से: cystocele। और यह सबसे common है।"
+   },
+   {
+    "say": "Rectum पीछे की दीवार से: rectocele। Patient बताए कि stool निकालने के लिए vagina में उंगली डालनी पड़ती है, तो rectocele।"
+   },
+   {
+    "say": "Small bowel ऊपर से: enterocele, जो अक्सर hysterectomy या pelvic surgery के बाद होता है।"
+   },
+   {
+    "say": "Uterus खुद: uterine prolapse, जिसमें mass introitus से बाहर आता है।"
+   }
+  ]
+ },
+ {
+  "id": "t41b",
+  "lines": [
+   {
+    "say": "Treatment तीन सवालों पर: patient surgery के लायक है? Uterus बचाना है? कौन सा compartment?"
+   },
+   {
+    "say": "बुज़ुर्ग, comorbid, warfarin पर, या भारी काम करने वाली, जिसे पहले कुछ simple चाहिए: pessary।"
+   },
+   {
+    "say": "Surgery: cystocele में anterior colporrhaphy। Rectocele में posterior colporrhaphy। दोनों में anterior और posterior colporrhaphy।"
+   },
+   {
+    "say": "दोनों के साथ uterine prolapse, और uterus बचाना है: Manchester repair।"
+   },
+   {
+    "say": "Hysterectomy के बाद vault prolapse, और sexually active: sacrospinous fixation। Pregnancy में prolapse, और सब normal: reassure।"
+   },
+   {
+    "say": "Fistula: hysterectomy के बाद vagina से लगातार urine आए, तो urinary tract और vagina के बीच fistula बन गया है। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: सबसे common cystocele। Hysterectomy के बाद enterocele। Unfit हो तो pessary। Uterus बचाना हो तो Manchester।"
+   }
+  ]
+ },
+ {
+  "id": "t42",
+  "lines": [
+   {
+    "say": "Topic forty-two: ovary।"
+   },
+   {
+    "say": "Ovarian masses में पहला सवाल: physiological है या tumour? Periods के लगभग 2 हफ्ते बाद adnexa में mass: follicular cyst, जो खुद चला जाता है।"
+   },
+   {
+    "say": "Young औरत में 5 cm simple cyst: follow-up की ज़रूरत नहीं।"
+   },
+   {
+    "say": "अब एक syndrome: ascites, pleural effusion, और ovarian mass। इसे Meigs syndrome कहते हैं। Meigs, Meigs। Tumour कौन सा? Fibroma या thecoma, यानी sex cord stromal tumour।"
+   },
+   {
+    "say": "Ovarian mass के लिए tumour marker? CA-125। पर final diagnosis? Histopathology। Malignancy का ultrasound sign? Septations और solid parts।"
+   },
+   {
+    "say": "CS के दौरान 12 cm ovarian cyst मिला: cystectomy। अचानक एक तरफ पेट दर्द, ovary बड़ी और enhancement कम: ovarian torsion। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: Meigs, fibroma या thecoma। Small simple cyst, follow-up नहीं। Final diagnosis, histopathology।"
+   }
+  ]
+ },
+ {
+  "id": "t43",
+  "lines": [
+   {
+    "say": "Topic forty-three: cervical screening।"
+   },
+   {
+    "say": "Cervical cancer को पहले पकड़ने के लिए Pap smear।"
+   },
+   {
+    "say": "Result ASCUS आया, यानी atypical squamous cells of undetermined significance, उमर 40: HPV test, ताकि पता चले high-risk HPV है या नहीं।"
+   },
+   {
+    "say": "27 साल, 3 साल पहले Pap normal था: अब repeat cytology। Pregnancy में cervix पर lesion दिखे: colposcopy, क्योंकि pregnancy में भी colposcopy safe है।"
+   },
+   {
+    "say": "Postcoital bleeding: Pap smear, और cervix का exam।"
+   },
+   {
+    "say": "याद रखना है: ASCUS, HPV test। Pregnancy में lesion, colposcopy।"
+   }
+  ]
+ },
+ {
+  "id": "t44",
+  "lines": [
+   {
+    "say": "Topic forty-four: breast।"
+   },
+   {
+    "say": "Pregnancy में areola पर छोटे, एक जैसे दाने: Montgomery tubercles, normal।"
+   },
+   {
+    "say": "दोनों breasts में छोटे lumps, जो period से पहले बढ़ जाते हैं: fibrocystic change।"
+   },
+   {
+    "say": "Pregnancy में breast mass: ultrasound, mammogram नहीं।"
+   },
+   {
+    "say": "Mastectomy के बाद rectus muscle से reconstruction: recall answer, blood supply inferior epigastric artery से। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: areola पर दाने, Montgomery। Period से पहले बढ़े, fibrocystic।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "Cheesy, candida, azole। Fishy BV और yellow-green trich, metronidazole। Gonorrhea, endocervical swab।"
+   },
+   {
+    "say": "PID में ceftriaxone fail, तो chlamydia।"
+   },
+   {
+    "say": "Bartholin, 5 और 7 o'clock। Lichen sclerosus, SCC।"
+   },
+   {
+    "say": "सबसे common prolapse cystocele। Hysterectomy के बाद enterocele। Unfit में pessary। Uterus बचाना हो, तो Manchester।"
+   },
+   {
+    "say": "Meigs, fibroma। Simple cyst, follow-up नहीं। ASCUS, HPV। Montgomery tubercles, fibrocystic।"
+   }
+  ]
+ }
+]
