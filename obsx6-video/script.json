@@ -1,0 +1,172 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part six: PPH, और puerperium।"
+   },
+   {
+    "say": "पिछला part एक line में: early head, variable cord, late placenta। Sinusoidal में CS। पहला twin breech, तो CS। Anti-D delivery के बाद भी।"
+   },
+   {
+    "say": "ठीक है? Baby आ गया। अब माँ की सबसे बड़ी emergency।"
+   }
+  ]
+ },
+ {
+  "id": "t26a",
+  "lines": [
+   {
+    "say": "Topic twenty-six: PPH क्या है, और क्यों होता है।"
+   },
+   {
+    "say": "Postpartum hemorrhage, PPH, मतलब delivery के बाद ज़्यादा bleeding: vaginal delivery में लगभग 500 ml से ज़्यादा, या इतनी कि माँ unstable हो जाए।"
+   },
+   {
+    "say": "पहले 24 घंटे में हो, तो primary PPH। 24 घंटे से 12 हफ्ते के बीच हो, तो secondary।"
+   },
+   {
+    "say": "Placenta अभी अंदर है, और delivery को 10 minute हुए, और bleeding हो रही है: यह भी primary PPH है।"
+   },
+   {
+    "say": "Causes याद करने का तरीका: चार T। Tone, trauma, tissue, thrombin।"
+   },
+   {
+    "say": "Tone मतलब uterus contract नहीं हो रहा, uterine atony। यह सबसे common है। सबसे common, सबसे common।"
+   },
+   {
+    "say": "क्यों इतना important? Delivery के बाद placenta की जगह खुली vessels होती हैं, और उन्हें बंद करने का काम uterus की muscle करती है, contract करके। Muscle ढीली, तो vessels खुली, तो bleeding।"
+   }
+  ]
+ },
+ {
+  "id": "t26b",
+  "lines": [
+   {
+    "say": "Atony के risk factors क्या हैं? जो भी uterus को ज़्यादा खींचता या थकाता है।"
+   },
+   {
+    "say": "Grand multiparity, जैसे 7 बच्चे। बड़ा baby, जैसे 4.5 kg। Twins। बहुत लंबा labour। और बहुत तेज़ labour, precipitous labour, जैसे सिर्फ 2 घंटे में delivery।"
+   },
+   {
+    "say": "Uterine inversion के साथ 1200 ml bleeding हो, तो भी source atony है।"
+   },
+   {
+    "say": "Placenta को cord खींच कर निकाला, और फिर बहुत bleeding, तो पहला काम: uterus की contraction check करो।"
+   },
+   {
+    "say": "Trauma: forceps से cervix और vagina में tear, फिर PPH, तो cause genital tract trauma।"
+   },
+   {
+    "say": "Thrombin: clotting की problem, जैसे DIC या ITP।"
+   },
+   {
+    "say": "Delivery के 2 हफ्ते बाद बुखार और bleeding: endometritis, यानी secondary PPH का infection वाला cause। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: चार T, tone, trauma, tissue, thrombin। सबसे common tone, uterine atony।"
+   }
+  ]
+ },
+ {
+  "id": "t27a",
+  "lines": [
+   {
+    "say": "Topic twenty-seven: PPH का management।"
+   },
+   {
+    "say": "Prevention सबसे पहले। जिसे पहले recurrent PPH हुआ, और transfusion लगी, उसे अगली बार क्या? Active management of the third stage of labour: baby के तुरंत बाद oxytocin, controlled cord traction, और uterine massage।"
+   },
+   {
+    "say": "अब bleeding शुरू हो गई। पहला काम क्या? Call for help, और blood cross-match।"
+   },
+   {
+    "say": "Severity का best indicator? कितना खून गया, blood loss की मात्रा।"
+   },
+   {
+    "say": "और ongoing blood loss का सबसे early sign? Tachycardia। BP बाद में गिरता है।"
+   },
+   {
+    "say": "Hypovolemic shock और सिर्फ PPH में फ़र्क? Pulse का बढ़ना।"
+   }
+  ]
+ },
+ {
+  "id": "t27b",
+  "lines": [
+   {
+    "say": "दवाइयाँ एक ladder की तरह: पहले oxytocin, और uterine massage।"
+   },
+   {
+    "say": "फिर misoprostol, methylergonovine, या carboprost।"
+   },
+   {
+    "say": "एक बात ज़रूर याद रखना: asthma वाली माँ में carboprost नहीं, क्योंकि यह bronchospasm करता है। Recall का answer carboprost है।"
+   },
+   {
+    "say": "दवा के बाद भी bleeding? Bakri balloon। फिर भी? B-Lynch suture, embolisation, और आखिर में hysterectomy।"
+   },
+   {
+    "say": "अब thrombin वाला T। Resuscitation के बाद भी कई puncture sites से खून: यह coagulopathy है, DIC। Treatment: correct करो, FFP और cryoprecipitate।"
+   },
+   {
+    "say": "Transfusion के बाद भी hypotension और platelets 60, या abruption के बाद DIC: cryoprecipitate।"
+   },
+   {
+    "say": "ITP वाली माँ को PPH: platelets। Heparin पर थी: protamine sulfate। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: earliest sign, tachycardia। Asthma में carboprost नहीं। Puncture sites से bleeding, coagulopathy correct करो। ITP, platelets।"
+   }
+  ]
+ },
+ {
+  "id": "t28",
+  "lines": [
+   {
+    "say": "Topic twenty-eight: puerperium।"
+   },
+   {
+    "say": "Puerperium मतलब delivery के बाद के लगभग 6 हफ्ते, जब body वापस normal होती है।"
+   },
+   {
+    "say": "इस वक्त की problems: delivery के 10 दिन बाद बुखार, breast लाल और सूजन, और cracked nipple: breast abscess, क्योंकि cracked nipple से bacteria अंदर जाते हैं।"
+   },
+   {
+    "say": "Previa या PPH में बहुत ज़्यादा खून गया, फिर दूध नहीं आया और menses बंद: Sheehan syndrome, pituitary का damage।"
+   },
+   {
+    "say": "घर पर delivery, baby को bruises, PT और PTT high, पर platelets normal: hemorrhagic disease of the newborn, vitamin K की कमी।"
+   },
+   {
+    "say": "और breastfeeding का सबसे बड़ा फायदा options में? माँ और baby की bonding।"
+   },
+   {
+    "say": "याद रखना है: cracked nipple और बुखार, breast abscess। PPH के बाद no menses, Sheehan।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "PPH के चार T। सबसे common atony। Risk factors: बड़ा baby, grand multipara, precipitous labour, twins।"
+   },
+   {
+    "say": "Prevention, active management of third stage। Earliest sign, tachycardia।"
+   },
+   {
+    "say": "Oxytocin और massage, फिर second line दवा। Asthma में carboprost नहीं। फिर Bakri balloon।"
+   },
+   {
+    "say": "Puncture sites से bleeding, coagulopathy। ITP में platelets। Heparin पर protamine।"
+   },
+   {
+    "say": "Cracked nipple, breast abscess। Sheehan।"
+   }
+  ]
+ }
+]
