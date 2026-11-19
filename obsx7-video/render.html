@@ -1295,10 +1295,13 @@ function partTitle(t, part, title, color, icon) {
   });
 }
 // rows of recap: rows = [[lineIdx, left, right, color, icon]]
+let FREG = null;
+function freg(li, x, y, w, h) { if (!FREG) return; const r = FREG[li]; if (!r) FREG[li] = [x, y, w, h]; else { const x2 = Math.max(r[0] + r[2], x + w), y2 = Math.max(r[1] + r[3], y + h); r[0] = Math.min(r[0], x); r[1] = Math.min(r[1], y); r[2] = x2 - r[0]; r[3] = y2 - r[1]; } }
 function recapRows(t, Q, title, rows, y0 = 230, rh = 150) {
   fadeUp(P(t, 0, .5), () => txt(title, W / 2, 165, { size: 64, weight: 900, color: C.navy }));
   rows.forEach(([li, q, a, c, ic], i) => {
     const y = y0 + i * rh;
+    freg(li, 120, y, 1680, rh - 22);
     fadeUp(P(t, Q(li) + (i > 0 && rows[i - 1][0] === li ? 1.2 : 0), .5), () => {
       card(120, y, 1680, rh - 22, { fill: '#fff', r: 24 });
       rr(120, y, 14, rh - 22, 7); ctx.fillStyle = c; ctx.fill();
@@ -1931,6 +1934,7 @@ function hemangiomaFace(cx, cy, s, k) {
 /* ---- generic case template ---- */
 function caseHead(t, k, num, title, color) { }
 function neoRemember(t, k, text, color = C.neo) {
+  if (FREG) { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); freg('rem', W / 2 - w / 2, 922, w, 76); }
   pop(k, W / 2, 960, () => { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); card(W / 2 - w / 2, 922, w, 76, { fill: color, r: 38, blur: 0 }); txt(text, W / 2, 961, { size: 34, weight: 900, color: '#fff' }); });
 }
 
@@ -1973,6 +1977,7 @@ function board(t, Q, items, opts = {}) {
     const row = cols === 2 ? (col ? i - Math.ceil(items.length / 2) : i) : Math.floor(i / cols);
     const x = (opts.x0 || 90) + col * (cw + 30), y = y0 + row * gap;
     const k = P(t, Q(li) + off, .5);
+    if (FREG) { const tx0 = (icon ? 180 : 40), mw = cw - (icon ? 210 : 70); ctx.font = `700 28px ${FONT}`; const wq = Math.min(mw, ctx.measureText(q).width); ctx.font = `900 40px ${FONT}`; const wa = Math.min(mw, ctx.measureText(a).width); freg(li, x, y, Math.min(cw, tx0 + Math.max(wq, wa) + 50), ch); }
     fadeUp(k, () => {
       card(x, y, cw, ch, { fill: '#fff', r: 24, blur: 10 });
       rr(x, y, 12, ch, 6); ctx.fillStyle = c; ctx.fill();
@@ -2089,6 +2094,7 @@ function partIntro2(t, Q, part, title, color, icon, chips, nextText) {
   header(part + ' · ' + title, color);
   if (t < Q(1) - .3) { partTitle(t, 'Obstetrics & Gynae · ' + part, title, color, icon); return; }
   fadeUp(P(t, Q(1) - .3, .5), () => txt('Pichhla part ek line mein', W / 2, 170, { size: 56, weight: 900, color: C.navy }));
+  freg(1, 140, 150, 1640, 370); freg(2, 400, 560, 1120, 400);
   chips.forEach(([s, c], i) => fadeUp(P(t, Q(1) + i * 1.8, .5), () => { const x = 140 + (i % 2) * 840, y = 240 + Math.floor(i / 2) * 140; card(x, y, 800, 110, { fill: '#fff', r: 55 }); rr(x, y, 14, 110, 7); ctx.fillStyle = c; ctx.fill(); txt(s, x + 400, y + 55, { size: 36, weight: 900, color: c }); }, 12));
   pop(P(t, Q(2), .6), W / 2, 720, () => { icon(W / 2, 680); txt(nextText, W / 2, 900, { size: 50, weight: 900, color }); });
 }
@@ -2107,6 +2113,7 @@ SC.intro = (t, D, Q) => partIntro2(t, Q, 'Part 7', 'Gynae: fibroid · adenomyosi
 SC.t29 = (t, D, Q) => {
   header('Topic 29 · Fibroid', '#9D174D');
   if (t < Q(1) - .3) { partTitle(t, 'Topic 29', 'Fibroid kya hai aur kahan hota hai', '#9D174D', (x, y) => fibroidUterus(x, y + 20, .45, 1, 1, 1, t)); return; }
+  freg(3, 90, 160, 760, 760); freg(4, 90, 160, 760, 760); freg(5, 90, 160, 760, 760); freg(6, 90, 160, 760, 760);
   heroCard(P(t, Q(1) - .3, .5), 90, 160, 760, 760, () => {
     fibroidUterus(470, 480, 1.05, P(t, Q(4), .8), P(t, Q(5), .8), P(t, Q(6), .8), t);
     if (t > Q(3)) { txt('endometrium', 470, 200, { size: 26, weight: 800, color: '#BE185D', alpha: P(t, Q(3), .5) }); }
@@ -2125,6 +2132,7 @@ SC.t29 = (t, D, Q) => {
 SC.t30 = (t, D, Q) => {
   header('Topic 30 · Fibroid management', '#9D174D');
   if (t < Q(1) - .3) { partTitle(t, 'Topic 30', 'Fibroid ka management', '#9D174D', (x, y) => fibroidUterus(x, y + 20, .45, 1, 1, 1, t)); return; }
+  freg(1, 150, 420, 1620, 160);
   if (t < Q(2) - .2) { ['Symptoms hain?', 'Fertility chahiye?', 'Fibroid kahan hai?'].forEach((q, i) => pop(P(t, Q(1) + i * 1.3, .5), 380 + i * 580, 500, () => { card(150 + i * 580, 420, 460, 160, { fill: '#9D174D', r: 40, blur: 0 }); txt(q, 380 + i * 580, 501, { size: 40, weight: 900, color: '#fff' }); })); return; }
   board(t, Q, [
     [2, 0, 'Symptoms nahi', 'Yearly US follow-up', C.ok, null],
@@ -2142,15 +2150,16 @@ SC.t30 = (t, D, Q) => {
 SC.t31 = (t, D, Q) => {
   header('Topic 31 · Adenomyosis vs endometriosis', C.kid);
   if (t < Q(1) - .3) { partTitle(t, 'Topic 31', 'Adenomyosis aur endometriosis', C.kid, (x, y) => uterusFront(x, y + 20, .55, {}, t)); return; }
+  freg(1, 90, 130, 1740, 140);
   const endo = t >= Q(4) - .3;
   fadeUp(P(t, Q(1) - .3, .5), () => { txt('Endometrium jaisa tissue · GALAT jagah', W / 2, 165, { size: 40, weight: 900, color: C.navy }); [['ADENOMYOSIS · muscle ke ANDAR', C.kid, 90, !endo], ['ENDOMETRIOSIS · uterus ke BAHAR', C.bad, 960, endo]].forEach(([n, c, x, on]) => { ctx.save(); ctx.globalAlpha *= on ? 1 : .35; rr(x, 200, 870, 64, 32); ctx.fillStyle = c; ctx.fill(); txt(n, x + 435, 233, { size: 32, weight: 900, color: '#fff' }); ctx.restore(); }); }, 12);
-  if (!endo) board(t, Q, [
+  if (!endo || FREG) board(t, Q, [
     [2, 0, 'Uterus', 'Bulky · tender · GLOBULAR', C.kid, (x, y) => uterusFront(x, y + 6, .2, {}, t)],
     [2, 2.5, 'Ultrasound', 'Diffuse myometrial thickening', C.kid, null],
     [3, 0, 'Kaun?', '40+ multipara · painful heavy periods', C.kid, null],
     [3, 2.5, 'Definitive treatment', 'HYSTERECTOMY', C.kid, null],
   ], { y0: 300, ch: 170, gap: 195 });
-  else board(t, Q, [
+  if (endo || FREG) board(t, Q, [
     [4, 0, 'Kahan? (har period mein bleed → dard, scarring)', 'Ovaries · peritoneum · uterosacral lig.', C.bad, null],
     [5, 0, 'Classic picture', 'Dysmenorrhea · dyspareunia · infertility', C.bad, null],
     [5, 2.5, 'Exam', 'Retroverted fixed · USL tender nodules', C.bad, null],
@@ -2201,6 +2210,33 @@ window.setup = (timeline) => {
   TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
   return acc;
 };
+
+/* ---------- camera: zoom to what is being spoken ---------- */
+const FOCUS = {};
+function focusFor(sc) {
+  if (FOCUS[sc.id]) return FOCUS[sc.id];
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  FREG = {}; ctx.save(); try { SC[sc.id](sc.dur - .05, sc.dur, Q, i => [Q(i)]); } catch (e) {} ctx.restore();
+  const f = FREG; FREG = null; FOCUS[sc.id] = f; return f;
+}
+const FULLR = [0, 0, 1920, 1080];
+function camRect(sc, t) {
+  const F = focusFor(sc), cues = [...sc.cues].sort((a, b) => a.t - b.t), last = cues.length ? cues[cues.length - 1].line : -1;
+  const keys = [[0, FULLR]];
+  cues.forEach(c => { let r = F[c.line]; if (!r && c.line === last && F.rem) r = F.rem; keys.push([c.t - .3, r || FULLR]); });
+  keys.push([sc.dur - 1.0, FULLR]);
+  let i = 0; while (i + 1 < keys.length && t >= keys[i + 1][0]) i++;
+  const prev = i > 0 ? keys[i - 1][1] : FULLR, cur = keys[i][1];
+  const k = eio(clamp((t - keys[i][0]) / 1.0));
+  return cur.map((v, j) => lerp(prev[j], v, k));
+}
+function camApply(r) {
+  const pad = 36; const x = r[0] - pad, y = r[1] - pad, w = r[2] + pad * 2, h = r[3] + pad * 2;
+  const s = Math.max(1, Math.min(W / w, H / h, 2.4));
+  let tx = W / 2 - (x + w / 2) * s, ty = H / 2 - (y + h / 2) * s;
+  tx = Math.min(0, Math.max(W - W * s, tx)); ty = Math.min(0, Math.max(H - H * s, ty));
+  ctx.setTransform(s, 0, 0, s, tx, ty);
+}
 window.renderFrame = (T) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   background(T);
@@ -2210,6 +2246,7 @@ window.renderFrame = (T) => {
   const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
   const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
   const fin = clamp(t / .35), fout = clamp((D - t) / .3);
+  const cr = camRect(sc, t); ctx.setTransform(1, 0, 0, 1, 0, 0); background(T); camApply(cr);
   ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
   let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
   window.REPEAT = !!(cue && cue.of > 1);
