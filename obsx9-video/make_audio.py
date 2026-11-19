@@ -1,6 +1,6 @@
 # Builds narration.wav (sentence + 3.5 s gap, important lines x3) and timeline.json cues
 import json, wave
-GAP, LEAD, SR = 2.0, 0.6, 48000
+GAP, LEAD, SR = 2.5, 0.6, 48000
 sc = json.load(open("script.json"))
 out = wave.open("narration.wav", "wb"); out.setnchannels(1); out.setsampwidth(2); out.setframerate(SR)
 sil = lambda s: out.writeframes(b"\x00\x00" * int(round(s * SR)))
