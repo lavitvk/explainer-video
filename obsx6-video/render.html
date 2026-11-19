@@ -1295,10 +1295,13 @@ function partTitle(t, part, title, color, icon) {
   });
 }
 // rows of recap: rows = [[lineIdx, left, right, color, icon]]
+let FREG = null;
+function freg(li, x, y, w, h) { if (!FREG) return; const r = FREG[li]; if (!r) FREG[li] = [x, y, w, h]; else { const x2 = Math.max(r[0] + r[2], x + w), y2 = Math.max(r[1] + r[3], y + h); r[0] = Math.min(r[0], x); r[1] = Math.min(r[1], y); r[2] = x2 - r[0]; r[3] = y2 - r[1]; } }
 function recapRows(t, Q, title, rows, y0 = 230, rh = 150) {
   fadeUp(P(t, 0, .5), () => txt(title, W / 2, 165, { size: 64, weight: 900, color: C.navy }));
   rows.forEach(([li, q, a, c, ic], i) => {
     const y = y0 + i * rh;
+    freg(li, 120, y, 1680, rh - 22);
     fadeUp(P(t, Q(li) + (i > 0 && rows[i - 1][0] === li ? 1.2 : 0), .5), () => {
       card(120, y, 1680, rh - 22, { fill: '#fff', r: 24 });
       rr(120, y, 14, rh - 22, 7); ctx.fillStyle = c; ctx.fill();
@@ -1931,6 +1934,7 @@ function hemangiomaFace(cx, cy, s, k) {
 /* ---- generic case template ---- */
 function caseHead(t, k, num, title, color) { }
 function neoRemember(t, k, text, color = C.neo) {
+  if (FREG) { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); freg('rem', W / 2 - w / 2, 922, w, 76); }
   pop(k, W / 2, 960, () => { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); card(W / 2 - w / 2, 922, w, 76, { fill: color, r: 38, blur: 0 }); txt(text, W / 2, 961, { size: 34, weight: 900, color: '#fff' }); });
 }
 
@@ -1973,6 +1977,7 @@ function board(t, Q, items, opts = {}) {
     const row = cols === 2 ? (col ? i - Math.ceil(items.length / 2) : i) : Math.floor(i / cols);
     const x = (opts.x0 || 90) + col * (cw + 30), y = y0 + row * gap;
     const k = P(t, Q(li) + off, .5);
+    freg(li, x, y, cw, ch);
     fadeUp(k, () => {
       card(x, y, cw, ch, { fill: '#fff', r: 24, blur: 10 });
       rr(x, y, 12, ch, 6); ctx.fillStyle = c; ctx.fill();
@@ -2089,6 +2094,7 @@ function partIntro2(t, Q, part, title, color, icon, chips, nextText) {
   header(part + ' · ' + title, color);
   if (t < Q(1) - .3) { partTitle(t, 'Obstetrics & Gynae · ' + part, title, color, icon); return; }
   fadeUp(P(t, Q(1) - .3, .5), () => txt('Pichhla part ek line mein', W / 2, 170, { size: 56, weight: 900, color: C.navy }));
+  freg(1, 140, 150, 1640, 370); freg(2, 400, 560, 1120, 400);
   chips.forEach(([s, c], i) => fadeUp(P(t, Q(1) + i * 1.8, .5), () => { const x = 140 + (i % 2) * 840, y = 240 + Math.floor(i / 2) * 140; card(x, y, 800, 110, { fill: '#fff', r: 55 }); rr(x, y, 14, 110, 7); ctx.fillStyle = c; ctx.fill(); txt(s, x + 400, y + 55, { size: 36, weight: 900, color: c }); }, 12));
   pop(P(t, Q(2), .6), W / 2, 720, () => { icon(W / 2, 680); txt(nextText, W / 2, 900, { size: 50, weight: 900, color }); });
 }
@@ -2099,12 +2105,14 @@ SC.intro = (t, D, Q) => partIntro2(t, Q, 'Part 6', 'PPH aur puerperium', C.bad, 
 SC.t26a = (t, D, Q) => {
   header('Topic 26 · PPH kya hai', C.bad);
   if (t < Q(1) - .3) { partTitle(t, 'Topic 26', 'PPH kya hai aur kyun hota hai', C.bad, (x, y) => { pregUterus(x, y, .45, 'normal', 1, t); bleedDrops(x, y + 140, 1.2, t); }); return; }
+  freg(1, 140, 170, 1640, 160); freg(2, 140, 370, 1640, 260); freg(3, 140, 670, 1640, 120);
   if (t < Q(4) - .3) {
     fadeUp(P(t, Q(1) - .3, .5), () => { card(140, 170, 1640, 160, { fill: '#fff', stroke: C.bad, lw: 4 }); txt('PPH = delivery ke baad zyada bleeding', W / 2, 225, { size: 44, weight: 900, color: C.bad }); txt('Vaginal delivery > ~500 ml · ya maa UNSTABLE', W / 2, 290, { size: 34, weight: 800, color: C.ink }); }, 14);
     fadeUp(P(t, Q(2), .5), () => { card(140, 370, 1640, 260, { fill: '#fff' }); const x0 = 200, w = 1520; rr(x0, 480, w * .2, 40, 20); ctx.fillStyle = C.bad; ctx.fill(); rr(x0 + w * .2 + 10, 480, w * .8 - 10, 40, 20); ctx.fillStyle = C.warn; ctx.fill(); txt('PRIMARY · < 24 h', x0 + w * .1, 440, { size: 32, weight: 900, color: C.bad }); txt('SECONDARY · 24 h – 12 hafte', x0 + w * .6, 440, { size: 32, weight: 900, color: C.warn }); txt('delivery', x0, 560, { size: 24, weight: 800, color: C.sub }); }, 14);
     fadeUp(P(t, Q(3), .5), () => { card(140, 670, 1640, 120, { fill: C.badSoft, r: 30 }); txt('Placenta andar · 10 min · bleeding → yeh bhi PRIMARY PPH', W / 2, 731, { size: 38, weight: 900, color: C.bad }); }, 12);
     return;
   }
+  freg(4, 140, 140, 1640, 260); freg(5, 140, 240, 400, 220); freg(6, 140, 480, 1640, 420);
   fadeUp(P(t, Q(4) - .3, .5), () => txt('Chaar T', W / 2, 180, { size: 60, weight: 900, color: C.navy }), 10);
   [['TONE', 'uterine atony'], ['TRAUMA', 'tear'], ['TISSUE', 'placenta bacha'], ['THROMBIN', 'clotting']].forEach(([n, d], i) => fadeUp(P(t, Q(4) + i * .6, .4), () => tCard(140 + i * 415, 240, n, d, i ? C.bad : C.bad, i === 0 && t > Q(5)), 10));
   if (t > Q(5)) pop(P(t, Q(5), .5), 330, 430, () => txt('SABSE COMMON ↑', 330, 430, { size: 36, weight: 900, color: C.bad }));
@@ -2142,6 +2150,7 @@ SC.t27a = (t, D, Q) => topicScene(t, Q, { hdr: 'Topic 27 · PPH management', par
 SC.t27b = (t, D, Q) => {
   header('Topic 27 · Dawa ki ladder + coagulopathy', C.bad);
   const steps = [[0, 'Oxytocin + uterine massage', C.ok], [1, 'Misoprostol · methylergonovine · carboprost', C.blue], [3, 'Bakri balloon', C.warn], [3, 'B-Lynch · embolisation', C.kid], [3, 'Hysterectomy', C.bad]];
+  freg(0, 90, 170, 820, 104); freg(1, 114, 298, 772, 104); freg(3, 138, 426, 724, 360); freg(2, 100, 800, 1720, 80);
   steps.forEach(([li, s, c], i) => fadeUp(P(t, Q(li) + (li === 3 ? i - 2 : 0) * 1.3, .5), () => { const y = 170 + i * 128; card(90 + i * 24, y, 820 - i * 48, 104, { fill: '#fff', r: 26 }); rr(90 + i * 24, y, 14, 104, 7); ctx.fillStyle = c; ctx.fill(); txt((i + 1) + '. ' + s, 130 + i * 24, y + 52, { size: s.length > 30 ? 28 : 34, weight: 900, color: c, align: 'left' }); }, 12));
   board(t, Q, [
     [4, 0, 'Kai puncture sites se khoon', 'DIC → FFP + CRYO', C.bad, null],
@@ -2178,6 +2187,33 @@ window.setup = (timeline) => {
   TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
   return acc;
 };
+
+/* ---------- camera: zoom to what is being spoken ---------- */
+const FOCUS = {};
+function focusFor(sc) {
+  if (FOCUS[sc.id]) return FOCUS[sc.id];
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  FREG = {}; ctx.save(); try { SC[sc.id](sc.dur - .05, sc.dur, Q, i => [Q(i)]); } catch (e) {} ctx.restore();
+  const f = FREG; FREG = null; FOCUS[sc.id] = f; return f;
+}
+const FULLR = [0, 0, 1920, 1080];
+function camRect(sc, t) {
+  const F = focusFor(sc), cues = [...sc.cues].sort((a, b) => a.t - b.t), last = cues.length ? cues[cues.length - 1].line : -1;
+  const keys = [[0, FULLR]];
+  cues.forEach(c => { let r = F[c.line]; if (!r && c.line === last && F.rem) r = F.rem; keys.push([c.t - .3, r || FULLR]); });
+  keys.push([sc.dur - 1.0, FULLR]);
+  let i = 0; while (i + 1 < keys.length && t >= keys[i + 1][0]) i++;
+  const prev = i > 0 ? keys[i - 1][1] : FULLR, cur = keys[i][1];
+  const k = eio(clamp((t - keys[i][0]) / 1.0));
+  return cur.map((v, j) => lerp(prev[j], v, k));
+}
+function camApply(r) {
+  const pad = 40; const x = r[0] - pad, y = r[1] - pad, w = r[2] + pad * 2, h = r[3] + pad * 2;
+  const s = Math.max(1, Math.min(W / w, H / h, 2.2));
+  let tx = W / 2 - (x + w / 2) * s, ty = H / 2 - (y + h / 2) * s;
+  tx = Math.min(0, Math.max(W - W * s, tx)); ty = Math.min(0, Math.max(H - H * s, ty));
+  ctx.setTransform(s, 0, 0, s, tx, ty);
+}
 window.renderFrame = (T) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   background(T);
@@ -2187,6 +2223,7 @@ window.renderFrame = (T) => {
   const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
   const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
   const fin = clamp(t / .35), fout = clamp((D - t) / .3);
+  const cr = camRect(sc, t); ctx.setTransform(1, 0, 0, 1, 0, 0); background(T); camApply(cr);
   ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
   let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
   window.REPEAT = !!(cue && cue.of > 1);
