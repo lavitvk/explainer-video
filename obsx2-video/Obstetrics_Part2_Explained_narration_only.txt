@@ -1,0 +1,127 @@
+Part two: antenatal care, physiology, और drugs।
+
+पहले Part one को एक line में बुलाओ: Chadwick sign पर beta hCG, dating के लिए early ultrasound, missed abortion में misoprostol, unstable ectopic में surgery।
+
+ठीक है? अब pregnancy confirm हो गई। अब हम antenatal care पर आते हैं, यानी delivery से पहले माँ और baby की देखभाल।
+
+Topic five: scans और screening का timing।
+
+Antenatal care का एक बड़ा हिस्सा, सही time पर सही test करना है। इसको एक timeline की तरह सोचो, एक-एक step।
+
+पहला scan कब? 11 से 13 weeks, जिसमें dating और nuchal translucency देखते हैं।
+
+दूसरा, detailed anomaly scan कब? 18 से 20 weeks, क्योंकि तब तक baby के organs इतने बने होते हैं कि structural defect दिख सके।
+
+Asymptomatic bacteriuria के लिए urine culture कब? लगभग 12 weeks पर, पहली visit में।
+
+Group B Streptococcus, यानी GBS, का vaginal swab कब? 35 से 37 weeks।
+
+क्यों इतना late? क्योंकि हमें delivery के वक्त का status चाहिए।
+
+Visits कितनी बार? 28 weeks तक हर 4 हफ्ते, 36 तक हर 2 हफ्ते, फिर हर हफ्ते।
+
+इसलिए 34 हफ्ते की normal patient को अगले हफ्ते नहीं, दो हफ्ते बाद बुलाया जाता है। Recall में see next week दिया है।
+
+और 75 gram OGTT कब order करते हैं? जब पिछली pregnancy में gestational diabetes हुआ हो।
+
+Down syndrome का quadruple screen कैसे पढ़ते हैं? दो चीज़ें high, दो low।
+
+High कौन? hCG और inhibin। Low कौन? AFP और estriol।
+
+और twins में एक baby की nuchal translucency बढ़ी हो, तो सबसे ज़्यादा किस चीज़ का risk? Congenital heart disease, क्योंकि ज़्यादातर chromosomal syndromes में heart defect होता है।
+
+ठीक है? याद रखना है: dating 11 से 13, anomaly 18 से 20, GBS 35 से 37।
+
+Down screen में hCG और inhibin high, AFP और estriol low।
+
+Topic six: pregnancy की physiology।
+
+Pregnancy में माँ की body बहुत बदलती है, और exam यही बदलाव पूछता है। एक-एक system लेते हैं।
+
+Kidney: GFR बढ़ जाता है। तो blood में BUN और creatinine क्या होंगे? कम। कम, कम।
+
+Blood: plasma volume बढ़ता है, RBC mass से ज़्यादा, इसलिए physiological anemia जैसा दिखता है।
+
+यही plasma volume और stroke volume का बढ़ना, mitral stenosis वाली patient के लिए खतरनाक है, क्योंकि उसका heart इतना extra load नहीं संभाल पाता, और failure हो जाता है।
+
+Clinical hook: इसलिए MS वाली pregnant को second stage में push नहीं करवाते, forceps लगाते हैं।
+
+Hormones: pregnancy को maintain कौन करता है? Progesterone।
+
+Pregnancy का main estrogen कौन सा है? Estriol।
+
+Gestational diabetes क्यों होता है? Human placental lactogen, hPL, जो insulin के against काम करता है। hPL, hPL।
+
+Immunity: माँ का IgG placenta cross करके baby में जाता है। इसे passive natural immunity कहते हैं।
+
+Breast milk में कौन सा immunoglobulin? IgA।
+
+और pregnancy में areola पर छोटे-छोटे दाने दिखते हैं, Montgomery tubercles। यह normal हैं।
+
+याद रखना है: BUN और creatinine कम। GDM का hormone hPL। Plasma volume बढ़ने से MS वाली patient fail होती है।
+
+Topic seven: supplements और vaccines।
+
+Folic acid normally 400 microgram होता है। पर sickle cell disease वाली pregnant को कितना? 5 mg, और पूरी pregnancy, delivery तक।
+
+क्यों? क्योंकि hemolysis में folate जल्दी खत्म होता है।
+
+Oral iron 12 हफ्ते लेने पर भी iron deficiency anemia ठीक नहीं हुआ, तो? IV iron।
+
+Vegan माँ breastfeed कर रही है, तो milk में किस चीज़ की कमी? Vitamin B12।
+
+Vaccines में एक ही rule पकड़ो: live vaccine pregnancy में नहीं।
+
+Varicella antibody negative है? Vaccine नहीं देंगे, क्योंकि live है। Advice है exposure से बचना, vaccine delivery के बाद।
+
+गलती से rubella vaccine लगने के एक महीने के अंदर pregnant हो गई? घबराना नहीं। Outcome favorable होता है, termination की ज़रूरत नहीं।
+
+ठीक है? याद रखना है: SCD में folic acid 5 mg, पूरी pregnancy। Live vaccine, pregnancy में नहीं।
+
+Topic eight: medicines in pregnancy।
+
+Pregnancy में दवा का सवाल, हमेशा दो बातें तोलता है: माँ की बीमारी control रहे, और baby को नुकसान ना हो।
+
+Hypothyroidism से शुरू करते हैं। Levothyroxine पर controlled patient pregnant हो गई, तो dose का क्या? बढ़ाओ, लगभग 30 percent।
+
+क्यों? Pregnancy में thyroid hormone की demand बढ़ती है, और baby के brain को शुरुआत में माँ का hormone चाहिए।
+
+Hyperthyroidism में, first trimester में PTU। Second और third में methimazole।
+
+Epilepsy, phenytoin पर, 6 साल से attack नहीं: pregnancy के बीच में चलती दवा अचानक नहीं रोकते। Antiepileptics से congenital malformation का risk ज़रूर है, इसलिए counselling।
+
+Isotretinoin पर acne वाली औरत conceive करना चाहती है? दवा बंद करने के 1 महीने बाद।
+
+SLE में hydroxychloroquine continue। Mycophenolate बंद करके azathioprine।
+
+Depression controlled है paroxetine पर, और वह pregnant हो चुकी है? Continue, क्योंकि relapse का नुकसान बड़ा है। अगर सिर्फ plan कर रही है, तो safe दवा पर switch।
+
+और एक दवा जो बिल्कुल नहीं: ACE inhibitor। क्यों? Baby की kidney damage करता है, renal agenesis और oligohydramnios। ACE inhibitor, ACE inhibitor।
+
+इसलिए preeclampsia में भी captopril contraindicated है। ठीक है?
+
+याद रखना है: hypothyroid में dose बढ़ाओ। ACE inhibitor नहीं, fetal kidney। Mycophenolate बंद, azathioprine शुरू।
+
+Topic nine: risk factors, और antenatal counselling।
+
+Pregnancy complications का सबसे बड़ा risk factor कौन सा है? माँ की उमर, अगर 35 या ज़्यादा।
+
+अगर उमर 34 है और वह smoker है, तो smoking।
+
+Smoking से baby पर सबसे common असर? Low birth weight।
+
+और कौन सी दवा preeclampsia का risk कम करती है? Low-dose aspirin। Aspirin preeclampsia और उसके साथ IUGR, दोनों का risk घटाता है।
+
+याद रखना है: 35 से ऊपर age, सबसे बड़ा risk। Aspirin preeclampsia रोकता है।
+
+एक बार दोबारा देखते हैं।
+
+Dating 11 से 13, anomaly 18 से 20, GBS 35 से 37। Down screen में hCG और inhibin high।
+
+Pregnancy में BUN और creatinine कम। GDM hPL से। MS वाली patient plasma volume से fail।
+
+SCD में folic acid 5 mg। Live vaccine नहीं।
+
+Hypothyroid, dose बढ़ाओ। ACE inhibitor नहीं। Mycophenolate से azathioprine।
+
+35 से ऊपर age। Aspirin, preeclampsia के लिए।
