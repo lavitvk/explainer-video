@@ -1,0 +1,40 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part three: anemia of chronic disease।"},
+  {"say":"पिछला part एक line में: IDA में low ferritin और high TIBC, elderly में colonoscopy, पहले oral iron। ठीक है?"},
+  {"say":"अब एक anemia, जो IDA जैसा दिखता है, पर बिल्कुल अलग है।"}]},
+ {"id":"c8","lines":[
+  {"say":"Topic eight: anemia of chronic disease क्या है।"},
+  {"say":"Anemia of chronic disease, जिसे anemia of chronic inflammation भी कहते हैं, वह anemia है, जो किसी लंबी चलने वाली बीमारी या inflammation के साथ होता है।"},
+  {"say":"यहाँ body में iron की कमी नहीं है। Problem यह है, कि iron store में बंद पड़ा है, और marrow तक पहुँच नहीं पा रहा। Iron है, पर इस्तेमाल नहीं हो रहा। एक बार और: iron है, पर इस्तेमाल नहीं हो रहा।"},
+  {"say":"ऐसा क्यों होता है? Inflammation में liver, hepcidin नाम का hormone बनाता है। Hepcidin, iron को cells के अंदर बंद कर देता है।"},
+  {"say":"Clinical hook: यह body का एक defence है, क्योंकि bacteria को भी iron चाहिए; iron छुपा दो, तो infection को खाना नहीं मिलेगा।"},
+  {"say":"कौन सी बीमारियाँ? Systemic inflammatory diseases, जैसे SLE, inflammatory bowel disease, vasculitis, और systemic sclerosis; chronic infections; malignancy, ख़ासकर lymphoma और multiple myeloma; chronic disorders; और बुढ़ापा।"},
+  {"say":"याद रखना है: anemia of chronic disease में iron की कमी नहीं; iron store में बंद है, hepcidin की वजह से।"}]},
+ {"id":"c9a","lines":[
+  {"say":"Topic nine: lab में फ़र्क, ACD versus IDA।"},
+  {"say":"अब सबसे important हिस्सा, क्योंकि exam यही पूछता है। ACD में anemia normocytic या microcytic। Serum iron low, बिल्कुल IDA जैसा।"},
+  {"say":"पर ferritin? Normal या high। क्यों? क्योंकि ferritin store बताता है, और store भरा हुआ है। और TIBC? Normal या low।"},
+  {"say":"तो IDA और ACD को अलग करने की चाबी क्या है? Ferritin और TIBC।"},
+  {"say":"IDA में ferritin low, और TIBC high। ACD में ferritin normal या high, और TIBC normal या low। उल्टा-उल्टा। ठीक है?"}]},
+ {"id":"c9b","lines":[
+  {"say":"File का MCQ: 45 साल की औरत, sarcoidosis, थकान और pallor, Hb low और ferritin high। कौन सा anemia?"},
+  {"say":"Sarcoidosis एक chronic inflammatory disease है, और ferritin high है, तो anemia of chronic disease।"},
+  {"say":"File का दूसरा MCQ: 56 साल का आदमी, polymyalgia rheumatica, Hb 9.2, MCV 89, यानी normocytic। Iron 35, कम। TIBC 200, कम। Ferritin 385, ज़्यादा।"},
+  {"say":"Smear पर spherocytes या schistocytes नहीं, तो hemolysis नहीं। अब चाबी लगाओ: iron low, TIBC low, ferritin high, और एक chronic inflammatory बीमारी। तो answer? Anemia of chronic disease।"},
+  {"say":"Thalassemia क्यों नहीं? वह microcytic होता है, और iron panel normal। B12 क्यों नहीं? वह macrocytic होता है।"},
+  {"say":"याद रखना है: IDA: ferritin low, TIBC high। ACD: ferritin normal या high, TIBC normal या low।"}]},
+ {"id":"c10","lines":[
+  {"say":"Topic ten: ACD का management।"},
+  {"say":"Treatment क्या है? Underlying बीमारी का इलाज, क्योंकि जब inflammation कम होगी, hepcidin कम होगा, और iron वापस इस्तेमाल होने लगेगा।"},
+  {"say":"Iron देने से ज़्यादा फ़ायदा नहीं, क्योंकि iron की कमी है ही नहीं।"},
+  {"say":"Chronic kidney disease में erythropoietin देते हैं, ताकि hemoglobin 10 से 12 gram per dL के target में रहे।"},
+  {"say":"क्यों CKD में? क्योंकि kidney ही erythropoietin बनाती है, और ख़राब kidney कम बनाती है।"},
+  {"say":"याद रखना है: ACD में underlying disease treat करो। CKD में erythropoietin, Hb target 10 से 12।"}]},
+ {"id":"recap","lines":[
+  {"say":"एक बार दोबारा देखते हैं: anemia of chronic disease में iron की कमी नहीं, iron hepcidin की वजह से store में बंद है।"},
+  {"say":"Causes: SLE, IBD, vasculitis, infection, lymphoma, myeloma, और बुढ़ापा।"},
+  {"say":"Serum iron दोनों में low, पर ACD में ferritin normal या high, और TIBC normal या low; जबकि IDA में ferritin low, और TIBC high।"},
+  {"say":"Sarcoidosis plus high ferritin, ACD। Treatment underlying disease; CKD में erythropoietin।"}]},
+ {"id":"end","lines":[]}
+]
