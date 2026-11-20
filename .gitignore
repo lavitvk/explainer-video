@@ -9,3 +9,6 @@ lines_madhur/
 voice_samples/
 narration.wav
 video_silent.mp4
+part*.mp4
+par*.log
+parts.txt
