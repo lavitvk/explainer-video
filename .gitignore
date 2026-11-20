@@ -13,3 +13,4 @@ part*.mp4
 par*.log
 parts.txt
 __pycache__/
+render.log

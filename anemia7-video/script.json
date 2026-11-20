@@ -1,0 +1,59 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part seven: sickle cell crises aur prevention."},
+  {"say":"Pichhla part ek line mein: sickle cell mein HbS, do hallmarks vaso-occlusion aur hemolysis, aur painful crisis mein rehydration aur pain control. Theek hai?"},
+  {"say":"Ab sickle cell ki sabse khatarnak emergencies."}]},
+ {"id":"a23","lines":[
+  {"say":"Topic twenty-three: acute chest syndrome."},
+  {"say":"Acute chest syndrome, ACS, kya hai? Sickle cell patient mein naya lung infiltrate, saath mein bukhar, chest pain, hypoxemia, wheezing, cough ya saans ki takleef."},
+  {"say":"Naya infiltrate, naya infiltrate: yahi definition ki chaabi hai."},
+  {"say":"Cause aksar ek se zyada hota hai: infection, lung ki vessels mein vaso-occlusion, kam saans lena, atelectasis, thrombosis, aur kabhi fat embolism."}]},
+ {"id":"a23b","lines":[
+  {"say":"Management step by step: oxygen, IV fluids, pain control, aur har patient ko broad-spectrum antibiotics, kyunki infection hamesha ho sakta hai. Ek baar aur: har patient ko antibiotics."},
+  {"say":"Par mainstay kya hai? Blood transfusion, kyunki naya khoon oxygen carrying badhaata hai, aur sickle cells ko dilute karta hai. Mainstay, transfusion."},
+  {"say":"Kitna transfusion, yeh severity par. Mild: saturation 90 percent se upar aur ek lobe, toh 0 se 2 unit simple transfusion."},
+  {"say":"Moderate: saturation 85 percent ya zyada aur 2 lobes tak, toh 2 se 3 unit."},
+  {"say":"Severe: saturation 85 percent se kam aur 2 se zyada lobes, toh exchange transfusion. Ek baar aur: severe, toh exchange transfusion."},
+  {"say":"Exchange transfusion ke aur indications: pehle severe ACS ya heart-lung disease, ek se zyada lobe, simple transfusion ke baad bhi badhna, aur oxygen badhane par bhi saturation girna."}]},
+ {"id":"a23c","lines":[
+  {"say":"File ka MCQ: bachcha, halki respiratory infection, phir bukhar aur saans ki takleef, X-ray par lobar infiltrate, Hb low aur reticulocytes high."},
+  {"say":"Low Hb aur high retic matlab hemolysis, aur naya infiltrate matlab acute chest syndrome."},
+  {"say":"Toh answer: sickle cell anemia, A. Answer: sickle cell anemia. Theek hai?"},
+  {"say":"Yaad rakhna hai: ACS: naya infiltrate plus bukhar ya chest pain ya hypoxia. Sabko antibiotics; mainstay transfusion; severe ya multilobar mein exchange transfusion."}]},
+ {"id":"a24","lines":[
+  {"say":"Topic twenty-four: aplastic crisis versus splenic sequestration."},
+  {"say":"Dono mein Hb achanak girta hai, toh farq kaise? Ek hi test: reticulocyte count. Retic, retic."},
+  {"say":"Aplastic crisis mein bone marrow kuch din ke liye naye red cells banana band kar deta hai. Isliye reticulocytes kam."},
+  {"say":"Sabse common cause? Parvovirus B19, jo red cell precursors ko maarta hai. Ek baar aur: parvovirus B19."},
+  {"say":"Splenic sequestration crisis mein marrow theek kaam kar raha hai, par red cells spleen mein phans kar jama ho jaate hain."},
+  {"say":"Hb baseline se 2 gram per dL ya zyada girta hai, spleen achanak bada ho jaata hai, aur reticulocytes high rehte hain. Yeh jaan-leva hai, kyunki khoon spleen mein chala gaya."}]},
+ {"id":"a24b","lines":[
+  {"say":"File ka MCQ: sickle cell patient, dono pairon mein 3 ghante se dard, DVT nahi, spleen bada, aur Hb 3.2."},
+  {"say":"Bada spleen plus bahut kam Hb: splenic sequestration."},
+  {"say":"Best next step? Blood transfusion, D. Answer: blood transfusion."},
+  {"say":"Hydration aur morphine painful crisis ke liye hain, par yahan jaan khoon ki kami se ja rahi hai. Ye point yaad rakhna hai."},
+  {"say":"Yaad rakhna hai: aplastic crisis: retic kam, parvovirus B19. Sequestration: retic high, spleen bada, Hb bahut kam, toh transfusion."}]},
+ {"id":"a25","lines":[
+  {"say":"Topic twenty-five: complications se bachao."},
+  {"say":"Sickle cell mein spleen jaldi kaam karna band karta hai, toh capsulated bacteria se infection ka khatra."},
+  {"say":"Bachao kaise? Pneumococcal, meningococcal aur Hib vaccines, aur roz penicillin prophylaxis, kam se kam 5 saal ki umar tak. Ek baar aur: penicillin, 5 saal tak."},
+  {"say":"Aur complications kam karne ki dawa? Hydroxyurea."},
+  {"say":"Kaise kaam karti hai? Fetal hemoglobin, HbF, badhaati hai, aur HbF sickle nahi hota. Hydroxyurea, HbF. Theek hai?"},
+  {"say":"Yaad rakhna hai: vaccines plus penicillin 5 saal tak. Hydroxyurea HbF badhaati hai."}]},
+ {"id":"recap","lines":[
+  {"say":"Ek baar dobara dekhte hain: acute chest syndrome mein naya infiltrate; sabko antibiotics, mainstay transfusion, severe mein exchange."},
+  {"say":"Aplastic crisis mein retic kam aur parvovirus B19; sequestration mein retic high, spleen bada, aur transfusion."},
+  {"say":"Prevention ke liye vaccines, penicillin 5 saal tak, aur hydroxyurea, jo HbF badhaati hai."}]},
+ {"id":"quiz","lines":[
+  {"say":"Ab chhota sa quiz. Sawal suno, ruko, khud jawab socho, phir answer suno."},
+  {"say":"Sawal ek: acute chest syndrome ki definition ki chaabi?"},{"say":"Naya lung infiltrate. Naya infiltrate."},
+  {"say":"Sawal do: ACS mein kis patient ko antibiotics?"},{"say":"Har patient ko. Sabko antibiotics."},
+  {"say":"Sawal teen: ACS ka mainstay treatment?"},{"say":"Blood transfusion. Transfusion."},
+  {"say":"Sawal chaar: saturation 85 se kam aur 2 se zyada lobes?"},{"say":"Exchange transfusion. Exchange."},
+  {"say":"Sawal paanch: aplastic crisis aur sequestration mein farq karne wala test?"},{"say":"Reticulocyte count. Retic."},
+  {"say":"Sawal chhe: aplastic crisis ka sabse common cause?"},{"say":"Parvovirus B19. Parvovirus B19."},
+  {"say":"Sawal saat: bada spleen, Hb 3.2, retic high. Next step?"},{"say":"Blood transfusion. Transfusion."},
+  {"say":"Sawal aath: penicillin prophylaxis kab tak?"},{"say":"Kam se kam 5 saal ki umar tak. 5 saal."},
+  {"say":"Sawal nau: hydroxyurea kaise kaam karti hai?"},{"say":"HbF badhaati hai. Fetal hemoglobin."}]},
+ {"id":"end","lines":[]}
+]
