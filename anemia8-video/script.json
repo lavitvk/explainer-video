@@ -1,0 +1,71 @@
+[
+{"id":"intro","lines":[
+{"say":"Part eight: hemolytic anemias."},
+{"say":"Pichhla part ek line mein: acute chest syndrome mein transfusion, sequestration mein retic high aur transfusion, hydroxyurea HbF badhaati hai. Theek hai?"},
+{"say":"Ab woh anemias jinmein red cells jaldi toot-te hain."}]},
+{"id":"a26","lines":[
+{"say":"Topic twenty-six: autoimmune hemolytic anemia, warm vs cold."},
+{"say":"Autoimmune hemolytic anemia, AIHA, kya hai? Body apne hi red cells ke khilaf antibodies bana leti hai, aur woh cells toot jaate hain."},
+{"say":"Isse pakadne ka test kya hai? Coombs test, yaani direct antiglobulin test, jo red cells par chipki antibodies dikhata hai. Coombs, Coombs."},
+{"say":"AIHA do tarah ka hai, aur farq body temperature par antibody ke kaam karne se aata hai."}]},
+{"id":"a26b","lines":[
+{"say":"Warm AIHA: antibody IgG, jo body ke normal temperature par kaam karti hai. Coombs IgG ke liye positive."},
+{"say":"Smear par spherocytes, kyunki spleen antibody wale cells ka thoda-thoda hissa kaat leta hai."},
+{"say":"Kin bimariyon ke saath? SLE, CLL aur penicillin jaisi dawayein. Treatment? Steroids. Warm mein steroids."},
+{"say":"Cold AIHA: antibody IgM, jo thand mein kaam karti hai, aur complement C3 lagaati hai. Coombs IgM aur C3 ke liye positive."},
+{"say":"Smear par red cell agglutination, yaani cells ka gucchha. Kis infection ke saath? Mycoplasma pneumonia. Mycoplasma, Mycoplasma."},
+{"say":"Treatment? Thand se bacho, aur zaroorat ho toh rituximab; steroids yahan achhe kaam nahi karte. Theek hai?"},
+{"say":"Yaad rakhna hai: Warm: IgG, spherocytes, SLE aur CLL, steroids. Cold: IgM aur C3, agglutination, Mycoplasma, thand se bacho aur rituximab."}]},
+{"id":"a27","lines":[
+{"say":"Topic twenty-seven: G6PD deficiency."},
+{"say":"G6PD kya karta hai? Yeh enzyme red cells ko oxidative damage se bachaata hai. Enzyme kam ho, toh koi oxidative trigger aaye aur red cells toot jaayein."},
+{"say":"Inheritance? X-linked recessive, isliye ladkon mein zyada. X-linked, X-linked."},
+{"say":"Classes one se five hain; sirf pehli teen clinically important hain."},
+{"say":"Triggers kya hain? Infection, dapsone, sulfa drugs, nitrofurantoin aur fava beans."}]},
+{"id":"a27b","lines":[
+{"say":"Exam ka hint: kisi trigger ke baad achanak anemia aur jaundice, aur spleen normal size ka."},
+{"say":"Blood film par bite cells, jaise kisi ne cell mein se ek kaata kaata ho, kyunki spleen damaged hemoglobin, Heinz bodies, nikaal deta hai. Bite cells, bite cells."},
+{"say":"Yaad rakhna hai: G6PD: X-linked, trigger ke baad achanak hemolysis, normal spleen, bite cells. Triggers infection, dapsone, sulfa, nitrofurantoin, fava beans."}]},
+{"id":"a28","lines":[
+{"say":"Topic twenty-eight: hereditary spherocytosis."},
+{"say":"Hereditary spherocytosis kya hai? Red cell ki membrane ki protein mein khandaani kharabi, jisse cell gol, yaani spherocyte, ban jaata hai aur spleen use jaldi tod deta hai."},
+{"say":"Complications? Bilirubin wali gallstones aur splenomegaly."},
+{"say":"Exam ka hint: family mein gallbladder stones ya splenectomy ki history. Smear par spherocytes."},
+{"say":"Diagnosis: eosin-5-maleimide, EMA, binding test sabse best; osmotic fragility test bhi. Best test, EMA binding."},
+{"say":"Treatment: folic acid supplement, zaroorat par transfusion, aur severe case mein splenectomy."}]},
+{"id":"a28b","lines":[
+{"say":"File ka MCQ: 12 ghante ka newborn, jaundice, smear par chhote, gehre rang ke cells, yaani spherocytes."},
+{"say":"Best investigation? EMA binding test, D. Answer: EMA binding test."},
+{"say":"Agar options mein EMA na ho, toh osmotic fragility test. Theek hai?"},
+{"say":"Yaad rakhna hai: HS: family history of gallstones ya splenectomy, spherocytes, best test EMA. Severe mein splenectomy."}]},
+{"id":"recap","lines":[
+{"say":"Ek baar dobara dekhte hain: AIHA ka test Coombs; warm mein IgG, spherocytes, SLE aur CLL, steroids; cold mein IgM aur C3, agglutination, Mycoplasma, thand se bacho aur rituximab."},
+{"say":"G6PD X-linked, trigger ke baad hemolysis, bite cells, normal spleen."},
+{"say":"Hereditary spherocytosis mein family history, spherocytes, EMA test, aur severe mein splenectomy."}]},
+{"id":"care","lines":[
+{"say":"File ke points jin par dhyan dena hai."},
+{"say":"Ek: file mein hereditary spherocytosis ke treatment mein EPO aur iron likha hai. Iron routinely nahi dete, jab tak iron deficiency prove na ho, kyunki hemolysis aur transfusion se iron overload ho sakta hai."},
+{"say":"EPO sirf kuch newborns mein, transfusion kam karne ke liye, specialist ki salah par."},
+{"say":"Do: cold AIHA mein Coombs test aksar sirf C3 ke liye positive aata hai, kyunki IgM cell se chhoot jaati hai."}]},
+{"id":"quiz","lines":[
+{"say":"Ab chhota sa quiz. Sawal suno, ruko, khud jawab socho, phir answer suno."},
+{"say":"Sawal ek: AIHA pakadne ka test?"},
+{"say":"Coombs test, direct antiglobulin test. Coombs test."},
+{"say":"Sawal do: warm AIHA mein kaunsi antibody?"},
+{"say":"IgG. Warm mein IgG."},
+{"say":"Sawal teen: warm AIHA ka treatment?"},
+{"say":"Steroids. Steroids."},
+{"say":"Sawal chaar: cold AIHA kis infection ke saath?"},
+{"say":"Mycoplasma pneumonia. Mycoplasma."},
+{"say":"Sawal paanch: cold AIHA mein smear par kya dikhta hai?"},
+{"say":"Red cell agglutination. Agglutination."},
+{"say":"Sawal chhe: G6PD deficiency ki inheritance?"},
+{"say":"X-linked recessive. X-linked."},
+{"say":"Sawal saat: G6PD mein blood film par kaunse cells?"},
+{"say":"Bite cells, Heinz bodies ki wajah se. Bite cells."},
+{"say":"Sawal aath: hereditary spherocytosis ka best test?"},
+{"say":"EMA binding test. EMA binding."},
+{"say":"Sawal nau: severe hereditary spherocytosis ka treatment?"},
+{"say":"Splenectomy. Splenectomy."}]},
+{"id":"end","lines":[]}
+]
