@@ -1295,10 +1295,13 @@ function partTitle(t, part, title, color, icon) {
   });
 }
 // rows of recap: rows = [[lineIdx, left, right, color, icon]]
+let FREG = null;
+function freg(li, x, y, w, h) { if (!FREG) return; const r = FREG[li]; if (!r) FREG[li] = [x, y, w, h]; else { const x2 = Math.max(r[0] + r[2], x + w), y2 = Math.max(r[1] + r[3], y + h); r[0] = Math.min(r[0], x); r[1] = Math.min(r[1], y); r[2] = x2 - r[0]; r[3] = y2 - r[1]; } }
 function recapRows(t, Q, title, rows, y0 = 230, rh = 150) {
   fadeUp(P(t, 0, .5), () => txt(title, W / 2, 165, { size: 64, weight: 900, color: C.navy }));
   rows.forEach(([li, q, a, c, ic], i) => {
     const y = y0 + i * rh;
+    freg(li, 120, y, 1680, rh - 22);
     fadeUp(P(t, Q(li) + (i > 0 && rows[i - 1][0] === li ? 1.2 : 0), .5), () => {
       card(120, y, 1680, rh - 22, { fill: '#fff', r: 24 });
       rr(120, y, 14, rh - 22, 7); ctx.fillStyle = c; ctx.fill();
@@ -1931,6 +1934,7 @@ function hemangiomaFace(cx, cy, s, k) {
 /* ---- generic case template ---- */
 function caseHead(t, k, num, title, color) { }
 function neoRemember(t, k, text, color = C.neo) {
+  if (FREG) { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); freg('rem', W / 2 - w / 2, 922, w, 76); }
   pop(k, W / 2, 960, () => { ctx.font = `900 34px ${FONT}`; const w = Math.min(1700, ctx.measureText(text).width + 120); card(W / 2 - w / 2, 922, w, 76, { fill: color, r: 38, blur: 0 }); txt(text, W / 2, 961, { size: 34, weight: 900, color: '#fff' }); });
 }
 
@@ -1965,19 +1969,29 @@ function calIcon(cx, cy, s, text, color) {
 function arrowsIcon(cx, cy, s, up, color) { arrow(cx, cy + (up ? 30 : -30) * s, cx, cy + (up ? -30 : 30) * s, 1, color, 8 * s); }
 
 // board: items [li, off, q, a, color, icon, warn]
+const ART = {}; let CURSC = '';
+window.artReady = Promise.all(Object.entries(typeof ART_SRC !== 'undefined' ? ART_SRC : {}).map(([k, src]) => new Promise(r => { const im = new Image(); im.onload = () => { ART[k] = im; r(); }; im.onerror = r; im.src = src; })));
+const PICS = (typeof PICS_MAP !== 'undefined') ? PICS_MAP : {};
+function pic(name, x, y, w, h) { const im = ART[name]; if (!im) return; const s = Math.min(w / im.width, h / im.height), dw = im.width * s, dh = im.height * s; ctx.save(); rr(x + (w - dw) / 2, y + (h - dh) / 2, dw, dh, 14); ctx.clip(); ctx.drawImage(im, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh); ctx.restore(); ctx.save(); rr(x + (w - dw) / 2, y + (h - dh) / 2, dw, dh, 14); ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 3; ctx.stroke(); ctx.restore(); }
 function board(t, Q, items, opts = {}) {
   const cols = opts.cols || 2, cw = opts.cw || (cols === 2 ? 840 : cols === 1 ? 1740 : 560), ch = opts.ch || 165, y0 = opts.y0 || 160, gap = opts.gap || 182;
   items.forEach((it, i) => {
-    const [li, off, q, a, c, icon, warn] = it;
+    let [li, off, q, a, c, icon, warn] = it;
     const col = cols === 2 ? (i < Math.ceil(items.length / 2) ? 0 : 1) : i % cols;
     const row = cols === 2 ? (col ? i - Math.ceil(items.length / 2) : i) : Math.floor(i / cols);
     const x = (opts.x0 || 90) + col * (cw + 30), y = y0 + row * gap;
     const k = P(t, Q(li) + off, .5);
+    const pn = (off === 0 && ART[PICS[CURSC + ':' + li]]) ? PICS[CURSC + ':' + li] : null, pw = pn ? Math.round((ch - 16) * 4 / 3) : 0;
+    if (pn) icon = null;
+    let picX = x + cw - pw - 8;
+    if (pn) { const tx0 = x + 40; ctx.font = `700 28px ${FONT}`; const wq = ctx.measureText(q).width; ctx.font = `900 40px ${FONT}`; const wa = ctx.measureText(a).width; picX = Math.min(picX, tx0 + Math.min(Math.max(wq, wa), cw - pw - 110) + 40); }
+    if (FREG && pn) { freg(li, x, y, picX + pw + 8 - x, ch); } else if (FREG) { const tx0 = (icon ? 180 : 40), mw = cw - (icon ? 210 : 70); ctx.font = `700 28px ${FONT}`; const wq = Math.min(mw, ctx.measureText(q).width); ctx.font = `900 40px ${FONT}`; const wa = Math.min(mw, ctx.measureText(a).width); freg(li, x, y, Math.min(cw, tx0 + Math.max(wq, wa) + 50), ch); }
     fadeUp(k, () => {
       card(x, y, cw, ch, { fill: '#fff', r: 24, blur: 10 });
       rr(x, y, 12, ch, 6); ctx.fillStyle = c; ctx.fill();
       if (icon) { ctx.save(); ctx.beginPath(); ctx.arc(x + 95, y + ch / 2, 62, 0, 7); ctx.fillStyle = c + '18'; ctx.fill(); ctx.restore(); icon(x + 95, y + ch / 2); }
-      const tx = x + (icon ? 180 : 40), maxW = cw - (icon ? 210 : 70);
+      const tx = x + (icon ? 180 : 40), maxW = (pn ? picX - x - 56 : cw - (icon ? 210 : 70));
+      if (pn) pic(pn, picX, y + 8, pw, ch - 16);
       let fs = 28; ctx.font = `700 ${fs}px ${FONT}`; while (ctx.measureText(q).width > maxW && fs > 18) { fs -= 1; ctx.font = `700 ${fs}px ${FONT}`; }
       txt(q, tx, y + 50, { size: fs, weight: 700, color: C.sub, align: 'left' });
       let fa = 40; ctx.font = `900 ${fa}px ${FONT}`; while (ctx.measureText(a).width > maxW && fa > 22) { fa -= 1; ctx.font = `900 ${fa}px ${FONT}`; }
@@ -2089,6 +2103,7 @@ function partIntro2(t, Q, part, title, color, icon, chips, nextText) {
   header(part + ' · ' + title, color);
   if (t < Q(1) - .3) { partTitle(t, 'Obstetrics & Gynae · ' + part, title, color, icon); return; }
   fadeUp(P(t, Q(1) - .3, .5), () => txt('Pichhla part ek line mein', W / 2, 170, { size: 56, weight: 900, color: C.navy }));
+  freg(1, 140, 150, 1640, 370); freg(2, 400, 560, 1120, 400);
   chips.forEach(([s, c], i) => fadeUp(P(t, Q(1) + i * 1.8, .5), () => { const x = 140 + (i % 2) * 840, y = 240 + Math.floor(i / 2) * 140; card(x, y, 800, 110, { fill: '#fff', r: 55 }); rr(x, y, 14, 110, 7); ctx.fillStyle = c; ctx.fill(); txt(s, x + 400, y + 55, { size: 36, weight: 900, color: c }); }, 12));
   pop(P(t, Q(2), .6), W / 2, 720, () => { icon(W / 2, 680); txt(nextText, W / 2, 900, { size: 50, weight: 900, color }); });
 }
@@ -2182,6 +2197,57 @@ window.setup = (timeline) => {
   TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
   return acc;
 };
+
+/* ---------- camera: zoom to what is being spoken ---------- */
+const FOCUS = {};
+function focusFor(sc) {
+  if (FOCUS[sc.id]) return FOCUS[sc.id];
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  FREG = {}; CURSC = sc.id; ctx.save(); try { SC[sc.id](sc.dur - .05, sc.dur, Q, i => [Q(i)]); } catch (e) {} ctx.restore();
+  const f = FREG; FREG = null;
+  try { diffFocus(sc, f, Q); } catch (e) {}
+  FOCUS[sc.id] = f; return f;
+}
+const _off = document.createElement('canvas'); _off.width = 192; _off.height = 108; const _octx = _off.getContext('2d', { willReadFrequently: true });
+function _snap(sc, t, Q) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; background(0); ctx.save(); try { SC[sc.id](t, sc.dur, Q, i => [Q(i)]); } catch (e) {} ctx.restore(); _octx.clearRect(0, 0, 192, 108); _octx.drawImage(cv, 0, 0, 192, 108); return _octx.getImageData(0, 0, 192, 108).data; }
+function diffFocus(sc, F, Q) {
+  const cues = [...sc.cues].sort((a, b) => a.t - b.t);
+  cues.forEach((c, ci) => {
+    if (F[c.line]) return;
+    const nxt = ci + 1 < cues.length ? cues[ci + 1].t - .1 : sc.dur - .1;
+    const a0 = _snap(sc, Math.max(0, c.t - 1.2), Q), a1 = _snap(sc, Math.max(0, c.t - .1), Q), b = _snap(sc, Math.min(nxt, c.t + Math.min(c.d, 3.5) + .8), Q), b2 = _snap(sc, Math.min(nxt, c.t + Math.min(c.d, 3.5) + 1.6), Q);
+    let x0 = 999, y0 = 999, x1 = -1, y1 = -1, n = 0;
+    for (let i = 0; i < 192 * 108; i++) {
+      const d = (u, v) => Math.abs(u[i * 4] - v[i * 4]) + Math.abs(u[i * 4 + 1] - v[i * 4 + 1]) + Math.abs(u[i * 4 + 2] - v[i * 4 + 2]);
+      if (d(a0, a1) > 30 || d(b, b2) > 30) continue;
+      if (d(a1, b) > 45) { const x = i % 192, y = (i / 192) | 0; if (y < 9) continue; n++; if (x < x0) x0 = x; if (y < y0) y0 = y; if (x > x1) x1 = x; if (y > y1) y1 = y; }
+    }
+    if (n < 25) return;
+    let r = [x0 * 10 - 12, y0 * 10 - 12, (x1 - x0 + 1) * 10 + 24, (y1 - y0 + 1) * 10 + 24];
+    if (r[2] < 420) { r[0] -= (420 - r[2]) / 2; r[2] = 420; }
+    if (r[3] < 240) { r[1] -= (240 - r[3]) / 2; r[3] = 240; }
+    F[c.line] = r;
+  });
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+}
+const FULLR = [0, 0, 1920, 1080];
+function camRect(sc, t) {
+  const F = focusFor(sc), cues = [...sc.cues].sort((a, b) => a.t - b.t), last = cues.length ? cues[cues.length - 1].line : -1;
+  const keys = [[0, FULLR]];
+  cues.forEach(c => { let r = F[c.line]; if (!r && c.line === last && F.rem) r = F.rem; keys.push([c.t - .3, r || FULLR]); });
+  keys.push([sc.dur - 1.0, FULLR]);
+  let i = 0; while (i + 1 < keys.length && t >= keys[i + 1][0]) i++;
+  const prev = i > 0 ? keys[i - 1][1] : FULLR, cur = keys[i][1];
+  const k = eio(clamp((t - keys[i][0]) / 1.0));
+  return cur.map((v, j) => lerp(prev[j], v, k));
+}
+function camApply(r) {
+  const pad = 36; const x = r[0] - pad, y = r[1] - pad, w = r[2] + pad * 2, h = r[3] + pad * 2;
+  const s = Math.max(1, Math.min(W / w, H / h, 2.4));
+  let tx = W / 2 - (x + w / 2) * s, ty = H / 2 - (y + h / 2) * s;
+  tx = Math.min(0, Math.max(W - W * s, tx)); ty = Math.min(0, Math.max(H - H * s, ty));
+  ctx.setTransform(s, 0, 0, s, tx, ty);
+}
 window.renderFrame = (T) => {
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
   background(T);
@@ -2191,6 +2257,7 @@ window.renderFrame = (T) => {
   const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
   const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
   const fin = clamp(t / .35), fout = clamp((D - t) / .3);
+  CURSC = sc.id; const cr = camRect(sc, t); ctx.setTransform(1, 0, 0, 1, 0, 0); background(T); camApply(cr);
   ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
   let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
   window.REPEAT = !!(cue && cue.of > 1);

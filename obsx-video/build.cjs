@@ -9,6 +9,7 @@ const mode = process.argv[2] || 'preview';
   p.on('pageerror', e => console.error('PAGEERR', e.message));
   await p.goto('file://' + __dirname + '/render.html');
   await p.evaluate(() => document.fonts.ready);
+  await p.evaluate(() => window.artReady);
   const total = await p.evaluate(t => setup(t), tl);
   const shot = async () => Buffer.from((await p.evaluate(() => document.getElementById('c').toDataURL('image/jpeg', .93))).split(',')[1], 'base64');
   if (mode === 'preview') {
