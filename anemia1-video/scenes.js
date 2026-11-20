@@ -6,6 +6,14 @@ function rbc(cx, cy, r, pale = 0, col = '#DC2626') {
 function rbcIcon(cx, cy) { rbc(cx - 22, cy + 6, 30, .4); rbc(cx + 24, cy - 10, 26, .4); rbc(cx + 8, cy + 30, 20, .4); }
 function dropIcon(cx, cy, s = 1) { ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.beginPath(); ctx.moveTo(0, -60); ctx.bezierCurveTo(45, -5, 45, 50, 0, 55); ctx.bezierCurveTo(-45, 50, -45, -5, 0, -60); ctx.fillStyle = C.hem; ctx.fill(); ctx.restore(); }
 
+function bigPanel(t, Q, list, x, y, w, h, color) {
+  let cur = null, k0 = 0; list.forEach(([li, img]) => { if (t >= Q(li) - .2 && ART[img]) { cur = img; k0 = Q(li) - .2; } });
+  list.forEach(([li, img]) => freg(li, x, y, w, h));
+  if (!cur) return;
+  const k = eo(P(t, k0, .6));
+  ctx.save(); ctx.globalAlpha *= k; card(x, y, w, h, { fill: '#fff', stroke: color, lw: 5, r: 28 }); pic(cur, x + 16, y + 16, w - 32, h - 32); ctx.restore();
+}
+
 SC.intro = (t, D, Q) => {
   header('Anemia · Part 1', C.hem);
   if (t < Q(1) - .3) { partTitle(t, 'Anemia · Part 1', 'Definition · classification · picture', C.hem, (x, y) => dropIcon(x, y, 1.1)); return; }
@@ -21,7 +29,7 @@ SC.a1 = (t, D, Q) => topicScene(t, Q, { hdr: 'Topic 1 · Anemia kya hai', part: 
   [3, 0, 'Hb kam = O₂ kam', 'Saare SYMPTOMS yahin se', C.warn, null],
   [4, 0, 'Cutoff (is file ke hisaab se)', 'Male < 13.5 · Female < 12 g/dL', C.kid, null],
   [5, 0, 'Ek baar aur', 'MALE 13.5 · FEMALE 12', C.ok, null],
-], bopts: { cols: 1, ch: 130, gap: 146, y0: 160 }, rem: [6, 'Anemia = Hb kam · Male < 13.5 · Female < 12'] });
+], bopts: { cols: 1, ch: 130, gap: 146, y0: 160, cw: 1000 }, rem: [6, 'Anemia = Hb kam · Male < 13.5 · Female < 12'], before: () => bigPanel(t, Q, [[1, 'lowhb'], [2, 'o2'], [3, 'tired']], 1120, 170, 720, 560, C.hem) });
 
 SC.a2 = (t, D, Q) => {
   header('Topic 2 · MCV se classification', C.kid);
@@ -37,8 +45,8 @@ SC.a2 = (t, D, Q) => {
     fadeUp(P(t, Q(li), .5), () => {
       card(x, y, 560, 610, { fill: '#fff', stroke: c, lw: 5 });
       txt(n, x + 280, y + 50, { size: 42, weight: 900, color: c }); txt(mcv, x + 280, y + 100, { size: 28, weight: 800, color: C.sub });
-      if (ART[img]) pic(img, x + 120, y + 125, 320, 190); else { rbc(x + 280, y + 220, i === 0 ? 30 : i === 1 ? 45 : 60, i === 0 ? .5 : 0); }
-      rows.forEach((r, j) => { const kk = P(t, Q(li2) + (li === li2 ? 1.5 : 0) + j * .9, .4); txt(r, x + 280, y + 365 + j * 62, { size: 31, weight: 900, color: C.ink, alpha: kk }); });
+      if (ART[img]) pic(img, x + 30, y + 120, 500, 300); else { rbc(x + 280, y + 220, i === 0 ? 30 : i === 1 ? 45 : 60, i === 0 ? .5 : 0); }
+      rows.forEach((r, j) => { const kk = P(t, Q(li2) + (li === li2 ? 1.5 : 0) + j * .9, .4); txt(r, x + 280, y + 455 + j * 46, { size: 28, weight: 900, color: C.ink, alpha: kk }); });
     }, 14);
   });
   if (t >= Q(7) - .3) { freg(7, 160, 900, 1600, 100); freg(8, 160, 900, 1600, 100); }
@@ -59,8 +67,8 @@ SC.a3a = (t, D, Q) => {
     fadeUp(P(t, Q(li), .5), () => {
       card(x, y, 830, 640, { fill: '#fff', stroke: c, lw: 5 });
       txt(n, x + 415, y + 50, { size: 46, weight: 900, color: c }); txt(sub, x + 415, y + 100, { size: 28, weight: 700, color: C.sub });
-      if (ART[img]) pic(img, x + 40, y + 140, 330, 250);
-      rows.forEach((r, j) => { const kk = P(t, Q(li) + .8 + j * 1.3, .4); txt(r, x + (ART[img] ? 600 : 415), y + 175 + j * 62, { size: 30, weight: 900, color: C.ink, alpha: kk }); });
+      if (ART[img]) pic(img, x + 25, y + 130, 440, 330);
+      rows.forEach((r, j) => { const kk = P(t, Q(li) + .8 + j * 1.3, .4); txt(r, x + (ART[img] ? 650 : 415), y + 170 + j * 80, { size: 27, weight: 900, color: C.ink, alpha: kk }); });
       txt(i ? 'Sab anemia mein' : 'Kam O₂ ka asar', x + 415, y + 560, { size: 30, weight: 800, color: c, alpha: P(t, Q(li) + 5, .5) });
     }, 14);
   });
@@ -74,7 +82,8 @@ SC.a3b = (t, D, Q) => {
     [1, 0, 'Ajeeb cheezein khaana: mitti, paint, baraf', 'PICA', C.hem, null],
     [2, 0, 'Restless legs · baal jhadna · conjunctival rim pallor', 'KOILONYCHIA (chamach nails)', C.kid, null],
     [3, 0, 'IDA + nigalne mein mushkil (dysphagia)', 'PLUMMER–VINSON', C.warn, null],
-  ], { cols: 1, ch: 190, gap: 210, y0: 290 });
+  ], { cols: 1, ch: 190, gap: 210, y0: 290, cw: 1000 });
+  bigPanel(t, Q, [[1, 'pica'], [2, 'koilo'], [3, 'pvs']], 1120, 290, 720, 600, C.hem);
   neoRemember(t, P(t, Q(4), .5), 'Sab: pallor · tachycardia · murmur  |  IDA: pica · koilonychia  |  IDA + dysphagia → PVS', C.hem);
 };
 
