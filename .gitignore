@@ -2,3 +2,4 @@
 *.log
 .claude/settings.local.json
 render_orig.html
+lines_tts/
