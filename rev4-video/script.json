@@ -1,347 +1,103 @@
 [
- {
-  "id": "title",
-  "lines": [
-   {
-    "say": "Revision notes: respiration, और triangle का SAS construction।"
-   },
-   {
-    "say": "Part one, science: respiration।"
-   }
-  ]
- },
- {
-  "id": "r1",
-  "lines": [
-   {
-    "say": "Topic one: respiration क्या है।"
-   },
-   {
-    "say": "Respiration क्या है? यह वह process है, जिसमें खाने से मिला glucose, oxygen की मदद से, carbon dioxide और पानी में टूट जाता है, और इस तोड़ने से energy निकलती है।"
-   },
-   {
-    "say": "इसी energy से हम चलते, पढ़ते और खेलते हैं। तो respiration का असली काम क्या है? Energy बनाना। Energy, energy। ठीक है?"
-   },
-   {
-    "say": "इसका equation एक line में याद रखो: glucose plus oxygen से, carbon dioxide plus पानी plus energy। एक बार और बोलो: glucose plus oxygen, carbon dioxide plus water plus energy।"
-   },
-   {
-    "say": "Organisms respire क्यों करते हैं? दो कारणों से: energy पाने के लिए, और जो carbon dioxide बनती है, उसे body से बाहर निकालने के लिए।"
-   },
-   {
-    "say": "याद रखना है: glucose plus oxygen, carbon dioxide plus water plus energy। Respiration का काम energy बनाना।"
-   }
-  ]
- },
- {
-  "id": "r2",
-  "lines": [
-   {
-    "say": "Topic two: breathing, inhaling और exhaling।"
-   },
-   {
-    "say": "Respiration के लिए oxygen चाहिए, तो वह body में आती कैसे है? Breathing से। Breathing के दो हिस्से हैं।"
-   },
-   {
-    "say": "Inhaling, यानी साँस अंदर लेना, ताकि oxygen मिले। Exhaling, यानी साँस बाहर छोड़ना, ताकि carbon dioxide बाहर जाए।"
-   },
-   {
-    "say": "Inhaling में oxygen अंदर, exhaling में carbon dioxide बाहर। एक inhale और एक exhale मिलकर एक breath बनाते हैं। ठीक है?"
-   },
-   {
-    "say": "याद रखना है: inhaling, साँस अंदर, oxygen लेना। Exhaling, साँस बाहर, carbon dioxide छोड़ना।"
-   }
-  ]
- },
- {
-  "id": "r3",
-  "lines": [
-   {
-    "say": "Topic three: human respiratory system, हवा का रास्ता।"
-   },
-   {
-    "say": "Human respiratory system किस-किस से बना है? Nose, nostrils, nasal cavity, trachea, bronchi, bronchioles, alveoli, और diaphragm। अब इसे एक कहानी की तरह समझो, जैसे हवा का एक सफ़र, एक-एक step।"
-   },
-   {
-    "say": "सफ़र nose से शुरू होता है। Nose में दो छेद हैं, जिन्हें nostrils कहते हैं। Nostrils से हवा nasal cavity में जाती है।"
-   },
-   {
-    "say": "Nasal cavity में बाल और mucus होते हैं। Mucus कौन बनाता है? Mucus glands।"
-   },
-   {
-    "say": "अब सोचो, जो हवा हम अंदर लेते हैं, उसमें धूल, pollen और germs भी होते हैं। यह सब कहाँ अटक जाते हैं? बालों और mucus में। इसलिए nasal cavity में हवा filter भी होती है, और गरम भी। Filter और गरम, filter और गरम।"
-   },
-   {
-    "say": "यह साफ़ हवा अब trachea, यानी windpipe, से नीचे जाती है। Trachea दो हिस्सों में बँट जाती है, जिन्हें bronchi कहते हैं, एक-एक हर lung के लिए।"
-   },
-   {
-    "say": "Bronchi और छोटी नलिकाओं में बँटती हैं, जिन्हें bronchioles कहते हैं। हर bronchiole के end पर छोटे-छोटे गुब्बारे जैसे थैले होते हैं, जिन्हें alveoli कहते हैं।"
-   }
-  ]
- },
- {
-  "id": "r3b",
-  "lines": [
-   {
-    "say": "Alveoli सबसे important हैं। क्यों? क्योंकि यहीं gases का exchange होता है।"
-   },
-   {
-    "say": "हर alveolus के चारों तरफ़ blood vessels का जाल होता है। Alveolus में आई oxygen blood में जाती है, और blood की carbon dioxide alveolus में आकर बाहर निकलती है।"
-   },
-   {
-    "say": "Clinical hook: इसीलिए alveoli को gas exchange की जगह कहते हैं। ठीक है?"
-   },
-   {
-    "say": "याद रखना है: रास्ता: nose, nostrils, nasal cavity, trachea, bronchi, bronchioles, alveoli। Nasal cavity में filter और गरम। Alveoli में gas exchange।"
-   }
-  ]
- },
- {
-  "id": "r4",
-  "lines": [
-   {
-    "say": "Topic four: lungs और diaphragm।"
-   },
-   {
-    "say": "Lungs क्या हैं? यह elastic, muscular और spongy, थैले जैसे organs हैं, जो chest cavity में दिल के दोनों तरफ़ होते हैं।"
-   },
-   {
-    "say": "Elastic मतलब खिंच कर फैल सकते हैं, और वापस सिकुड़ सकते हैं। Lungs की सुरक्षा कौन करता है? Rib cage, यानी पसलियों का पिंजरा।"
-   },
-   {
-    "say": "और lungs के ठीक नीचे एक मोटी muscular दीवार होती है, जिसे diaphragm कहते हैं। Diaphragm, diaphragm।"
-   },
-   {
-    "say": "यह chest को पेट से अलग करती है, और breathing में सबसे बड़ा role इसी का है, जो अगले topic में देखेंगे।"
-   },
-   {
-    "say": "याद रखना है: lungs elastic और spongy, rib cage से सुरक्षित। Lungs के नीचे diaphragm।"
-   }
-  ]
- },
- {
-  "id": "r5",
-  "lines": [
-   {
-    "say": "Topic five: mechanism of breathing।"
-   },
-   {
-    "say": "Breathing में दो चीज़ें हिलती हैं: diaphragm और rib cage। अब दोनों steps को एक-एक करके समझो।"
-   },
-   {
-    "say": "Inhalation, यानी साँस अंदर लेना। Ribs ऊपर और बाहर की तरफ़ जाती हैं। Diaphragm नीचे जाता है, और flat हो जाता है।"
-   },
-   {
-    "say": "दोनों मिलकर chest cavity का volume बढ़ाते हैं। जगह बढ़ी, तो lungs फैलते हैं, और हवा तेज़ी से lungs में भर जाती है। Ribs ऊपर-बाहर, diaphragm नीचे, volume बढ़ा, हवा अंदर।"
-   },
-   {
-    "say": "Exhalation, यानी साँस बाहर छोड़ना। अब सब उल्टा। Ribs नीचे और अंदर की तरफ़ आती हैं। Diaphragm ऊपर, अपनी पुरानी position पर वापस जाता है।"
-   },
-   {
-    "say": "Chest cavity का volume कम होता है। जगह कम, तो lungs सिकुड़ते हैं, और हवा बाहर निकल जाती है। Ribs नीचे-अंदर, diaphragm ऊपर, volume कम, हवा बाहर। ठीक है?"
-   },
-   {
-    "say": "एक आसान trick: inhalation में सब कुछ बढ़ता है, exhalation में सब कुछ घटता है।"
-   },
-   {
-    "say": "याद रखना है: inhalation: ribs ऊपर-बाहर, diaphragm नीचे, volume बढ़ा, हवा अंदर। Exhalation: ribs नीचे-अंदर, diaphragm ऊपर, volume कम, हवा बाहर।"
-   }
-  ]
- },
- {
-  "id": "rrecap",
-  "lines": [
-   {
-    "say": "एक बार दोबारा देखते हैं: respiration में glucose और oxygen से carbon dioxide, पानी और energy बनती है।"
-   },
-   {
-    "say": "Inhaling oxygen लेने के लिए, exhaling carbon dioxide छोड़ने के लिए।"
-   },
-   {
-    "say": "हवा का रास्ता nose, nostrils, nasal cavity, trachea, bronchi, bronchioles और alveoli; nasal cavity में filter और गरम, alveoli में gas exchange।"
-   },
-   {
-    "say": "Lungs elastic और spongy, rib cage से सुरक्षित, नीचे diaphragm।"
-   },
-   {
-    "say": "Inhalation में ribs ऊपर-बाहर और diaphragm नीचे; exhalation में ribs नीचे-अंदर और diaphragm ऊपर।"
-   }
-  ]
- },
- {
-  "id": "m6",
-  "lines": [
-   {
-    "say": "Part two, maths: triangle inequality, और SAS construction।"
-   },
-   {
-    "say": "Topic six: triangle inequality के नए examples। Rule याद है? किन्हीं भी दो sides का जोड़ तीसरी side से बड़ा होना चाहिए।"
-   },
-   {
-    "say": "आसान तरीका: दो छोटी sides जोड़ो, और सबसे बड़ी से compare करो। बराबर हो, तो भी triangle नहीं। ठीक है?"
-   }
-  ]
- },
- {
-  "id": "m6b",
-  "lines": [
-   {
-    "say": "पहला: 1, 100, 100। दो छोटी sides कौन सी? 1 और 100। जोड़ 101। क्या 101, 100 से बड़ा है? हाँ। तो triangle बन सकता है। यह एक बहुत पतला, लंबा isosceles triangle होगा, पर बनेगा ज़रूर।"
-   },
-   {
-    "say": "दूसरा: 3, 6, 9। छोटी दो: 3 और 6। जोड़ 9। क्या 9, 9 से बड़ा है? नहीं, बराबर है। बराबर, तो triangle नहीं। तीनों points एक सीधी line में आ जाएँगे।"
-   },
-   {
-    "say": "तीसरा: 1, 1, 5। छोटी दो: 1 और 1। जोड़ 2। क्या 2, 5 से बड़ा है? नहीं। तो triangle नहीं।"
-   },
-   {
-    "say": "याद रखना है: 1, 100, 100 बनेगा। 3, 6, 9 नहीं, क्योंकि जोड़ बराबर है। 1, 1, 5 नहीं।"
-   }
-  ]
- },
- {
-  "id": "m7",
-  "lines": [
-   {
-    "say": "Topic seven: SAS construction, दो sides और बीच का angle।"
-   },
-   {
-    "say": "अब एक नया construction। इस बार तीन sides नहीं, बल्कि दो sides, और उनके बीच का angle दिया है। इसे SAS कहते हैं: side, angle, side।"
-   },
-   {
-    "say": "बीच का angle मतलब वह angle, जो उन दो sides के बीच है, जैसे AB और AC के बीच angle A।"
-   }
-  ]
- },
- {
-  "id": "m7b",
-  "lines": [
-   {
-    "say": "सवाल: triangle ABC बनाओ, जिसमें AB 5 cm, AC 4 cm, और angle A 45 degree। अब step by step।"
-   },
-   {
-    "say": "Step 1: ruler से line AB draw करो, 5 cm।"
-   },
-   {
-    "say": "Step 2: protractor को point A पर रखो, और 45 degree का angle बनाओ; A से उस direction में एक line खींचो।"
-   },
-   {
-    "say": "Step 3: compass 4 cm खोल कर, A को centre मान कर, उस line पर एक arc लगाओ।"
-   },
-   {
-    "say": "Step 4: जहाँ arc line को काटता है, उस point का नाम C।"
-   },
-   {
-    "say": "Step 5: B और C को जोड़ो। Triangle ABC तैयार।"
-   }
-  ]
- },
- {
-  "id": "m7c",
-  "lines": [
-   {
-    "say": "ध्यान दो, step 3 में arc A से लगता है, क्योंकि AC 4 cm है, और AC, A से शुरू होती है।"
-   },
-   {
-    "say": "और angle हमेशा उन दो sides के बीच वाले point पर बनता है, जो दी गई हैं; यहाँ AB और AC दोनों A से निकलती हैं, इसलिए angle A पर। ठीक है?"
-   },
-   {
-    "say": "Notebook में page 161 का अगला सवाल शुरू हुआ है: 3 cm, 75 degree, और 7 cm।"
-   },
-   {
-    "say": "वही तरीका: पहले 3 cm की side XY बनाओ, फिर X पर 75 degree का angle, फिर उस line पर X से 7 cm का arc, और काटने वाले point को Y से जोड़ो।"
-   },
-   {
-    "say": "याद रखना है: SAS: पहली side बनाओ, उसके एक सिरे पर बीच का angle बनाओ, उस line पर दूसरी side का arc लगाओ, और काटने वाले point को जोड़ो।"
-   }
-  ]
- },
- {
-  "id": "mrecap",
-  "lines": [
-   {
-    "say": "एक बार दोबारा देखते हैं: दो छोटी sides का जोड़ सबसे बड़ी से बड़ा हो, तभी triangle; 1, 100, 100 बनेगा, 3, 6, 9 और 1, 1, 5 नहीं।"
-   },
-   {
-    "say": "SAS में दो sides और उनके बीच का angle: side बनाओ, angle बनाओ, arc लगाओ, जोड़ो।"
-   }
-  ]
- },
- {
-  "id": "full",
-  "lines": [
-   {
-    "say": "अब सब कुछ एक साथ। Science में: respiration में glucose और oxygen से carbon dioxide, पानी और energy बनती है। Inhaling से oxygen अंदर, exhaling से carbon dioxide बाहर।"
-   },
-   {
-    "say": "हवा nose, nostrils और nasal cavity से होकर, जहाँ वह filter और गरम होती है, trachea, bronchi और bronchioles से alveoli तक पहुँचती है, जहाँ gas exchange होता है।"
-   },
-   {
-    "say": "Inhalation में ribs ऊपर-बाहर और diaphragm नीचे जाता है, तो volume बढ़ता है, और हवा अंदर आती है; exhalation में सब उल्टा।"
-   },
-   {
-    "say": "Maths में: दो छोटी sides का जोड़ सबसे बड़ी side से बड़ा हो, तभी triangle बनता है। SAS construction में पहले एक side, फिर बीच का angle, फिर दूसरी side का arc, और आख़िर में जोड़ना।"
-   }
-  ]
- },
- {
-  "id": "rapid",
-  "lines": [
-   {
-    "say": "Rapid recall, खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
-   },
-   {
-    "say": "Respiration का equation?"
-   },
-   {
-    "say": "Glucose plus oxygen, carbon dioxide plus water plus energy।"
-   },
-   {
-    "say": "Gas exchange कहाँ होता है?"
-   },
-   {
-    "say": "Alveoli में।"
-   },
-   {
-    "say": "Nasal cavity में धूल कौन रोकता है?"
-   },
-   {
-    "say": "बाल और mucus।"
-   },
-   {
-    "say": "Inhalation में diaphragm किधर जाता है?"
-   },
-   {
-    "say": "नीचे।"
-   },
-   {
-    "say": "Exhalation में ribs?"
-   },
-   {
-    "say": "नीचे और अंदर।"
-   },
-   {
-    "say": "Lungs की सुरक्षा कौन करता है?"
-   },
-   {
-    "say": "Rib cage।"
-   },
-   {
-    "say": "2, 3, 5 से triangle बनेगा?"
-   },
-   {
-    "say": "2 plus 3 equals 5, बराबर, तो नहीं।"
-   },
-   {
-    "say": "AB 5 cm, AC 4 cm, angle A 45 degree; arc कहाँ से लगेगा?"
-   },
-   {
-    "say": "A से, 4 cm का।"
-   }
-  ]
- },
- {
-  "id": "end",
-  "lines": []
- }
+ {"id":"title","lines":[{"say":"Revision notes: respiration, और triangle का SAS construction।"},{"say":"Part one, science: respiration।"}]},
+ {"id":"r1","lines":[
+  {"say":"Topic one: respiration क्या है।"},
+  {"say":"Respiration क्या है? यह वह process है, जिसमें खाने से मिला glucose, oxygen की मदद से, carbon dioxide और पानी में टूट जाता है, और इस तोड़ने से energy निकलती है।"},
+  {"say":"इसी energy से हम चलते, पढ़ते और खेलते हैं। तो respiration का असली काम क्या है? Energy बनाना। Energy, energy। ठीक है?"},
+  {"say":"इसका equation एक line में याद रखो: glucose plus oxygen से, carbon dioxide plus पानी plus energy। एक बार और बोलो: glucose plus oxygen, carbon dioxide plus water plus energy।"},
+  {"say":"Organisms respire क्यों करते हैं? दो कारणों से: energy पाने के लिए, और जो carbon dioxide बनती है, उसे body से बाहर निकालने के लिए।"},
+  {"say":"याद रखना है: glucose plus oxygen, carbon dioxide plus water plus energy। Respiration का काम energy बनाना।"}]},
+ {"id":"r2","lines":[
+  {"say":"Topic two: breathing, inhaling और exhaling।"},
+  {"say":"Respiration के लिए oxygen चाहिए, तो वह body में आती कैसे है? Breathing से। Breathing के दो हिस्से हैं।"},
+  {"say":"Inhaling, यानी साँस अंदर लेना, ताकि oxygen मिले। Exhaling, यानी साँस बाहर छोड़ना, ताकि carbon dioxide बाहर जाए।"},
+  {"say":"Inhaling में oxygen अंदर, exhaling में carbon dioxide बाहर। एक inhale और एक exhale मिलकर एक breath बनाते हैं। ठीक है?"},
+  {"say":"याद रखना है: inhaling, साँस अंदर, oxygen लेना। Exhaling, साँस बाहर, carbon dioxide छोड़ना।"}]},
+ {"id":"r3","lines":[
+  {"say":"Topic three: human respiratory system, हवा का रास्ता।"},
+  {"say":"Human respiratory system किस-किस से बना है? Nose, nostrils, nasal cavity, trachea, bronchi, bronchioles, alveoli, और diaphragm। अब इसे एक कहानी की तरह समझो, जैसे हवा का एक सफ़र, एक-एक step।"},
+  {"say":"सफ़र nose से शुरू होता है। Nose में दो छेद हैं, जिन्हें nostrils कहते हैं। Nostrils से हवा nasal cavity में जाती है।"},
+  {"say":"Nasal cavity में बाल और mucus होते हैं। Mucus कौन बनाता है? Mucus glands।"},
+  {"say":"अब सोचो, जो हवा हम अंदर लेते हैं, उसमें धूल, pollen और germs भी होते हैं। यह सब कहाँ अटक जाते हैं? बालों और mucus में। इसलिए nasal cavity में हवा filter भी होती है, और गरम भी। Filter और गरम, filter और गरम।"},
+  {"say":"यह साफ़ हवा अब trachea, यानी windpipe, से नीचे जाती है। Trachea दो हिस्सों में बँट जाती है, जिन्हें bronchi कहते हैं, एक-एक हर lung के लिए।"},
+  {"say":"Bronchi और छोटी नलिकाओं में बँटती हैं, जिन्हें bronchioles कहते हैं। हर bronchiole के end पर छोटे-छोटे गुब्बारे जैसे थैले होते हैं, जिन्हें alveoli कहते हैं।"}]},
+ {"id":"r3b","lines":[
+  {"say":"Alveoli सबसे important हैं। क्यों? क्योंकि यहीं gases का exchange होता है।"},
+  {"say":"हर alveolus के चारों तरफ़ blood vessels का जाल होता है। Alveolus में आई oxygen blood में जाती है, और blood की carbon dioxide alveolus में आकर बाहर निकलती है।"},
+  {"say":"Clinical hook: इसीलिए alveoli को gas exchange की जगह कहते हैं। ठीक है?"},
+  {"say":"याद रखना है: रास्ता: nose, nostrils, nasal cavity, trachea, bronchi, bronchioles, alveoli। Nasal cavity में filter और गरम। Alveoli में gas exchange।"}]},
+ {"id":"r4","lines":[
+  {"say":"Topic four: lungs और diaphragm।"},
+  {"say":"Lungs क्या हैं? यह elastic, muscular और spongy, थैले जैसे organs हैं, जो chest cavity में दिल के दोनों तरफ़ होते हैं।"},
+  {"say":"Elastic मतलब खिंच कर फैल सकते हैं, और वापस सिकुड़ सकते हैं। Lungs की सुरक्षा कौन करता है? Rib cage, यानी पसलियों का पिंजरा।"},
+  {"say":"और lungs के ठीक नीचे एक मोटी muscular दीवार होती है, जिसे diaphragm कहते हैं। Diaphragm, diaphragm।"},
+  {"say":"यह chest को पेट से अलग करती है, और breathing में सबसे बड़ा role इसी का है, जो अगले topic में देखेंगे।"},
+  {"say":"याद रखना है: lungs elastic और spongy, rib cage से सुरक्षित। Lungs के नीचे diaphragm।"}]},
+ {"id":"r5","lines":[
+  {"say":"Topic five: mechanism of breathing।"},
+  {"say":"Breathing में दो चीज़ें हिलती हैं: diaphragm और rib cage। अब दोनों steps को एक-एक करके समझो।"},
+  {"say":"Inhalation, यानी साँस अंदर लेना। Ribs ऊपर और बाहर की तरफ़ जाती हैं। Diaphragm नीचे जाता है, और flat हो जाता है।"},
+  {"say":"दोनों मिलकर chest cavity का volume बढ़ाते हैं। जगह बढ़ी, तो lungs फैलते हैं, और हवा तेज़ी से lungs में भर जाती है। Ribs ऊपर-बाहर, diaphragm नीचे, volume बढ़ा, हवा अंदर।"},
+  {"say":"Exhalation, यानी साँस बाहर छोड़ना। अब सब उल्टा। Ribs नीचे और अंदर की तरफ़ आती हैं। Diaphragm ऊपर, अपनी पुरानी position पर वापस जाता है।"},
+  {"say":"Chest cavity का volume कम होता है। जगह कम, तो lungs सिकुड़ते हैं, और हवा बाहर निकल जाती है। Ribs नीचे-अंदर, diaphragm ऊपर, volume कम, हवा बाहर। ठीक है?"},
+  {"say":"एक आसान trick: inhalation में सब कुछ बढ़ता है, exhalation में सब कुछ घटता है।"},
+  {"say":"याद रखना है: inhalation: ribs ऊपर-बाहर, diaphragm नीचे, volume बढ़ा, हवा अंदर। Exhalation: ribs नीचे-अंदर, diaphragm ऊपर, volume कम, हवा बाहर।"}]},
+ {"id":"rrecap","lines":[
+  {"say":"एक बार दोबारा देखते हैं: respiration में glucose और oxygen से carbon dioxide, पानी और energy बनती है।"},
+  {"say":"Inhaling oxygen लेने के लिए, exhaling carbon dioxide छोड़ने के लिए।"},
+  {"say":"हवा का रास्ता nose, nostrils, nasal cavity, trachea, bronchi, bronchioles और alveoli; nasal cavity में filter और गरम, alveoli में gas exchange।"},
+  {"say":"Lungs elastic और spongy, rib cage से सुरक्षित, नीचे diaphragm।"},
+  {"say":"Inhalation में ribs ऊपर-बाहर और diaphragm नीचे; exhalation में ribs नीचे-अंदर और diaphragm ऊपर।"}]},
+ {"id":"m6","lines":[
+  {"say":"Part two, maths: triangle inequality, और SAS construction।"},
+  {"say":"Topic six: triangle inequality के नए examples। Rule याद है? किन्हीं भी दो sides का जोड़ तीसरी side से बड़ा होना चाहिए।"},
+  {"say":"आसान तरीका: दो छोटी sides जोड़ो, और सबसे बड़ी से compare करो। बराबर हो, तो भी triangle नहीं। ठीक है?"}]},
+ {"id":"m6b","lines":[
+  {"say":"पहला: 1, 100, 100। दो छोटी sides कौन सी? 1 और 100। जोड़ 101। क्या 101, 100 से बड़ा है? हाँ। तो triangle बन सकता है। यह एक बहुत पतला, लंबा isosceles triangle होगा, पर बनेगा ज़रूर।"},
+  {"say":"दूसरा: 3, 6, 9। छोटी दो: 3 और 6। जोड़ 9। क्या 9, 9 से बड़ा है? नहीं, बराबर है। बराबर, तो triangle नहीं। तीनों points एक सीधी line में आ जाएँगे।"},
+  {"say":"तीसरा: 1, 1, 5। छोटी दो: 1 और 1। जोड़ 2। क्या 2, 5 से बड़ा है? नहीं। तो triangle नहीं।"},
+  {"say":"याद रखना है: 1, 100, 100 बनेगा। 3, 6, 9 नहीं, क्योंकि जोड़ बराबर है। 1, 1, 5 नहीं।"}]},
+ {"id":"m7","lines":[
+  {"say":"Topic seven: SAS construction, दो sides और बीच का angle।"},
+  {"say":"अब एक नया construction। इस बार तीन sides नहीं, बल्कि दो sides, और उनके बीच का angle दिया है। इसे SAS कहते हैं: side, angle, side।"},
+  {"say":"बीच का angle मतलब वह angle, जो उन दो sides के बीच है, जैसे AB और AC के बीच angle A।"}]},
+ {"id":"m7b","lines":[
+  {"say":"सवाल: triangle ABC बनाओ, जिसमें AB 5 cm, AC 4 cm, और angle A 45 degree। अब step by step।"},
+  {"say":"Step 1: ruler से line AB draw करो, 5 cm।"},
+  {"say":"Step 2: protractor को point A पर रखो, और 45 degree का angle बनाओ; A से उस direction में एक line खींचो।"},
+  {"say":"Step 3: compass 4 cm खोल कर, A को centre मान कर, उस line पर एक arc लगाओ।"},
+  {"say":"Step 4: जहाँ arc line को काटता है, उस point का नाम C।"},
+  {"say":"Step 5: B और C को जोड़ो। Triangle ABC तैयार।"}]},
+ {"id":"m7c","lines":[
+  {"say":"ध्यान दो, step 3 में arc A से लगता है, क्योंकि AC 4 cm है, और AC, A से शुरू होती है।"},
+  {"say":"और angle हमेशा उन दो sides के बीच वाले point पर बनता है, जो दी गई हैं; यहाँ AB और AC दोनों A से निकलती हैं, इसलिए angle A पर। ठीक है?"},
+  {"say":"Notebook में page 161 का अगला सवाल शुरू हुआ है: 3 cm, 75 degree, और 7 cm।"},
+  {"say":"वही तरीका: पहले 3 cm की side XY बनाओ, फिर X पर 75 degree का angle, फिर उस line पर X से 7 cm का arc, और काटने वाले point को Y से जोड़ो।"},
+  {"say":"याद रखना है: SAS: पहली side बनाओ, उसके एक सिरे पर बीच का angle बनाओ, उस line पर दूसरी side का arc लगाओ, और काटने वाले point को जोड़ो।"}]},
+ {"id":"mrecap","lines":[
+  {"say":"एक बार दोबारा देखते हैं: दो छोटी sides का जोड़ सबसे बड़ी से बड़ा हो, तभी triangle; 1, 100, 100 बनेगा, 3, 6, 9 और 1, 1, 5 नहीं।"},
+  {"say":"SAS में दो sides और उनके बीच का angle: side बनाओ, angle बनाओ, arc लगाओ, जोड़ो।"}]},
+ {"id":"full","lines":[
+  {"say":"अब सब कुछ एक साथ। Science में: respiration में glucose और oxygen से carbon dioxide, पानी और energy बनती है। Inhaling से oxygen अंदर, exhaling से carbon dioxide बाहर।"},
+  {"say":"हवा nose, nostrils और nasal cavity से होकर, जहाँ वह filter और गरम होती है, trachea, bronchi और bronchioles से alveoli तक पहुँचती है, जहाँ gas exchange होता है।"},
+  {"say":"Inhalation में ribs ऊपर-बाहर और diaphragm नीचे जाता है, तो volume बढ़ता है, और हवा अंदर आती है; exhalation में सब उल्टा।"},
+  {"say":"Maths में: दो छोटी sides का जोड़ सबसे बड़ी side से बड़ा हो, तभी triangle बनता है। SAS construction में पहले एक side, फिर बीच का angle, फिर दूसरी side का arc, और आख़िर में जोड़ना।"}]},
+ {"id":"rapid","lines":[
+  {"say":"Rapid recall, खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"},
+  {"say":"Respiration का equation?"},{"say":"Glucose plus oxygen, carbon dioxide plus water plus energy।"},
+  {"say":"Gas exchange कहाँ होता है?"},{"say":"Alveoli में।"},
+  {"say":"Nasal cavity में धूल कौन रोकता है?"},{"say":"बाल और mucus।"},
+  {"say":"Inhalation में diaphragm किधर जाता है?"},{"say":"नीचे।"},
+  {"say":"Exhalation में ribs?"},{"say":"नीचे और अंदर।"},
+  {"say":"Lungs की सुरक्षा कौन करता है?"},{"say":"Rib cage।"},
+  {"say":"2, 3, 5 से triangle बनेगा?"},{"say":"2 plus 3 equals 5, बराबर, तो नहीं।"},
+  {"say":"SAS में A का मतलब?"},{"say":"दो sides के बीच का angle।"},
+  {"say":"AB 5 cm, AC 4 cm, angle A 45 degree; arc कहाँ से लगेगा?"},{"say":"A से, 4 cm का।"}]},
+ {"id":"check","lines":[
+  {"say":"अब notebook का check।"},
+  {"say":"Maths notebook में 1, 100, 100 के आगे triangle inequality is equal लिखा है। यह सही नहीं है: 1 plus 100, 101 होता है, जो 100 से बड़ा है, इसलिए triangle बन सकता है।"},
+  {"say":"3, 6, 9 वाले सवाल में पहली line में 3 plus 6, 8 लिखा है; 3 plus 6, 9 होता है, जो 9 के बराबर है। Conclusion, कि triangle नहीं बनेगा, सही है, क्योंकि बराबर होने पर भी triangle नहीं बनता।"},
+  {"say":"Construction की heading में sum of the sides and angles are given लिखा है। इस construction का सही नाम है: two sides and the included angle are given, यानी SAS।"},
+  {"say":"Science notebook की बाक़ी बातें सही हैं। Respiration वाले पहले page का सिर्फ़ किनारा photo में था, इसलिए equation और organisms respire क्यों करते हैं वाला हिस्सा, textbook के standard points से पूरा किया है।"}]},
+ {"id":"end","lines":[]}
 ]

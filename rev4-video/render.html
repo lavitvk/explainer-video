@@ -2626,7 +2626,7 @@ SC.full = (t, D, Q) => {
 SC.rapid = (t, D, Q) => {
   header('Rapid recall · khud se poochho', C.warn);
   if (t < Q(1) - .2) { fadeUp(P(t, 0, .5), () => { txt('Rapid recall', W / 2, 400, { size: 90, weight: 900, color: C.warn }); txt('Sawal padho → ruko → khud jawab bolo', W / 2, 520, { size: 44, weight: 800, color: C.sub }); }); return; }
-  qaCards(t, Q, [[1, 2, 'Respiration ka equation?', 'Glucose + O₂ → CO₂ + H₂O + Energy'], [3, 4, 'Gas exchange kahan?', 'ALVEOLI'], [5, 6, 'Nasal cavity mein dhool kaun rokta?', 'BAAL + MUCUS'], [7, 8, 'Inhalation mein diaphragm?', 'NEECHE'], [9, 10, 'Exhalation mein ribs?', 'NEECHE + ANDAR'], [11, 12, 'Lungs ki suraksha?', 'RIB CAGE'], [13, 14, '2, 3, 5 → triangle?', '2 + 3 = 5 · barabar → NAHI'], [15, 16, 'AB 5 · AC 4 · ∠A 45° → arc kahan se?', 'A se, 4 cm']], C.warn);
+  qaCards(t, Q, [[1, 2, 'Respiration ka equation?', 'Glucose + O₂ → CO₂ + H₂O + Energy'], [3, 4, 'Gas exchange kahan?', 'ALVEOLI'], [5, 6, 'Nasal cavity mein dhool kaun rokta?', 'BAAL + MUCUS'], [7, 8, 'Inhalation mein diaphragm?', 'NEECHE'], [9, 10, 'Exhalation mein ribs?', 'NEECHE + ANDAR'], [11, 12, 'Lungs ki suraksha?', 'RIB CAGE'], [13, 14, '2, 3, 5 → triangle?', '2 + 3 = 5 · barabar → NAHI'], [15, 16, 'SAS mein "A"?', 'Do sides ke BEECH ka angle'], [17, 18, 'AB 5 · AC 4 · ∠A 45° → arc kahan se?', 'A se, 4 cm']], C.warn);
 };
 
 SC.check = (t, D, Q) => {
