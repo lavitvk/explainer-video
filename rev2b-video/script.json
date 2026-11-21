@@ -1,0 +1,604 @@
+[
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two. English poem: Paper Boats, by Rabindranath Tagore।"
+   },
+   {
+    "say": "Maths वापस बुलाओ: दो छोटी sides का जोड़, बड़ी से बड़ा, तभी triangle।"
+   },
+   {
+    "say": "अब, poem।"
+   }
+  ]
+ },
+ {
+  "id": "e4",
+  "lines": [
+   {
+    "say": "Poem किसने लिखी? Rabindranath Tagore।"
+   },
+   {
+    "say": "Poem में बोलने वाला कौन? एक छोटा बच्चा।"
+   },
+   {
+    "say": "वह क्या करता है? रोज़ कागज़ की नावें बनाता है, और बहती धारा में छोड़ देता है। Paper boats, running stream।"
+   }
+  ]
+ },
+ {
+  "id": "e5",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: बच्चा, paper boats, बहती धारा। आगे।"
+   },
+   {
+    "say": "नाव पर क्या लिखता है? बड़े काले अक्षरों में, अपना नाम, और अपने गाँव का नाम।"
+   },
+   {
+    "say": "क्यों? उसे उम्मीद है, कि किसी अनजान देश में कोई इन नावों को पाएगा, और जान लेगा कि वह कौन है।"
+   },
+   {
+    "say": "नाव में क्या भरता है? अपने बगीचे के शिउली के फूल।"
+   },
+   {
+    "say": "शिउली सुबह खिलने वाला फूल है। इसलिए, blooms of the dawn।"
+   },
+   {
+    "say": "उम्मीद क्या है? यह सुबह के फूल, रात तक सही-सलामत किनारे पहुँच जाएँगे।"
+   },
+   {
+    "say": "So remember: नाम और गाँव लिखता है। शिउली के फूल भरता है।"
+   }
+  ]
+ },
+ {
+  "id": "e6",
+  "lines": [
+   {
+    "say": "पिछला एक line में: नाम, गाँव, शिउली। आगे।"
+   },
+   {
+    "say": "नाव छोड़कर बच्चा आसमान देखता है। छोटे-छोटे बादल, सफेद फूली हुई पाल जैसे। White bulging sails।"
+   },
+   {
+    "say": "उसे लगता है, आसमान में कोई playmate है, जो बादलों को नीचे भेजता है, उसकी नावों से race करने के लिए।"
+   },
+   {
+    "say": "So remember: बादल, सफेद पाल। दोस्त की नावें, race करती हुई।"
+   }
+  ]
+ },
+ {
+  "id": "e7",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: बादल, पाल, race। आखिरी हिस्सा।"
+   },
+   {
+    "say": "रात आती है। बच्चा बाहों में मुँह छुपाकर सोता है।"
+   },
+   {
+    "say": "सपना देखता है, कि उसकी कागज़ की नावें, आधी रात के तारों के नीचे, आगे, और आगे, तैरती जा रही हैं।"
+   },
+   {
+    "say": "नावों में कौन बैठा है? नींद की परियाँ। Fairies of sleep।"
+   },
+   {
+    "say": "उनका सामान क्या है? सपनों से भरी टोकरियाँ। Baskets full of dreams।"
+   },
+   {
+    "say": "So remember: रात, तारों के नीचे नावें। नींद की परियाँ, सपनों की टोकरी।"
+   }
+  ]
+ },
+ {
+  "id": "e8",
+  "lines": [
+   {
+    "say": "पिछला: नींद की परियाँ, सपनों की टोकरी। अब पूरे poem का मतलब।"
+   },
+   {
+    "say": "बच्चे की कल्पना, imagination।"
+   },
+   {
+    "say": "वह चाहता है, कि दूर कोई उसे जाने। दोस्ती और जुड़ने की इच्छा।"
+   },
+   {
+    "say": "और प्रकृति: धारा, फूल, बादल, तारे। सब उसके खेल के साथी।"
+   },
+   {
+    "say": "So remember: imagination। जाने जाने की इच्छा। प्रकृति, साथी।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। सब एक साथ।"
+   },
+   {
+    "say": "Tagore। बच्चा बहती धारा में paper boats छोड़ता है। नाव पर नाम और गाँव।"
+   },
+   {
+    "say": "शिउली के फूल, blooms of the dawn। बादल, सफेद पाल, आसमान के दोस्त की नावें, race।"
+   },
+   {
+    "say": "रात को तारों के नीचे नावें। नींद की परियाँ, सपनों की टोकरी।"
+   },
+   {
+    "say": "भाव: imagination, और जाने जाने की इच्छा।"
+   }
+  ]
+ },
+ {
+  "id": "p2think",
+  "lines": [
+   {
+    "say": "Think about it: बच्चा नाव पर अपना नाम और गाँव क्यों लिखता है?"
+   },
+   {
+    "say": "ताकि किसी दूर देश में कोई नाव पाए, और जाने कि वह कौन है।"
+   }
+  ]
+ },
+ {
+  "id": "p3intro",
+  "lines": [
+   {
+    "say": "Part three. Grammar: framing questions।"
+   },
+   {
+    "say": "पिछला वापस बुलाओ: triangle, दो छोटी sides का जोड़ बड़ी से बड़ा।"
+   },
+   {
+    "say": "Paper Boats: नाम और गाँव, नींद की परियाँ।"
+   },
+   {
+    "say": "अब, question words।"
+   }
+  ]
+ },
+ {
+  "id": "g9",
+  "lines": [
+   {
+    "say": "Question word, हमेशा sentence की शुरुआत में।"
+   },
+   {
+    "say": "What: चीज़, या information। What are you doing?"
+   },
+   {
+    "say": "Why: reason, कारण। Why are you so late?"
+   },
+   {
+    "say": "Where: जगह। Where is my passport?"
+   },
+   {
+    "say": "When: time, समय। When does the train arrive?"
+   },
+   {
+    "say": "Who: कौन, person की पहचान। Who is that man?"
+   },
+   {
+    "say": "Which: choice, कौन सा। Which of these is your jacket?"
+   }
+  ]
+ },
+ {
+  "id": "g9q",
+  "lines": [
+   {
+    "say": "एक बार उल्टा।"
+   },
+   {
+    "say": "जगह पूछनी है?"
+   },
+   {
+    "say": "Where।"
+   },
+   {
+    "say": "समय?"
+   },
+   {
+    "say": "When।"
+   },
+   {
+    "say": "कारण?"
+   },
+   {
+    "say": "Why।"
+   },
+   {
+    "say": "Person?"
+   },
+   {
+    "say": "Who।"
+   },
+   {
+    "say": "Choice?"
+   },
+   {
+    "say": "Which।"
+   },
+   {
+    "say": "चीज़ या info?"
+   },
+   {
+    "say": "What।"
+   },
+   {
+    "say": "So remember: what चीज़, why कारण, where जगह, when समय, who person, which choice।"
+   }
+  ]
+ },
+ {
+  "id": "g10",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: where जगह, when समय, why कारण, who person, which choice। अब how। यह special है।"
+   },
+   {
+    "say": "How के चार काम। एक: किस तरीके से। How did you make this sauce?"
+   },
+   {
+    "say": "दो: adjective के साथ। How tall are you? How old is your house?"
+   },
+   {
+    "say": "तीन: much और many के साथ। How much: गिनती नहीं हो सकती, या कीमत। How many: गिनती हो सकती।"
+   },
+   {
+    "say": "चार: दूसरे adverbs के साथ। How quickly? How often?"
+   },
+   {
+    "say": "और हाल पूछना: How are you?"
+   },
+   {
+    "say": "Much और many में फ़र्क: How much are these tomatoes? कीमत। How many people are coming? लोग गिने जा सकते हैं।"
+   },
+   {
+    "say": "So remember: how, तरीका, adjective, much और many, adverb, हाल।"
+   }
+  ]
+ },
+ {
+  "id": "g11",
+  "lines": [
+   {
+    "say": "पिछला एक line में: how, तरीका, much many, often। अब उल्टा काम।"
+   },
+   {
+    "say": "Answer दिया है, question बनाना है। Italic वाले words देखो, वह क्या बता रहे हैं।"
+   },
+   {
+    "say": "जगह: where। Person: who। कीमत: how much। समय कितना लगा: how long। Date: when।"
+   },
+   {
+    "say": "She is staying with an old friend. किसके साथ? Who is she staying with?"
+   },
+   {
+    "say": "The used car cost me ninety thousand rupees. कीमत: How much did the car cost?"
+   },
+   {
+    "say": "It took them six years to make the film. कितना समय: How long did it take them to make the film?"
+   },
+   {
+    "say": "India became independent on 15 August 1947. When did India become independent?"
+   },
+   {
+    "say": "So remember: italic word का type देखो, वही question word लगाओ। और helping verb, do, does, did, को subject से पहले लाओ।"
+   }
+  ]
+ },
+ {
+  "id": "p3recap",
+  "lines": [
+   {
+    "say": "Part three का recap। सब एक साथ।"
+   },
+   {
+    "say": "What चीज़, why कारण, where जगह, when समय, who person, which choice।"
+   },
+   {
+    "say": "How: तरीका, adjective, much many, often, हाल।"
+   },
+   {
+    "say": "How much: uncountable, या कीमत। How many: गिनती।"
+   },
+   {
+    "say": "Answer से question: italic word का type देखो।"
+   }
+  ]
+ },
+ {
+  "id": "p3think",
+  "lines": [
+   {
+    "say": "Think about it: That sports car belongs to my uncle. Italic my uncle हो, तो question क्या?"
+   },
+   {
+    "say": "Who does that sports car belong to?"
+   }
+  ]
+ },
+ {
+  "id": "p4intro",
+  "lines": [
+   {
+    "say": "Part four. Grammar: question tags।"
+   },
+   {
+    "say": "पिछला वापस बुलाओ: where जगह, when समय, who person। How much कीमत, how many गिनती।"
+   },
+   {
+    "say": "अब, question tags।"
+   }
+  ]
+ },
+ {
+  "id": "g12",
+  "lines": [
+   {
+    "say": "Statement के end में छोटा सा सवाल, जैसे isn't she, didn't he। यह question tag है।"
+   },
+   {
+    "say": "कब use करते हैं? जब बोलने वाले को जवाब पहले से पता है, बस confirm करना है।"
+   },
+   {
+    "say": "Comma से अलग करते हैं। Miss Desai is very busy, isn't she?"
+   },
+   {
+    "say": "So remember: tag, confirm करने के लिए। Comma के बाद।"
+   }
+  ]
+ },
+ {
+  "id": "g13",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: tag confirm करने के लिए। अब सबसे important rule।"
+   },
+   {
+    "say": "Rule एक: statement positive, तो tag negative, और negative contraction, जैसे isn't, doesn't, won't। यह Yes expect करता है।"
+   },
+   {
+    "say": "She speaks French, doesn't she?"
+   },
+   {
+    "say": "Statement negative, तो tag positive। यह No expect करता है। She doesn't like French, does she?"
+   },
+   {
+    "say": "Rule दो: tag में वही helping verb, और वही tense, जो statement में है।"
+   },
+   {
+    "say": "Is हो तो isn't। Will हो तो won't। Has हो तो hasn't।"
+   },
+   {
+    "say": "और main verb अकेला हो, helping verb ना हो, तो do, does, did लगाओ। Speaks, present: doesn't। Went, past: didn't।"
+   },
+   {
+    "say": "So remember: positive का negative। वही helping verb। अकेला verb हो, तो do, does, did।"
+   }
+  ]
+ },
+ {
+  "id": "g14",
+  "lines": [
+   {
+    "say": "पिछला एक line में: उल्टा tag, वही helping verb। अब tricky वाले।"
+   },
+   {
+    "say": "Imperative, यानी order: Keep quiet, will you? Order के बाद, will you।"
+   },
+   {
+    "say": "Never, hardly जैसे words: sentence negative मान लो। She never loses her temper, does she?"
+   },
+   {
+    "say": "There वाला sentence: There wasn't enough paper, was there? Tag में भी there।"
+   },
+   {
+    "say": "I am वाला: aren't I? You're a dancer, aren't you?"
+   },
+   {
+    "say": "Has जब possess, यानी रखना: Leena has two dogs, doesn't she? British English में hasn't she भी चलता है।"
+   },
+   {
+    "say": "So remember: order के बाद will you। Never के साथ positive tag। There के साथ there।"
+   }
+  ]
+ },
+ {
+  "id": "p4recap",
+  "lines": [
+   {
+    "say": "Part four का recap। सब एक साथ।"
+   },
+   {
+    "say": "Tag confirm करने के लिए, comma के बाद।"
+   },
+   {
+    "say": "Positive statement, negative tag, Yes expect। Negative statement, positive tag, No expect।"
+   },
+   {
+    "say": "वही helping verb, वही tense। अकेला verb हो, तो do, does, did।"
+   },
+   {
+    "say": "Order के बाद will you। Never के साथ positive tag। There के साथ there।"
+   }
+  ]
+ },
+ {
+  "id": "p4think",
+  "lines": [
+   {
+    "say": "Think about it: They've already seen that place. Tag क्या?"
+   },
+   {
+    "say": "Haven't they?"
+   },
+   {
+    "say": "Raghu missed his flight."
+   },
+   {
+    "say": "Didn't he?"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, सब कुछ एक साथ। कुछ नया नहीं।"
+   },
+   {
+    "say": "Maths: दो sides का जोड़, तीसरी से बड़ा। Trick: दो छोटी sides जोड़ो, सबसे बड़ी से compare।"
+   },
+   {
+    "say": "3, 4, 8 नहीं। 5, 6, 7 हाँ। बराबर हो, तब भी नहीं।"
+   },
+   {
+    "say": "Poem: Tagore, Paper Boats। बहती धारा में नावें। नाव पर नाम और गाँव।"
+   },
+   {
+    "say": "शिउली, blooms of the dawn। बादल, सफेद पाल, दोस्त की नावें। रात को तारे, नींद की परियाँ, सपनों की टोकरी।"
+   },
+   {
+    "say": "Framing questions: what चीज़, why कारण, where जगह, when समय, who person, which choice।"
+   },
+   {
+    "say": "How: तरीका, much many, often। Answer से question: italic word का type देखो।"
+   },
+   {
+    "say": "Question tags: positive का negative, negative का positive। वही helping verb और tense।"
+   },
+   {
+    "say": "अकेला verb हो, तो do, does, did। Order के बाद will you। Never के साथ positive tag।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "6 cm, 8 cm, 15 cm से triangle बनेगा?"
+   },
+   {
+    "say": "6 plus 8, equals 14। 15 से कम। नहीं।"
+   },
+   {
+    "say": "7 cm, 7 cm, 7 cm?"
+   },
+   {
+    "say": "14, 7 से बड़ा। हाँ।"
+   },
+   {
+    "say": "Poem में बच्चा नाव में कौन से फूल भरता है?"
+   },
+   {
+    "say": "शिउली।"
+   },
+   {
+    "say": "बादल उसे क्या लगते हैं?"
+   },
+   {
+    "say": "सफेद पाल, आसमान के दोस्त की नावें।"
+   },
+   {
+    "say": "नावों में रात को कौन?"
+   },
+   {
+    "say": "नींद की परियाँ।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "जगह के लिए?"
+   },
+   {
+    "say": "Where।"
+   },
+   {
+    "say": "कारण के लिए?"
+   },
+   {
+    "say": "Why।"
+   },
+   {
+    "say": "कीमत के लिए?"
+   },
+   {
+    "say": "How much।"
+   },
+   {
+    "say": "कितना समय लगा?"
+   },
+   {
+    "say": "How long।"
+   },
+   {
+    "say": "Maya writes novels..."
+   },
+   {
+    "say": "Doesn't she?"
+   },
+   {
+    "say": "Foxes don't eat vegetables..."
+   },
+   {
+    "say": "Do they?"
+   },
+   {
+    "say": "You'll be there..."
+   },
+   {
+    "say": "Won't you?"
+   },
+   {
+    "say": "Keep quiet..."
+   },
+   {
+    "say": "Will you?"
+   },
+   {
+    "say": "She never loses her temper..."
+   },
+   {
+    "say": "Does she?"
+   }
+  ]
+ },
+ {
+  "id": "workbook",
+  "lines": [
+   {
+    "say": "Notebook और workbook answers का check।"
+   },
+   {
+    "say": "Grammar के सारे answers, page 44, 45, 48, 49, सही हैं।"
+   },
+   {
+    "say": "एक छोटी बात: page 48, Exercise B, सवाल 3 में, पहले Yes वाला, और फिर No वाला लिखना था।"
+   },
+   {
+    "say": "She does lose her temper, doesn't she? Yes वाला है। She never loses her temper, does she? No वाला। Notebook में इनका क्रम उल्टा है।"
+   },
+   {
+    "say": "Maths notebook में, 10 km, 10 km, 25 km वाले सवाल की तीसरी line में, 10 km plus 25 km equals 3.5 km लिखा है। यह 35 km होना चाहिए।"
+   },
+   {
+    "say": "Triangle नहीं बनेगा, यह answer सही है।"
+   },
+   {
+    "say": "Page 156 का Figure it out सवाल, notebook में अभी शुरू ही हुआ है। उसके numbers photo में नहीं थे, इसलिए वह हिस्सा notes में नहीं है।"
+   }
+  ]
+ }
+]

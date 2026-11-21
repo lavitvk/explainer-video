@@ -1,0 +1,743 @@
+[
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two: uterine fibroids, यानी leiomyoma।"
+   },
+   {
+    "say": "नया part शुरू करने से पहले, Part one वापस बुलाओ।"
+   },
+   {
+    "say": "Known cyst, sudden pain: torsion, laparoscopy।"
+   },
+   {
+    "say": "Dysmenorrhea plus infertility: endometriosis। Gold standard: laparoscopy।"
+   },
+   {
+    "say": "Definitive: hysterectomy plus oophorectomy।"
+   },
+   {
+    "say": "अब, fibroids।"
+   }
+  ]
+ },
+ {
+  "id": "q6case",
+  "lines": [
+   {
+    "say": "Case six. तेईस साल की single female।"
+   },
+   {
+    "say": "दो साल से, period के पहले चार दिन heavy bleeding। Heavy menstrual bleeding।"
+   },
+   {
+    "say": "और imaging में, uterus में well-defined solid mass।"
+   },
+   {
+    "say": "Heavy bleeding, plus solid uterine mass। यह क्या है? Uterine leiomyoma। Fibroid।"
+   }
+  ]
+ },
+ {
+  "id": "q6why",
+  "lines": [
+   {
+    "say": "Pregnancy क्यों नहीं? दो साल से regular cycles चल रहे हैं।"
+   },
+   {
+    "say": "Ovarian cyst से heavy bleeding typical नहीं।"
+   },
+   {
+    "say": "Endometrial cancer, तेईस साल में बहुत rare है। वह usually postmenopausal bleeding से आता है।"
+   },
+   {
+    "say": "So remember: heavy menstrual bleeding, plus solid uterine mass: fibroid।"
+   }
+  ]
+ },
+ {
+  "id": "q7case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: heavy bleeding, uterine mass: fibroid।"
+   },
+   {
+    "say": "Case seven. Menorrhagia है, और exam पर uterus irregular लगता है। Irregular, bosselated।"
+   },
+   {
+    "say": "Ultrasound में, 1.5 by 2 cm lesion।"
+   },
+   {
+    "say": "Irregular uterus मतलब क्या? Leiomyoma। Irregular uterus, fibroid।"
+   }
+  ]
+ },
+ {
+  "id": "q7why",
+  "lines": [
+   {
+    "say": "अब adenomyosis से फ़र्क: adenomyosis में uterus uniformly bulky, और tender होता है। Irregular नहीं।"
+   },
+   {
+    "say": "Polyp, cavity के अंदर होता है। Uterus को irregular नहीं बनाता।"
+   },
+   {
+    "say": "Endometriosis से, menorrhagia और irregular uterus नहीं होता।"
+   },
+   {
+    "say": "So remember: irregular uterus, fibroid। Uniformly bulky, tender uterus, adenomyosis।"
+   }
+  ]
+ },
+ {
+  "id": "q8case",
+  "lines": [
+   {
+    "say": "पिछला एक line में: irregular uterus, fibroid। Uniformly bulky, adenomyosis।"
+   },
+   {
+    "say": "Case eight. Dysmenorrhea, और pelvic heaviness। Heaviness मतलब, pressure symptoms।"
+   },
+   {
+    "say": "और vaginal exam पर, mass palpable।"
+   },
+   {
+    "say": "Pressure symptoms, plus palpable mass। यह क्या है? Uterine leiomyoma। फिर से fibroid।"
+   }
+  ]
+ },
+ {
+  "id": "q8why",
+  "lines": [
+   {
+    "say": "Adenomyosis में uterus globular और tender होता है। अलग से discrete mass नहीं।"
+   },
+   {
+    "say": "Endometriosis में nodules हो सकते हैं, पर heaviness और mass, main feature नहीं।"
+   },
+   {
+    "say": "Ovarian cyst adnexal होता है, uterus में नहीं। और dysmenorrhea typical नहीं।"
+   },
+   {
+    "say": "So remember: heaviness, plus palpable uterine mass: fibroid।"
+   }
+  ]
+ },
+ {
+  "id": "q9case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: pressure symptoms, mass: fibroid। इस part का last one।"
+   },
+   {
+    "say": "Case nine. Fibroid है, और family complete है। Definitive management क्या? Hysterectomy।"
+   },
+   {
+    "say": "सवाल में दो words देखो: definitive, और family complete। दोनों मिले, तो hysterectomy। Recurrence zero।"
+   }
+  ]
+ },
+ {
+  "id": "q9why",
+  "lines": [
+   {
+    "say": "Myomectomy कब? जब fertility बचानी हो। पर recurrence होता है।"
+   },
+   {
+    "say": "GnRH agonist temporary है, surgery से पहले fibroid shrink करने के लिए। बंद करो, तो fibroid वापस बढ़ता है।"
+   },
+   {
+    "say": "Uterine artery embolization, uterus बचाता है, पर definitive नहीं।"
+   },
+   {
+    "say": "So remember: fertility चाहिए, myomectomy। Family complete, definitive, hysterectomy।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। चारों एक साथ।"
+   },
+   {
+    "say": "Heavy bleeding, plus solid uterine mass: fibroid।"
+   },
+   {
+    "say": "Irregular uterus: fibroid। Uniformly bulky, tender uterus: adenomyosis।"
+   },
+   {
+    "say": "Heaviness, plus palpable mass: fibroid।"
+   },
+   {
+    "say": "Family complete, definitive: hysterectomy। Fertility चाहिए: myomectomy।"
+   }
+  ]
+ },
+ {
+  "id": "p2think",
+  "lines": [
+   {
+    "say": "Think about it: endometriosis और fibroid, दोनों का definitive treatment hysterectomy है। तो फ़र्क क्या?"
+   },
+   {
+    "say": "Endometriosis में ovaries भी निकालते हैं, estrogen source हटाने के लिए।"
+   }
+  ]
+ },
+ {
+  "id": "p3intro",
+  "lines": [
+   {
+    "say": "Part three: ectopic pregnancy, और acute pelvic pain।"
+   },
+   {
+    "say": "Early pregnancy से पहले, पिछला वापस बुलाओ।"
+   },
+   {
+    "say": "Torsion: laparoscopy, detorsion। Endometriosis gold standard: laparoscopy।"
+   },
+   {
+    "say": "Irregular uterus: fibroid। Family complete fibroid: hysterectomy।"
+   },
+   {
+    "say": "अब, ectopic।"
+   }
+  ]
+ },
+ {
+  "id": "q10case",
+  "lines": [
+   {
+    "say": "Case ten. तीस साल की female। पहले एक ectopic pregnancy हो चुकी है।"
+   },
+   {
+    "say": "अगली बार ectopic का risk कितना? छह से पंद्रह percent। लगभग दस percent।"
+   },
+   {
+    "say": "तो अगली pregnancy में क्या करना है? Early ultrasound से location confirm करो।"
+   }
+  ]
+ },
+ {
+  "id": "q10why",
+  "lines": [
+   {
+    "say": "एक से पाँच percent, general population के पास का number है। वहाँ risk लगभग एक से दो percent होता है।"
+   },
+   {
+    "say": "सोलह से तीस percent, तब जब दो या ज़्यादा ectopics हो चुके हों।"
+   },
+   {
+    "say": "तीस percent से ज़्यादा, बहुत ज़्यादा है।"
+   },
+   {
+    "say": "So remember: एक previous ectopic, recurrence about दस percent। अगली बार, early ultrasound।"
+   }
+  ]
+ },
+ {
+  "id": "q11case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: ectopic recurrence, about दस percent।"
+   },
+   {
+    "say": "Case eleven. Asymptomatic female, ectopic के लिए methotrexate लिया।"
+   },
+   {
+    "say": "अब day 4 और day 7 का beta hCG देखो।"
+   },
+   {
+    "say": "Rule क्या है? Day 4 से day 7 के बीच, hCG कम से कम पंद्रह percent गिरना चाहिए।"
+   },
+   {
+    "say": "यहाँ plateau है, नहीं गिरा। यह inadequate response है।"
+   },
+   {
+    "say": "Next step: second dose of methotrexate। Patient stable है, तो दूसरा dose।"
+   }
+  ]
+ },
+ {
+  "id": "q11why",
+  "lines": [
+   {
+    "say": "Surgery कब? Rupture के signs हों, patient unstable हो, या second dose के बाद भी fail हो।"
+   },
+   {
+    "say": "सिर्फ 48 घंटे या एक हफ्ते बाद hCG repeat करना क्यों गलत? Failure को ignore कर रहे हो। Rupture का risk है।"
+   },
+   {
+    "say": "So remember: day 4 से 7 में hCG पंद्रह percent नहीं गिरा, patient stable: second dose methotrexate।"
+   }
+  ]
+ },
+ {
+  "id": "q12case",
+  "lines": [
+   {
+    "say": "पिछला: hCG पंद्रह percent नहीं गिरा, second dose methotrexate।"
+   },
+   {
+    "say": "Case twelve. Recently married young female। Sudden right lower quadrant pain, तीन बार vomiting।"
+   },
+   {
+    "say": "RLQ में सबसे ज़्यादा tenderness। Reproductive age female, acute pelvic pain।"
+   },
+   {
+    "say": "Next step क्या? Pelvic ultrasound, साथ में pregnancy test।"
+   },
+   {
+    "say": "क्यों? Ectopic, torsion, ruptured cyst, सब दिख जाते हैं। और radiation नहीं है।"
+   }
+  ]
+ },
+ {
+  "id": "q12why",
+  "lines": [
+   {
+    "say": "CT क्यों नहीं पहले? Pregnancy हो सकती है, और CT radiation देता है। Reproductive age female में, पहले ultrasound।"
+   },
+   {
+    "say": "Diagnostic laparoscopy invasive है। Imaging के बाद, या unstable patient में।"
+   },
+   {
+    "say": "Colonoscopy का acute pain में कोई role नहीं।"
+   },
+   {
+    "say": "So remember: young female, acute lower abdominal pain: पहले pelvic ultrasound, और pregnancy test।"
+   }
+  ]
+ },
+ {
+  "id": "p3recap",
+  "lines": [
+   {
+    "say": "Part three का recap। तीनों एक साथ।"
+   },
+   {
+    "say": "एक ectopic के बाद recurrence, about दस percent। अगली बार early ultrasound।"
+   },
+   {
+    "say": "Methotrexate के बाद, day 4 से 7 में hCG पंद्रह percent नहीं गिरा: second dose।"
+   },
+   {
+    "say": "Young female, acute RLQ pain: pelvic ultrasound, plus pregnancy test।"
+   }
+  ]
+ },
+ {
+  "id": "p3think",
+  "lines": [
+   {
+    "say": "Think about it: methotrexate के बाद surgery कब करते हैं?"
+   },
+   {
+    "say": "Rupture signs, instability, या second dose के बाद भी failure।"
+   }
+  ]
+ },
+ {
+  "id": "p4intro",
+  "lines": [
+   {
+    "say": "Part four: miscarriage।"
+   },
+   {
+    "say": "Miscarriage से पहले, एक चक्कर पीछे का।"
+   },
+   {
+    "say": "Endometriosis: dysmenorrhea, infertility, NSAID fail। Fibroid definitive: hysterectomy।"
+   },
+   {
+    "say": "Ectopic recurrence: about दस percent। hCG पंद्रह percent नहीं गिरा: second dose methotrexate।"
+   },
+   {
+    "say": "Acute RLQ pain, young female: pelvic ultrasound।"
+   },
+   {
+    "say": "अब, miscarriage।"
+   }
+  ]
+ },
+ {
+  "id": "q13case",
+  "lines": [
+   {
+    "say": "Case thirteen. इक्कीस साल की female, आठ weeks pregnancy। Missed miscarriage।"
+   },
+   {
+    "say": "मतलब pregnancy non-viable है, पर अभी अंदर ही है। Patient stable है।"
+   },
+   {
+    "say": "Management क्या? Misoprostol। Medical management।"
+   },
+   {
+    "say": "Ideally, पहले mifepristone, फिर misoprostol।"
+   }
+  ]
+ },
+ {
+  "id": "q13why",
+  "lines": [
+   {
+    "say": "Methotrexate क्यों नहीं? Methotrexate ectopic के लिए है, intrauterine non-viable pregnancy के लिए नहीं।"
+   },
+   {
+    "say": "Hysterectomy बहुत extreme है। कोई indication नहीं।"
+   },
+   {
+    "say": "Hypertonic saline, पुराना और dangerous second-trimester method है।"
+   },
+   {
+    "say": "So remember: stable missed miscarriage: misoprostol। Methotrexate, सिर्फ ectopic में।"
+   }
+  ]
+ },
+ {
+  "id": "q14case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: missed miscarriage, misoprostol।"
+   },
+   {
+    "say": "Case fourteen. पच्चीस साल की female, दस weeks पर complete miscarriage।"
+   },
+   {
+    "say": "रोज़ बीस से ज़्यादा cigarettes पीती है। Folic acid नहीं लेती।"
+   },
+   {
+    "say": "Miscarriage का risk किसने बढ़ाया? Heavy smoking।"
+   },
+   {
+    "say": "Risk dose-dependent है। जितनी ज़्यादा cigarettes, उतना ज़्यादा risk। और यह modifiable है।"
+   }
+  ]
+ },
+ {
+  "id": "q14why",
+  "lines": [
+   {
+    "say": "Folic acid वाला trap ध्यान से। Folic acid की कमी, neural tube defects का risk बढ़ाती है। Miscarriage का नहीं।"
+   },
+   {
+    "say": "Carotene का कोई established link नहीं।"
+   },
+   {
+    "say": "So remember: miscarriage risk, heavy smoking। Folic acid की कमी, NTD।"
+   }
+  ]
+ },
+ {
+  "id": "q15case",
+  "lines": [
+   {
+    "say": "पिछला एक line में: smoking, miscarriage। Folic acid, NTD।"
+   },
+   {
+    "say": "Case fifteen. एक female का एक miscarriage हुआ। दूसरे का risk कितना?"
+   },
+   {
+    "say": "दस से पच्चीस percent। यह baseline जैसा ही है।"
+   },
+   {
+    "say": "एक miscarriage के बाद risk बढ़ता नहीं। क्यों? ज़्यादातर losses, chance chromosomal errors होते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "q15why",
+  "lines": [
+   {
+    "say": "छब्बीस से पैंतालीस percent, तब जब तीन या ज़्यादा losses हों, या age advanced हो।"
+   },
+   {
+    "say": "एक से नौ percent, baseline से भी कम है। गलत।"
+   },
+   {
+    "say": "Recurrent loss का workup कब? दो से तीन losses के बाद। एक के बाद नहीं।"
+   },
+   {
+    "say": "So remember: एक miscarriage के बाद, दस से पच्चीस percent, baseline। Workup, दो से तीन losses के बाद।"
+   }
+  ]
+ },
+ {
+  "id": "q16case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: एक miscarriage के बाद risk, दस से पच्चीस percent। अब last one।"
+   },
+   {
+    "say": "Case sixteen. पच्चीस साल की female। Second trimester।"
+   },
+   {
+    "say": "Sudden rupture of membranes, फिर painless expulsion।"
+   },
+   {
+    "say": "Painless second-trimester loss। यह क्या है? Cervical insufficiency। Cervix बिना pain के खुल गया।"
+   },
+   {
+    "say": "अगली pregnancy में क्या करते हैं? History-indicated cerclage। बारह से चौदह weeks पर।"
+   }
+  ]
+ },
+ {
+  "id": "q16why",
+  "lines": [
+   {
+    "say": "Septic miscarriage में fever, foul discharge, और tenderness।"
+   },
+   {
+    "say": "Threatened miscarriage में bleeding होती है, पर os closed है, और pregnancy continue करती है।"
+   },
+   {
+    "say": "Incomplete में products retain रहते हैं। Pain और bleeding होती है।"
+   },
+   {
+    "say": "So remember: painless second-trimester loss: cervical insufficiency। Next time, cerclage at बारह से चौदह weeks।"
+   }
+  ]
+ },
+ {
+  "id": "p4recap",
+  "lines": [
+   {
+    "say": "Part four का recap। चारों एक साथ।"
+   },
+   {
+    "say": "Missed miscarriage: misoprostol। Methotrexate, सिर्फ ectopic।"
+   },
+   {
+    "say": "Miscarriage risk factor: heavy smoking। Folic acid की कमी: NTD।"
+   },
+   {
+    "say": "एक miscarriage के बाद risk: दस से पच्चीस percent, baseline।"
+   },
+   {
+    "say": "Painless second-trimester loss: cervical insufficiency। Cerclage, बारह से चौदह weeks।"
+   }
+  ]
+ },
+ {
+  "id": "p4think",
+  "lines": [
+   {
+    "say": "Think about it: misoprostol और methotrexate, कौन कहाँ?"
+   },
+   {
+    "say": "Misoprostol, intrauterine non-viable pregnancy में।"
+   },
+   {
+    "say": "Methotrexate, ectopic में।"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, पूरा chapter एक साथ। कुछ नया नहीं, सिर्फ वही जो पढ़ा है।"
+   },
+   {
+    "say": "Torsion: known cyst, sudden severe pain। Laparoscopy, detorsion, ovary बचाओ।"
+   },
+   {
+    "say": "Endometriosis: dysmenorrhea, infertility, NSAID fail। Gold standard, diagnostic laparoscopy। Dark powder-burn lesions। Definitive, hysterectomy plus oophorectomy।"
+   },
+   {
+    "say": "Fibroids: heavy bleeding plus solid uterine mass। Irregular uterus, fibroid। Uniformly bulky tender uterus, adenomyosis।"
+   },
+   {
+    "say": "Family complete: hysterectomy। Fertility चाहिए: myomectomy।"
+   },
+   {
+    "say": "Ectopic: एक ectopic के बाद recurrence, about दस percent। Methotrexate के बाद hCG पंद्रह percent नहीं गिरा: second dose।"
+   },
+   {
+    "say": "Young female, acute pelvic pain: pelvic ultrasound, plus pregnancy test।"
+   },
+   {
+    "say": "Miscarriage: missed miscarriage, misoprostol। Heavy smoking risk बढ़ाता है। Folic acid की कमी, NTD।"
+   },
+   {
+    "say": "एक miscarriage के बाद risk, दस से पच्चीस percent। Painless second-trimester loss: cervical insufficiency, cerclage बारह से चौदह weeks।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "Known ovarian cyst, sudden severe pain, Doppler flow कम?"
+   },
+   {
+    "say": "Torsion।"
+   },
+   {
+    "say": "Next step?"
+   },
+   {
+    "say": "Laparoscopy, detorsion।"
+   },
+   {
+    "say": "Normal Doppler, torsion exclude करता है?"
+   },
+   {
+    "say": "नहीं।"
+   },
+   {
+    "say": "Endometriosis की classic picture?"
+   },
+   {
+    "say": "Dysmenorrhea, infertility, NSAID-resistant pain।"
+   },
+   {
+    "say": "Gold standard?"
+   },
+   {
+    "say": "Diagnostic laparoscopy।"
+   },
+   {
+    "say": "Powder-burn lesions?"
+   },
+   {
+    "say": "Endometriosis।"
+   },
+   {
+    "say": "Medical fail, fertility नहीं चाहिए?"
+   },
+   {
+    "say": "Hysterectomy, plus oophorectomy।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "Heavy bleeding, plus solid uterine mass?"
+   },
+   {
+    "say": "Fibroid।"
+   },
+   {
+    "say": "Irregular uterus?"
+   },
+   {
+    "say": "Fibroid।"
+   },
+   {
+    "say": "Uniformly bulky, tender uterus?"
+   },
+   {
+    "say": "Adenomyosis।"
+   },
+   {
+    "say": "Fibroid, family complete?"
+   },
+   {
+    "say": "Hysterectomy।"
+   },
+   {
+    "say": "Fibroid, fertility चाहिए?"
+   },
+   {
+    "say": "Myomectomy।"
+   },
+   {
+    "say": "GnRH agonist का role?"
+   },
+   {
+    "say": "Temporary, pre-op shrink।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "एक ectopic के बाद recurrence?"
+   },
+   {
+    "say": "About दस percent।"
+   },
+   {
+    "say": "Methotrexate के बाद, day 4 से 7 में hCG कितना गिरना चाहिए?"
+   },
+   {
+    "say": "पंद्रह percent।"
+   },
+   {
+    "say": "नहीं गिरा, patient stable?"
+   },
+   {
+    "say": "Second dose।"
+   },
+   {
+    "say": "Young female, acute RLQ pain, first test?"
+   },
+   {
+    "say": "Pelvic ultrasound, plus pregnancy test।"
+   }
+  ]
+ },
+ {
+  "id": "rapidD",
+  "lines": [
+   {
+    "say": "Missed miscarriage, stable?"
+   },
+   {
+    "say": "Misoprostol।"
+   },
+   {
+    "say": "Methotrexate किसके लिए?"
+   },
+   {
+    "say": "Ectopic।"
+   },
+   {
+    "say": "Miscarriage का modifiable risk factor?"
+   },
+   {
+    "say": "Heavy smoking।"
+   },
+   {
+    "say": "Folic acid की कमी?"
+   },
+   {
+    "say": "NTD।"
+   },
+   {
+    "say": "एक miscarriage के बाद risk?"
+   },
+   {
+    "say": "दस से पच्चीस percent।"
+   },
+   {
+    "say": "Workup कब?"
+   },
+   {
+    "say": "दो से तीन losses के बाद।"
+   },
+   {
+    "say": "Painless second-trimester loss?"
+   },
+   {
+    "say": "Cervical insufficiency।"
+   },
+   {
+    "say": "अगली बार?"
+   },
+   {
+    "say": "Cerclage, बारह से चौदह weeks।"
+   }
+  ]
+ }
+]

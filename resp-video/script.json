@@ -1,0 +1,584 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part three: Respiratory।"
+   },
+   {
+    "say": "Respiratory से पहले, पिछला वापस बुलाओ।"
+   },
+   {
+    "say": "Nephrotic: morning puffiness, normal BP। Renal scar: DMSA।"
+   },
+   {
+    "say": "Kernicterus: dyskinetic CP। Ptosis और शाम की weakness: AChR antibodies।"
+   },
+   {
+    "say": "Infantile spasms: hypsarrhythmia।"
+   },
+   {
+    "say": "अब, lungs।"
+   }
+  ]
+ },
+ {
+  "id": "q9case",
+  "lines": [
+   {
+    "say": "Case nine. Childhood asthma का prognosis।"
+   },
+   {
+    "say": "पाँच साल के asthmatic की माँ पूछती है: बड़ा होकर क्या होगा?"
+   },
+   {
+    "say": "सही जवाब क्या है? Adolescence में asthma remit हो सकता है।"
+   },
+   {
+    "say": "पर persist भी कर सकता है, या वापस भी आ सकता है।"
+   },
+   {
+    "say": "Remit हो सकता है, guarantee नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "q9why",
+  "lines": [
+   {
+    "say": "कोई relation नहीं, यह गलत है। Childhood asthma, adult asthma का risk factor है।"
+   },
+   {
+    "say": "और जिस option में हमेशा, या हर बच्चा लिखा हो, वह गलत। Absolute statements गलत होते हैं।"
+   },
+   {
+    "say": "So remember: asthma adolescence में improve हो सकता है, पर persist या recur कर सकता है।"
+   }
+  ]
+ },
+ {
+  "id": "q10case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: asthma remit हो सकता है, guarantee नहीं।"
+   },
+   {
+    "say": "Case ten. तीन साल का asthmatic, घर पर nebulizer use करता है।"
+   },
+   {
+    "say": "माँ परेशान है, कि बिजली की वजह से घर से निकल नहीं सकते।"
+   },
+   {
+    "say": "Advice क्या? Inhaler सिखाओ, nebulizer बंद करो।"
+   },
+   {
+    "say": "कौन सा inhaler? MDI plus spacer, with mask।"
+   },
+   {
+    "say": "MDI plus spacer, nebulizer जितना अच्छा है, या उससे बेहतर। Portable है, सस्ता है।"
+   }
+  ]
+ },
+ {
+  "id": "q10why",
+  "lines": [
+   {
+    "say": "घर पर रहो, यह quality of life खराब करता है।"
+   },
+   {
+    "say": "Portable nebulizer काम करेगा, पर spacer simple है, सस्ता है, और evidence बेहतर है।"
+   },
+   {
+    "say": "Oral bronchodilators कम effective हैं, और side effects ज़्यादा।"
+   },
+   {
+    "say": "So remember: छोटे बच्चे में भी, MDI plus spacer with mask। Nebulizer की ज़रूरत नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "q11case",
+  "lines": [
+   {
+    "say": "पिछला: nebulizer की जगह, MDI plus spacer।"
+   },
+   {
+    "say": "Case eleven. दस साल का asthmatic, exacerbation।"
+   },
+   {
+    "say": "पूरे sentences बोल रहा है। घर पर 2 puff salbutamol ले चुका है।"
+   },
+   {
+    "say": "Mild bilateral wheeze। PEF, best का 60 percent।"
+   },
+   {
+    "say": "यह कौन सा exacerbation है? Moderate।"
+   },
+   {
+    "say": "First step क्या? Salbutamol via spacer, फिर reassess। पहले bronchodilator।"
+   }
+  ]
+ },
+ {
+  "id": "q11why",
+  "lines": [
+   {
+    "say": "Prednisolone देते हैं, पर bronchodilator के बाद। सवाल sequence का है।"
+   },
+   {
+    "say": "Ipratropium, severe exacerbation में add-on है।"
+   },
+   {
+    "say": "PEF 60 percent पर, बिना दवा discharge करना unsafe है।"
+   },
+   {
+    "say": "So remember: moderate exacerbation। पहले SABA via spacer, reassess, फिर steroid।"
+   }
+  ]
+ },
+ {
+  "id": "midrecap",
+  "lines": [
+   {
+    "say": "बीच का recap। तीन asthma points एक साथ।"
+   },
+   {
+    "say": "Prognosis: remit हो सकता है, पर guarantee नहीं।"
+   },
+   {
+    "say": "Device: MDI plus spacer।"
+   },
+   {
+    "say": "Exacerbation: पहले salbutamol, फिर reassess।"
+   }
+  ]
+ },
+ {
+  "id": "q12case",
+  "lines": [
+   {
+    "say": "एक बार फिर: moderate exacerbation में first step, salbutamol via spacer।"
+   },
+   {
+    "say": "Case twelve. बच्चे को recurrent chest infections। Asthma, जो control नहीं होता।"
+   },
+   {
+    "say": "और foul-smelling stools। Chest plus stools।"
+   },
+   {
+    "say": "Sweat chloride positive।"
+   },
+   {
+    "say": "यह क्या है? Cystic fibrosis।"
+   },
+   {
+    "say": "Most common complication? Bronchiectasis।"
+   },
+   {
+    "say": "क्यों? Thick mucus, plus recurrent infection। Airways destroy हो जाते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "q12why",
+  "lines": [
+   {
+    "say": "Emphysema, alpha-1 antitrypsin deficiency या smoking से होता है।"
+   },
+   {
+    "say": "Hypothyroidism, CF से related नहीं।"
+   },
+   {
+    "say": "GI cancer का risk थोड़ा बढ़ता है, पर वह common complication नहीं।"
+   },
+   {
+    "say": "So remember: recurrent chest infections, plus foul stools, plus positive sweat chloride: CF। Complication: bronchiectasis।"
+   }
+  ]
+ },
+ {
+  "id": "q13case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: CF का common complication, bronchiectasis।"
+   },
+   {
+    "say": "Case thirteen. तीन साल का बच्चा। Flu जैसे prodrome के बाद, 5 दिन से fever और cough।"
+   },
+   {
+    "say": "Right middle zone में air entry कम, और crackles।"
+   },
+   {
+    "say": "अब vitals देखो: BP normal, RR 20, SpO2 97 percent।"
+   },
+   {
+    "say": "बच्चा stable है, SpO2 normal है। यह uncomplicated community-acquired pneumonia है।"
+   },
+   {
+    "say": "Management: oral amoxicillin, और discharge। घर भेजो।"
+   }
+  ]
+ },
+ {
+  "id": "q13why",
+  "lines": [
+   {
+    "say": "सिर्फ reassurance नहीं। Bacterial pneumonia treat करना है।"
+   },
+   {
+    "say": "Bronchodilator और steroid, asthma या bronchiolitis के लिए हैं।"
+   },
+   {
+    "say": "Admit और IV antibiotics कब? Hypoxia, respiratory distress, dehydration, या toxic बच्चा।"
+   },
+   {
+    "say": "So remember: stable child, normal SpO2, pneumonia: oral amoxicillin at home।"
+   }
+  ]
+ },
+ {
+  "id": "q14case",
+  "lines": [
+   {
+    "say": "पिछला: stable pneumonia, oral amoxicillin।"
+   },
+   {
+    "say": "Case fourteen. दो साल का बच्चा। Flu के बाद, एक हफ्ते से cough और fever।"
+   },
+   {
+    "say": "Right lower lung में air entry कम, और crackles।"
+   },
+   {
+    "say": "और उसके नीचे, percussion पर stony dullness।"
+   },
+   {
+    "say": "Stony dull मतलब क्या? Fluid।"
+   },
+   {
+    "say": "CXR में क्या दिखेगा? Pleural effusion। Parapneumonic effusion।"
+   }
+  ]
+ },
+ {
+  "id": "q14why",
+  "lines": [
+   {
+    "say": "Consolidation में percussion dull होता है, stony नहीं, और bronchial breathing होती है।"
+   },
+   {
+    "say": "Pneumothorax में hyperresonance।"
+   },
+   {
+    "say": "Collapse में dull, और trachea उसी side shift होती है।"
+   },
+   {
+    "say": "So remember: dull plus bronchial breathing, consolidation। Stony dull, effusion। Hyperresonant, pneumothorax।"
+   }
+  ]
+ },
+ {
+  "id": "q15case",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: stony dullness, pleural effusion।"
+   },
+   {
+    "say": "Case fifteen. सात साल का बच्चा। 12 दिन से purulent nasal discharge, daytime cough, और low-grade fever।"
+   },
+   {
+    "say": "Frontal region tender है। आँख normal, periorbital swelling नहीं।"
+   },
+   {
+    "say": "10 दिन से ज़्यादा, और improve नहीं हो रहा। यह क्या है? Acute bacterial sinusitis।"
+   },
+   {
+    "say": "Diagnosis clinical है। Next step: oral amoxicillin।"
+   }
+  ]
+ },
+ {
+  "id": "q15why",
+  "lines": [
+   {
+    "say": "Supportive treatment, viral URTI में ठीक है, जो 10 दिन से कम रहता है।"
+   },
+   {
+    "say": "Nasal steroids adjunct हैं, primary treatment नहीं।"
+   },
+   {
+    "say": "Sinus X-ray routine नहीं। Imaging सिर्फ orbital या intracranial complications में, और तब CT।"
+   },
+   {
+    "say": "So remember: symptoms 10 दिन से ज़्यादा, बिना improvement: bacterial sinusitis। Oral amoxicillin, no X-ray।"
+   }
+  ]
+ },
+ {
+  "id": "q16case",
+  "lines": [
+   {
+    "say": "पिछला: 10 दिन से ज़्यादा purulent discharge, sinusitis, amoxicillin। अब last one।"
+   },
+   {
+    "say": "Case sixteen. एक साल का boy। Recurrent pneumonia, और persistent cough।"
+   },
+   {
+    "say": "Laryngomalacia है, जो age के साथ ठीक नहीं हुई।"
+   },
+   {
+    "say": "Recurrent pneumonia क्यों? Aspiration। तो यह mild नहीं, severe laryngomalacia है।"
+   },
+   {
+    "say": "Next step: ENT को refer करो, surgical evaluation।"
+   },
+   {
+    "say": "कौन सी surgery सोचते हैं? Supraglottoplasty।"
+   }
+  ]
+ },
+ {
+  "id": "q16why",
+  "lines": [
+   {
+    "say": "Antibiotics हर episode treat करेंगे, cause नहीं।"
+   },
+   {
+    "say": "Observation और reassurance, mild cases में। यहाँ complications हैं।"
+   },
+   {
+    "say": "Reflux का medical treatment adjunct है। Severe disease में काफी नहीं।"
+   },
+   {
+    "say": "So remember: laryngomalacia with recurrent pneumonia, severe। ENT surgical evaluation।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "Part three का recap। आठों एक साथ।"
+   },
+   {
+    "say": "Asthma remit हो सकता है, guarantee नहीं।"
+   },
+   {
+    "say": "MDI plus spacer, nebulizer नहीं।"
+   },
+   {
+    "say": "Moderate exacerbation: पहले salbutamol, फिर reassess।"
+   },
+   {
+    "say": "CF: bronchiectasis।"
+   },
+   {
+    "say": "Stable pneumonia: oral amoxicillin।"
+   },
+   {
+    "say": "Stony dullness: pleural effusion।"
+   },
+   {
+    "say": "10 दिन से ज़्यादा sinus symptoms: oral amoxicillin।"
+   },
+   {
+    "say": "Laryngomalacia with recurrent pneumonia: ENT surgical evaluation।"
+   }
+  ]
+ },
+ {
+  "id": "think",
+  "lines": [
+   {
+    "say": "Think about it: दो बच्चों को pneumonia है। एक घर जाता है, दूसरा admit होता है। फ़र्क क्या है?"
+   },
+   {
+    "say": "घर वाला stable है, और SpO2 normal।"
+   },
+   {
+    "say": "Admit वाले में hypoxia, distress, dehydration, या toxicity।"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, पूरा chapter एक साथ। कुछ नया नहीं, सिर्फ वही जो पढ़ा है।"
+   },
+   {
+    "say": "Nephrology: सुबह periorbital swelling, BP normal: nephrotic, minimal change।"
+   },
+   {
+    "say": "Well infant, दो महीने से बड़ा, UTI: oral cephalexin। Renal scarring: DMSA, चार से छह महीने बाद। Reflux: MCU।"
+   },
+   {
+    "say": "Neurology: kernicterus, basal ganglia, dyskinetic CP। Simple febrile seizure: reassure, no CT, no EEG।"
+   },
+   {
+    "say": "शाम तक बढ़ती weakness, ptosis: myasthenia, AChR antibodies।"
+   },
+   {
+    "say": "Proximal weakness, heliotrope rash, Gottron papules: juvenile dermatomyositis।"
+   },
+   {
+    "say": "Flexion spasms, regression: West syndrome, hypsarrhythmia, ACTH या vigabatrin।"
+   },
+   {
+    "say": "Asthma: remit हो सकता है, guarantee नहीं। Nebulizer नहीं, MDI plus spacer। Moderate exacerbation: पहले salbutamol, reassess, फिर steroid।"
+   },
+   {
+    "say": "Recurrent chest infections, foul stools, sweat chloride positive: CF, bronchiectasis।"
+   },
+   {
+    "say": "Stable pneumonia, normal SpO2: oral amoxicillin at home। Stony dullness: pleural effusion।"
+   },
+   {
+    "say": "10 दिन से ज़्यादा purulent discharge: bacterial sinusitis, oral amoxicillin। Laryngomalacia with recurrent pneumonia: ENT surgical evaluation।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "सुबह periorbital swelling, BP normal, पाँच साल का बच्चा?"
+   },
+   {
+    "say": "Nephrotic syndrome।"
+   },
+   {
+    "say": "चार महीने का well infant, UTI?"
+   },
+   {
+    "say": "Oral cephalexin।"
+   },
+   {
+    "say": "IV कब?"
+   },
+   {
+    "say": "Toxic, vomiting, दो महीने से छोटा।"
+   },
+   {
+    "say": "Renal scarring का test?"
+   },
+   {
+    "say": "DMSA।"
+   },
+   {
+    "say": "Reflux का test?"
+   },
+   {
+    "say": "MCU।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "Kernicterus के बाद CP का type?"
+   },
+   {
+    "say": "Dyskinetic।"
+   },
+   {
+    "say": "सबसे common CP overall?"
+   },
+   {
+    "say": "Spastic।"
+   },
+   {
+    "say": "Simple febrile seizure में CT या EEG?"
+   },
+   {
+    "say": "नहीं। Reassure।"
+   },
+   {
+    "say": "Fatigable weakness और ptosis का test?"
+   },
+   {
+    "say": "AChR antibodies।"
+   },
+   {
+    "say": "Myasthenia में CK?"
+   },
+   {
+    "say": "Normal।"
+   },
+   {
+    "say": "Heliotrope rash और Gottron papules?"
+   },
+   {
+    "say": "Juvenile dermatomyositis।"
+   },
+   {
+    "say": "Infantile spasms का EEG?"
+   },
+   {
+    "say": "Hypsarrhythmia।"
+   },
+   {
+    "say": "Treatment?"
+   },
+   {
+    "say": "ACTH या vigabatrin।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "Nebulizer की जगह क्या?"
+   },
+   {
+    "say": "MDI plus spacer with mask।"
+   },
+   {
+    "say": "PEF 60 percent, पूरे sentences। First step?"
+   },
+   {
+    "say": "Salbutamol via spacer, reassess।"
+   },
+   {
+    "say": "CF का common complication?"
+   },
+   {
+    "say": "Bronchiectasis।"
+   },
+   {
+    "say": "Stable pneumonia, SpO2 97 percent?"
+   },
+   {
+    "say": "Oral amoxicillin, discharge।"
+   },
+   {
+    "say": "Stony dull percussion?"
+   },
+   {
+    "say": "Pleural effusion।"
+   },
+   {
+    "say": "Hyperresonant percussion?"
+   },
+   {
+    "say": "Pneumothorax।"
+   },
+   {
+    "say": "12 दिन से purulent nasal discharge?"
+   },
+   {
+    "say": "Oral amoxicillin।"
+   },
+   {
+    "say": "Laryngomalacia with recurrent pneumonia?"
+   },
+   {
+    "say": "ENT surgical evaluation।"
+   }
+  ]
+ }
+]

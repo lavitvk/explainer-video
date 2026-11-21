@@ -1,0 +1,149 @@
+Part one: early pregnancy।
+
+यह notes एक recall file से बने हैं, इसलिए हर topic एक exam case की तरह चलेगा।
+
+पहले हम समझेंगे कि चीज़ क्या है, फिर picture कैसी दिखती है, फिर management, और बीच-बीच में खुद से सवाल पूछेंगे।
+
+ठीक है? शुरू करते हैं।
+
+Topic one: pregnancy पहचानना, और gestational age निकालना।
+
+सबसे पहले, pregnancy का शक कब होता है? जब period miss हो जाए।
+
+Examination में एक sign बहुत आता है: cervix का रंग blue या dusky हो जाता है।
+
+इसे Chadwick sign कहते हैं। Chadwick sign।
+
+क्यों होता है? Pregnancy में pelvis में blood flow बढ़ जाता है, इसलिए cervix और vagina नीले-से दिखते हैं।
+
+अब Chadwick sign दिखा, तो next step क्या है? Beta hCG।
+
+पहले pregnancy confirm करो, ultrasound बाद में।
+
+इसी तरह galactorrhea के साथ amenorrhea हो, तो भी initial test pregnancy test ही है। Prolactin बाद में।
+
+अब pregnancy confirm हो गई। अगला सवाल: baby कितने हफ्ते का है, यानी gestational age क्या है?
+
+सबसे accurate तरीका है first trimester का ultrasound, और उसमें crown-rump length, CRL।
+
+Crown-rump length मतलब baby के सिर से नीचे तक की लंबाई।
+
+अगर माँ को LMP याद नहीं, तो क्या करें? जितनी जल्दी हो सके, transvaginal ultrasound।
+
+अगर options में CRL ना हो, तो head circumference, या biparietal diameter।
+
+और third trimester में baby का weight अंदाज़ा लगाना हो, तो कौन सा measurement? Abdominal circumference।
+
+ठीक है? याद रखना है: Chadwick sign दिखे, तो पहले beta hCG।
+
+Dating के लिए सबसे accurate, early ultrasound और CRL। Weight के लिए, abdominal circumference।
+
+Topic two: abortion के types, और management।
+
+Abortion, यानी miscarriage, का मतलब है 20 हफ्ते से पहले pregnancy का खत्म हो जाना।
+
+Exam में type पहचानने की एक ही चाबी है: cervical os बंद है या खुला, और pregnancy viable है या नहीं।
+
+Os, os, os। इसको पकड़ लो, सब type खुल जाएँगे।
+
+पहला type, threatened abortion। Bleeding या spotting है, पर os बंद है, और ultrasound पर baby ठीक है, normal sac है।
+
+Pregnancy अभी भी चल सकती है, इसलिए नाम threatened है। सिर्फ खतरा है। Management क्या? Reassurance।
+
+दूसरा type, missed abortion। Baby अंदर है पर non-viable है, heartbeat नहीं, और os बंद है।
+
+Body ने खुद नहीं निकाला, इसलिए missed। Management क्या? Misoprostol, जो uterus को contract करके अंदर की चीज़ निकाल देता है।
+
+तीसरा type, incomplete abortion। Os खुला है, और कुछ tissue निकल चुका है, कुछ अंदर है।
+
+अगर bleeding severe है, तो D and C। अगर patient stable है और bleeding moderate, तो expectant management भी चल सकता है।
+
+एक और term आती है: sac है, पर embryo नहीं दिखता। इसे pregnancy of unknown viability कहते हैं, क्योंकि अभी पक्का नहीं पता कि pregnancy आगे बढ़ेगी या नहीं।
+
+अब सवाल: first trimester में miscarriage का सबसे common cause क्या है? Chromosomal abnormalities।
+
+और spontaneous miscarriage कितना common है? लगभग 10 से 15 percent pregnancies में।
+
+इसलिए एक miscarriage के बाद माँ को reassure करते हैं, full workup नहीं। Workup कब? जब recurrent losses हों।
+
+अगर recurrent loss के साथ thrombosis की history, या prolonged aPTT हो, तो सोचो antiphospholipid syndrome।
+
+Modifiable risk factor कौन सा है? Heavy smoking। ठीक है?
+
+याद रखना है: os बंद और baby ठीक, threatened, reassure। Os बंद और baby non-viable, missed, misoprostol। Most common cause, chromosomal।
+
+Topic three: ectopic pregnancy।
+
+Ectopic pregnancy क्या है? जब fertilized egg uterus की main cavity के बाहर implant हो जाता है, और वहीं बढ़ने लगता है।
+
+Ectopic, मतलब गलत जगह। सबसे common गलत जगह कौन सी है? Fallopian tube। इसलिए इसे tubal pregnancy भी कहते हैं।
+
+अब सोचो, tube पतली सी नली है। उसमें baby बढ़ेगा, तो क्या होगा? Tube फट जाएगी।
+
+इसे कहते हैं ruptured ectopic। Ruptured ectopic।
+
+Picture कैसी होगी? Period miss, पेट के नीचे एक तरफ अचानक तेज़ दर्द, और दर्द shoulder तक जाता है।
+
+Shoulder तक क्यों? क्योंकि पेट में भरा खून diaphragm को irritate करता है।
+
+BP गिरता है, pulse बढ़ती है, और pouch of Douglas में खून और clot मिलते हैं।
+
+Patient unstable हो, तो क्या करें? तुरंत surgery।
+
+Recall में answer laparoscopy दिया है। बहुत unstable patient में अक्सर laparotomy होती है।
+
+IVF के 4 हफ्ते बाद अचानक दर्द और hypotension हो, तो भी ectopic सोचो, क्योंकि embryo transfer के बाद भी ectopic हो सकता है।
+
+अगर patient stable है? Pregnancy test positive, uterus में sac नहीं, और adnexa में mass। यह stable ectopic है।
+
+और अगर 7 हफ्ते पर TVUS में, ना uterus के अंदर sac दिखे, ना बाहर? तब जल्दी फैसला नहीं। Repeat ultrasound, और hCG।
+
+Methotrexate एक option है, पर कब तक? Repeat dose तब, जब hCG लगभग 5000 से कम हो, और mass 4 cm से छोटा।
+
+अगर methotrexate के बाद hCG 2900 से बढ़ कर 6000 हो गया, तो दवा fail है। अब surgery।
+
+IVF pregnancy में right tube में 4 cm mass, stable patient, तो right salpingotomy।
+
+और जिस औरत को पहले ectopic हो चुका है, वह दोबारा conceive करे, तो क्या advice? Early ultrasound से location confirm करो, क्योंकि recurrence लगभग 10 percent है।
+
+ठीक है? याद रखना है: unstable ectopic, तुरंत surgery। MTX के बाद hCG बढ़े, surgery। पिछला ectopic हो, अगली बार early ultrasound।
+
+Topic four: molar pregnancy, और hyperemesis।
+
+Molar pregnancy क्या है? यह gestational trophoblastic disease है, जिसमें placenta का tissue abnormal तरीके से बढ़ता है, और normal baby नहीं बनता।
+
+इसे hydatidiform mole भी कहते हैं। दो types हैं: complete और partial।
+
+Complete mole में कोई fetal tissue नहीं होता। Partial में कुछ fetal parts होते हैं।
+
+Picture क्या है? Uterus pregnancy के हफ्तों से बड़ा लगता है, fundal height ज़्यादा, hCG बहुत high, और ultrasound पर snowstorm appearance। Snowstorm, snowstorm।
+
+अगर patient अंगूर जैसे vesicles pass करे, तो complete mole। अगर fetal parts दिखें, तो partial mole।
+
+Treatment क्या है? Suction evacuation। Final diagnosis कैसे? Histopathology से।
+
+Evacuation के तुरंत बाद सबसे common complication? Uterine perforation। थोड़ा बाद में? Infection।
+
+और follow-up कैसे? hCG हर हफ्ते, जब तक लगातार 3 बार negative ना आ जाए। फिर हर महीने, 6 महीने तक।
+
+क्यों? ताकि अगर mole वापस बढ़े, या cancer बने, तो जल्दी पकड़ा जाए।
+
+Hyperemesis gravidarum मतलब pregnancy में इतनी ज़्यादा उल्टी, कि dehydration और weight loss हो जाए।
+
+Urine में क्या मिलेगा? Ketones, क्योंकि body खाना नहीं ले पा रही, और fat जला रही है।
+
+Clinical hook: बहुत high hCG वाली conditions, जैसे mole और twins, में hyperemesis ज़्यादा होता है।
+
+याद रखना है: snowstorm और vesicles, complete mole, suction evacuation। hCG weekly जब तक 3 बार negative, फिर monthly 6 महीने।
+
+एक बार दोबारा देखते हैं।
+
+Chadwick sign दिखा, तो पहले beta hCG। Dating के लिए early ultrasound और CRL।
+
+Os बंद और baby ठीक, threatened abortion, reassure। Os बंद और baby non-viable, missed abortion, misoprostol।
+
+Miscarriage का most common cause, chromosomal।
+
+Ectopic मतलब uterus की cavity के बाहर pregnancy, सबसे common tube में। Unstable हो तो surgery। MTX के बाद hCG बढ़े, तो surgery।
+
+Snowstorm और vesicles, complete mole। Suction evacuation, और hCG follow-up।

@@ -1,0 +1,51 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part five: Hemochromatosis."},
+  {"say":"Pichhla part ek line mein: thalassemia major mein transfusion se iron jama hota hai, aur treatment deferoxamine. Theek hai?"},
+  {"say":"Ab wahi iron jama hone wali problem, par ek bimari ke roop mein."}]},
+ {"id":"h15","lines":[
+  {"say":"Topic fifteen: hemochromatosis kya hai."},
+  {"say":"Hemochromatosis woh condition hai jismein body mein iron abnormal tareeqe se jama hota jaata hai, aur khaas organs mein baith jaata hai. Iron jama, iron jama."},
+  {"say":"Iske do types hain."},
+  {"say":"Primary, yaani hereditary hemochromatosis: yeh autosomal recessive bimari hai, jismein aant zaroorat se zyada iron absorb karti hai. Gene ka naam HFE. Ek baar aur: HFE gene, autosomal recessive."},
+  {"say":"Secondary: bahar se iron aata hai, jaise baar-baar transfusion, jo humne thalassemia mein dekha."},
+  {"say":"Yaad rakhna hai: hereditary hemochromatosis, autosomal recessive, HFE gene, aant se zyada iron absorption. Secondary, transfusion se."}]},
+ {"id":"h16","lines":[
+  {"say":"Topic sixteen: symptoms aur complications."},
+  {"say":"Ab socho, iron kahan-kahan baithega, aur kya kharab karega?"},
+  {"say":"Most common symptoms: thakaan, erectile dysfunction, aur osteoarthritis, par ajeeb joints mein, jaise shoulder, ankle ya elbow."},
+  {"say":"Normal osteoarthritis knee aur hip mein hota hai, isliye ajeeb joints ek clue hai. Ek baar aur: shoulder aur ankle ka arthritis, clue."},
+  {"say":"Complications teen organs ke: heart mein cardiomyopathy; pancreas mein diabetes; aur liver disease, jo cirrhosis tak ja sakti hai."},
+  {"say":"Heart, pancreas, liver. Ek baar aur: cardiomyopathy, diabetes, liver disease."},
+  {"say":"Clinical hook: iron skin mein baith kar use kaala kar deta hai, isliye purana naam bronze diabetes hai. Bronze diabetes. Theek hai?"},
+  {"say":"Yaad rakhna hai: symptoms: fatigue, erectile dysfunction, shoulder aur ankle jaise joints ka arthritis. Complications: cardiomyopathy, diabetes, liver disease."}]},
+ {"id":"h17a","lines":[
+  {"say":"Topic seventeen: diagnosis aur management."},
+  {"say":"Imaging mein kya? Liver ka MRI, jo liver mein iron ka andaaza deta hai."},
+  {"say":"Confirmation? File ke hisaab se liver biopsy aur HFE gene testing."},
+  {"say":"Dhyan do: aaj ki practice mein pehle ferritin aur transferrin saturation, phir HFE gene test; biopsy ab kam hi ki jaati hai."}]},
+ {"id":"h17b","lines":[
+  {"say":"Treatment kya? Phlebotomy, yaani regular khoon nikaalna."},
+  {"say":"Kyun? Har baar khoon ke saath iron bhi nikal jaata hai, aur yeh patient anemic nahi hai. Phlebotomy, phlebotomy."},
+  {"say":"Chelation therapy, jaise deferoxamine, kab? Jab phlebotomy na ho sake: heart disease ho, anemia ho, ya veins achhi na hon."},
+  {"say":"Ab thalassemia se jodo. Thalassemia major mein phlebotomy kyun nahi, aur yahan kyun?"},
+  {"say":"Thalassemia mein patient anemic hai, isliye chelation. Hereditary hemochromatosis mein patient anemic nahi, isliye phlebotomy. Ek baar aur: anemic nahi, toh phlebotomy."},
+  {"say":"Yaad rakhna hai: hereditary hemochromatosis, phlebotomy. Anemia, heart disease ya kharab veins ho, toh chelation."}]},
+ {"id":"recap","lines":[
+  {"say":"Ek baar dobara dekhte hain: hemochromatosis mein iron organs mein jama hota hai; hereditary type autosomal recessive aur HFE gene, secondary type transfusion se."},
+  {"say":"Symptoms thakaan, erectile dysfunction aur ajeeb joints ka arthritis; complications cardiomyopathy, diabetes aur liver disease."},
+  {"say":"MRI liver; confirmation HFE gene."},
+  {"say":"Treatment phlebotomy; anemia ya heart disease mein chelation."}]},
+ {"id":"quiz","lines":[
+  {"say":"Ab chhota sa quiz. Sawal suno, ruko, khud jawab socho, phir answer suno."},
+  {"say":"Sawal ek: hereditary hemochromatosis ki inheritance?"},{"say":"Autosomal recessive. Autosomal recessive."},
+  {"say":"Sawal do: kaun sa gene?"},{"say":"HFE gene. HFE."},
+  {"say":"Sawal teen: arthritis ka kaun sa pattern clue deta hai?"},{"say":"Ajeeb joints, jaise shoulder aur ankle. Shoulder aur ankle."},
+  {"say":"Sawal chaar: teen organ complications?"},{"say":"Cardiomyopathy, diabetes, liver disease. Heart, pancreas, liver."},
+  {"say":"Sawal paanch: kaali skin aur diabetes ka purana naam?"},{"say":"Bronze diabetes. Bronze diabetes."},
+  {"say":"Sawal chhe: liver mein iron dekhne ki imaging?"},{"say":"Liver ka MRI. MRI."},
+  {"say":"Sawal saat: hereditary hemochromatosis ka treatment?"},{"say":"Phlebotomy. Phlebotomy."},
+  {"say":"Sawal aath: heart disease ya anemia ho toh?"},{"say":"Chelation, jaise deferoxamine. Chelation."},
+  {"say":"Sawal nau: thalassemia major mein phlebotomy kyun nahi?"},{"say":"Kyunki patient anemic hai. Anemic hai, toh chelation."}]},
+ {"id":"end","lines":[]}
+]

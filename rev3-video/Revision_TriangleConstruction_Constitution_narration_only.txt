@@ -1,0 +1,173 @@
+Revision notes: triangle construction, और constitution के key features।
+
+Part one: maths। Triangle कब बनता है, और कैसे बनाते हैं।
+
+Triangle inequality क्या है? यह rule बताता है कि तीन lengths से triangle बनेगा या नहीं।
+
+Rule है: किन्हीं भी दो sides का जोड़, तीसरी side से बड़ा होना चाहिए। बड़ा, बड़ा। बराबर भी नहीं चलेगा। ठीक है?
+
+Check करने का आसान तरीका: दो सबसे छोटी sides जोड़ो, और सबसे बड़ी side से compare करो।
+
+अगर छोटी दो का जोड़ बड़ी से बड़ा है, तो बाकी दो check अपने आप pass हो जाते हैं, और triangle बन जाएगा।
+
+Notebook का पहला example: 10 cm, 20 cm, और 25 cm। छोटी दो कौन सी? 10 और 20। जोड़ कितना? 30। क्या 30, 25 से बड़ा है? हाँ। तो triangle बन सकता है।
+
+दूसरा example: 10 cm, 20 cm, और 35 cm। छोटी दो का जोड़ फिर 30। क्या 30, 35 से बड़ा है? नहीं, छोटा है। तो triangle नहीं बन सकता।
+
+याद रखना है: दो छोटी sides का जोड़ सबसे बड़ी side से बड़ा हो, तभी triangle बनता है। बराबर हो, तो भी नहीं।
+
+अब यही rule एक drawing से समझते हैं, जो notebook में Case 1, 2 और 3 में है।
+
+एक line segment AB बनाओ। यह triangle की एक side है।
+
+अब A को centre मान कर एक circle बनाओ, जिसका radius दूसरी side जितना है। फिर B को centre मान कर एक circle बनाओ, जिसका radius तीसरी side जितना है।
+
+Triangle का तीसरा corner वहाँ बनेगा, जहाँ दोनों circles मिलते हैं। क्यों? क्योंकि वही point A से भी सही दूरी पर है, और B से भी। ठीक है?
+
+Case 1: दोनों circles एक-दूसरे को दो points पर काटते हैं। मतलब meeting point मिल गया। तो triangle बन जाता है। यह तब होता है, जब दोनों radius का जोड़ AB से बड़ा हो।
+
+Case 2: दोनों circles दूर-दूर हैं, छूते ही नहीं। मतलब कोई meeting point नहीं। तो triangle नहीं बनता। यह तब होता है, जब दोनों radius का जोड़ AB से छोटा हो।
+
+Case 3: दोनों circles सिर्फ एक point पर छूते हैं, और वह point line AB पर ही है।
+
+तीसरा corner line पर ही आ गया, तो तीनों points एक सीधी line में हैं, और triangle नहीं बनता। यह तब होता है, जब दोनों radius का जोड़ AB के बराबर हो।
+
+इसीलिए rule में बराबर नहीं चलता। यह point याद रखना है।
+
+याद रखना है: circles काटें, triangle बनेगा। Circles दूर रहें, नहीं। Circles सिर्फ छूएँ, तीनों points एक line में, नहीं।
+
+अब असल construction, जिसे SSS construction कहते हैं, यानी side-side-side।
+
+Notebook का सवाल: 4 cm, 6 cm, और 8 cm का triangle बनाओ। पहले check: 4 plus 6 equals 10। क्या 10, 8 से बड़ा है? हाँ। तो बन जाएगा।
+
+Step 1: ruler से base AB draw करो, 4 cm।
+
+Step 2: compass 8 cm खोल कर, A से एक arc लगाओ।
+
+Step 3: compass 6 cm खोल कर, B से एक arc लगाओ, जो पहले arc को काटे। जहाँ दोनों arcs काटते हैं, उस point का नाम C।
+
+Step 4: C को A से और B से जोड़ो। Triangle ABC तैयार: AB 4 cm, AC 8 cm, BC 6 cm।
+
+ध्यान दो, यह वही दो circles वाला तरीका है। बस पूरा circle बनाने की जगह, सिर्फ arc लगाया।
+
+दूसरा सवाल: 3.5 cm, 3.5 cm, 3.5 cm। तीनों बराबर, तो equilateral triangle।
+
+Base CD 3.5 cm बनाओ, फिर compass 3.5 cm पर ही रख कर, C से और D से arc लगाओ। जहाँ काटें, वही तीसरा corner। ठीक है?
+
+याद रखना है: पहले inequality check। फिर base, फिर दोनों सिरों से बाकी दो sides के arcs, काटने वाला point जोड़ो।
+
+एक बार दोबारा देखते हैं।
+
+दो छोटी sides का जोड़ सबसे बड़ी से बड़ा हो, तभी triangle। 10, 20, 25 बन जाता है। 10, 20, 35 नहीं।
+
+दो circles के तीन cases: काटें तो बनेगा, दूर रहें तो नहीं, सिर्फ छूएँ तो भी नहीं, क्योंकि points एक line में।
+
+SSS construction: base, फिर दोनों सिरों से arcs, काटने वाला point जोड़ो।
+
+Part two: social science। Constitution के key features, और Preamble।
+
+पहले पिछला chapter एक line में बुलाओ: Constitution देश के basic principles और laws का document है। Constituent Assembly 1946 में बनी।
+
+Drafting Committee के chairman, Dr B R Ambedkar। Adopt हुआ 26 November 1949, और लागू हुआ 26 January 1950।
+
+ठीक है? अब देखते हैं कि हमारा Constitution कैसा है, यानी उसके key features क्या हैं।
+
+पहला feature: दुनिया का सबसे लंबा लिखा हुआ constitution, lengthiest written constitution। इतना बड़ा क्यों? क्योंकि India बहुत बड़ा और विविध देश है, तो हर चीज़ साफ लिखनी पड़ी।
+
+दूसरा: Preamble, यानी Constitution की शुरुआत का परिचय। इसे हम अगले topic में detail में पढ़ेंगे।
+
+तीसरा: Parliamentary system। इसका मतलब है कि government Parliament के प्रति जवाबदेह है। Prime Minister और ministers Parliament के members होते हैं, और उन्हें Parliament का भरोसा चाहिए।
+
+चौथा: Fundamental Rights and Duties। Rights वह अधिकार हैं जो हर citizen को मिलते हैं, जैसे equality और freedom। Duties वह कर्तव्य हैं जो हर citizen को निभाने चाहिए। Rights और duties, दोनों साथ।
+
+पाँचवाँ: Directive Principles of State Policy। यह government के लिए guidelines हैं कि अच्छी policies कैसे बनाएँ, जैसे सबके लिए शिक्षा और काम। Court इन्हें ज़बरदस्ती लागू नहीं करवा सकता, पर government को इनके हिसाब से चलना चाहिए।
+
+छठा: Independent Judiciary। Courts government के दबाव के बिना फैसला करते हैं, ताकि लोगों के rights की रक्षा हो सके।
+
+सातवाँ: Secular State। Government का कोई अपना धर्म नहीं है, और हर धर्म के साथ बराबर व्यवहार होता है।
+
+आठवाँ: Universal Adult Franchise। 18 साल का हर citizen vote दे सकता है, चाहे वह अमीर हो या गरीब, लड़का हो या लड़की।
+
+याद करने का एक छोटा तरीका: L, P, P, F, D, I, S, U।
+
+Lengthiest, Preamble, Parliamentary, Fundamental rights, Directive principles, Independent judiciary, Secular, Universal franchise। ठीक है?
+
+याद रखना है: आठ features: lengthiest, Preamble, parliamentary, fundamental rights और duties, directive principles, independent judiciary, secular, universal adult franchise।
+
+Preamble क्या है? यह Constitution का introduction है, जो Constitution के main objectives, ideals और principles समझाता है। Introduction, introduction।
+
+इसे पढ़ कर पता चलता है कि Constitution किस तरह का देश बनाना चाहता है।
+
+Notebook में values or key features of the Preamble का heading है, पर points अभी लिखे नहीं गए। Textbook के हिसाब से, Preamble India को यह कहता है: Sovereign, Socialist, Secular, Democratic Republic।
+
+Sovereign मतलब अपने फैसले खुद लेता है। Socialist मतलब अमीर-गरीब का फ़र्क कम करना। Secular मतलब सब धर्म बराबर।
+
+Democratic मतलब लोग अपनी government चुनते हैं। Republic मतलब देश का head चुना हुआ होता है, राजा नहीं।
+
+और Preamble चार ideals का वादा करता है: Justice, Liberty, Equality, और Fraternity।
+
+Justice यानी न्याय, Liberty यानी आज़ादी, Equality यानी बराबरी, Fraternity यानी भाईचारा। ठीक है?
+
+याद रखना है: Preamble Constitution का introduction है। India: Sovereign, Socialist, Secular, Democratic Republic। Ideals: Justice, Liberty, Equality, Fraternity।
+
+एक बार दोबारा देखते हैं।
+
+Constitution के आठ key features: lengthiest written constitution, Preamble, parliamentary system, fundamental rights और duties।
+
+Directive principles, independent judiciary, secular state, और universal adult franchise।
+
+Preamble Constitution का introduction है। India: Sovereign, Socialist, Secular, Democratic Republic। Ideals: Justice, Liberty, Equality, Fraternity।
+
+एक बार दोबारा, सब कुछ एक साथ।
+
+Maths में: triangle तभी बनता है, जब दो छोटी sides का जोड़ सबसे बड़ी side से बड़ा हो।
+
+दो circles वाली drawing में, अगर circles काटें तो triangle बनता है, दूर रहें तो नहीं, और सिर्फ छूएँ तो भी नहीं, क्योंकि तीनों points एक line में आ जाते हैं।
+
+SSS construction में पहले base, फिर दोनों सिरों से बाकी sides के arcs, और काटने वाले point को जोड़ो।
+
+Social science में: हमारा Constitution सबसे लंबा लिखा हुआ constitution है, जिसमें Preamble, parliamentary system, fundamental rights और duties, directive principles, independent judiciary, secular state, और universal adult franchise हैं।
+
+Preamble उसका introduction है, जो India को Sovereign, Socialist, Secular, Democratic Republic कहता है, और Justice, Liberty, Equality और Fraternity का वादा करता है।
+
+Rapid recall। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।
+
+6 cm, 7 cm, 14 cm से triangle बनेगा?
+
+6 plus 7 equals 13, जो 14 से कम है, तो नहीं।
+
+दो circles सिर्फ एक point पर छूएँ, तो?
+
+Triangle नहीं। Points एक line में।
+
+4, 6, 8 cm वाले construction में base 4 cm हो, तो A से कितने का arc?
+
+8 cm।
+
+Vote देने की उमर?
+
+18 साल।
+
+Government का कोई धर्म नहीं, इसे क्या कहते हैं?
+
+Secular state।
+
+Government के लिए guidelines, जो court लागू नहीं करवाता?
+
+Directive Principles of State Policy।
+
+Preamble क्या है?
+
+Constitution का introduction।
+
+Preamble के चार ideals?
+
+Justice, Liberty, Equality, Fraternity।
+
+Notebook का check।
+
+Maths notebook में, 10, 20, 35 वाले सवाल में तीसरी line, 20 plus 35 equals 55, less than 10 लिखी है। यह 55 greater than 10 होना चाहिए।
+
+Answer का conclusion, कि triangle नहीं बनेगा, सही है।
+
+Social science notebook में Preamble के values वाला हिस्सा खाली था। इसलिए यहाँ textbook के standard points जोड़े हैं: Sovereign, Socialist, Secular, Democratic Republic, और Justice, Liberty, Equality, Fraternity।

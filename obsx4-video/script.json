@@ -1,0 +1,261 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part four: antepartum hemorrhage, preterm labour, और PROM।"
+   },
+   {
+    "say": "पिछला part एक line में: early HbA1c high, तो malformations। HELLP at term, deliver। Mg toxicity में calcium gluconate। Active herpes में CS।"
+   },
+   {
+    "say": "ठीक है? अब तीन emergencies, जो third trimester में सबसे ज़्यादा आती हैं।"
+   }
+  ]
+ },
+ {
+  "id": "t15a",
+  "lines": [
+   {
+    "say": "Topic fifteen: placenta previa।"
+   },
+   {
+    "say": "Antepartum hemorrhage, APH, मतलब 24 हफ्ते के बाद और delivery से पहले vaginal bleeding।"
+   },
+   {
+    "say": "इसके दो बड़े causes हैं, और दोनों को एक सवाल से अलग करते हैं: दर्द है या नहीं?"
+   },
+   {
+    "say": "पहला cause, placenta previa। Placenta previa क्या है? जब placenta uterus के ऊपर वाले हिस्से की जगह नीचे, cervix के internal os के पास, या उसके ऊपर चिपक जाता है।"
+   },
+   {
+    "say": "Previa, मतलब रास्ते में। Baby के रास्ते में।"
+   },
+   {
+    "say": "Picture क्या? Painless bleeding। अक्सर पहला episode हल्का, जिसे warning bleed कहते हैं।"
+   },
+   {
+    "say": "Risk factors? Multiparity और multiple gestation, क्योंकि बड़ा placenta, या कई बार खिंची हुई uterus।"
+   }
+  ]
+ },
+ {
+  "id": "t15b",
+  "lines": [
+   {
+    "say": "अब सबसे important point। Previa का शक हो, तो vaginal exam पहले नहीं।"
+   },
+   {
+    "say": "क्यों? उंगली लगने से placenta से और ज़्यादा bleeding हो सकती है। पहले ultrasound से placenta locate करो।"
+   },
+   {
+    "say": "इसलिए medical student exam करना चाहे, तो उसे बोलो: पहले US से previa rule out करो।"
+   },
+   {
+    "say": "Management: 37 हफ्ते पर previa वाली को bleeding, तो तुरंत admit।"
+   },
+   {
+    "say": "27 हफ्ते पर previa, हल्की bleeding, stable: steroids, ताकि अगर जल्दी delivery करनी पड़े, तो baby के lungs तैयार हों।"
+   },
+   {
+    "say": "Low-lying placenta, bleeding रुक गई: CTG से baby check करो।"
+   },
+   {
+    "say": "Clinical hook: previa के बाद बहुत ज़्यादा bleeding से pituitary damage हो सकता है, Sheehan syndrome, जिसमें बाद में menses नहीं आते।"
+   },
+   {
+    "say": "याद रखना है: painless bleeding, previa। Vaginal exam से पहले ultrasound। Bleeding हो, तो admit।"
+   }
+  ]
+ },
+ {
+  "id": "t16a",
+  "lines": [
+   {
+    "say": "Topic sixteen: placental abruption, और uterine rupture।"
+   },
+   {
+    "say": "अब दूसरा cause, placental abruption। Abruption क्या है? Placenta delivery से पहले ही uterus की दीवार से अलग होने लगता है। अलग होने से उसके पीछे खून जमा होता है।"
+   },
+   {
+    "say": "Picture? दर्द, tense और tender uterus, bleeding, और baby की heart rate गिर जाती है, fetal bradycardia। Painful, painful।"
+   },
+   {
+    "say": "सबसे बड़ा risk factor? Hypertension।"
+   }
+  ]
+ },
+ {
+  "id": "t16b",
+  "lines": [
+   {
+    "say": "Management: abruption, bleeding रुक गई, माँ stable, 32 हफ्ते: hospital में ही रहो, घर नहीं।"
+   },
+   {
+    "say": "30 हफ्ते, severe bleeding, CTG पर decelerations, और BP 90 by 60: CS।"
+   },
+   {
+    "say": "एक खतरा याद रखना: abruption में DIC हो सकता है, क्योंकि placenta के पीछे का clot, clotting factors खा जाता है।"
+   },
+   {
+    "say": "Abruption, plus DIC, plus IUFD, cervix 7 cm: recall का answer CS है।"
+   },
+   {
+    "say": "Uterine rupture अलग चीज़ है। इसमें uterus की दीवार ही फट जाती है, अक्सर पुराने CS के scar पर।"
+   },
+   {
+    "say": "चार पिछले CS, अब bleeding और shock: uterine rupture। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: painful tense uterus, abruption। HTN सबसे बड़ा risk। कई पिछले CS, plus shock, uterine rupture।"
+   }
+  ]
+ },
+ {
+  "id": "t17a",
+  "lines": [
+   {
+    "say": "Topic seventeen: preterm labour।"
+   },
+   {
+    "say": "Preterm labour क्या है? 37 हफ्ते से पहले, regular contractions के साथ cervix में बदलाव।"
+   },
+   {
+    "say": "Confirm कैसे करते हैं? सिर्फ contractions काफी नहीं। Cervix खुलना या छोटा होना चाहिए, जो digital exam से देखते हैं।"
+   },
+   {
+    "say": "अब treatment एक कहानी की तरह। 31 हफ्ते, contractions, cervix अभी बंद: steroids।"
+   },
+   {
+    "say": "Steroids क्यों? Baby के lungs में surfactant बढ़ता है, respiratory distress syndrome कम होता है।"
+   },
+   {
+    "say": "Steroids को काम करने में लगभग 48 घंटे चाहिए। तो tocolytic क्यों देते हैं? Delivery को इतनी देर रोकने के लिए, कि steroids काम कर सकें।"
+   },
+   {
+    "say": "37 हफ्ते तक रोकने के लिए नहीं। यह point याद रखना है।"
+   }
+  ]
+ },
+ {
+  "id": "t17b",
+  "lines": [
+   {
+    "say": "Tocolytics कौन से? Nifedipine सबसे common।"
+   },
+   {
+    "say": "Indomethacin भी, पर baby में ductus arteriosus जल्दी बंद कर सकता है, PDA closure।"
+   },
+   {
+    "say": "Terbutaline, एक beta-mimetic, माँ को palpitations करता है।"
+   },
+   {
+    "say": "Type 1 diabetic, contractions, और cervix बंद: steroids plus insulin, क्योंकि steroids sugar बढ़ाते हैं। Cervix खुलने लगे, तो tocolytic भी।"
+   },
+   {
+    "say": "32 हफ्ते से पहले delivery हो रही हो, तो magnesium sulfate, baby के brain की सुरक्षा के लिए।"
+   },
+   {
+    "say": "पहले preterm labour हो चुका है? Cervical length देखो, और progesterone दो।"
+   },
+   {
+    "say": "याद रखना है: steroid, RDS कम करने के लिए। Tocolytic, सिर्फ steroid का time देने के लिए। Indomethacin से PDA closure, terbutaline से palpitations।"
+   }
+  ]
+ },
+ {
+  "id": "t18",
+  "lines": [
+   {
+    "say": "Topic eighteen: cervical incompetence।"
+   },
+   {
+    "say": "Cervical incompetence क्या है? Cervix इतना कमज़ोर होता है, कि बिना दर्द और बिना contractions के, second trimester में खुल जाता है। Painless, painless।"
+   },
+   {
+    "say": "Picture: 18 से 25 हफ्ते, cervix छोटा और खुला, membranes बाहर लटकती दिखती हैं, या अचानक baby के parts निकल आते हैं, और पहले भी ऐसा loss हो चुका है।"
+   },
+   {
+    "say": "अगली pregnancy में क्या? Cerclage, cervix में एक टाँका, 12 से 14 हफ्ते पर।"
+   },
+   {
+    "say": "याद रखना है: painless second trimester loss, cervical incompetence। अगली बार cerclage।"
+   }
+  ]
+ },
+ {
+  "id": "t19a",
+  "lines": [
+   {
+    "say": "Topic nineteen: PROM, और chorioamnionitis।"
+   },
+   {
+    "say": "PROM, premature rupture of membranes, मतलब labour शुरू होने से पहले पानी की थैली फट जाना। अगर 37 हफ्ते से पहले हो, तो PPROM, preterm PROM।"
+   },
+   {
+    "say": "पहले confirm कैसे करें कि जो पानी निकला, वह amniotic fluid ही है? Sterile speculum exam: vagina में पानी का pooling, nitrazine test पर pH 7 जैसा alkaline, और fern test।"
+   },
+   {
+    "say": "Term पर labour के साथ पानी आए, तो यह normal spontaneous rupture है।"
+   },
+   {
+    "say": "Term PROM, 24 घंटे, contractions नहीं: induction।"
+   },
+   {
+    "say": "अब PPROM, 24 से 34 हफ्ते, infection नहीं। Plan क्या? Expectant, यानी इंतज़ार, पर तीन चीज़ों के साथ: steroids, antibiotics जैसे ampicillin और erythromycin, और GBS prophylaxis।"
+   },
+   {
+    "say": "32 हफ्ते से पहले delivery हो रही हो, तो magnesium भी।"
+   }
+  ]
+ },
+ {
+  "id": "t19b",
+  "lines": [
+   {
+    "say": "पर इंतज़ार कब बंद? जब infection हो जाए।"
+   },
+   {
+    "say": "Chorioamnionitis क्या है? Membranes और amniotic fluid का infection।"
+   },
+   {
+    "say": "Picture: PPROM के बाद बुखार, tender uterus, बदबूदार discharge, माँ और baby की heart rate तेज़।"
+   },
+   {
+    "say": "क्या करें? Antibiotics और delivery। इंतज़ार नहीं।"
+   },
+   {
+    "say": "इसलिए PPROM के 3 दिन बाद बुखार और पेट दर्द आए, तो deliver।"
+   },
+   {
+    "say": "Planned CS में prolonged ROM हो, तो antibiotic कब? Incision से पहले, pre-op। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: PPROM में steroids plus antibiotics। बुखार plus tender uterus, chorioamnionitis: antibiotics और deliver।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "Painless bleeding, previa। Exam से पहले ultrasound। Bleeding पर admit।"
+   },
+   {
+    "say": "Painful tense uterus, abruption। HTN risk, DIC का खतरा। कई CS के बाद shock, uterine rupture।"
+   },
+   {
+    "say": "Steroid RDS के लिए। Tocolytic, steroid का time देने के लिए। Indomethacin से PDA, terbutaline से palpitations।"
+   },
+   {
+    "say": "Painless second trimester loss, cerclage।"
+   },
+   {
+    "say": "PROM confirm, speculum और fern से। PPROM में steroids plus antibiotics। Chorioamnionitis में deliver।"
+   }
+  ]
+ }
+]

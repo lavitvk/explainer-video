@@ -1,0 +1,416 @@
+[
+ {
+  "id": "title",
+  "lines": [
+   {
+    "say": "Revision notes. Chapter seven: a tale of three intersecting lines. Triangles।"
+   }
+  ]
+ },
+ {
+  "id": "d1",
+  "lines": [
+   {
+    "say": "Part one: triangle क्या है।"
+   },
+   {
+    "say": "Triangle क्या है? A triangle is a three sided polygon।"
+   },
+   {
+    "say": "Three sided, यानी तीन sides वाला polygon।"
+   },
+   {
+    "say": "Tri मतलब three।"
+   },
+   {
+    "say": "So, triangle: three sided polygon।"
+   }
+  ]
+ },
+ {
+  "id": "d2",
+  "lines": [
+   {
+    "say": "पहले वाला याद है? Triangle, three sided polygon। अब triangle ABC के parts।"
+   },
+   {
+    "say": "Triangle में कितनी sides होती हैं? 3।"
+   },
+   {
+    "say": "कौन सी? AB, BC, और CA।"
+   },
+   {
+    "say": "कितने vertices? 3। कौन से? A, B, और C।"
+   },
+   {
+    "say": "Vertex मतलब corner point। एक हो तो vertex, ज़्यादा हों तो vertices।"
+   }
+  ]
+ },
+ {
+  "id": "d2b",
+  "lines": [
+   {
+    "say": "और कितने angles? 3। Angle A, angle B, angle C।"
+   },
+   {
+    "say": "इनको पूरा कैसे लिखते हैं? Angle B A C, angle A B C, और angle A C B।"
+   },
+   {
+    "say": "ध्यान दो: बीच वाला letter ही vertex होता है।"
+   },
+   {
+    "say": "Angle B A C में बीच में A है, तो यह angle A है।"
+   },
+   {
+    "say": "Angle A B C में बीच में B, यानी angle B। Angle A C B में बीच में C, यानी angle C।"
+   },
+   {
+    "say": "So remember: triangle में सब कुछ तीन-तीन। 3 sides, 3 vertices, 3 angles।"
+   }
+  ]
+ },
+ {
+  "id": "d3",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: 3 sides AB, BC, CA। 3 vertices A, B, C। 3 angles।"
+   },
+   {
+    "say": "अब types। यह types sides के basis पर हैं। Sides गिननी हैं, कि कितनी equal हैं।"
+   },
+   {
+    "say": "Equilateral triangle: all sides are equal। तीनों sides equal। Equi मतलब equal।"
+   },
+   {
+    "say": "Isosceles triangle: 2 sides are equal। सिर्फ दो equal।"
+   },
+   {
+    "say": "और scalene triangle: three sides are unequal। कोई भी side equal नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "d3quiz",
+  "lines": [
+   {
+    "say": "अब उल्टा पूछो।"
+   },
+   {
+    "say": "तीनों sides equal?"
+   },
+   {
+    "say": "Equilateral।"
+   },
+   {
+    "say": "दो sides equal?"
+   },
+   {
+    "say": "Isosceles।"
+   },
+   {
+    "say": "कोई side equal नहीं?"
+   },
+   {
+    "say": "Scalene।"
+   },
+   {
+    "say": "3, 2, 0: equilateral, isosceles, scalene।"
+   },
+   {
+    "say": "So remember: equilateral all equal, isosceles two equal, scalene all unequal।"
+   }
+  ]
+ },
+ {
+  "id": "p1recap",
+  "lines": [
+   {
+    "say": "Part one का recap। सब एक साथ।"
+   },
+   {
+    "say": "Triangle, three sided polygon।"
+   },
+   {
+    "say": "3 sides AB, BC, CA। 3 vertices A, B, C। 3 angles: angle B A C, angle A B C, angle A C B।"
+   },
+   {
+    "say": "Equilateral all sides equal। Isosceles 2 sides equal। Scalene all sides unequal।"
+   }
+  ]
+ },
+ {
+  "id": "p1think",
+  "lines": [
+   {
+    "say": "Think about it: एक triangle की sides 5 cm, 5 cm, और 3 cm हैं। यह कौन सा triangle है?"
+   },
+   {
+    "say": "दो sides equal हैं, तो isosceles।"
+   }
+  ]
+ },
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two: construction of triangles। Equilateral triangle।"
+   },
+   {
+    "say": "Construction से पहले, Part one वापस बुलाओ।"
+   },
+   {
+    "say": "Triangle: three sided polygon। Equilateral: all sides equal। Isosceles: 2 sides equal। Scalene: all unequal।"
+   },
+   {
+    "say": "अब बनाना सीखते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "c4",
+  "lines": [
+   {
+    "say": "सवाल क्या है? Equilateral triangle बनाना है, side 4 cm।"
+   },
+   {
+    "say": "Equilateral मतलब क्या? तीनों sides equal।"
+   },
+   {
+    "say": "तो तीनों sides कितनी होंगी? 4 cm, 4 cm, 4 cm।"
+   },
+   {
+    "say": "क्या चाहिए? Ruler, compass, और pencil।"
+   }
+  ]
+ },
+ {
+  "id": "c4steps",
+  "lines": [
+   {
+    "say": "Step one: ruler से एक line segment PQ draw करो। 4 cm। PQ equals 4 cm। यह triangle का base है।"
+   },
+   {
+    "say": "Step two: compass को ruler पर रखकर 4 cm खोलो। वही, जो side है।"
+   },
+   {
+    "say": "अब compass की नोक P पर रखो, और PQ के ऊपर एक arc लगाओ।"
+   },
+   {
+    "say": "Step three: compass को छेड़ना नहीं। Same 4 cm।"
+   },
+   {
+    "say": "अब नोक Q पर रखो, और एक और arc लगाओ, जो पहले वाले arc को काटे।"
+   },
+   {
+    "say": "दोनों arcs जहाँ cut करते हैं, उस point का नाम R।"
+   },
+   {
+    "say": "Step four: R को P से जोड़ो। R को Q से जोड़ो। PR और QR।"
+   },
+   {
+    "say": "हो गया triangle PQR।"
+   },
+   {
+    "say": "अब check करो: PQ 4 cm, PR 4 cm, QR 4 cm। तीनों equal। Equilateral।"
+   }
+  ]
+ },
+ {
+  "id": "c4why",
+  "lines": [
+   {
+    "say": "यह काम क्यों करता है? R दोनों arcs पर है।"
+   },
+   {
+    "say": "P से 4 cm दूर, और Q से भी 4 cm दूर। इसलिए PR भी 4 cm, और QR भी 4 cm।"
+   },
+   {
+    "say": "So remember: base 4 cm। P से 4 cm का arc। Q से 4 cm का arc। जहाँ काटें, वह R। जोड़ो।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। चार steps एक साथ।"
+   },
+   {
+    "say": "PQ, 4 cm draw करो।"
+   },
+   {
+    "say": "P से 4 cm का arc।"
+   },
+   {
+    "say": "Q से 4 cm का arc।"
+   },
+   {
+    "say": "Arcs R पर मिलते हैं। PR और QR जोड़ो।"
+   },
+   {
+    "say": "Triangle PQR, तीनों sides 4 cm।"
+   }
+  ]
+ },
+ {
+  "id": "p2think",
+  "lines": [
+   {
+    "say": "Think about it: अगर 6 cm का equilateral triangle बनाना हो, तो compass कितना खोलोगे?"
+   },
+   {
+    "say": "6 cm।"
+   },
+   {
+    "say": "और base कितना?"
+   },
+   {
+    "say": "6 cm।"
+   }
+  ]
+ },
+ {
+  "id": "full",
+  "lines": [
+   {
+    "say": "एक बार दोबारा, पूरा chapter एक साथ। कुछ नया नहीं, सिर्फ वही जो पढ़ा है।"
+   },
+   {
+    "say": "Triangle: three sided polygon। 3 sides AB, BC, CA। 3 vertices A, B, C।"
+   },
+   {
+    "say": "3 angles: angle B A C, angle A B C, angle A C B। बीच वाला letter vertex होता है।"
+   },
+   {
+    "say": "Types based on sides: equilateral, all sides equal। Isosceles, 2 sides equal। Scalene, all sides unequal।"
+   },
+   {
+    "say": "Construction: base PQ 4 cm। P से 4 cm का arc। Q से 4 cm का arc।"
+   },
+   {
+    "say": "दोनों arcs R पर मिलते हैं। PR और QR जोड़ो। Equilateral triangle PQR।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। खुद से पूछो। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "Triangle क्या है?"
+   },
+   {
+    "say": "Three sided polygon।"
+   },
+   {
+    "say": "Triangle ABC की sides?"
+   },
+   {
+    "say": "AB, BC, CA।"
+   },
+   {
+    "say": "Vertices?"
+   },
+   {
+    "say": "A, B, C।"
+   },
+   {
+    "say": "कितने angles?"
+   },
+   {
+    "say": "3।"
+   },
+   {
+    "say": "Angle A B C में vertex कौन सा है?"
+   },
+   {
+    "say": "B।"
+   },
+   {
+    "say": "एक corner को क्या कहते हैं?"
+   },
+   {
+    "say": "Vertex।"
+   },
+   {
+    "say": "तीनों को?"
+   },
+   {
+    "say": "Vertices।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "तीनों sides equal?"
+   },
+   {
+    "say": "Equilateral।"
+   },
+   {
+    "say": "सिर्फ दो sides equal?"
+   },
+   {
+    "say": "Isosceles।"
+   },
+   {
+    "say": "कोई side equal नहीं?"
+   },
+   {
+    "say": "Scalene।"
+   },
+   {
+    "say": "Sides 4 cm, 6 cm, 7 cm: कौन सा triangle?"
+   },
+   {
+    "say": "Scalene।"
+   },
+   {
+    "say": "Sides 5 cm, 5 cm, 5 cm?"
+   },
+   {
+    "say": "Equilateral।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "4 cm का equilateral triangle बनाने में, पहले क्या draw करते हैं?"
+   },
+   {
+    "say": "Base PQ, 4 cm।"
+   },
+   {
+    "say": "Compass कितना खोलते हैं?"
+   },
+   {
+    "say": "4 cm।"
+   },
+   {
+    "say": "Arcs कहाँ से लगाते हैं?"
+   },
+   {
+    "say": "P से, और Q से।"
+   },
+   {
+    "say": "Arcs जहाँ काटें, वह point?"
+   },
+   {
+    "say": "R।"
+   },
+   {
+    "say": "फिर क्या?"
+   },
+   {
+    "say": "PR और QR जोड़ो।"
+   }
+  ]
+ }
+]

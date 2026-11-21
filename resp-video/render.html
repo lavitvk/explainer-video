@@ -1,0 +1,2097 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080;
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+const FONT = 'Inter, "DejaVu Sans", sans-serif';
+
+/* ---------- palette ---------- */
+const C = {
+  bg1: '#F7F9FC', bg2: '#E8EEF7', ink: '#0F172A', sub: '#475569', mute: '#94A3B8',
+  navy: '#1E3A8A', active: '#DC2626', activeSoft: '#FEE2E2', latent: '#059669', latentSoft: '#D1FAE5',
+  warn: '#D97706', warnSoft: '#FEF3C7', blue: '#2563EB', blueSoft: '#DBEAFE',
+  H: '#0EA5E9', R: '#F97316', Z: '#A855F7', E: '#EAB308', bac: '#E11D48', cell: '#60A5FA'
+};
+
+/* ---------- math / easing ---------- */
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eo = x => 1 - Math.pow(1 - clamp(x), 3);
+const eio = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const eback = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const P = (t, s, d = .5) => clamp((t - s) / d);
+const lerp = (a, b, k) => a + (b - a) * k;
+
+/* ---------- primitives ---------- */
+function rr(x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function txt(s, x, y, o = {}) {
+  ctx.save();
+  ctx.font = `${o.weight || 600} ${o.size || 40}px ${FONT}`;
+  ctx.fillStyle = o.color || C.ink;
+  ctx.textAlign = o.align || 'center';
+  ctx.textBaseline = o.base || 'middle';
+  if (o.alpha !== undefined) ctx.globalAlpha *= o.alpha;
+  if (o.ls) ctx.letterSpacing = o.ls + 'px';
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function card(x, y, w, h, o = {}) {
+  ctx.save();
+  ctx.shadowColor = 'rgba(15,23,42,0.10)'; ctx.shadowBlur = o.blur ?? 30; ctx.shadowOffsetY = 10;
+  rr(x, y, w, h, o.r ?? 28); ctx.fillStyle = o.fill || '#fff'; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  if (o.stroke) { ctx.lineWidth = o.lw || 4; ctx.strokeStyle = o.stroke; ctx.stroke(); }
+  ctx.restore();
+}
+// scale-pop an element around (cx,cy)
+function pop(k, cx, cy, fn, back = true) {
+  if (k <= 0) return;
+  const s = back ? eback(k) : eo(k);
+  ctx.save(); ctx.globalAlpha *= clamp(k * 2.5);
+  ctx.translate(cx, cy); ctx.scale(s, s); ctx.translate(-cx, -cy);
+  fn(); ctx.restore();
+}
+function fadeUp(k, fn, dy = 30) {
+  if (k <= 0) return;
+  ctx.save(); ctx.globalAlpha *= eo(k); ctx.translate(0, (1 - eo(k)) * dy); fn(); ctx.restore();
+}
+function check(cx, cy, s, color, k) {
+  if (k <= 0) return;
+  ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI * 2); ctx.fillStyle = color; ctx.globalAlpha *= clamp(k * 3); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = s * .22;
+  const pts = [[-.45, .02], [-.12, .35], [.48, -.32]];
+  const kk = eo(k);
+  ctx.beginPath(); ctx.moveTo(cx + pts[0][0] * s, cy + pts[0][1] * s);
+  const seg1 = clamp(kk * 2), seg2 = clamp(kk * 2 - 1);
+  ctx.lineTo(cx + lerp(pts[0][0], pts[1][0], seg1) * s, cy + lerp(pts[0][1], pts[1][1], seg1) * s);
+  if (seg2 > 0) ctx.lineTo(cx + lerp(pts[1][0], pts[2][0], seg2) * s, cy + lerp(pts[1][1], pts[2][1], seg2) * s);
+  ctx.stroke(); ctx.restore();
+}
+function cross(cx, cy, s, color, k) {
+  if (k <= 0) return;
+  ctx.save(); ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI * 2); ctx.fillStyle = color; ctx.globalAlpha *= clamp(k * 3); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = s * .22; const a = s * .38, kk = eo(k);
+  ctx.beginPath(); ctx.moveTo(cx - a, cy - a); ctx.lineTo(cx - a + 2 * a * clamp(kk * 2), cy - a + 2 * a * clamp(kk * 2)); ctx.stroke();
+  if (kk > .5) { const k2 = clamp(kk * 2 - 1); ctx.beginPath(); ctx.moveTo(cx + a, cy - a); ctx.lineTo(cx + a - 2 * a * k2, cy - a + 2 * a * k2); ctx.stroke(); }
+  ctx.restore();
+}
+function stamp(label, cx, cy, color, k, rot = -0.08, size = 110) {
+  if (k <= 0) return;
+  const s = k < 1 ? lerp(2.2, 1, eo(k)) : 1;
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.globalAlpha *= clamp(k * 2);
+  ctx.font = `900 ${size}px ${FONT}`; const w = ctx.measureText(label).width + size * .9, h = size * 1.55;
+  rr(-w / 2, -h / 2, w, h, 26); ctx.lineWidth = 14; ctx.strokeStyle = color; ctx.stroke();
+  rr(-w / 2 + 16, -h / 2 + 16, w - 32, h - 32, 16); ctx.lineWidth = 4; ctx.stroke();
+  ctx.fillStyle = color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, 0, 6);
+  ctx.restore();
+}
+function arrow(x1, y1, x2, y2, k, color = C.sub, lw = 8) {
+  if (k <= 0) return;
+  const kk = eo(k), x = lerp(x1, x2, kk), y = lerp(y1, y2, kk);
+  ctx.save(); ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke();
+  const a = Math.atan2(y2 - y1, x2 - x1), hs = lw * 3;
+  ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * hs * .4, y + Math.sin(a) * hs * .4);
+  ctx.lineTo(x - Math.cos(a - .5) * hs, y - Math.sin(a - .5) * hs);
+  ctx.lineTo(x - Math.cos(a + .5) * hs, y - Math.sin(a + .5) * hs); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- illustrations ---------- */
+function bacillus(x, y, len, ang, color = C.bac, alpha = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.globalAlpha *= alpha;
+  const w = len * .32; rr(-len / 2, -w / 2, len, w, w / 2);
+  ctx.fillStyle = color; ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.35)'; rr(-len / 2 + w * .3, -w / 2 + w * .18, len * .55, w * .22, w * .11); ctx.fill();
+  ctx.restore();
+}
+function immuneCell(x, y, r, t, color = C.cell) {
+  ctx.save();
+  ctx.beginPath();
+  for (let i = 0; i <= 40; i++) {
+    const a = i / 40 * Math.PI * 2;
+    const rr2 = r * (1 + .06 * Math.sin(a * 5 + t * 3) + .04 * Math.sin(a * 3 - t * 2));
+    const px = x + Math.cos(a) * rr2, py = y + Math.sin(a) * rr2;
+    i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+  }
+  ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  ctx.beginPath(); ctx.arc(x + r * .1, y - r * .05, r * .42, 0, Math.PI * 2); ctx.fillStyle = 'rgba(30,58,138,.55)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(x - r * .35, y - r * .4, r * .16, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,.45)'; ctx.fill();
+  ctx.restore();
+}
+function child(cx, cy, s, shirt = C.blue, mood = 'ok', t = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // body
+  rr(-62, -10, 124, 150, 52); ctx.fillStyle = shirt; ctx.fill();
+  // neck/head
+  ctx.beginPath(); ctx.arc(0, -70, 58, 0, Math.PI * 2); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  // hair
+  ctx.beginPath(); ctx.arc(0, -82, 60, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(48, -95); ctx.quadraticCurveTo(0, -112, -50, -92); ctx.closePath();
+  ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // eyes
+  ctx.fillStyle = C.ink;
+  ctx.beginPath(); ctx.arc(-20, -70, 6, 0, 7); ctx.arc(20, -70, 6, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath();
+  if (mood === 'sick') { ctx.moveTo(-14, -38); ctx.quadraticCurveTo(0, -48, 14, -38); }
+  else { ctx.moveTo(-16, -44); ctx.quadraticCurveTo(0, -30, 16, -44); }
+  ctx.stroke();
+  if (mood === 'sick') { // flushed cheeks + sweat
+    ctx.fillStyle = 'rgba(239,68,68,.35)'; ctx.beginPath(); ctx.ellipse(-34, -52, 12, 7, 0, 0, 7); ctx.ellipse(34, -52, 12, 7, 0, 0, 7); ctx.fill();
+    const dy = (t * 40) % 40;
+    ctx.fillStyle = '#7DD3FC'; ctx.globalAlpha *= 1 - dy / 40;
+    ctx.beginPath(); ctx.moveTo(56, -100 + dy); ctx.quadraticCurveTo(66, -84 + dy, 56, -78 + dy); ctx.quadraticCurveTo(46, -84 + dy, 56, -100 + dy); ctx.fill();
+  }
+  ctx.restore();
+}
+function adult(cx, cy, s, shirt = '#64748B', t = 0, cough = false) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-80, -10, 160, 210, 64); ctx.fillStyle = shirt; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -78, 64, 0, 7); ctx.fillStyle = '#D9A877'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -92, 66, Math.PI * 1.08, Math.PI * 1.92); ctx.closePath(); ctx.fillStyle = '#1F2937'; ctx.fill();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-22, -78, 6, 0, 7); ctx.arc(22, -78, 6, 0, 7); ctx.fill();
+  if (cough) {
+    ctx.beginPath(); ctx.ellipse(8, -44, 12, 10, 0, 0, 7); ctx.fillStyle = C.ink; ctx.fill();
+    // droplets with bacilli
+    for (let i = 0; i < 6; i++) {
+      const ph = ((t * .9 + i / 6) % 1);
+      const dx = 80 + ph * 260, dy = -50 + Math.sin(i * 2.1) * 60 * ph;
+      ctx.globalAlpha = (1 - ph) * .9;
+      bacillus(dx, dy, 34, i, C.bac);
+      ctx.globalAlpha = 1;
+    }
+  } else {
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(-16, -46); ctx.lineTo(16, -46); ctx.stroke();
+  }
+  ctx.restore();
+}
+function thermometer(cx, cy, s, level, hot = true) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-18, -110, 36, 170, 18); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 70, 34, 0, 7); ctx.fillStyle = hot ? C.active : C.blue; ctx.fill(); ctx.stroke();
+  const top = lerp(50, -90, level);
+  rr(-8, top, 16, 70 - top, 8); ctx.fillStyle = hot ? C.active : C.blue; ctx.fill();
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(18, -80 + i * 28); ctx.lineTo(4, -80 + i * 28); ctx.lineWidth = 4; ctx.stroke(); }
+  ctx.restore();
+}
+function scaleIcon(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-90, -60, 180, 140, 30); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, -10, 48, Math.PI, 0); ctx.fillStyle = '#F1F5F9'; ctx.fill(); ctx.stroke();
+  const a = Math.PI + lerp(1.9, .9, eo(k));
+  ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(Math.cos(a) * 40, -10 + Math.sin(a) * 40); ctx.strokeStyle = C.active; ctx.lineWidth = 6; ctx.stroke();
+  ctx.restore();
+  arrow(cx + 120 * s, cy - 60 * s, cx + 120 * s, cy + 50 * s, k, C.active, 9 * s);
+}
+function lungsPath(side, x, y, w, h) {
+  // side: -1 = viewer-left lung (patient's RIGHT), +1 = viewer-right lung (patient's LEFT)
+  const cx = x + w / 2, o = side;
+  const inner = cx + o * w * .07, outer = cx + o * w * .40;
+  const top = y + h * .12, bot = y + h * .86;
+  ctx.beginPath();
+  ctx.moveTo(inner, top + h * .06);
+  ctx.bezierCurveTo(inner + o * w * .02, top - h * .05, outer - o * w * .10, top - h * .02, outer - o * w * .03, top + h * .25);
+  ctx.bezierCurveTo(outer + o * w * .02, top + h * .45, outer + o * w * .02, bot - h * .10, outer - o * w * .01, bot);
+  ctx.quadraticCurveTo(cx + o * w * .22, bot - h * (side < 0 ? .10 : .07), inner + o * w * (side > 0 ? .10 : .02), bot - h * .05);
+  if (side > 0) ctx.quadraticCurveTo(inner + o * w * .12, y + h * .55, inner + o * w * .02, y + h * .45);
+  ctx.lineTo(inner, top + h * .06);
+  ctx.closePath();
+}
+function xray(x, y, w, h, o = {}) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#05080F'; ctx.fill();
+  ctx.save(); rr(x, y, w, h, 18); ctx.clip();
+  // soft tissue glow
+  const g = ctx.createRadialGradient(x + w / 2, y + h * .55, w * .1, x + w / 2, y + h * .55, w * .62);
+  g.addColorStop(0, '#5B6472'); g.addColorStop(.7, '#2A303A'); g.addColorStop(1, '#0B0F16');
+  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+  // lungs (dark = air)
+  for (const sd of [-1, 1]) {
+    lungsPath(sd, x, y, w, h);
+    const lg = ctx.createLinearGradient(0, y, 0, y + h);
+    lg.addColorStop(0, '#11151C'); lg.addColorStop(1, '#1B212B');
+    ctx.fillStyle = lg; ctx.fill();
+  }
+  // vascular markings
+  ctx.strokeStyle = 'rgba(160,170,185,.18)'; ctx.lineWidth = 2;
+  for (const sd of [-1, 1]) for (let i = 0; i < 7; i++) {
+    const hx = x + w / 2 + sd * w * .1, hy = y + h * .48;
+    ctx.beginPath(); ctx.moveTo(hx, hy);
+    const a = (-.9 + i * .3);
+    ctx.quadraticCurveTo(hx + sd * w * .12, hy + a * h * .15, hx + sd * w * (.18 + .05 * (i % 3)), hy + a * h * .32); ctx.stroke();
+  }
+  // ribs
+  ctx.strokeStyle = 'rgba(210,215,225,.28)'; ctx.lineWidth = Math.max(3, w * .012);
+  for (let i = 0; i < 9; i++) {
+    const ry = y + h * (.16 + i * .078);
+    for (const sd of [-1, 1]) {
+      ctx.beginPath();
+      ctx.moveTo(x + w / 2 + sd * w * .05, ry);
+      ctx.bezierCurveTo(x + w / 2 + sd * w * .30, ry - h * .06, x + w / 2 + sd * w * .44, ry + h * .02, x + w / 2 + sd * w * .40, ry + h * .12);
+      ctx.stroke();
+    }
+  }
+  // clavicles
+  ctx.strokeStyle = 'rgba(225,230,238,.55)'; ctx.lineWidth = w * .02;
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.moveTo(x + w / 2 + sd * w * .04, y + h * .13); ctx.quadraticCurveTo(x + w / 2 + sd * w * .22, y + h * .07, x + w / 2 + sd * w * .38, y + h * .11); ctx.stroke(); }
+  // spine + mediastinum
+  const sg = ctx.createLinearGradient(x + w * .42, 0, x + w * .58, 0);
+  sg.addColorStop(0, 'rgba(200,205,215,0)'); sg.addColorStop(.5, 'rgba(200,205,215,.55)'); sg.addColorStop(1, 'rgba(200,205,215,0)');
+  ctx.fillStyle = sg; ctx.fillRect(x + w * .42, y, w * .16, h);
+  // heart
+  ctx.beginPath(); ctx.ellipse(x + w * .56, y + h * .66, w * .17, h * .16, -.35, 0, 7);
+  ctx.fillStyle = 'rgba(200,205,215,.30)'; ctx.fill();
+  // consolidation in patient's RIGHT upper lobe (viewer's LEFT, upper zone)
+  const cons = o.cons || 0;
+  if (cons > 0) {
+    ctx.save(); lungsPath(-1, x, y, w, h); ctx.clip();
+    const pulse = o.pulse ? (0.85 + .15 * Math.sin(o.t * 4)) : 1;
+    const cxx = x + w * .30, cyy = y + h * .27;
+    const rg = ctx.createRadialGradient(cxx, cyy, 4, cxx, cyy, w * .20 * eo(cons));
+    rg.addColorStop(0, `rgba(240,242,246,${.85 * pulse})`); rg.addColorStop(.6, `rgba(215,220,228,${.55 * pulse})`); rg.addColorStop(1, 'rgba(200,205,215,0)');
+    ctx.fillStyle = rg; ctx.fillRect(x, y, w, h);
+    // horizontal fissure line hint
+    ctx.strokeStyle = `rgba(235,238,242,${.5 * eo(cons)})`; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(x + w * .13, y + h * .40); ctx.quadraticCurveTo(x + w * .28, y + h * .42, x + w * .42, y + h * .40); ctx.stroke();
+    ctx.restore();
+  }
+  ctx.restore();
+  // marker
+  txt('R', x + 34, y + 38, { size: Math.max(22, w * .06), weight: 800, color: '#FDE68A' });
+  ctx.restore();
+}
+function forearm(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-190, -55, 380, 110, 55); ctx.fillStyle = '#E8B98C'; ctx.fill();
+  ctx.fillStyle = 'rgba(0,0,0,.06)'; rr(-190, 10, 380, 45, 30); ctx.fill();
+  // induration
+  const r = 44 * eo(k);
+  if (r > 0) {
+    ctx.beginPath(); ctx.ellipse(0, -5, r, r * .8, 0, 0, 7); ctx.fillStyle = 'rgba(220,38,38,.35)'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(0, -5, r * .55, r * .45, 0, 0, 7); ctx.fillStyle = 'rgba(220,38,38,.45)'; ctx.fill();
+    // ruler
+    ctx.globalAlpha *= clamp(k * 2 - 1);
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(-r, -78); ctx.lineTo(r, -78); ctx.moveTo(-r, -90); ctx.lineTo(-r, -66); ctx.moveTo(r, -90); ctx.lineTo(r, -66); ctx.stroke();
+    txt('≥ 10 mm', 0, -112, { size: 30, weight: 700, color: C.ink });
+  }
+  ctx.restore();
+}
+function tube(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-34, -150, 68, 40, 10); ctx.fillStyle = '#7C3AED'; ctx.fill();
+  rr(-28, -115, 56, 230, 28); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = '#94A3B8'; ctx.stroke();
+  const lvl = lerp(110, -40, eo(k));
+  ctx.save(); rr(-28, -115, 56, 230, 28); ctx.clip();
+  ctx.fillStyle = '#B91C1C'; ctx.fillRect(-30, lvl, 60, 200);
+  ctx.fillStyle = '#FCD34D'; ctx.fillRect(-30, lvl, 60, 40 * eo(k));
+  ctx.restore();
+  rr(-30, -40, 60, 70, 6); ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fill();
+  txt('IFN-γ', 0, -5, { size: 17, weight: 800, color: C.navy });
+  ctx.restore();
+}
+function pill(cx, cy, letter, color, s = 1) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.shadowColor = 'rgba(0,0,0,.15)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 5;
+  ctx.beginPath(); ctx.arc(0, 0, 42, 0, 7); ctx.fillStyle = color; ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.beginPath(); ctx.arc(-12, -14, 12, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fill();
+  txt(letter, 0, 3, { size: 44, weight: 900, color: '#fff' });
+  ctx.restore();
+}
+function iconBadge(cx, cy, r, color, soft, draw) {
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = soft; ctx.fill();
+  ctx.lineWidth = 5; ctx.strokeStyle = color; ctx.stroke(); ctx.restore(); draw && draw();
+}
+function bodySilhouette(cx, cy, s, glow) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#CBD5E1';
+  ctx.beginPath(); ctx.arc(0, -250, 70, 0, 7); ctx.fill();
+  rr(-34, -190, 68, 50, 20); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(-150, -150); ctx.quadraticCurveTo(0, -175, 150, -150);
+  ctx.lineTo(170, 70); ctx.quadraticCurveTo(150, 120, 120, 80);
+  ctx.lineTo(100, -40); ctx.lineTo(95, 250); ctx.lineTo(-95, 250); ctx.lineTo(-100, -40);
+  ctx.lineTo(-120, 80); ctx.quadraticCurveTo(-150, 120, -170, 70); ctx.closePath(); ctx.fill();
+  // lungs
+  for (const sd of [-1, 1]) {
+    ctx.beginPath(); ctx.ellipse(sd * 48, -60, 40, 75, sd * .1, 0, 7);
+    ctx.fillStyle = `rgba(251,113,133,${.55 + .3 * glow})`; ctx.fill();
+  }
+  ctx.restore();
+}
+
+/* ---------- background, header, subtitles ---------- */
+function background(T) {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.bg1); g.addColorStop(1, C.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(30,58,138,.05)';
+  for (let x = 40; x < W; x += 60) for (let y = 40; y < H; y += 60) { ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); }
+  // floating decorative bacilli very faint
+  for (let i = 0; i < 6; i++) {
+    const bx = (i * 377 + T * 12) % (W + 200) - 100, by = 160 + (i * 211) % 700 + Math.sin(T * .6 + i) * 20;
+    bacillus(bx, by, 50, i + T * .2, 'rgba(225,29,72,.05)');
+  }
+}
+function header(label, accent = C.navy) {
+  rr(60, 44, 18, 54, 9); ctx.fillStyle = accent; ctx.fill();
+  txt(label, 96, 72, { size: 34, weight: 800, color: C.ink, align: 'left' });
+  if (!window.REPEAT) txt('Pediatrics · Part 3', W - 60, 72, { size: 24, weight: 600, color: C.mute, align: 'right' });
+}
+function wrap(s, maxW) {
+  const words = s.split(' '), lines = []; let cur = '';
+  for (const w of words) { const t2 = cur ? cur + ' ' + w : w; if (ctx.measureText(t2).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t2; }
+  if (cur) lines.push(cur); return lines;
+}
+function subtitle(s, k) {
+  if (!s || k <= 0) return;
+  ctx.save(); ctx.globalAlpha *= eo(k);
+  ctx.font = `600 38px ${FONT}`;
+  const lines = wrap(s, 1500), lh = 50, bh = lines.length * lh + 36;
+  const by = H - 40 - bh;
+  ctx.fillStyle = 'rgba(15,23,42,.86)'; rr(W / 2 - 800, by, 1600, bh, 22); ctx.fill();
+  lines.forEach((l, i) => txt(l, W / 2, by + 18 + lh / 2 + i * lh, { size: 38, weight: 600, color: '#F8FAFC' }));
+  ctx.restore();
+}
+
+/* ================= NEPHROLOGY: extra palette + illustrations ================= */
+C.kid = '#7C3AED'; C.kidSoft = '#EDE9FE';
+C.ok = '#059669'; C.okSoft = '#D1FAE5';
+C.bad = '#DC2626'; C.badSoft = '#FEE2E2';
+
+// background without TB bacilli: soft drifting kidney-pink circles
+function background(T) {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.bg1); g.addColorStop(1, C.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(30,58,138,.05)';
+  for (let x = 40; x < W; x += 60) for (let y = 40; y < H; y += 60) { ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); }
+  for (let i = 0; i < 5; i++) {
+    const bx = (i * 431 + T * 10) % (W + 200) - 100, by = 180 + (i * 233) % 700 + Math.sin(T * .5 + i) * 20;
+    ctx.beginPath(); ctx.arc(bx, by, 40 + i * 6, 0, 7); ctx.fillStyle = 'rgba(124,58,237,.035)'; ctx.fill();
+  }
+}
+
+// seeded random for deterministic textures
+function rng(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+
+function para(lines, x, y, o = {}) {
+  lines.forEach((l, i) => txt(l, x, y + i * (o.lh || (o.size || 32) * 1.35), o));
+}
+
+function kidneyPath(cx, cy, s, flip = 1) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s * flip, s);
+  ctx.beginPath();
+  ctx.moveTo(0, -70);
+  ctx.bezierCurveTo(72, -74, 72, 74, 0, 70);
+  ctx.bezierCurveTo(-45, 68, -52, 30, -22, 12);
+  ctx.quadraticCurveTo(-10, 0, -22, -12);
+  ctx.bezierCurveTo(-52, -30, -45, -68, 0, -70);
+  ctx.closePath();
+  ctx.restore();
+}
+function kidney(cx, cy, s, flip = 1, fill = '#C2410C', stroke = '#7C2D12') {
+  ctx.save();
+  kidneyPath(cx, cy, s, flip);
+  const g = ctx.createRadialGradient(cx + 10 * s * flip, cy - 20 * s, 5, cx, cy, 80 * s);
+  g.addColorStop(0, '#FB923C'); g.addColorStop(1, fill);
+  ctx.fillStyle = g; ctx.fill(); ctx.lineWidth = 5 * s; ctx.strokeStyle = stroke; ctx.stroke();
+  // hilum vessels
+  ctx.strokeStyle = '#1D4ED8'; ctx.lineWidth = 7 * s; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy - 4 * s); ctx.lineTo(cx - 60 * s * flip, cy - 10 * s); ctx.stroke();
+  ctx.strokeStyle = '#DC2626';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy + 6 * s); ctx.lineTo(cx - 60 * s * flip, cy + 4 * s); ctx.stroke();
+  ctx.strokeStyle = '#FDE68A';
+  ctx.beginPath(); ctx.moveTo(cx - 18 * s * flip, cy + 14 * s); ctx.quadraticCurveTo(cx - 40 * s * flip, cy + 40 * s, cx - 36 * s * flip, cy + 90 * s); ctx.stroke();
+  ctx.restore();
+}
+
+// big child face with periorbital puffiness (puff 0..1)
+function face(cx, cy, s, puff, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // ears
+  ctx.fillStyle = '#EDBF93';
+  ctx.beginPath(); ctx.ellipse(-150, 10, 26, 40, 0, 0, 7); ctx.ellipse(150, 10, 26, 40, 0, 0, 7); ctx.fill();
+  // head
+  ctx.beginPath(); ctx.ellipse(0, 0, 150, 170, 0, 0, 7); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  // hair
+  ctx.beginPath(); ctx.ellipse(0, -60, 158, 125, 0, Math.PI * 1.02, Math.PI * 1.98);
+  ctx.quadraticCurveTo(80, -110, 0, -95); ctx.quadraticCurveTo(-80, -110, -150, -70); ctx.closePath();
+  ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // periorbital puffiness: swollen lids above & below eyes
+  for (const sd of [-1, 1]) {
+    const ex = sd * 58, ey = 0;
+    const p = eo(puff);
+    if (p > 0) {
+      ctx.fillStyle = `rgba(236,160,150,${.55 * p})`;
+      ctx.beginPath(); ctx.ellipse(ex, ey - 16, 48 + 8 * p, 18 + 14 * p, 0, Math.PI, 0); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(ex, ey + 14, 46 + 10 * p, 14 + 18 * p, 0, 0, Math.PI); ctx.fill();
+      ctx.strokeStyle = `rgba(190,110,100,${.5 * p})`; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.ellipse(ex, ey + 18, 40 + 8 * p, 10 + 16 * p, 0, .2, Math.PI - .2); ctx.stroke();
+    }
+    // eye: narrower as puff increases
+    const open = lerp(14, 5, p);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.ellipse(ex, ey, 26, open, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.ellipse(ex, ey, 10, Math.min(10, open), 0, 0, 7); ctx.fill();
+    // brow
+    ctx.strokeStyle = '#3F2A1D'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(ex - 28, -50 - 6 * p); ctx.quadraticCurveTo(ex, -60 - 6 * p, ex + 28, -50 - 6 * p); ctx.stroke();
+  }
+  // nose + mouth
+  ctx.strokeStyle = '#C08A62'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, 30); ctx.quadraticCurveTo(10, 55, -4, 62); ctx.stroke();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.moveTo(-28, 100); ctx.quadraticCurveTo(0, 116, 28, 100); ctx.stroke();
+  ctx.restore();
+}
+
+function sun(cx, cy, r, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(t * .4);
+  ctx.strokeStyle = '#F59E0B'; ctx.lineWidth = r * .14; ctx.lineCap = 'round';
+  for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 1.3, Math.sin(a) * r * 1.3); ctx.lineTo(Math.cos(a) * r * 1.65, Math.sin(a) * r * 1.65); ctx.stroke(); }
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fillStyle = '#FBBF24'; ctx.fill();
+  ctx.restore();
+}
+
+// BP gauge: v = 0..1 needle position; label text under
+function gauge(cx, cy, s, v, value, label, color) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const zones = [['#10B981', 0, .45], ['#F59E0B', .45, .7], ['#EF4444', .7, 1]];
+  ctx.lineWidth = 34;
+  zones.forEach(([c, a, b]) => { ctx.strokeStyle = c; ctx.beginPath(); ctx.arc(0, 0, 120, Math.PI + a * Math.PI + .02, Math.PI + b * Math.PI - .02); ctx.stroke(); });
+  const a = Math.PI + clamp(v) * Math.PI;
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 9; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * 100, Math.sin(a) * 100); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, 16, 0, 7); ctx.fillStyle = C.ink; ctx.fill();
+  txt(value, 0, 55, { size: 52, weight: 900, color: C.ink });
+  if (label) txt(label, 0, 105, { size: 34, weight: 800, color: color || C.ok });
+  ctx.restore();
+}
+
+// urine cup: color, foam 0..1 (frothy = proteinuria), bugs (E. coli rods)
+function cup(cx, cy, s, o = {}) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const path = () => { ctx.beginPath(); ctx.moveTo(-70, -90); ctx.lineTo(70, -90); ctx.lineTo(56, 100); ctx.quadraticCurveTo(0, 112, -56, 100); ctx.closePath(); };
+  path(); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill();
+  ctx.save(); path(); ctx.clip();
+  ctx.fillStyle = o.color || '#FCD34D'; ctx.fillRect(-80, -40, 160, 160);
+  if (o.foam) {
+    const r = rng(7);
+    for (let i = 0; i < 26; i++) { const x = -64 + r() * 128, y = -44 - r() * 26 * o.foam, rr2 = 8 + r() * 12; ctx.beginPath(); ctx.arc(x, y, rr2 * o.foam, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.fill(); ctx.strokeStyle = 'rgba(203,213,225,.9)'; ctx.lineWidth = 2; ctx.stroke(); }
+  }
+  if (o.bugs) {
+    for (let i = 0; i < 6; i++) bacillus(-40 + (i % 3) * 40 + Math.sin(o.t * 2 + i) * 6, 0 + Math.floor(i / 3) * 45 + Math.cos(o.t * 2 + i) * 5, 30, i + o.t * .6, '#16A34A', o.bugs);
+  }
+  ctx.restore();
+  path(); ctx.lineWidth = 6; ctx.strokeStyle = '#94A3B8'; ctx.stroke();
+  rr(-78, -110, 156, 26, 10); ctx.fillStyle = '#64748B'; ctx.fill();
+  ctx.restore();
+}
+
+function baby(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // body + diaper
+  rr(-70, 10, 140, 120, 55); ctx.fillStyle = '#93C5FD'; ctx.fill();
+  rr(-60, 85, 120, 60, 28); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 4; ctx.stroke();
+  // arms
+  ctx.fillStyle = '#F2C9A0';
+  ctx.beginPath(); ctx.ellipse(-82, 50, 20, 34, .4, 0, 7); ctx.ellipse(82, 50, 20, 34, -.4, 0, 7); ctx.fill();
+  // head
+  ctx.beginPath(); ctx.arc(0, -70, 82, 0, 7); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -138, 14, 0, 7); ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  // flushed cheeks (fever)
+  ctx.fillStyle = 'rgba(239,68,68,.35)'; ctx.beginPath(); ctx.ellipse(-46, -48, 16, 10, 0, 0, 7); ctx.ellipse(46, -48, 16, 10, 0, 0, 7); ctx.fill();
+  // alert eyes (blink)
+  const blink = (t % 3.2) < .12 ? .15 : 1;
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.ellipse(-28, -75, 9, 11 * blink, 0, 0, 7); ctx.ellipse(28, -75, 9, 11 * blink, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-12, -36); ctx.quadraticCurveTo(0, -30, 12, -36); ctx.stroke();
+  ctx.restore();
+}
+
+function bottle(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-14, -100); ctx.quadraticCurveTo(0, -130, 14, -100); ctx.closePath(); ctx.fillStyle = '#F59E0B'; ctx.fill();
+  rr(-30, -100, 60, 22, 8); ctx.fillStyle = '#60A5FA'; ctx.fill();
+  rr(-34, -78, 68, 160, 26); ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.save(); rr(-34, -78, 68, 160, 26); ctx.clip(); ctx.fillStyle = '#FEF3C7'; ctx.fillRect(-40, -20, 80, 120); ctx.restore();
+  ctx.restore();
+}
+
+function ivBag(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, -140); ctx.lineTo(0, -120); ctx.stroke();
+  rr(-60, -120, 120, 150, 26); ctx.fillStyle = 'rgba(219,234,254,.95)'; ctx.fill(); ctx.strokeStyle = '#60A5FA'; ctx.lineWidth = 5; ctx.stroke();
+  txt('IV', 0, -45, { size: 40, weight: 900, color: C.blue });
+  rr(-10, 30, 20, 30, 6); ctx.fillStyle = '#60A5FA'; ctx.fill();
+  ctx.strokeStyle = '#60A5FA'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(0, 60); ctx.quadraticCurveTo(10, 110, -30, 140); ctx.stroke();
+  const d = (t * 1.5) % 1; ctx.fillStyle = C.blue; ctx.globalAlpha *= 1 - d;
+  ctx.beginPath(); ctx.arc(0, 36 + d * 20, 4, 0, 7); ctx.fill();
+  ctx.restore();
+}
+
+function syrup(cx, cy, s, label = 'Cephalexin') {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-30, -150, 60, 36, 8); ctx.fillStyle = '#F8FAFC'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-26, -114); ctx.lineTo(26, -114); ctx.quadraticCurveTo(80, -90, 80, -40); ctx.lineTo(80, 110); ctx.quadraticCurveTo(80, 130, 60, 130);
+  ctx.lineTo(-60, 130); ctx.quadraticCurveTo(-80, 130, -80, 110); ctx.lineTo(-80, -40); ctx.quadraticCurveTo(-80, -90, -26, -114); ctx.closePath();
+  ctx.fillStyle = '#B45309'; ctx.fill();
+  rr(-66, -20, 132, 100, 14); ctx.fillStyle = '#fff'; ctx.fill();
+  txt(label, 0, 14, { size: 22, weight: 900, color: C.ink });
+  txt('oral', 0, 48, { size: 22, weight: 700, color: C.sub });
+  ctx.restore();
+}
+
+function capsule(cx, cy, s, rot = -.5, c1 = '#F97316', c2 = '#FDE68A') {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.save(); rr(-60, -24, 120, 48, 24); ctx.clip();
+  ctx.fillStyle = c1; ctx.fillRect(-60, -24, 60, 48); ctx.fillStyle = c2; ctx.fillRect(0, -24, 60, 48); ctx.restore();
+  rr(-60, -24, 120, 48, 24); ctx.strokeStyle = 'rgba(0,0,0,.15)'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.restore();
+}
+
+// DMSA scan panel: posterior view, two kidneys with radiotracer; scars = photopenic cortical defects
+function dmsa(x, y, w, h, scarK = 0, t = 0) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#020617'; ctx.fill();
+  ctx.save(); rr(x, y, w, h, 18); ctx.clip();
+  const s = Math.min(w, h) / 360;
+  const ks = [[x + w * .32, y + h * .5, -1], [x + w * .68, y + h * .5, 1]];
+  ks.forEach(([kx, ky, f], i) => {
+    ctx.save(); kidneyPath(kx, ky, s * 1.35, f);
+    const g = ctx.createRadialGradient(kx, ky, 4, kx, ky, 95 * s * 1.35);
+    g.addColorStop(0, '#7C2D12'); g.addColorStop(.45, '#F97316'); g.addColorStop(.8, '#FDE047'); g.addColorStop(1, '#FEF9C3');
+    ctx.fillStyle = g; ctx.fill(); ctx.clip();
+    // speckle noise
+    const r = rng(11 + i); ctx.fillStyle = 'rgba(0,0,0,.18)';
+    for (let k = 0; k < 160; k++) { ctx.beginPath(); ctx.arc(kx - 90 * s + r() * 180 * s, ky - 110 * s + r() * 220 * s, 2 + r() * 2, 0, 7); ctx.fill(); }
+    if (i === 0 && scarK > 0) {
+      // scars at upper & lower pole (outer cortex)
+      ctx.fillStyle = `rgba(2,6,23,${.92 * eo(scarK)})`;
+      ctx.beginPath(); ctx.ellipse(kx + 34 * s * 1.35 * f, ky - 60 * s * 1.35, 52 * s, 36 * s, .5, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(kx + 46 * s * 1.35 * f, ky + 48 * s * 1.35, 40 * s, 30 * s, -.5, 0, 7); ctx.fill();
+    }
+    ctx.restore();
+  });
+  ctx.restore();
+  txt('L', x + 30, y + 34, { size: 26, weight: 800, color: '#FDE68A' });
+  txt('R', x + w - 30, y + 34, { size: 26, weight: 800, color: '#FDE68A' });
+  txt('posterior', x + w / 2, y + h - 26, { size: 22, weight: 600, color: '#94A3B8' });
+  ctx.restore();
+}
+
+// Ultrasound fan image with kidney (hydronephrosis optional)
+function ultrasound(x, y, w, h, hydro = 0) {
+  ctx.save();
+  rr(x, y, w, h, 18); ctx.fillStyle = '#000'; ctx.fill();
+  const ax = x + w / 2, ay = y + 20, R = h - 40;
+  ctx.save();
+  ctx.beginPath(); ctx.moveTo(ax, ay); ctx.arc(ax, ay, R, Math.PI / 2 - .62, Math.PI / 2 + .62); ctx.closePath(); ctx.clip();
+  ctx.fillStyle = '#2B2B2B'; ctx.fillRect(x, y, w, h);
+  const r = rng(5);
+  for (let i = 0; i < 1400; i++) { ctx.fillStyle = `rgba(220,220,220,${r() * .35})`; ctx.fillRect(x + r() * w, y + r() * h, 2 + r() * 3, 1 + r() * 2); }
+  // kidney: hypoechoic cortex ring, echogenic sinus
+  const kx = ax, ky = ay + R * .58;
+  ctx.beginPath(); ctx.ellipse(kx, ky, w * .26, h * .16, -.15, 0, 7); ctx.fillStyle = 'rgba(70,70,70,.95)'; ctx.fill();
+  ctx.beginPath(); ctx.ellipse(kx, ky, w * .14, h * .07, -.15, 0, 7); ctx.fillStyle = 'rgba(225,225,225,.8)'; ctx.fill();
+  if (hydro > 0) { ctx.beginPath(); ctx.ellipse(kx, ky, w * .10 * hydro, h * .05 * hydro, -.15, 0, 7); ctx.fillStyle = '#050505'; ctx.fill(); }
+  ctx.restore();
+  ctx.restore();
+}
+
+// MCU: bladder + ureters + kidneys; contrast refluxes up (k 0..1)
+function mcu(cx, cy, s, k) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // kidneys outline
+  for (const sd of [-1, 1]) { kidneyPath(sd * 120, -170, .75, sd); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 6; ctx.stroke(); }
+  // ureters
+  for (const sd of [-1, 1]) {
+    ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 16; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(sd * 100, -150); ctx.bezierCurveTo(sd * 90, -40, sd * 60, 20, sd * 40, 80); ctx.stroke();
+  }
+  // bladder
+  ctx.beginPath(); ctx.ellipse(0, 130, 110, 80, 0, 0, 7); ctx.fillStyle = '#1E3A8A'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-14, 205); ctx.lineTo(14, 205); ctx.lineTo(8, 250); ctx.lineTo(-8, 250); ctx.closePath(); ctx.fill();
+  txt('contrast', 0, 132, { size: 26, weight: 700, color: '#DBEAFE' });
+  // reflux up left ureter
+  if (k > 0) {
+    ctx.strokeStyle = '#1E3A8A'; ctx.lineWidth = 14;
+    const N = 40, kk = eo(k);
+    ctx.beginPath();
+    for (let i = 0; i <= N * kk; i++) {
+      const u = 1 - i / N; // from bladder (u=1) upward (u=0)
+      const bx = (1 - u) ** 3 * -100 + 3 * (1 - u) ** 2 * u * -90 + 3 * (1 - u) * u * u * -60 + u ** 3 * -40;
+      const by = (1 - u) ** 3 * -150 + 3 * (1 - u) ** 2 * u * -40 + 3 * (1 - u) * u * u * 20 + u ** 3 * 80;
+      i ? ctx.lineTo(bx, by) : ctx.moveTo(bx, by);
+    }
+    ctx.stroke();
+    if (kk > .95) { ctx.save(); kidneyPath(-120, -170, .75, -1); ctx.clip(); ctx.beginPath(); ctx.ellipse(-110, -170, 30, 44, 0, 0, 7); ctx.fillStyle = 'rgba(30,58,138,.8)'; ctx.fill(); ctx.restore(); }
+  }
+  ctx.restore();
+}
+
+function family(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  [[-40, 0, 26, '#64748B'], [40, 0, 26, '#A855F7'], [0, 20, 18, '#0EA5E9']].forEach(([x, y, r, c]) => {
+    ctx.beginPath(); ctx.arc(x, y - r * 1.6, r * .8, 0, 7); ctx.fillStyle = '#E2B48A'; ctx.fill();
+    rr(x - r, y - r * .6, r * 2, r * 2.4, r); ctx.fillStyle = c; ctx.fill();
+  });
+  ctx.restore();
+}
+function gut(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#FB7185'; ctx.lineWidth = 16; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(-50, -40);
+  ctx.bezierCurveTo(50, -60, 60, -10, -10, -10); ctx.bezierCurveTo(-70, -10, -60, 40, 0, 35); ctx.bezierCurveTo(50, 30, 60, 60, 20, 60);
+  ctx.stroke(); ctx.restore();
+}
+function bulb(cx, cy, s, glow) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  if (glow > 0) { const g = ctx.createRadialGradient(0, -20, 10, 0, -20, 120); g.addColorStop(0, `rgba(253,224,71,${.6 * glow})`); g.addColorStop(1, 'rgba(253,224,71,0)'); ctx.fillStyle = g; ctx.fillRect(-130, -150, 260, 260); }
+  ctx.beginPath(); ctx.arc(0, -20, 56, Math.PI * .8, Math.PI * .2); ctx.lineTo(22, 50); ctx.lineTo(-22, 50); ctx.closePath();
+  ctx.fillStyle = '#FDE047'; ctx.fill(); ctx.strokeStyle = '#CA8A04'; ctx.lineWidth = 6; ctx.stroke();
+  rr(-24, 52, 48, 34, 8); ctx.fillStyle = '#64748B'; ctx.fill();
+  ctx.restore();
+}
+
+/* ---- layout helpers ---- */
+// "why wrong" row
+function optRow(y, k, o, t) {
+  fadeUp(k, () => {
+    card(140, y, 1640, o.h || 200, { fill: '#fff', r: 26, blur: 16 });
+    rr(140, y, 16, o.h || 200, 8); ctx.fillStyle = o.color || C.bad; ctx.fill();
+    o.icon && o.icon(270, y + (o.h || 200) / 2);
+    txt(o.title, 390, y + 58, { size: 46, weight: 900, align: 'left', color: C.ink });
+    para(o.lines, 390, y + 118, { size: 32, weight: 600, align: 'left', color: C.sub, lh: 42 });
+  }, 24);
+}
+function recapStrip(k, label, text) {
+  fadeUp(k, () => {
+    card(260, 130, 1400, 100, { fill: C.kidSoft, r: 50, blur: 8 });
+    txt(label, 330, 180, { size: 30, weight: 800, align: 'left', color: C.kid });
+    txt(text, 560, 180, { size: 32, weight: 700, align: 'left', color: C.ink });
+  }, 16);
+}
+function factRow(x, y, w, k, label, color, soft, icon, checkK) {
+  fadeUp(k, () => {
+    card(x, y - 58, w, 116, { fill: soft, r: 24, blur: 10 });
+    icon && icon(x + 62, y);
+    txt(label, x + (icon ? 120 : 34), y, { size: 36, weight: 800, align: 'left' });
+  }, 20);
+  if (checkK !== undefined) check(x + w - 46, y, 28, color, checkK);
+}
+function answerCard(cx, y, k, title, color, sub) {
+  pop(k, cx, y + 70, () => {
+    let fs = 70; ctx.font = `900 ${fs}px ${FONT}`;
+    while (ctx.measureText(title).width > 1500 && fs > 40) { fs -= 2; ctx.font = `900 ${fs}px ${FONT}`; }
+    const cw = Math.max(1120, ctx.measureText(title).width + 120);
+    card(cx - cw / 2, y, cw, 140, { fill: color, r: 36 });
+    txt(title, cx, y + 72, { size: fs, weight: 900, color: '#fff' });
+  });
+}
+function remember(t, items, title = 'So remember') {
+  fadeUp(P(t, 0, .5), () => {
+    bulb(260, 220, .8, .6 + .4 * Math.sin(t * 2));
+    txt(title, 360, 220, { size: 70, weight: 900, color: C.navy, align: 'left' });
+  });
+  items.forEach((it, i) => it(i));
+}
+
+/* ================= NEUROLOGY illustrations ================= */
+C.neuro = '#4F46E5'; C.neuroSoft = '#E0E7FF';
+C.bili = '#EAB308';
+
+// baby with configurable skin (jaundice), smile on/off, flexion pose 0..1
+function baby2(cx, cy, s, t, o = {}) {
+  const skin = o.skin || '#F2C9A0', flex = o.flex || 0;
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-70, 10, 140, 120, 55); ctx.fillStyle = o.shirt || '#93C5FD'; ctx.fill();
+  rr(-60, 85, 120, 60, 28); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 4; ctx.stroke();
+  // arms: rest -> flexed/raised during spasm (flex) then extended (o.ext)
+  ctx.strokeStyle = skin; ctx.lineWidth = 34; ctx.lineCap = 'round';
+  for (const sd of [-1, 1]) {
+    const ext = o.ext || 0;
+    const ang = lerp(lerp(.9, -.2, flex), -1.2, ext);
+    ctx.beginPath(); ctx.moveTo(sd * 62, 30);
+    ctx.lineTo(sd * (62 + Math.cos(ang) * 70), 30 + Math.sin(ang) * 70 * (ext > 0 ? 1 : 1)); ctx.stroke();
+  }
+  // head nods forward with flexion
+  ctx.save(); ctx.translate(0, 14 * flex); ctx.rotate(0);
+  ctx.beginPath(); ctx.arc(0, -70, 82, 0, 7); ctx.fillStyle = skin; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -138, 14, 0, 7); ctx.fillStyle = '#3F2A1D'; ctx.fill();
+  ctx.fillStyle = C.ink;
+  if (o.sclera) { ctx.fillStyle = '#FDE047'; ctx.beginPath(); ctx.ellipse(-28, -75, 15, 12, 0, 0, 7); ctx.ellipse(28, -75, 15, 12, 0, 0, 7); ctx.fill(); ctx.fillStyle = C.ink; }
+  ctx.beginPath(); ctx.ellipse(-28, -75, 8, 10, 0, 0, 7); ctx.ellipse(28, -75, 8, 10, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath();
+  if (o.smile === false) { ctx.moveTo(-14, -34); ctx.lineTo(14, -34); }
+  else { ctx.moveTo(-16, -40); ctx.quadraticCurveTo(0, -24, 16, -40); }
+  ctx.stroke();
+  ctx.restore();
+  ctx.restore();
+}
+
+// coronal brain section; hl: 'bg' basal ganglia (bilirubin yellow), 'wm' periventricular white matter
+function brainCoronal(cx, cy, s, hl = {}, t = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // hemispheres
+  for (const sd of [-1, 1]) {
+    ctx.beginPath(); ctx.ellipse(sd * 95, -10, 120, 150, 0, 0, 7); ctx.fillStyle = '#F9A8D4'; ctx.fill();
+  }
+  // cortex gyri edge
+  ctx.strokeStyle = '#EC4899'; ctx.lineWidth = 5;
+  for (const sd of [-1, 1]) for (let i = 0; i < 9; i++) {
+    const a = -Math.PI / 2 + sd * (i * .32 - .2);
+    const x = sd * 95 + Math.cos(a) * 112, y = -10 + Math.sin(a) * 140;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - Math.cos(a) * 26, y - Math.sin(a) * 26); ctx.stroke();
+  }
+  // white matter
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sd * 85, -5, 82, 112, 0, 0, 7); ctx.fillStyle = '#FDF2F8'; ctx.fill(); }
+  if (hl.wm) {
+    for (const sd of [-1, 1]) {
+      ctx.beginPath(); ctx.ellipse(sd * 52, -40, 40, 52, sd * .3, 0, 7);
+      ctx.fillStyle = `rgba(59,130,246,${.55 * hl.wm})`; ctx.fill();
+    }
+  }
+  // lateral ventricles
+  ctx.fillStyle = '#334155';
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sd * 28, -42, 14, 40, sd * .35, 0, 7); ctx.fill(); }
+  // basal ganglia (caudate/putamen + globus pallidus)
+  for (const sd of [-1, 1]) {
+    ctx.beginPath(); ctx.ellipse(sd * 72, 30, 26, 42, sd * -.2, 0, 7); ctx.fillStyle = '#C4B5FD'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(sd * 48, 34, 14, 28, sd * -.2, 0, 7); ctx.fillStyle = '#A78BFA'; ctx.fill();
+    if (hl.bg) {
+      const pulse = .8 + .2 * Math.sin(t * 4);
+      const g = ctx.createRadialGradient(sd * 58, 32, 4, sd * 58, 32, 60);
+      g.addColorStop(0, `rgba(250,204,21,${.95 * hl.bg * pulse})`); g.addColorStop(1, 'rgba(250,204,21,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sd * 58, 32, 60, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(sd * 48, 34, 14, 28, sd * -.2, 0, 7); ctx.fillStyle = `rgba(234,179,8,${hl.bg})`; ctx.fill();
+    }
+  }
+  // thalamus + third ventricle + brainstem
+  ctx.fillStyle = '#E9D5FF'; ctx.beginPath(); ctx.ellipse(-20, 70, 20, 26, 0, 0, 7); ctx.ellipse(20, 70, 20, 26, 0, 0, 7); ctx.fill();
+  rr(-28, 110, 56, 90, 24); ctx.fillStyle = '#F9A8D4'; ctx.fill();
+  ctx.restore();
+}
+
+// side-view brain with cerebellum; hl = 'cb' cerebellum
+function brainSide(cx, cy, s, hlCb = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, -20, 160, 110, 0, 0, 7); ctx.fillStyle = '#F9A8D4'; ctx.fill();
+  ctx.strokeStyle = '#EC4899'; ctx.lineWidth = 5;
+  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-120 + i * 45, -110 + Math.abs(i - 2.5) * 12); ctx.quadraticCurveTo(-100 + i * 45, -40, -130 + i * 45, 20); ctx.stroke(); }
+  ctx.beginPath(); ctx.ellipse(95, 85, 70, 45, -.2, 0, 7); ctx.fillStyle = hlCb ? `rgba(16,185,129,${.4 + .6 * hlCb})` : '#F472B6'; ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.6)'; ctx.lineWidth = 4;
+  for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.ellipse(95, 85, 60 - i * 13, 35 - i * 8, -.2, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke(); }
+  rr(10, 60, 40, 110, 18); ctx.fillStyle = '#F9A8D4'; ctx.fill();
+  ctx.restore();
+}
+
+// writhing (athetoid) arm
+function athetoidArm(x, y, s, t) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.strokeStyle = '#F2C9A0'; ctx.lineWidth = 26; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(0, 0);
+  for (let i = 1; i <= 12; i++) { const u = i / 12; ctx.lineTo(u * 200, Math.sin(u * 4 + t * 3) * 34 * u + Math.sin(t * 1.7 + u * 7) * 10 * u); }
+  ctx.stroke();
+  // fingers
+  const ex = 200, ey = Math.sin(4 + t * 3) * 34 + Math.sin(t * 1.7 + 7) * 10;
+  ctx.lineWidth = 9;
+  for (let f = 0; f < 4; f++) { const a = -.6 + f * .4 + Math.sin(t * 4 + f) * .5; ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(ex + Math.cos(a) * 40, ey + Math.sin(a) * 40); ctx.stroke(); }
+  ctx.restore();
+}
+
+// stiff scissoring legs (spastic)
+function spasticLegs(x, y, s) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.strokeStyle = '#F2C9A0'; ctx.lineWidth = 26; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-30, 0); ctx.lineTo(20, 120); ctx.lineTo(10, 220); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(30, 0); ctx.lineTo(-20, 120); ctx.lineTo(-10, 220); ctx.stroke();
+  ctx.restore();
+}
+
+// clock showing minutes elapsed (m of 15)
+function timer(cx, cy, r, m, max = 15) {
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 8; ctx.strokeStyle = C.ink; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r - 14, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (m / max)); ctx.closePath();
+  ctx.fillStyle = 'rgba(16,185,129,.55)'; ctx.fill();
+  txt(`${Math.round(m)} min`, cx, cy + 4, { size: r * .42, weight: 900, color: C.ink });
+  ctx.restore();
+}
+
+// face with ptosis (droop 0..1); rash: 'helio' purple eyelids, 'malar' butterfly
+function face2(cx, cy, s, o = {}) {
+  const droop = o.droop || 0;
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = o.skin || '#EDBF93';
+  ctx.beginPath(); ctx.ellipse(-150, 10, 26, 40, 0, 0, 7); ctx.ellipse(150, 10, 26, 40, 0, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(0, 0, 150, 170, 0, 0, 7); ctx.fillStyle = '#F2C9A0'; ctx.fill();
+  // hair (girl: long sides)
+  ctx.fillStyle = '#3F2A1D';
+  if (o.girl) { rr(-170, -90, 50, 260, 25); ctx.fill(); rr(120, -90, 50, 260, 25); ctx.fill(); }
+  ctx.beginPath(); ctx.ellipse(0, -60, 158, 125, 0, Math.PI * 1.02, Math.PI * 1.98);
+  ctx.quadraticCurveTo(80, -110, 0, -95); ctx.quadraticCurveTo(-80, -110, -150, -70); ctx.closePath(); ctx.fill();
+  if (o.malar) {
+    ctx.fillStyle = `rgba(225,29,72,${.45 * o.malar})`;
+    ctx.beginPath(); ctx.moveTo(0, 40); ctx.bezierCurveTo(-30, 0, -120, 10, -100, 70); ctx.bezierCurveTo(-80, 100, -20, 80, 0, 50);
+    ctx.bezierCurveTo(20, 80, 80, 100, 100, 70); ctx.bezierCurveTo(120, 10, 30, 0, 0, 40); ctx.fill();
+  }
+  for (const sd of [-1, 1]) {
+    const ex = sd * 58;
+    if (o.helio) {
+      const g = ctx.createRadialGradient(ex, -14, 4, ex, -14, 60);
+      g.addColorStop(0, `rgba(147,51,234,${.75 * o.helio})`); g.addColorStop(1, 'rgba(147,51,234,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(ex, -10, 60, 44, 0, 0, 7); ctx.fill();
+    }
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.ellipse(ex, 0, 28, 15, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(ex, 2, 11, 0, 7); ctx.fill();
+    // upper lid covering eye proportional to droop
+    ctx.save(); ctx.beginPath(); ctx.ellipse(ex, 0, 30, 17, 0, 0, 7); ctx.clip();
+    ctx.fillStyle = o.helio ? '#C084FC' : '#E8B48C'; ctx.fillRect(ex - 32, -18, 64, 6 + 30 * droop);
+    ctx.restore();
+    ctx.strokeStyle = '#3F2A1D'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(ex - 28, -48 + 8 * droop); ctx.quadraticCurveTo(ex, -58 + 10 * droop, ex + 28, -48 + 8 * droop); ctx.stroke();
+  }
+  ctx.strokeStyle = '#C08A62'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, 30); ctx.quadraticCurveTo(10, 55, -4, 62); ctx.stroke();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 6; ctx.beginPath();
+  if (droop > .5) { ctx.moveTo(-26, 106); ctx.quadraticCurveTo(0, 98, 26, 106); } else { ctx.moveTo(-28, 100); ctx.quadraticCurveTo(0, 116, 28, 100); }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function moon(cx, cy, r) {
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = '#FDE68A'; ctx.fill();
+  ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(cx + r * .45, cy - r * .3, r * .85, 0, 7); ctx.fill();
+  ctx.restore();
+}
+
+// neuromuscular junction with ACh + receptors; ab = antibodies binding 0..1
+function nmj(cx, cy, s, ab, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // nerve terminal
+  ctx.beginPath(); ctx.moveTo(-60, -260); ctx.lineTo(60, -260); ctx.lineTo(60, -120); ctx.quadraticCurveTo(140, -110, 140, -40); ctx.lineTo(-140, -40); ctx.quadraticCurveTo(-140, -110, -60, -120); ctx.closePath();
+  ctx.fillStyle = '#FDE68A'; ctx.fill(); ctx.strokeStyle = '#CA8A04'; ctx.lineWidth = 5; ctx.stroke();
+  txt('Nerve', 0, -200, { size: 30, weight: 800, color: '#92400E' });
+  // vesicles
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.arc(-90 + i * 45, -80, 16, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#CA8A04'; ctx.stroke(); }
+  // muscle
+  rr(-260, 40, 520, 160, 30); ctx.fillStyle = '#FCA5A5'; ctx.fill();
+  ctx.strokeStyle = 'rgba(185,28,28,.3)'; ctx.lineWidth = 4;
+  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-250, 80 + i * 20); ctx.lineTo(250, 80 + i * 20); ctx.stroke(); }
+  txt('Muscle', 0, 160, { size: 30, weight: 800, color: '#7F1D1D' });
+  // receptors
+  for (let i = 0; i < 6; i++) {
+    const x = -150 + i * 60;
+    rr(x - 12, 24, 24, 26, 6); ctx.fillStyle = '#2563EB'; ctx.fill();
+  }
+  // ACh molecules drifting
+  for (let i = 0; i < 8; i++) {
+    const ph = (t * .6 + i / 8) % 1, x = -140 + (i * 37) % 280, y = -36 + ph * 56;
+    ctx.beginPath(); ctx.arc(x, y, 6, 0, 7); ctx.fillStyle = '#16A34A'; ctx.fill();
+  }
+  // antibodies (Y) docking on receptors
+  if (ab > 0) {
+    for (let i = 0; i < 6; i++) {
+      if (i % 3 === 2) continue;
+      const k = clamp(ab * 1.4 - i * .08);
+      const x = -150 + i * 60, y = lerp(-20, 4, eo(k));
+      ctx.save(); ctx.globalAlpha *= eo(k); ctx.translate(x, y); ctx.strokeStyle = '#DC2626'; ctx.lineWidth = 7; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(0, 18); ctx.lineTo(0, -4); ctx.lineTo(-14, -22); ctx.moveTo(0, -4); ctx.lineTo(14, -22); ctx.stroke();
+      ctx.restore();
+    }
+  }
+  ctx.restore();
+}
+
+// RNS decrement bars
+function rns(x, y, w, h, k) {
+  ctx.save();
+  const amps = [1, .82, .68, .58, .54];
+  amps.forEach((a, i) => {
+    const kk = eo(clamp(k * 5 - i));
+    const bx = x + i * (w / 5) + w / 20, bh = h * a * kk;
+    rr(bx, y + h - bh, w / 10, Math.max(bh, 1), 8); ctx.fillStyle = i ? C.neuro : C.ok; ctx.fill();
+  });
+  ctx.strokeStyle = C.mute; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x, y + h); ctx.lineTo(x + w, y + h); ctx.stroke();
+  ctx.restore();
+}
+
+// stairs + chair + arms-up icons for proximal weakness
+function stairs(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#CBD5E1';
+  for (let i = 0; i < 4; i++) ctx.fillRect(-80 + i * 40, 40 - i * 30, 40, 30 + i * 30);
+  ctx.restore();
+}
+function chair(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#92400E'; ctx.lineWidth = 12; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-40, -70); ctx.lineTo(-40, 60); ctx.moveTo(-40, 0); ctx.lineTo(40, 0); ctx.lineTo(40, 60); ctx.stroke();
+  ctx.restore();
+}
+// body outline with proximal muscle highlight (shoulders + hips)
+function bodyProximal(cx, cy, s, k, girl = true) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#CBD5E1';
+  ctx.beginPath(); ctx.arc(0, -230, 50, 0, 7); ctx.fill();
+  rr(-80, -170, 160, 210, 50); ctx.fill();
+  rr(-130, -160, 44, 190, 22); ctx.fill(); rr(86, -160, 44, 190, 22); ctx.fill();
+  rr(-70, 30, 58, 230, 26); ctx.fill(); rr(12, 30, 58, 230, 26); ctx.fill();
+  if (k > 0) {
+    ctx.fillStyle = `rgba(220,38,38,${.6 * eo(k)})`;
+    for (const sd of [-1, 1]) {
+      ctx.beginPath(); ctx.ellipse(sd * 100, -140, 42, 46, 0, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(sd * 42, 50, 46, 60, 0, 0, 7); ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+// dorsal hand with Gottron papules over knuckles
+function hand(cx, cy, s, rash) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#F2C9A0';
+  rr(-110, -20, 220, 170, 50); ctx.fill();
+  for (let i = 0; i < 4; i++) { rr(-104 + i * 54, -150, 46, 150, 23); ctx.fill(); }
+  ctx.save(); ctx.translate(120, 80); ctx.rotate(-.7); rr(-22, -100, 44, 120, 22); ctx.fill(); ctx.restore();
+  ctx.strokeStyle = 'rgba(160,110,80,.5)'; ctx.lineWidth = 3;
+  for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-96 + i * 54, -70); ctx.lineTo(-66 + i * 54, -70); ctx.stroke(); }
+  if (rash > 0) {
+    for (let i = 0; i < 4; i++) {
+      const kx = -81 + i * 54;
+      ctx.fillStyle = `rgba(190,24,93,${.75 * eo(rash)})`;
+      for (let j = 0; j < 5; j++) { ctx.beginPath(); ctx.arc(kx - 12 + (j % 3) * 12, -6 + Math.floor(j / 3) * 12, 7, 0, 7); ctx.fill(); }
+      for (let j = 0; j < 3; j++) { ctx.beginPath(); ctx.arc(kx - 8 + j * 8, -72, 6, 0, 7); ctx.fill(); }
+    }
+  }
+  ctx.restore();
+}
+function knee(cx, cy, s, swell) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#F2C9A0'; ctx.lineWidth = 60; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0, -140); ctx.lineTo(0, 140); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(0, 0, 40 + 22 * swell, 46 + 20 * swell, 0, 0, 7); ctx.fillStyle = swell ? '#F87171' : '#F2C9A0'; ctx.fill();
+  ctx.restore();
+}
+
+// EEG traces. type: 'hyps' | 'ssw' | '3hz' | 'poly' | 'focal' | 'normal'
+function eeg(x, y, w, h, type, t, k = 1, ch = 4) {
+  ctx.save();
+  rr(x, y, w, h, 16); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.save(); rr(x, y, w, h, 16); ctx.clip();
+  ctx.strokeStyle = '#F1F5F9'; ctx.lineWidth = 2;
+  for (let gx = x; gx < x + w; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, y); ctx.lineTo(gx, y + h); ctx.stroke(); }
+  const lh = h / ch, N = Math.floor(w * k);
+  for (let c = 0; c < ch; c++) {
+    const r = rng(31 + c * 7 + type.length * 3), base = y + lh * (c + .5);
+    ctx.strokeStyle = type === 'hyps' ? '#B91C1C' : C.ink; ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    let spikeAt = []; for (let i = 0; i < 40; i++) spikeAt.push(r());
+    for (let i = 0; i <= N; i += 2) {
+      const u = i / w; let v = 0;
+      if (type === 'hyps') {
+        v = Math.sin(u * 22 + c) * .55 + Math.sin(u * 9.3 + c * 2) * .45 + (r() - .5) * .5;
+        for (const sa of spikeAt.slice(0, 7)) if (Math.abs(u - sa) < .006) v += (r() > .5 ? 1.6 : -1.6);
+        v *= 1.0;
+      } else if (type === '3hz') {
+        const ph = (u * 18) % 1; v = ph < .12 ? -1.4 * Math.sin(ph / .12 * Math.PI) : .8 * Math.sin((ph - .12) / .88 * Math.PI) ;
+      } else if (type === 'ssw') {
+        const ph = (u * 13) % 1; v = ph < .2 ? -1.0 * Math.sin(ph / .2 * Math.PI) : .6 * Math.sin((ph - .2) / .8 * Math.PI);
+      } else if (type === 'poly') {
+        const ph = (u * 9) % 1; v = ph < .3 ? Math.sin(ph / .3 * Math.PI * 7) * 1.2 : .5 * Math.sin((ph - .3) / .7 * Math.PI) + (r() - .5) * .1;
+        if (u % 0.5 > .25) v = Math.sin(u * 60) * .15 + (r() - .5) * .1;
+      } else if (type === 'focal') {
+        v = Math.sin(u * 40 + c) * .2 + (r() - .5) * .15;
+        if (c === 1) { const ph = (u * 5) % 1; if (ph < .05) v -= Math.sin(ph / .05 * Math.PI) * 1.4; }
+      } else { v = Math.sin(u * 50 + c) * .18 + (r() - .5) * .12; }
+      const amp = type === 'hyps' ? lh * .42 : lh * .3;
+      const px = x + i, py = base + v * amp;
+      i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+  ctx.restore();
+}
+
+function ctScanner(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.arc(0, 0, 70, 0, 7); ctx.fillStyle = '#E2E8F0'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, 0, 34, 0, 7); ctx.fillStyle = '#fff'; ctx.fill();
+  rr(-110, 20, 220, 22, 10); ctx.fillStyle = '#94A3B8'; ctx.fill();
+  txt('CT', 0, -46, { size: 26, weight: 900, color: C.navy });
+  ctx.restore();
+}
+function vial(cx, cy, s, label, color) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-26, -96, 52, 24, 6); ctx.fillStyle = '#94A3B8'; ctx.fill();
+  rr(-40, -74, 80, 160, 18); ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.save(); rr(-40, -74, 80, 160, 18); ctx.clip(); ctx.fillStyle = color; ctx.globalAlpha *= .4; ctx.fillRect(-40, 10, 80, 80); ctx.restore();
+  txt(label, 0, -20, { size: 22, weight: 900, color: C.ink });
+  ctx.restore();
+}
+function speech(x, y, w, h, text, color) {
+  ctx.save();
+  rr(x, y, w, h, 30); ctx.fillStyle = color; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x + 50, y + h); ctx.lineTo(x + 40, y + h + 40); ctx.lineTo(x + 90, y + h); ctx.closePath(); ctx.fill();
+  txt(text, x + w / 2, y + h / 2 + 2, { size: 40, weight: 900, color: '#fff' });
+  ctx.restore();
+}
+function doctor(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-80, -10, 160, 210, 64); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-30, 0); ctx.quadraticCurveTo(-40, 80, 0, 90); ctx.quadraticCurveTo(40, 80, 30, 0); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 96, 10, 0, 7); ctx.fillStyle = '#334155'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -78, 64, 0, 7); ctx.fillStyle = '#D9A877'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -92, 66, Math.PI * 1.08, Math.PI * 1.92); ctx.closePath(); ctx.fillStyle = '#1F2937'; ctx.fill();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-22, -78, 6, 0, 7); ctx.arc(22, -78, 6, 0, 7); ctx.fill();
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-18, -46); ctx.quadraticCurveTo(0, -34, 18, -46); ctx.stroke();
+  ctx.restore();
+}
+function chip(x, y, text, color, soft, k, size = 34) {
+  ctx.font = `800 ${size}px ${FONT}`; const w = ctx.measureText(text).width + 60;
+  fadeUp(k, () => {
+    card(x, y - size * 1.2, w, size * 2.4, { fill: soft, stroke: color, lw: 3, r: size * 1.2, blur: 0 });
+    txt(text, x + w / 2, y + 2, { size, weight: 800, color });
+  }, 14);
+  return w;
+}
+function chipRow(x, y, items, t, size = 34, gap = 24) {
+  let cx = x;
+  items.forEach(([text, color, soft, s]) => { cx += chip(cx, y, text, color, soft, P(t, s, .45), size) + gap; });
+}
+
+/* ================= REVISION NOTES: icons ================= */
+C.sci = '#2563EB'; C.sciSoft = '#DBEAFE';
+C.mot = '#EA580C'; C.motSoft = '#FFEDD5';
+C.farm = '#16A34A'; C.farmSoft = '#DCFCE7';
+
+function background(T) {
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, C.bg1); g.addColorStop(1, C.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(30,58,138,.05)';
+  for (let x = 40; x < W; x += 60) for (let y = 40; y < H; y += 60) { ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); }
+}
+
+function stopwatch(cx, cy, r, t, color = C.sci) {
+  ctx.save();
+  rr(cx - r * .16, cy - r * 1.32, r * .32, r * .22, 6); ctx.fillStyle = color; ctx.fill();
+  ctx.lineWidth = r * .12; ctx.strokeStyle = color; ctx.beginPath(); ctx.moveTo(cx + r * .7, cy - r * .7); ctx.lineTo(cx + r * .86, cy - r * .86); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = r * .1; ctx.stroke();
+  for (let i = 0; i < 60; i++) {
+    const a = i / 60 * Math.PI * 2, l = i % 5 ? .08 : .16;
+    ctx.strokeStyle = C.ink; ctx.lineWidth = i % 5 ? 2 : 5;
+    ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * r * .86, cy + Math.sin(a) * r * .86); ctx.lineTo(cx + Math.cos(a) * r * (.86 - l), cy + Math.sin(a) * r * (.86 - l)); ctx.stroke();
+  }
+  const a = -Math.PI / 2 + Math.floor(t) / 60 * Math.PI * 2;
+  ctx.strokeStyle = C.bad; ctx.lineWidth = r * .05; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * r * .72, cy + Math.sin(a) * r * .72); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, r * .07, 0, 7); ctx.fillStyle = C.bad; ctx.fill();
+  ctx.restore();
+}
+
+function carIcon(cx, cy, s, color = C.mot, t = 0, moving = false) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-110, 10); ctx.lineTo(-100, -30); ctx.lineTo(-50, -34); ctx.lineTo(-20, -70); ctx.lineTo(50, -70); ctx.lineTo(80, -34); ctx.lineTo(110, -26); ctx.lineTo(115, 10); ctx.closePath();
+  ctx.fillStyle = color; ctx.fill();
+  ctx.fillStyle = '#BFDBFE'; ctx.beginPath(); ctx.moveTo(-12, -62); ctx.lineTo(12, -62); ctx.lineTo(12, -36); ctx.lineTo(-38, -36); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(22, -62); ctx.lineTo(46, -62); ctx.lineTo(68, -36); ctx.lineTo(22, -36); ctx.closePath(); ctx.fill();
+  for (const wx of [-60, 64]) {
+    ctx.beginPath(); ctx.arc(wx, 12, 24, 0, 7); ctx.fillStyle = '#1F2937'; ctx.fill();
+    ctx.beginPath(); ctx.arc(wx, 12, 10, 0, 7); ctx.fillStyle = '#CBD5E1'; ctx.fill();
+    if (moving) { ctx.strokeStyle = '#1F2937'; ctx.lineWidth = 3; const a = -t * 8; ctx.beginPath(); ctx.moveTo(wx, 12); ctx.lineTo(wx + Math.cos(a) * 10, 12 + Math.sin(a) * 10); ctx.stroke(); }
+  }
+  if (moving) { ctx.strokeStyle = 'rgba(100,116,139,.5)'; ctx.lineWidth = 5; ctx.lineCap = 'round'; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(-130 - i * 6, -40 + i * 18); ctx.lineTo(-170 - i * 10, -40 + i * 18); ctx.stroke(); } }
+  ctx.restore();
+}
+function tree(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-10, -20, 20, 70, 6); ctx.fillStyle = '#92400E'; ctx.fill();
+  ctx.fillStyle = '#22C55E'; ctx.beginPath(); ctx.arc(0, -50, 40, 0, 7); ctx.arc(-26, -26, 28, 0, 7); ctx.arc(26, -26, 28, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function bookTable(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-160, 0, 320, 24, 8); ctx.fillStyle = '#B45309'; ctx.fill();
+  ctx.fillStyle = '#92400E'; ctx.fillRect(-140, 24, 18, 120); ctx.fillRect(122, 24, 18, 120);
+  rr(-70, -40, 140, 40, 6); ctx.fillStyle = '#2563EB'; ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.fillRect(-62, -10, 124, 6);
+  rr(-60, -60, 120, 22, 5); ctx.fillStyle = '#DC2626'; ctx.fill();
+  ctx.restore();
+}
+function pin(x, y, color) {
+  ctx.save(); ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(x, y - 30, 16, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(x - 12, y - 22); ctx.lineTo(x, y); ctx.lineTo(x + 12, y - 22); ctx.fill();
+  ctx.beginPath(); ctx.arc(x, y - 30, 6, 0, 7); ctx.fillStyle = '#fff'; ctx.fill();
+  ctx.restore();
+}
+function road(x, y, w) {
+  ctx.save(); rr(x, y, w, 70, 12); ctx.fillStyle = '#475569'; ctx.fill();
+  ctx.strokeStyle = '#F8FAFC'; ctx.lineWidth = 5; ctx.setLineDash([30, 24]);
+  ctx.beginPath(); ctx.moveTo(x + 10, y + 35); ctx.lineTo(x + w - 10, y + 35); ctx.stroke(); ctx.restore();
+}
+function speedoDial(cx, cy, r, kmh, t) {
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fillStyle = '#0F172A'; ctx.fill();
+  ctx.lineWidth = 6; ctx.strokeStyle = '#334155'; ctx.stroke();
+  for (let v = 0; v <= 120; v += 10) {
+    const a = Math.PI * .75 + v / 120 * Math.PI * 1.5;
+    ctx.strokeStyle = '#E2E8F0'; ctx.lineWidth = v % 20 ? 2 : 4;
+    ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * r * .88, cy + Math.sin(a) * r * .88); ctx.lineTo(cx + Math.cos(a) * r * .76, cy + Math.sin(a) * r * .76); ctx.stroke();
+    if (v % 20 === 0) txt(String(v), cx + Math.cos(a) * r * .62, cy + Math.sin(a) * r * .62, { size: r * .12, weight: 700, color: '#E2E8F0' });
+  }
+  const a = Math.PI * .75 + clamp(kmh / 120) * Math.PI * 1.5;
+  ctx.strokeStyle = '#F97316'; ctx.lineWidth = r * .05; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * r * .8, cy + Math.sin(a) * r * .8); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, r * .08, 0, 7); ctx.fillStyle = '#F97316'; ctx.fill();
+  txt('km/h', cx, cy + r * .5, { size: r * .16, weight: 800, color: '#F97316' });
+  ctx.restore();
+}
+function odometer(cx, cy, s, value) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-210, -60, 420, 120, 16); ctx.fillStyle = '#0F172A'; ctx.fill();
+  const str = String(Math.floor(value)).padStart(6, '0'), frac = value % 1;
+  for (let i = 0; i < 6; i++) {
+    const x = -180 + i * 62;
+    rr(x, -44, 54, 88, 8); ctx.fillStyle = '#F8FAFC'; ctx.fill();
+    ctx.save(); rr(x, -44, 54, 88, 8); ctx.clip();
+    const d = +str[i], roll = i === 5 ? frac : 0;
+    txt(String(d), x + 27, 4 - roll * 80, { size: 56, weight: 900, color: C.ink });
+    txt(String((d + 1) % 10), x + 27, 84 - roll * 80, { size: 56, weight: 900, color: C.ink });
+    ctx.restore();
+  }
+  txt('km', 0, 92, { size: 34, weight: 900, color: C.mot });
+  ctx.restore();
+}
+function cyclist(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 6;
+  for (const wx of [-60, 60]) { ctx.beginPath(); ctx.arc(wx, 40, 40, 0, 7); ctx.stroke(); }
+  ctx.strokeStyle = C.mot; ctx.lineWidth = 8; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-60, 40); ctx.lineTo(-10, 40); ctx.lineTo(30, -10); ctx.lineTo(-30, -10); ctx.lineTo(-10, 40); ctx.moveTo(30, -10); ctx.lineTo(60, 40); ctx.moveTo(30, -10); ctx.lineTo(26, -30); ctx.stroke();
+  // rider
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 12;
+  ctx.beginPath(); ctx.moveTo(-26, -20); ctx.lineTo(0, -80); ctx.lineTo(26, -32); ctx.stroke();
+  const a = t * 5; ctx.lineWidth = 10;
+  ctx.beginPath(); ctx.moveTo(-26, -20); ctx.lineTo(-10 + Math.cos(a) * 18, 40 + Math.sin(a) * 18); ctx.stroke();
+  ctx.beginPath(); ctx.arc(6, -104, 20, 0, 7); ctx.fillStyle = '#E2B48A'; ctx.fill();
+  ctx.restore();
+}
+function soil(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-110, -10, 220, 80, 14); ctx.fillStyle = '#92400E'; ctx.fill();
+  ctx.fillStyle = '#B45309';
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.ellipse(-88 + i * 44, -8, 20, 12, 0, Math.PI, 0); ctx.fill(); }
+  ctx.strokeStyle = '#78350F'; ctx.lineWidth = 4;
+  for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(-100, 20 + i * 16); ctx.lineTo(100, 20 + i * 16); ctx.stroke(); }
+  ctx.restore();
+}
+function sprout(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-80, 30, 160, 40, 12); ctx.fillStyle = '#92400E'; ctx.fill();
+  ctx.strokeStyle = '#15803D'; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(0, 32); ctx.lineTo(0, -60); ctx.stroke();
+  ctx.fillStyle = '#22C55E';
+  ctx.beginPath(); ctx.ellipse(-28, -30, 30, 14, -.5, 0, 7); ctx.ellipse(28, -50, 30, 14, .5, 0, 7); ctx.ellipse(-22, -70, 24, 11, -.6, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function cow(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#F8FAFC'; ctx.strokeStyle = '#334155'; ctx.lineWidth = 4;
+  for (const lx of [-60, -30, 40, 66]) { rr(lx - 8, 20, 16, 60, 6); ctx.fill(); ctx.stroke(); }
+  ctx.beginPath(); ctx.ellipse(0, 0, 95, 50, 0, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#1F2937'; ctx.beginPath(); ctx.ellipse(-30, -12, 22, 16, .3, 0, 7); ctx.ellipse(34, 12, 18, 13, -.2, 0, 7); ctx.fill();
+  ctx.fillStyle = '#F8FAFC'; ctx.beginPath(); ctx.ellipse(110, -30, 34, 28, .2, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#FBCFE8'; ctx.beginPath(); ctx.ellipse(132, -18, 16, 12, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(108, -38, 4, 0, 7); ctx.fill();
+  ctx.strokeStyle = '#A16207'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(96, -54); ctx.lineTo(88, -72); ctx.moveTo(116, -56); ctx.lineTo(122, -74); ctx.stroke();
+  ctx.restore();
+}
+function apple(cx, cy, s) { ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.fillStyle = '#EF4444'; ctx.beginPath(); ctx.arc(-14, 0, 30, 0, 7); ctx.arc(14, 0, 30, 0, 7); ctx.fill(); ctx.strokeStyle = '#78350F'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(0, -24); ctx.lineTo(4, -42); ctx.stroke(); ctx.fillStyle = '#22C55E'; ctx.beginPath(); ctx.ellipse(16, -40, 14, 7, -.4, 0, 7); ctx.fill(); ctx.restore(); }
+function carrot(cx, cy, s) { ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.fillStyle = '#F97316'; ctx.beginPath(); ctx.moveTo(-18, -30); ctx.lineTo(18, -30); ctx.lineTo(0, 50); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#22C55E'; ctx.beginPath(); ctx.ellipse(-8, -42, 7, 16, -.4, 0, 7); ctx.ellipse(8, -42, 7, 16, .4, 0, 7); ctx.fill(); ctx.restore(); }
+function flower(cx, cy, s, color = '#EC4899') {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#15803D'; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 80); ctx.stroke();
+  ctx.fillStyle = '#22C55E'; ctx.beginPath(); ctx.ellipse(16, 50, 18, 8, -.5, 0, 7); ctx.fill();
+  ctx.fillStyle = color;
+  for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; ctx.beginPath(); ctx.ellipse(Math.cos(a) * 24, Math.sin(a) * 24, 20, 12, a, 0, 7); ctx.fill(); }
+  ctx.beginPath(); ctx.arc(0, 0, 13, 0, 7); ctx.fillStyle = '#FACC15'; ctx.fill();
+  ctx.restore();
+}
+function silkworm(cx, cy, s, t = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  for (let i = 6; i >= 0; i--) { const y = Math.sin(t * 3 + i * .8) * 6; ctx.beginPath(); ctx.arc(-60 + i * 20, y, 18 - (i === 6 ? 0 : 0), 0, 7); ctx.fillStyle = '#F1F5F9'; ctx.fill(); ctx.strokeStyle = '#CBD5E1'; ctx.lineWidth = 3; ctx.stroke(); }
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(66, Math.sin(t * 3 + 4.8) * 6 - 4, 3, 0, 7); ctx.fill();
+  // cocoon
+  ctx.beginPath(); ctx.ellipse(10, 70, 46, 28, 0, 0, 7); ctx.fillStyle = '#FEF9C3'; ctx.fill(); ctx.strokeStyle = '#EAB308'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.strokeStyle = 'rgba(234,179,8,.6)'; ctx.lineWidth = 2;
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.ellipse(10, 70, 40 - i * 7, 22 - i * 4, .3 * i, 0, 7); ctx.stroke(); }
+  ctx.restore();
+}
+function bee(cx, cy, s, t = 0) {
+  ctx.save(); ctx.translate(cx, cy + Math.sin(t * 4) * 6); ctx.scale(s, s);
+  ctx.fillStyle = 'rgba(219,234,254,.9)'; const w = .8 + .2 * Math.sin(t * 30);
+  ctx.beginPath(); ctx.ellipse(-12, -40, 26, 38 * w, -.4, 0, 7); ctx.ellipse(16, -40, 26, 38 * w, .4, 0, 7); ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.ellipse(0, 0, 62, 40, 0, 0, 7); ctx.clip();
+  ctx.fillStyle = '#FACC15'; ctx.fillRect(-70, -50, 140, 100);
+  ctx.fillStyle = '#1F2937'; for (let i = 0; i < 3; i++) ctx.fillRect(-30 + i * 30, -50, 14, 100);
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(66, -4, 22, 0, 7); ctx.fillStyle = '#1F2937'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-62, 0); ctx.lineTo(-84, 0); ctx.lineTo(-62, 10); ctx.fill();
+  ctx.restore();
+}
+function hive(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.fillStyle = '#F59E0B';
+  for (let i = 0; i < 4; i++) rr(-60 + i * 6, -60 + i * 30, 120 - i * 12, 30, 15), ctx.fill();
+  ctx.fillStyle = '#78350F'; ctx.beginPath(); ctx.arc(0, 36, 10, 0, 7); ctx.fill();
+  ctx.restore();
+}
+function fishIcon(cx, cy, s, t = 0, color = '#0EA5E9') {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.rotate(Math.sin(t * 2) * .08);
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.ellipse(0, 0, 70, 36, 0, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(60, 0); ctx.lineTo(110, -34 + Math.sin(t * 6) * 6); ctx.lineTo(110, 34 + Math.sin(t * 6) * 6); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.arc(-40, -8, 8, 0, 7); ctx.fillStyle = '#fff'; ctx.fill(); ctx.beginPath(); ctx.arc(-40, -8, 4, 0, 7); ctx.fillStyle = C.ink; ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 3; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(-6 + i * 20, 0, 18, -1, 1); ctx.stroke(); }
+  ctx.restore();
+}
+function grapes(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.strokeStyle = '#78350F'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(0, -70); ctx.lineTo(4, -50); ctx.stroke();
+  ctx.fillStyle = '#22C55E'; ctx.beginPath(); ctx.ellipse(26, -66, 24, 12, -.3, 0, 7); ctx.fill();
+  const rows = [4, 3, 3, 2, 1];
+  rows.forEach((n, r) => { for (let i = 0; i < n; i++) { const x = (i - (n - 1) / 2) * 30, y = -36 + r * 26; ctx.beginPath(); ctx.arc(x, y, 16, 0, 7); ctx.fillStyle = '#7C3AED'; ctx.fill(); ctx.beginPath(); ctx.arc(x - 5, y - 5, 4, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.fill(); } });
+  ctx.restore();
+}
+function watermelon(cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.arc(0, 0, 110, 0, Math.PI); ctx.closePath(); ctx.fillStyle = '#15803D'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, 0, 98, 0, Math.PI); ctx.closePath(); ctx.fillStyle = '#BBF7D0'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, 0, 88, 0, Math.PI); ctx.closePath(); ctx.fillStyle = '#EF4444'; ctx.fill();
+  ctx.fillStyle = '#1F2937';
+  [[-50, 20], [-20, 46], [16, 30], [44, 52], [56, 18], [-8, 70], [-44, 52]].forEach(([x, y]) => { ctx.beginPath(); ctx.ellipse(x, y, 5, 9, .3, 0, 7); ctx.fill(); });
+  ctx.restore();
+}
+
+/* ---- generic templates ---- */
+function partTitle(t, part, title, color, icon) {
+  pop(P(t, .1, .7), W / 2, 300, () => {
+    icon && icon(W / 2, 230);
+    txt(part, W / 2, 400, { size: 44, weight: 800, color: C.sub });
+    txt(title, W / 2, 490, { size: 88, weight: 900, color });
+  });
+}
+// rows of recap: rows = [[lineIdx, left, right, color, icon]]
+function recapRows(t, Q, title, rows, y0 = 230, rh = 150) {
+  fadeUp(P(t, 0, .5), () => txt(title, W / 2, 165, { size: 64, weight: 900, color: C.navy }));
+  rows.forEach(([li, q, a, c, ic], i) => {
+    const y = y0 + i * rh;
+    fadeUp(P(t, Q(li) + (i > 0 && rows[i - 1][0] === li ? 1.2 : 0), .5), () => {
+      card(120, y, 1680, rh - 22, { fill: '#fff', r: 24 });
+      rr(120, y, 14, rh - 22, 7); ctx.fillStyle = c; ctx.fill();
+      ic && ic(230, y + (rh - 22) / 2);
+      txt(q, 330, y + (rh - 22) / 2, { size: 38, weight: 800, align: 'left' });
+      txt(a, 1770, y + (rh - 22) / 2, { size: 40, weight: 900, align: 'right', color: c });
+    }, 16);
+  });
+}
+// Q/A flashcards: pairs = [[qLine, aLine, question, answer, icon?]]
+function qaCards(t, Q, pairs, color, opts = {}) {
+  // find current pair
+  let cur = -1; pairs.forEach((p, i) => { if (t >= Q(p[0]) - .2) cur = i; });
+  // progress dots
+  const n = pairs.length, dx = Math.min(56, 1400 / n);
+  pairs.forEach((p, i) => {
+    const x = W / 2 - (n - 1) * dx / 2 + i * dx, done = t >= Q(p[1]);
+    ctx.beginPath(); ctx.arc(x, 980, i === cur ? 14 : 10, 0, 7); ctx.fillStyle = done ? color : (i === cur ? C.warn : '#CBD5E1'); ctx.fill();
+  });
+  if (cur < 0) return;
+  const [ql, al, q, a, ic] = pairs[cur];
+  const k = P(t, Q(ql) - .2, .45), ak = P(t, Q(al), .45);
+  // question card
+  pop(k, W / 2, 400, () => {
+    card(260, 200, 1400, 400, { fill: '#fff', stroke: color, lw: 5, r: 36 });
+    rr(300, 170, 200, 60, 30); ctx.fillStyle = color; ctx.fill();
+    txt(opts.qLabel || 'Sawal', 400, 201, { size: 30, weight: 900, color: '#fff' });
+    if (ic) { ic(470, 400); }
+    let fs = 70; ctx.font = `900 ${fs}px ${FONT}`;
+    const maxW = ic ? 1000 : 1260;
+    while (ctx.measureText(q).width > maxW && fs > 40) { fs -= 2; ctx.font = `900 ${fs}px ${FONT}`; }
+    txt(q, ic ? 1060 : W / 2, 400, { size: fs, weight: 900, color: C.ink });
+  });
+  // thinking indicator during the pause
+  if (t > Q(ql) + .3 && ak <= 0) {
+    const ph = (t * 1.5) % 1;
+    ctx.save(); ctx.globalAlpha = .9;
+    for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(W / 2 - 40 + i * 40, 720, 12 + 6 * Math.max(0, Math.sin((ph - i * .2) * Math.PI * 2)), 0, 7); ctx.fillStyle = C.warn; ctx.fill(); }
+    txt('Ruko... khud jawab bolo', W / 2, 800, { size: 38, weight: 800, color: C.warn });
+    ctx.restore();
+  }
+  pop(ak, W / 2, 750, () => {
+    ctx.font = `900 64px ${FONT}`; let fs = 64;
+    while (ctx.measureText(a).width > 1300 && fs > 36) { fs -= 2; ctx.font = `900 ${fs}px ${FONT}`; }
+    const w = Math.max(500, ctx.measureText(a).width + 160);
+    card(W / 2 - w / 2, 670, w, 160, { fill: color, r: 80 });
+    txt(a, W / 2, 752, { size: fs, weight: 900, color: '#fff' });
+  });
+}
+function recallChips(t, items, y = 560) {
+  // items = [[time, text, color]]
+  items.forEach(([s, text, c], i) => {
+    fadeUp(P(t, s, .45), () => {
+      card(260, y + i * 120 - 50, 1400, 100, { fill: '#fff', r: 50 });
+      rr(260, y + i * 120 - 50, 14, 100, 7); ctx.fillStyle = c; ctx.fill();
+      txt(text, W / 2, y + i * 120, { size: 42, weight: 800, color: C.ink });
+    }, 14);
+  });
+}
+function bigFormula(cx, cy, k, num, den, lhs, color, s = 1) {
+  pop(k, cx, cy, () => {
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+    txt(lhs + '  =', -260, 0, { size: 80, weight: 900, color, align: 'right' });
+    txt(num, 60, -60, { size: 64, weight: 900, color: C.ink });
+    ctx.fillStyle = C.ink; ctx.fillRect(-200, -6, 520, 10);
+    txt(den, 60, 64, { size: 64, weight: 900, color: C.ink });
+    ctx.restore();
+  });
+}
+
+/* ================= RESPIRATORY illustrations ================= */
+C.resp = '#0891B2'; C.respSoft = '#CFFAFE';
+
+function lungs(cx, cy, s, o = {}, t = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const breath = 1 + .03 * Math.sin(t * 2);
+  ctx.save(); ctx.scale(breath, breath);
+  for (const sd of [-1, 1]) {
+    ctx.beginPath();
+    ctx.moveTo(sd * 20, -110); ctx.bezierCurveTo(sd * 120, -120, sd * 150, 40, sd * 130, 120);
+    ctx.quadraticCurveTo(sd * 70, 140, sd * 24, 110); ctx.lineTo(sd * 20, -110); ctx.closePath();
+    ctx.fillStyle = o.color || '#FDA4AF'; ctx.fill();
+  }
+  ctx.restore();
+  ctx.strokeStyle = '#BE123C'; ctx.lineWidth = 12; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(0, -170); ctx.lineTo(0, -60); ctx.stroke();
+  ctx.lineWidth = 8;
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.moveTo(0, -60); ctx.quadraticCurveTo(sd * 40, -40, sd * 70, 0); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sd * 50, -20); ctx.lineTo(sd * 100, -50); ctx.stroke(); ctx.beginPath(); ctx.moveTo(sd * 62, -6); ctx.lineTo(sd * 90, 60); ctx.stroke(); }
+  if (o.wheeze) {
+    ctx.strokeStyle = `rgba(37,99,235,${.6 * o.wheeze})`; ctx.lineWidth = 4;
+    for (let i = 0; i < 3; i++) { const ph = (t * .8 + i / 3) % 1; ctx.globalAlpha = 1 - ph; ctx.beginPath(); ctx.arc(0, -150, 30 + ph * 90, -2.4, -.7); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  }
+  ctx.restore();
+}
+// airway: normal tube vs bronchiectasis (dilated, mucus)
+function airway(x, y, w, ill, k = 1, t = 0) {
+  ctx.save();
+  const N = 60;
+  const top = [], bot = [];
+  for (let i = 0; i <= N; i++) {
+    const u = i / N, xx = x + u * w;
+    let r = lerp(40, 22, u);
+    if (ill) r = r * (1 + .9 * eo(k) * (.5 + .5 * Math.sin(u * 14)) * u + .4 * eo(k) * u);
+    top.push([xx, y - r]); bot.push([xx, y + r]);
+  }
+  ctx.beginPath(); top.forEach(([a, b], i) => i ? ctx.lineTo(a, b) : ctx.moveTo(a, b)); for (let i = bot.length - 1; i >= 0; i--) ctx.lineTo(...bot[i]); ctx.closePath();
+  ctx.fillStyle = ill ? '#FECDD3' : '#FCE7F3'; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = ill ? '#E11D48' : '#DB2777'; ctx.stroke();
+  if (ill) {
+    const r2 = rng(3);
+    for (let i = 0; i < 9; i++) { const u = .25 + r2() * .7, xx = x + u * w; ctx.beginPath(); ctx.ellipse(xx, y + (r2() - .5) * 20, 14 + 10 * u, 10 + 6 * u, 0, 0, 7); ctx.fillStyle = `rgba(202,138,4,${.75 * eo(k)})`; ctx.fill(); }
+  }
+  ctx.restore();
+}
+function nebulizer(cx, cy, s, t, crossK = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-110, -40, 220, 120, 20); ctx.fillStyle = '#E2E8F0'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.beginPath(); ctx.arc(-50, 20, 18, 0, 7); ctx.fillStyle = '#22C55E'; ctx.fill();
+  // cord + plug
+  ctx.strokeStyle = '#334155'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-110, 40); ctx.bezierCurveTo(-180, 60, -190, 140, -240, 120); ctx.stroke();
+  rr(-280, 100, 44, 40, 6); ctx.fillStyle = '#334155'; ctx.fill(); ctx.fillRect(-292, 108, 14, 6); ctx.fillRect(-292, 126, 14, 6);
+  // tube to cup + mask
+  ctx.strokeStyle = '#93C5FD'; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(60, -40); ctx.bezierCurveTo(80, -120, 150, -130, 170, -90); ctx.stroke();
+  rr(150, -110, 50, 60, 10); ctx.fillStyle = 'rgba(191,219,254,.9)'; ctx.fill();
+  for (let i = 0; i < 6; i++) { const ph = (t * .8 + i / 6) % 1; ctx.beginPath(); ctx.arc(175 + Math.sin(i * 2 + t) * 14, -120 - ph * 70, 8 + ph * 10, 0, 7); ctx.fillStyle = `rgba(148,163,184,${.5 * (1 - ph)})`; ctx.fill(); }
+  ctx.restore();
+  if (crossK > 0) cross(cx + 120 * s, cy - 80 * s, 36, C.bad, crossK);
+}
+function mdiSpacer(cx, cy, s, t = 0, puff = 0) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  // MDI (L-shape) at left
+  rr(-260, -110, 50, 110, 12); ctx.fillStyle = '#2563EB'; ctx.fill();
+  rr(-268, -10, 66, 40, 10); ctx.fillStyle = '#1D4ED8'; ctx.fill();
+  rr(-264, -150, 42, 46, 8); ctx.fillStyle = '#94A3B8'; ctx.fill();
+  // spacer chamber
+  ctx.beginPath(); ctx.moveTo(-205, -6); ctx.lineTo(-170, -50); ctx.lineTo(90, -50); ctx.lineTo(130, -10); ctx.lineTo(130, 50); ctx.lineTo(90, 90); ctx.lineTo(-170, 90); ctx.lineTo(-205, 46); ctx.closePath();
+  ctx.fillStyle = 'rgba(219,234,254,.75)'; ctx.fill(); ctx.strokeStyle = '#60A5FA'; ctx.lineWidth = 5; ctx.stroke();
+  // mask
+  ctx.beginPath(); ctx.moveTo(130, -10); ctx.quadraticCurveTo(230, -90, 250, 20); ctx.quadraticCurveTo(230, 130, 130, 50); ctx.closePath();
+  ctx.fillStyle = 'rgba(167,243,208,.85)'; ctx.fill(); ctx.strokeStyle = '#10B981'; ctx.lineWidth = 5; ctx.stroke();
+  // medicine cloud
+  if (puff > 0) {
+    for (let i = 0; i < 14; i++) { const ph = ((t * .5 + i / 14) % 1); ctx.beginPath(); ctx.arc(-170 + ph * 360, 20 + Math.sin(i * 3 + t * 2) * 30, 6 + 6 * (1 - ph), 0, 7); ctx.fillStyle = `rgba(37,99,235,${.45 * puff * (1 - ph * .6)})`; ctx.fill(); }
+  }
+  ctx.restore();
+}
+function pefMeter(cx, cy, s, pct) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-60, -260, 120, 480, 40); ctx.fillStyle = '#F8FAFC'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 5; ctx.stroke();
+  const zones = [[C.bad, 0, .5], [C.warn, .5, .8], [C.ok, .8, 1]];
+  zones.forEach(([c, a, b]) => { ctx.fillStyle = c; ctx.globalAlpha = .35; ctx.fillRect(40, 180 - b * 420, 16, (b - a) * 420); ctx.globalAlpha = 1; });
+  for (let i = 0; i <= 10; i++) { const y = 180 - i * 42; ctx.fillStyle = C.ink; ctx.fillRect(-40, y - 1.5, i % 5 ? 20 : 34, 3); if (i % 5 === 0) txt(`${i * 10}%`, -80, y, { size: 26, weight: 800, color: C.sub, align: 'right' }); }
+  const y = 180 - clamp(pct) * 420;
+  rr(-50, y - 10, 100, 20, 8); ctx.fillStyle = C.warn; ctx.fill();
+  rr(-30, 220, 60, 70, 12); ctx.fillStyle = '#64748B'; ctx.fill();
+  ctx.restore();
+}
+function sweatDrop(cx, cy, s, k = 1) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); ctx.globalAlpha *= eo(k);
+  ctx.beginPath(); ctx.moveTo(0, -80); ctx.bezierCurveTo(50, -10, 60, 30, 0, 60); ctx.bezierCurveTo(-60, 30, -50, -10, 0, -80); ctx.fillStyle = '#7DD3FC'; ctx.fill();
+  txt('Cl⁻', 0, 12, { size: 44, weight: 900, color: '#0C4A6E' });
+  ctx.restore();
+}
+function stinky(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-60, 0, 120, 70, 20); ctx.fillStyle = '#E2E8F0'; ctx.fill(); ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 4; ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(0, 6, 54, 14, 0, 0, 7); ctx.fillStyle = '#A16207'; ctx.fill();
+  ctx.strokeStyle = '#65A30D'; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  for (let i = 0; i < 3; i++) { ctx.beginPath(); const x = -30 + i * 30, o = Math.sin(t * 3 + i) * 6; ctx.moveTo(x, -10); ctx.bezierCurveTo(x + 14 + o, -30, x - 14 + o, -50, x + o, -70); ctx.stroke(); }
+  ctx.restore();
+}
+function pulseOx(cx, cy, s, val, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-120, -70, 240, 140, 30); ctx.fillStyle = '#0F172A'; ctx.fill();
+  rr(-100, -50, 200, 100, 14); ctx.fillStyle = '#022C22'; ctx.fill();
+  txt('SpO₂', -60, -24, { size: 22, weight: 800, color: '#6EE7B7' });
+  txt(`${val}%`, 20, 12, { size: 56, weight: 900, color: '#34D399' });
+  const ph = (t * 1.3) % 1; ctx.beginPath(); ctx.arc(80, -28, 8, 0, 7); ctx.fillStyle = ph < .2 ? '#F87171' : '#7F1D1D'; ctx.fill();
+  ctx.restore();
+}
+function house(cx, cy, s, color = C.ok) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-90, -10); ctx.lineTo(0, -90); ctx.lineTo(90, -10); ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  rr(-70, -14, 140, 100, 8); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = 6; ctx.stroke();
+  rr(-18, 30, 36, 56, 6); ctx.fillStyle = color; ctx.fill();
+  ctx.restore();
+}
+function hospital(cx, cy, s, color = C.bad) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  rr(-90, -80, 180, 170, 12); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = 6; ctx.stroke();
+  ctx.fillStyle = color; ctx.fillRect(-12, -60, 24, 70); ctx.fillRect(-35, -37, 70, 24);
+  for (let i = 0; i < 3; i++) { ctx.fillStyle = '#BFDBFE'; ctx.fillRect(-70 + i * 50, 30, 30, 26); }
+  ctx.restore();
+}
+// percussion sound bars: level 0 (stony flat) .. 4 (hyperresonant)
+function percBars(x, y, level, color) {
+  for (let i = 0; i < 5; i++) {
+    const h = i < level ? 18 + i * 12 : 6;
+    rr(x + i * 22, y - h, 14, h, 4); ctx.fillStyle = i < level ? color : '#CBD5E1'; ctx.fill();
+  }
+}
+// chest X-ray with RML consolidation or right-sided effusion overlays (patient's right = viewer's left)
+function xrayResp(x, y, w, h, o = {}) {
+  xray(x, y, w, h, {});
+  ctx.save(); rr(x, y, w, h, 18); ctx.clip();
+  lungsPath(-1, x, y, w, h); ctx.clip();
+  if (o.rml) {
+    const g = ctx.createRadialGradient(x + w * .28, y + h * .5, 4, x + w * .28, y + h * .5, w * .18);
+    g.addColorStop(0, `rgba(235,238,242,${.75 * o.rml})`); g.addColorStop(1, 'rgba(235,238,242,0)');
+    ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+  }
+  if (o.eff) {
+    const lvl = y + h * lerp(.9, .58, eo(o.eff));
+    ctx.beginPath(); ctx.moveTo(x, lvl - h * .1); ctx.quadraticCurveTo(x + w * .32, lvl + h * .04, x + w * .48, lvl);
+    ctx.lineTo(x + w * .48, y + h); ctx.lineTo(x, y + h); ctx.closePath();
+    ctx.fillStyle = 'rgba(232,236,242,.92)'; ctx.fill();
+  }
+  ctx.restore();
+}
+function calendar(x, y, days, mark, t) {
+  for (let i = 0; i < 14; i++) {
+    const cx = x + (i % 7) * 86, cy = y + Math.floor(i / 7) * 86, on = i < days;
+    rr(cx, cy, 74, 74, 12); ctx.fillStyle = on ? (i >= mark ? C.bad : C.warnSoft) : '#F1F5F9'; ctx.fill();
+    txt(String(i + 1), cx + 37, cy + 39, { size: 30, weight: 900, color: on ? (i >= mark ? '#fff' : '#92400E') : C.mute });
+  }
+}
+// endoscopic view of larynx: omega epiglottis, arytenoids prolapse on inspiration (c 0..1)
+function larynx(cx, cy, s, c) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.arc(0, 0, 200, 0, 7); ctx.fillStyle = '#7F1D1D'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, 0, 186, 0, 7); ctx.fillStyle = '#F9A8D4'; ctx.fill();
+  // airway opening (narrows as c increases)
+  const op = lerp(1, .35, c);
+  ctx.beginPath(); ctx.ellipse(0, 30, 70 * op, 110 * (0.6 + .4 * op), 0, 0, 7); ctx.fillStyle = '#1F2937'; ctx.fill();
+  // vocal cords
+  ctx.strokeStyle = '#F8FAFC'; ctx.lineWidth = 10;
+  ctx.beginPath(); ctx.moveTo(-8, -50); ctx.lineTo(-50 * op, 110); ctx.moveTo(8, -50); ctx.lineTo(50 * op, 110); ctx.stroke();
+  // omega-shaped epiglottis (curls in)
+  ctx.strokeStyle = '#DB2777'; ctx.lineWidth = 24; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-110, -40); ctx.bezierCurveTo(-110, -150, -30 - 20 * c, -120, 0, -110); ctx.bezierCurveTo(30 + 20 * c, -120, 110, -150, 110, -40); ctx.stroke();
+  // arytenoids prolapsing inward
+  for (const sd of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sd * lerp(110, 50, c), 120, 46, 40, 0, 0, 7); ctx.fillStyle = '#EC4899'; ctx.fill(); }
+  ctx.restore();
+}
+function scissors(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s); const a = .25 + .15 * Math.sin(t * 4);
+  ctx.strokeStyle = '#64748B'; ctx.lineWidth = 12; ctx.lineCap = 'round';
+  for (const sd of [-1, 1]) { ctx.save(); ctx.rotate(sd * a); ctx.beginPath(); ctx.moveTo(-20, 0); ctx.lineTo(110, 0); ctx.stroke(); ctx.beginPath(); ctx.arc(-50, 0, 26, 0, 7); ctx.stroke(); ctx.restore(); }
+  ctx.restore();
+}
+function outcomeTree(t, x, y, k, items) {
+  // child -> teen -> branches
+  fadeUp(k, () => {
+    child(x, y, .8, C.resp, 'ok', t);
+    txt('5 saal', x, y + 140, { size: 30, weight: 800, color: C.sub });
+  }, 14);
+  arrow(x + 90, y, x + 300, y, P(t, 0, 1) * k, C.mute, 7);
+  items.forEach(([label, sub, c, s], i) => {
+    const ty = y - 200 + i * 200;
+    arrow(x + 360, y, x + 560, ty, P(t, s, .5), c, 7);
+    fadeUp(P(t, s + .2, .5), () => {
+      card(x + 590, ty - 70, 520, 140, { fill: '#fff', stroke: c, lw: 5, r: 70 });
+      txt(label, x + 850, ty - 16, { size: 50, weight: 900, color: c });
+      txt(sub, x + 850, ty + 38, { size: 28, weight: 700, color: C.sub });
+    }, 12);
+  });
+  fadeUp(k, () => { ctx.save(); ctx.beginPath(); ctx.arc(x + 330, y, 46, 0, 7); ctx.fillStyle = C.respSoft; ctx.fill(); ctx.restore(); txt('Teen', x + 330, y + 4, { size: 26, weight: 900, color: C.resp }); }, 8);
+}
+
+/* ================= SCENES ================= */
+const SC = {};
+
+SC.intro = (t, D, Q) => {
+  header('Part 3 · Respiratory', C.resp);
+  if (t < Q(1) - .3) { partTitle(t, 'Part 3', 'Respiratory', C.resp, (x, y) => lungs(x, y + 30, .65, {}, t)); return; }
+  fadeUp(P(t, Q(1) - .3, .5), () => txt('Pichhla wapas bulao', W / 2, 170, { size: 60, weight: 900, color: C.navy }));
+  const fadeAll = 1 - P(t, Q(5) - .2, .5);
+  const rows = [
+    [Q(2), 'Morning puffiness + normal BP', 'Nephrotic', C.kid, (x, y) => face(x, y, .28, 1, t)],
+    [Q(2) + 2.5, 'Renal scar', 'DMSA', C.kid, (x, y) => kidney(x, y, .55, 1)],
+    [Q(3), 'Kernicterus', 'Dyskinetic CP', C.neuro, (x, y) => brainCoronal(x, y, .25, { bg: 1 }, t)],
+    [Q(3) + 2.5, 'Ptosis + shaam ki weakness', 'AChR antibodies', C.blue, (x, y) => face2(x, y, .26, { droop: .8 })],
+    [Q(4), 'Infantile spasms', 'Hypsarrhythmia', C.bad, (x, y) => baby2(x, y + 6, .3, t, { smile: false })],
+  ];
+  rows.forEach(([s, q, a, c, ic], i) => {
+    const y = 240 + i * 145;
+    fadeUp(P(t, s, .5) * fadeAll, () => {
+      card(160, y, 1600, 125, { fill: '#fff', r: 24 });
+      rr(160, y, 14, 125, 7); ctx.fillStyle = c; ctx.fill();
+      ic(270, y + 62);
+      txt(q, 370, y + 62, { size: 38, weight: 800, align: 'left' });
+      txt('→ ' + a, 1720, y + 62, { size: 42, weight: 900, align: 'right', color: c });
+    }, 14);
+  });
+  pop(P(t, Q(5), .6), W / 2, 560, () => { lungs(W / 2, 560, 1.4, {}, t); txt('Ab lungs', W / 2, 860, { size: 70, weight: 900, color: C.resp }); });
+};
+
+/* Case 9: asthma prognosis */
+SC.q9case = (t, D, Q) => {
+  header('Case 9 · Q160 · Asthma prognosis', C.resp);
+  fadeUp(P(t, Q(1), .5), () => {
+    card(100, 150, 1720, 130, { fill: C.respSoft, r: 65 });
+    family(220, 225, .9);
+    txt('Maa: "Bada hokar kya hoga?"', 330, 216, { size: 48, weight: 900, color: C.resp, align: 'left' });
+  }, 14);
+  if (t < Q(1)) pop(P(t, .1, .6), W / 2, 500, () => { lungs(W / 2, 470, 1.2, { wheeze: 1 }, t); txt('Childhood asthma', W / 2, 760, { size: 64, weight: 900, color: C.resp }); });
+  if (t >= Q(2) - .3) {
+    outcomeTree(t, 260, 590, P(t, Q(2) - .3, .5), [
+      ['REMIT', 'adolescence mein', C.ok, Q(2) + 1],
+      ['PERSIST', 'chalta reh sakta hai', C.warn, Q(3)],
+      ['RECUR', 'wapas aa sakta hai', C.bad, Q(3) + 2],
+    ]);
+  }
+  pop(P(t, Q(4), .5), W / 2, 975, () => { card(W / 2 - 560, 940, 1120, 74, { fill: C.ink, r: 37, blur: 0 }); txt('Remit ho sakta hai... GUARANTEE nahi', W / 2, 978, { size: 38, weight: 900, color: '#fff' }); });
+};
+
+SC.q9why = (t, D, Q) => {
+  header('Case 9 · Baaki options kyun galat?', C.bad);
+  optRow(160, P(t, Q(0), .5), { title: '"Koi relation nahi"', h: 220, lines: ['Galat: childhood asthma = adult asthma ka', 'RISK FACTOR'], icon: (x, y) => lungs(x, y + 10, .45, {}, t) });
+  cross(1700, 270, 38, C.bad, P(t, Q(0) + 1.5, .4));
+  optRow(420, P(t, Q(1), .5), { title: '"Hamesha" / "Har bachcha"', h: 220, lines: ['Absolute statements galat hote hain'], icon: (x, y) => { txt('100%', x, y, { size: 50, weight: 900, color: C.bad }); } });
+  cross(1700, 530, 38, C.bad, P(t, Q(1) + 2, .4));
+  pop(P(t, Q(2), .6), W / 2, 820, () => {
+    card(140, 700, 1640, 240, { fill: C.resp, r: 36 });
+    bulb(260, 820, .7, 1);
+    txt('Adolescence mein improve ho sakta hai', 1000, 790, { size: 50, weight: 900, color: '#fff' });
+    txt('par PERSIST ya RECUR kar sakta hai', 1000, 870, { size: 50, weight: 900, color: '#fff' });
+  });
+};
+
+/* Case 10: MDI + spacer */
+SC.q10case = (t, D, Q) => {
+  header('Case 10 · Q161 · Nebulizer ki jagah?', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pehle dohra lo:', 'Asthma remit ho sakta hai, guarantee nahi');
+  if (t < Q(1) - .4) return;
+  fadeUp(P(t, Q(1), .6), () => {
+    card(100, 150, 860, 560, { fill: '#fff' });
+    txt('3 saal · ghar par nebulizer', 530, 210, { size: 40, weight: 900, color: C.navy });
+    child(300, 470, 1.1, C.resp, 'ok', t);
+    nebulizer(700, 520, .9, t, P(t, Q(3), .5));
+  }, 18);
+  fadeUp(P(t, Q(2), .5), () => {
+    card(100, 740, 860, 190, { fill: C.warnSoft, r: 26 });
+    txt('⚡ Bijli chahiye', 530, 800, { size: 44, weight: 900, color: '#92400E' });
+    txt('Ghar se nikal nahi sakte', 530, 870, { size: 40, weight: 800, color: C.ink });
+  }, 16);
+  fadeUp(P(t, Q(3), .5), () => {
+    card(1000, 150, 820, 120, { fill: C.ink, r: 60, blur: 0 });
+    txt('Inhaler sikhao, nebulizer band', 1410, 211, { size: 40, weight: 900, color: '#fff' });
+  }, 14);
+  fadeUp(P(t, Q(4), .5), () => {
+    card(1000, 300, 820, 420, { fill: C.okSoft, stroke: C.ok, lw: 5 });
+    txt('MDI + SPACER + MASK', 1410, 360, { size: 50, weight: 900, color: C.ok });
+    mdiSpacer(1410, 540, 1.15, t, P(t, Q(4) + 1, .8));
+  }, 18);
+  const chips = [['≥ Nebulizer jitna achha', C.ok], ['Portable', C.blue], ['Sasta', C.warn]];
+  chips.forEach(([c, col], i) => pop(P(t, Q(5) + i * 1.3, .45), 1410, 780 + i * 60, () => { card(1100, 752 + i * 60, 620, 54, { fill: col, r: 27, blur: 0 }); txt(c, 1410, 780 + i * 60, { size: 30, weight: 900, color: '#fff' }); }));
+};
+
+SC.q10why = (t, D, Q) => {
+  header('Case 10 · Baaki options kyun galat?', C.bad);
+  optRow(150, P(t, Q(0), .5), { title: '"Ghar par raho"', h: 190, lines: ['Quality of life kharab'], icon: (x, y) => house(x, y + 10, .6, C.bad) });
+  cross(1700, 245, 36, C.bad, P(t, Q(0) + 1.5, .4));
+  optRow(370, P(t, Q(1), .5), { title: 'Portable nebulizer', h: 190, lines: ['Kaam karega... par spacer simple, sasta, evidence behtar'], icon: (x, y) => nebulizer(x + 20, y + 20, .4, t) });
+  cross(1700, 465, 36, C.bad, P(t, Q(1) + 3, .4));
+  optRow(590, P(t, Q(2), .5), { title: 'Oral bronchodilators', h: 190, lines: ['Kam effective · side effects zyada'], icon: (x, y) => syrup(x, y + 10, .5, 'Oral') });
+  cross(1700, 685, 36, C.bad, P(t, Q(2) + 2, .4));
+  pop(P(t, Q(3), .6), W / 2, 885, () => {
+    card(140, 810, 1640, 150, { fill: C.ok, r: 36 });
+    mdiSpacer(380, 885, .45, t, 1);
+    txt('Chhote bachche mein bhi: MDI + spacer + mask', 1150, 885, { size: 44, weight: 900, color: '#fff' });
+  });
+};
+
+/* Case 11: moderate exacerbation */
+SC.q11case = (t, D, Q) => {
+  header('Case 11 · Q162 · Asthma exacerbation', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pichhla:', 'Nebulizer ki jagah → MDI + spacer');
+  if (t < Q(1) - .4) return;
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 520, 740, { fill: '#fff' });
+    txt('10 saal', 350, 210, { size: 46, weight: 900, color: C.navy });
+    txt('Exacerbation', 350, 260, { size: 34, weight: 800, color: C.bad });
+    child(350, 540, 1.3, C.resp, 'sick', t);
+    lungs(350, 780, .35, { wheeze: P(t, Q(3), .5) }, t);
+  }, 18);
+  const X = 650, Wd = 640;
+  factRow(X, 250, Wd, P(t, Q(2), .5), 'Poore sentences bol raha', C.ok, C.okSoft, null, P(t, Q(2) + .4, .4));
+  factRow(X, 400, Wd, P(t, Q(2) + 2.2, .5), 'Ghar par 2 puff salbutamol', C.blue, C.blueSoft, null);
+  factRow(X, 550, Wd, P(t, Q(3), .5), 'Mild bilateral wheeze', C.warn, C.warnSoft, null);
+  factRow(X, 700, Wd, P(t, Q(3) + 1.5, .5), 'PEF = best ka 60%', C.warn, C.warnSoft, null);
+  fadeUp(P(t, Q(3) + 1.2, .5), () => {
+    card(1330, 150, 490, 740, { fill: '#fff' });
+    txt('Peak flow', 1575, 210, { size: 38, weight: 900, color: C.sub });
+    pefMeter(1620, 520, .9, .6 * eo(P(t, Q(3) + 1.6, 1.2)));
+  }, 18);
+  pop(P(t, Q(4), .5), 1575, 830, () => { card(1370, 795, 410, 70, { fill: C.warn, r: 35, blur: 0 }); txt('MODERATE', 1575, 831, { size: 40, weight: 900, color: '#fff' }); });
+  pop(P(t, Q(5), .5), W / 2, 960, () => { card(260, 922, 1400, 76, { fill: C.ok, r: 38, blur: 0 }); txt('1st step: Salbutamol via spacer → REASSESS', W / 2, 961, { size: 38, weight: 900, color: '#fff' }); });
+};
+
+SC.q11why = (t, D, Q) => {
+  header('Case 11 · Sequence kya hai?', C.resp);
+  const steps = [['1', 'Salbutamol', 'via spacer', C.ok], ['2', 'Reassess', '', C.blue], ['3', 'Steroid', 'prednisolone', C.warn]];
+  steps.forEach(([n, a, b, c], i) => {
+    const x = 160 + i * 560;
+    pop(P(t, .2 + i * .6, .5), x + 240, 270, () => {
+      card(x, 170, 480, 200, { fill: '#fff', stroke: c, lw: 5 });
+      ctx.beginPath(); ctx.arc(x + 70, 270, 44, 0, 7); ctx.fillStyle = c; ctx.fill(); txt(n, x + 70, 273, { size: 48, weight: 900, color: '#fff' });
+      txt(a, x + 280, b ? 245 : 270, { size: 50, weight: 900, color: c });
+      if (b) txt(b, x + 280, 305, { size: 32, weight: 700, color: C.sub });
+    });
+    if (i < 2) arrow(x + 490, 270, x + 550, 270, P(t, .6 + i * .6, .4), C.mute, 8);
+  });
+  fadeUp(P(t, Q(0), .5), () => txt('Prednisolone: haan, par bronchodilator ke BAAD', W / 2, 430, { size: 42, weight: 900, color: C.warn }), 12);
+  optRow(500, P(t, Q(1), .5), { title: 'Ipratropium', h: 180, lines: ['Severe exacerbation mein add-on'], color: C.warn, icon: (x, y) => mdiSpacer(x + 30, y, .3, t, 0) });
+  optRow(710, P(t, Q(2), .5), { title: 'Bina dawa discharge (PEF 60%)', h: 180, lines: ['UNSAFE'], icon: (x, y) => house(x, y + 10, .55, C.bad) });
+  cross(1700, 800, 36, C.bad, P(t, Q(2) + 1.5, .4));
+  pop(P(t, Q(3), .5), W / 2, 975, () => { card(200, 940, 1520, 74, { fill: C.ink, r: 37, blur: 0 }); txt('Moderate: pehle SABA via spacer → reassess → phir steroid', W / 2, 978, { size: 36, weight: 900, color: '#fff' }); });
+};
+
+SC.midrecap = (t, D, Q) => {
+  header('Beech ka recap · Asthma', C.resp);
+  recapRows(t, Q, 'Teen asthma points', [
+    [1, 'Prognosis', 'Remit ho sakta hai, guarantee nahi', C.resp, (x, y) => lungs(x, y + 6, .25, {}, t)],
+    [2, 'Device', 'MDI + spacer', C.ok, (x, y) => mdiSpacer(x + 10, y, .2, t, 1)],
+    [3, 'Exacerbation', 'Pehle salbutamol → reassess', C.warn, null],
+  ], 260, 200);
+};
+
+/* Case 12: CF */
+SC.q12case = (t, D, Q) => {
+  header('Case 12 · Q163 · Picture pehchano', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Ek baar phir:', 'Moderate exacerbation → salbutamol via spacer');
+  if (t < Q(1) - .4) return;
+  if (t >= Q(5) - .3) {
+    answerCard(W / 2, 150, P(t, Q(5) - .3, .6), 'COMPLICATION: BRONCHIECTASIS', C.bad);
+    fadeUp(P(t, Q(5) + .5, .5), () => {
+      card(140, 340, 800, 420, { fill: '#fff' });
+      txt('Normal airway', 540, 400, { size: 38, weight: 900, color: C.sub });
+      airway(220, 580, 640, false);
+      card(980, 340, 800, 420, { fill: '#fff', stroke: C.bad, lw: 4 });
+      txt('Bronchiectasis', 1380, 400, { size: 38, weight: 900, color: C.bad });
+      airway(1060, 580, 640, true, P(t, Q(5) + 1, 2), t);
+    }, 18);
+    const cyc = [['Thick mucus', '#CA8A04'], ['Recurrent infection', C.bad], ['Airways destroy', C.ink]];
+    cyc.forEach(([c, col], i) => {
+      pop(P(t, Q(6) + i * 1.2, .5), 360 + i * 600, 860, () => { card(160 + i * 600, 815, 400, 90, { fill: col, r: 45, blur: 0 }); txt(c, 360 + i * 600, 861, { size: 36, weight: 900, color: '#fff' }); });
+      if (i < 2) arrow(570 + i * 600, 860, 750 + i * 600, 860, P(t, Q(6) + i * 1.2 + .5, .4), C.mute, 7);
+    });
+    return;
+  }
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 560, 760, { fill: '#fff' });
+    child(370, 470, 1.4, C.resp, 'sick', t);
+    lungs(370, 780, .4, { color: '#FCA5A5' }, t);
+  }, 18);
+  const X = 700, Wd = 1120;
+  factRow(X, 240, Wd, P(t, Q(1), .5), 'Recurrent chest infections', C.bad, C.badSoft, null);
+  factRow(X, 380, Wd, P(t, Q(1) + 2.2, .5), '"Asthma" jo control nahi hota', C.warn, C.warnSoft, null);
+  factRow(X, 520, Wd, P(t, Q(2), .5), 'Foul-smelling stools', '#A16207', '#FEF3C7', (x, y) => stinky(x, y - 10, .45, t));
+  factRow(X, 660, Wd, P(t, Q(3), .5), 'Sweat chloride POSITIVE', C.resp, C.respSoft, (x, y) => sweatDrop(x, y, .55));
+  answerCard(1260, 760, P(t, Q(4), .6), 'CYSTIC FIBROSIS', C.resp);
+};
+
+SC.q12why = (t, D, Q) => {
+  header('Case 12 · Baaki options kyun galat?', C.bad);
+  optRow(150, P(t, Q(0), .5), { title: 'Emphysema', h: 190, lines: ['Alpha-1 antitrypsin deficiency ya smoking se'], icon: (x, y) => lungs(x, y + 10, .4, { color: '#CBD5E1' }, t) });
+  cross(1700, 245, 36, C.bad, P(t, Q(0) + 2, .4));
+  optRow(370, P(t, Q(1), .5), { title: 'Hypothyroidism', h: 190, lines: ['CF se related nahi'], icon: (x, y) => txt('T4', x, y, { size: 56, weight: 900, color: C.sub }) });
+  cross(1700, 465, 36, C.bad, P(t, Q(1) + 1.2, .4));
+  optRow(590, P(t, Q(2), .5), { title: 'GI cancer', h: 190, lines: ['Risk thoda badhta hai... par common complication nahi'], icon: (x, y) => gut(x, y, .9) });
+  cross(1700, 685, 36, C.bad, P(t, Q(2) + 2.5, .4));
+  pop(P(t, Q(3), .6), W / 2, 885, () => {
+    card(140, 810, 1640, 150, { fill: C.resp, r: 36 });
+    txt('Chest infections + foul stools + sweat Cl⁻ +  →  CF  →  Bronchiectasis', W / 2, 885, { size: 38, weight: 900, color: '#fff' });
+  });
+};
+
+/* Case 13: stable pneumonia */
+SC.q13case = (t, D, Q) => {
+  header('Case 13 · Q164 · Picture pehchano', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pehle dohra lo:', 'CF ka common complication → bronchiectasis');
+  if (t < Q(1) - .4) return;
+  if (t >= Q(5) - .3) {
+    answerCard(W / 2, 170, P(t, Q(5) - .3, .6), 'ORAL AMOXICILLIN · DISCHARGE', C.ok);
+    fadeUp(P(t, Q(5) + .3, .5), () => {
+      card(360, 380, 1200, 520, { fill: '#fff' });
+      syrup(620, 640, 1.1, 'Amoxicillin');
+      arrow(800, 640, 1060, 640, P(t, Q(5) + 1, .6), C.ok, 12);
+      house(1300, 660, 1.6, C.ok);
+      txt('Ghar bhejo', 1300, 850, { size: 48, weight: 900, color: C.ok });
+    }, 18);
+    return;
+  }
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 520, 560, { fill: '#fff' });
+    txt('3 saal', 350, 210, { size: 46, weight: 900, color: C.navy });
+    child(350, 460, 1.2, C.resp, 'sick', t);
+    thermometer(530, 330, .45, .85);
+  }, 18);
+  factRow(650, 250, 640, P(t, Q(1) + 2, .5), 'Flu prodrome → 5 din fever, cough', C.bad, C.badSoft, null);
+  factRow(650, 400, 640, P(t, Q(2), .5), 'R middle zone: ↓ air entry', C.warn, C.warnSoft, null);
+  factRow(650, 550, 640, P(t, Q(2) + 1.5, .5), 'Crackles', C.warn, C.warnSoft, null);
+  fadeUp(P(t, Q(2), .5), () => xrayResp(1330, 150, 490, 560, { rml: P(t, Q(2) + .5, 1.5) }), 18);
+  fadeUp(P(t, Q(3), .5), () => {
+    card(90, 750, 1730, 200, { fill: C.okSoft, r: 30 });
+    txt('BP normal', 300, 850, { size: 44, weight: 900, color: C.ink });
+    txt('RR 20', 640, 850, { size: 44, weight: 900, color: C.ink });
+    pulseOx(1000, 850, .9, 97, t);
+  }, 16);
+  pop(P(t, Q(4), .5), 1500, 850, () => { card(1260, 795, 500, 110, { fill: C.ok, r: 55, blur: 0 }); txt('STABLE', 1510, 836, { size: 44, weight: 900, color: '#fff' }); txt('uncomplicated CAP', 1510, 880, { size: 26, weight: 800, color: '#fff' }); });
+};
+
+SC.q13why = (t, D, Q) => {
+  header('Case 13 · Baaki options kyun galat?', C.bad);
+  optRow(150, P(t, Q(0), .5), { title: 'Sirf reassurance', h: 180, lines: ['Bacterial pneumonia treat karna hai'], icon: (x, y) => speech(x - 70, y - 40, 140, 70, '...', C.mute) });
+  cross(1700, 240, 36, C.bad, P(t, Q(0) + 1.5, .4));
+  optRow(360, P(t, Q(1), .5), { title: 'Bronchodilator / steroid', h: 180, lines: ['Asthma ya bronchiolitis ke liye'], icon: (x, y) => mdiSpacer(x + 30, y, .3, t, 0) });
+  cross(1700, 450, 36, C.bad, P(t, Q(1) + 1.5, .4));
+  fadeUp(P(t, Q(2), .5), () => {
+    card(140, 570, 1640, 230, { fill: '#fff', stroke: C.bad, lw: 4 });
+    hospital(270, 685, .7);
+    txt('Admit + IV antibiotics kab?', 400, 625, { size: 42, weight: 900, align: 'left' });
+  }, 18);
+  chipRow(400, 720, [['Hypoxia', C.bad, C.badSoft, Q(2) + 2], ['Resp. distress', C.bad, C.badSoft, Q(2) + 2.8], ['Dehydration', C.bad, C.badSoft, Q(2) + 3.6], ['Toxic', C.bad, C.badSoft, Q(2) + 4.4]], t, 32);
+  pop(P(t, Q(3), .5), W / 2, 900, () => { card(160, 850, 1600, 100, { fill: C.ok, r: 50, blur: 0 }); txt('Stable + normal SpO₂ + pneumonia → oral amoxicillin at home', W / 2, 901, { size: 38, weight: 900, color: '#fff' }); });
+};
+
+/* Case 14: pleural effusion */
+SC.q14case = (t, D, Q) => {
+  header('Case 14 · Q165 · Picture pehchano', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pichhla:', 'Stable pneumonia → oral amoxicillin');
+  if (t < Q(1) - .4) return;
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 480, 560, { fill: '#fff' });
+    txt('2 saal', 330, 210, { size: 46, weight: 900, color: C.navy });
+    baby(330, 450, 1.1, t);
+  }, 18);
+  factRow(610, 250, 640, P(t, Q(1) + 2, .5), 'Flu → 1 hafte se cough + fever', C.bad, C.badSoft, null);
+  factRow(610, 400, 640, P(t, Q(2), .5), 'R lower: ↓ air entry + crackles', C.warn, C.warnSoft, null);
+  fadeUp(P(t, Q(3), .5), () => {
+    card(610, 480, 640, 230, { fill: '#fff', stroke: C.ink, lw: 4 });
+    txt('Percussion:', 650, 540, { size: 36, weight: 800, align: 'left', color: C.sub });
+    txt('STONY DULL', 650, 620, { size: 62, weight: 900, align: 'left', color: C.ink });
+    percBars(1100, 660, 0, C.ink);
+  }, 16);
+  pop(P(t, Q(4), .5), 930, 790, () => { card(660, 750, 540, 80, { fill: '#0EA5E9', r: 40, blur: 0 }); txt('Stony dull = FLUID', 930, 791, { size: 40, weight: 900, color: '#fff' }); });
+  fadeUp(P(t, Q(5), .5), () => xrayResp(1290, 150, 530, 620, { eff: P(t, Q(5) + .3, 1.6) }), 18);
+  answerCard(W / 2, 860, P(t, Q(5) + 1.5, .6), 'PLEURAL EFFUSION (parapneumonic)', '#0EA5E9');
+};
+
+SC.q14why = (t, D, Q) => {
+  header('Case 14 · Percussion se pehchano', C.resp);
+  const rows = [
+    [Q(0), 'Consolidation', 'Dull + bronchial breathing', 2, C.warn],
+    [-1, 'Effusion', 'STONY dull', 0, '#0EA5E9'],
+    [Q(1), 'Pneumothorax', 'Hyperresonant', 5, C.blue],
+    [Q(2), 'Collapse', 'Dull + trachea USI side shift', 2, C.kid],
+  ];
+  rows.forEach(([s, n, d, lvl, c], i) => {
+    const y = 160 + i * 175, k = s < 0 ? P(t, Q(0) + 3, .5) : P(t, s, .5);
+    const hl = t >= Q(3) && i < 3;
+    fadeUp(k, () => {
+      card(140, y, 1640, 150, { fill: hl ? c + '18' : '#fff', stroke: hl ? c : '#E2E8F0', lw: 4, r: 26 });
+      percBars(200, y + 110, lvl, c);
+      txt(n, 380, y + 52, { size: 46, weight: 900, align: 'left', color: c });
+      txt(d, 380, y + 108, { size: 36, weight: 800, align: 'left', color: C.ink });
+    }, 14);
+  });
+  pop(P(t, Q(3), .5), W / 2, 920, () => { card(200, 880, 1520, 80, { fill: C.ink, r: 40, blur: 0 }); txt('Dull + bronchial → consolidation · Stony dull → effusion · Hyperresonant → pneumothorax', W / 2, 921, { size: 31, weight: 900, color: '#fff' }); });
+};
+
+/* Case 15: sinusitis */
+SC.q15case = (t, D, Q) => {
+  header('Case 15 · Q166 · Picture pehchano', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pehle dohra lo:', 'Stony dullness → pleural effusion');
+  if (t < Q(1) - .4) return;
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 640, 780, { fill: '#fff' });
+    txt('7 saal', 410, 210, { size: 46, weight: 900, color: C.navy });
+    face2(410, 520, 1.25, {});
+    // purulent drip
+    for (let i = 0; i < 2; i++) { const d = ((t * .6 + i * .5) % 1); ctx.beginPath(); ctx.ellipse(400 + (i ? 22 : -22), 610 + d * 60, 9, 14, 0, 0, 7); ctx.fillStyle = `rgba(132,204,22,${.9 * (1 - d)})`; ctx.fill(); }
+    // frontal sinuses tender
+    const fk = P(t, Q(2), .6);
+    if (fk > 0) { for (const sd of [-1, 1]) { ctx.beginPath(); ctx.ellipse(410 + sd * 50, 400, 40, 26, 0, 0, 7); ctx.fillStyle = `rgba(220,38,38,${.45 * eo(fk) * (.75 + .25 * Math.sin(t * 4))})`; ctx.fill(); } txt('Frontal tender', 410, 860, { size: 36, weight: 900, color: C.bad }); }
+  }, 18);
+  fadeUp(P(t, Q(1) + .5, .5), () => {
+    card(780, 150, 1040, 330, { fill: '#fff' });
+    txt('12 din se', 830, 200, { size: 36, weight: 900, align: 'left', color: C.sub });
+    calendar(830, 240, Math.round(12 * eo(P(t, Q(1) + 1, 2))), 10, t);
+    ctx.save(); ctx.strokeStyle = C.bad; ctx.lineWidth = 5; ctx.setLineDash([10, 8]); ctx.beginPath(); ctx.moveTo(830 + 3 * 86 - 6, 320); ctx.lineTo(830 + 3 * 86 - 6, 420); ctx.stroke(); ctx.restore();
+    txt('10 din', 830 + 3 * 86 - 6, 440, { size: 24, weight: 900, color: C.bad });
+  }, 16);
+  factRow(780, 540, 1040, P(t, Q(1) + 3, .5), 'Purulent discharge · daytime cough · low fever', C.warn, C.warnSoft, null);
+  factRow(780, 680, 1040, P(t, Q(2) + 2.2, .5), 'Aankh normal · periorbital swelling NAHI', C.ok, C.okSoft, null, P(t, Q(2) + 2.6, .4));
+  if (t >= Q(3)) {
+    pop(P(t, Q(3), .5), 1300, 820, () => { card(820, 775, 960, 90, { fill: C.bad, r: 45, blur: 0 }); txt('>10 din, improve nahi → BACTERIAL SINUSITIS', 1300, 821, { size: 34, weight: 900, color: '#fff' }); });
+  }
+  pop(P(t, Q(4), .5), 1300, 915, () => { card(900, 880, 800, 74, { fill: C.ok, r: 37, blur: 0 }); txt('Clinical diagnosis → Oral amoxicillin', 1300, 918, { size: 34, weight: 900, color: '#fff' }); });
+};
+
+SC.q15why = (t, D, Q) => {
+  header('Case 15 · Baaki options kyun galat?', C.bad);
+  optRow(150, P(t, Q(0), .5), { title: 'Sirf supportive', h: 180, lines: ['Viral URTI ke liye (< 10 din)'], icon: (x, y) => thermometer(x, y, .4, .5) });
+  cross(1700, 240, 36, C.bad, P(t, Q(0) + 2, .4));
+  optRow(360, P(t, Q(1), .5), { title: 'Nasal steroids', h: 180, lines: ['Adjunct, primary treatment nahi'], icon: (x, y) => vial(x, y + 10, .7, 'Nasal', C.blue) });
+  cross(1700, 450, 36, C.bad, P(t, Q(1) + 1.8, .4));
+  optRow(570, P(t, Q(2), .5), { title: 'Sinus X-ray', h: 200, lines: ['Routine NAHI', 'Sirf orbital / intracranial complication → CT'], icon: (x, y) => ctScanner(x, y, .8) });
+  cross(1700, 670, 36, C.bad, P(t, Q(2) + 1.5, .4));
+  pop(P(t, Q(3), .5), W / 2, 890, () => { card(160, 840, 1600, 100, { fill: C.ok, r: 50, blur: 0 }); txt('>10 din, no improvement → bacterial sinusitis → oral amoxicillin, no X-ray', W / 2, 891, { size: 34, weight: 900, color: '#fff' }); });
+};
+
+/* Case 16: laryngomalacia */
+SC.q16case = (t, D, Q) => {
+  header('Case 16 · Q167 · Picture pehchano', C.resp);
+  const rk = P(t, 0, .5) * (1 - P(t, Q(1) - .4, .5));
+  recapStrip(rk, 'Pichhla:', '>10 din purulent discharge → sinusitis → amoxicillin');
+  if (t < Q(1) - .4) return;
+  if (t >= Q(4) - .3) {
+    answerCard(W / 2, 160, P(t, Q(4) - .3, .6), 'ENT · SURGICAL EVALUATION', C.resp);
+    fadeUp(P(t, Q(4) + .4, .5), () => {
+      card(260, 360, 640, 560, { fill: '#fff' });
+      doctor(470, 680, 1);
+      rr(560, 470, 240, 90, 45); ctx.fillStyle = C.resp; ctx.fill(); txt('ENT', 680, 516, { size: 54, weight: 900, color: '#fff' });
+    }, 18);
+    fadeUp(P(t, Q(5), .5), () => {
+      card(1020, 360, 640, 560, { fill: C.respSoft, stroke: C.resp, lw: 5 });
+      larynx(1340, 590, .8, 0);
+      scissors(1500, 470, .8, t);
+      txt('Supraglottoplasty', 1340, 860, { size: 50, weight: 900, color: C.resp });
+    }, 18);
+    return;
+  }
+  fadeUp(P(t, Q(1), .6), () => {
+    card(90, 150, 560, 760, { fill: '#fff' });
+    txt('1 saal ka boy', 370, 210, { size: 44, weight: 900, color: C.navy });
+    baby(370, 470, 1.3, t);
+    lungs(370, 770, .4, { color: '#FCA5A5' }, t);
+  }, 18);
+  factRow(700, 230, 520, P(t, Q(1) + 1.5, .5), 'Recurrent pneumonia', C.bad, C.badSoft, null);
+  factRow(700, 370, 520, P(t, Q(1) + 3, .5), 'Persistent cough', C.warn, C.warnSoft, null);
+  fadeUp(P(t, Q(2), .5), () => {
+    card(1260, 150, 560, 560, { fill: '#fff' });
+    txt('Laryngomalacia', 1540, 200, { size: 40, weight: 900, color: C.resp });
+    larynx(1540, 440, .95, .5 + .5 * Math.sin(t * 3));
+    txt('age ke saath theek NAHI', 1540, 680, { size: 30, weight: 800, color: C.bad });
+  }, 18);
+  fadeUp(P(t, Q(3), .5), () => {
+    card(700, 470, 520, 240, { fill: C.badSoft, r: 26 });
+    txt('Kyun? ASPIRATION', 960, 540, { size: 40, weight: 900, color: C.bad });
+    txt('→ recurrent pneumonia', 960, 610, { size: 34, weight: 800, color: C.ink });
+  }, 16);
+  pop(P(t, Q(3) + 2.5, .5), 960, 830, () => { card(560, 770, 800, 120, { fill: C.bad, r: 60, blur: 0 }); txt('Mild NAHI → SEVERE laryngomalacia', 960, 831, { size: 40, weight: 900, color: '#fff' }); });
+};
+
+SC.q16why = (t, D, Q) => {
+  header('Case 16 · Baaki options kyun galat?', C.bad);
+  optRow(150, P(t, Q(0), .5), { title: 'Antibiotics', h: 180, lines: ['Har episode treat karenge, CAUSE nahi'], icon: (x, y) => capsule(x, y, .9) });
+  cross(1700, 240, 36, C.bad, P(t, Q(0) + 1.5, .4));
+  optRow(360, P(t, Q(1), .5), { title: 'Observation / reassurance', h: 180, lines: ['Mild cases mein... yahan complications hain'], icon: (x, y) => speech(x - 70, y - 40, 140, 70, '...', C.mute) });
+  cross(1700, 450, 36, C.bad, P(t, Q(1) + 2, .4));
+  optRow(570, P(t, Q(2), .5), { title: 'Reflux medical treatment', h: 180, lines: ['Adjunct · severe disease mein kaafi nahi'], icon: (x, y) => syrup(x, y + 10, .5, 'Anti-reflux') });
+  cross(1700, 660, 36, C.bad, P(t, Q(2) + 2, .4));
+  pop(P(t, Q(3), .5), W / 2, 880, () => { card(160, 830, 1600, 100, { fill: C.resp, r: 50, blur: 0 }); txt('Laryngomalacia + recurrent pneumonia = severe → ENT surgical evaluation', W / 2, 881, { size: 34, weight: 900, color: '#fff' }); });
+};
+
+SC.recap = (t, D, Q) => {
+  header('Part 3 · Recap', C.resp);
+  recapRows(t, Q, 'Aathon ek saath', [
+    [1, 'Asthma prognosis', 'Remit ho sakta hai, guarantee nahi', C.resp, null],
+    [2, 'Device', 'MDI + spacer, nebulizer nahi', C.ok, null],
+    [3, 'Moderate exacerbation', 'Salbutamol → reassess', C.warn, null],
+    [4, 'Cystic fibrosis', 'Bronchiectasis', C.bad, null],
+    [5, 'Stable pneumonia', 'Oral amoxicillin', C.ok, null],
+    [6, 'Stony dullness', 'Pleural effusion', '#0EA5E9', null],
+    [7, '> 10 din sinus symptoms', 'Oral amoxicillin', C.warn, null],
+    [8, 'Laryngomalacia + recurrent pneumonia', 'ENT surgical evaluation', C.resp, null],
+  ], 215, 100);
+};
+
+SC.think = (t, D, Q) => {
+  header('Think about it', C.warn);
+  fadeUp(P(t, 0, .5), () => {
+    bulb(260, 220, .9, .5 + .5 * Math.sin(t * 2.5));
+    txt('Dono ko pneumonia...', 370, 195, { size: 58, weight: 900, color: C.navy, align: 'left' });
+    txt('ek ghar, ek admit. Farq kya?', 370, 275, { size: 46, weight: 800, color: C.warn, align: 'left' });
+  });
+  pop(P(t, Q(1), .6), 540, 650, () => {
+    card(140, 370, 800, 580, { fill: C.okSoft, stroke: C.ok, lw: 5 });
+    house(400, 520, 1, C.ok);
+    pulseOx(700, 520, .8, 97, t);
+    txt('GHAR', 540, 700, { size: 60, weight: 900, color: C.ok });
+    para(['Stable', 'SpO₂ normal'], 540, 790, { size: 42, weight: 800, lh: 60 });
+  });
+  pop(P(t, Q(2), .6), 1380, 650, () => {
+    card(980, 370, 800, 580, { fill: C.badSoft, stroke: C.bad, lw: 5 });
+    hospital(1240, 520, .9);
+    pulseOx(1560, 520, .8, 88, t);
+    txt('ADMIT', 1380, 700, { size: 60, weight: 900, color: C.bad });
+    para(['Hypoxia · Distress', 'Dehydration · Toxicity'], 1380, 790, { size: 42, weight: 800, lh: 60 });
+  });
+};
+
+SC.full = (t, D, Q) => {
+  header('Poora chapter ek saath', C.navy);
+  fadeUp(P(t, 0, .5), () => txt('Kuch naya nahi... sirf wahi jo padha hai', W / 2, 165, { size: 44, weight: 800, color: C.sub }));
+  const cols = [
+    ['NEPHROLOGY', C.kid, 100, [[1, 'Puffiness + normal BP'], [1, '→ Nephrotic, MCD'], [2, 'Well infant UTI → oral cephalexin'], [2, 'Scar → DMSA (4–6 mo)'], [2, 'Reflux → MCU']]],
+    ['NEUROLOGY', C.neuro, 680, [[3, 'Kernicterus → dyskinetic CP'], [3, 'Febrile seizure → reassure'], [4, 'Ptosis → AChR antibodies'], [5, 'Heliotrope + Gottron → JDM'], [6, 'Spasms → hypsarrhythmia'], [6, 'ACTH / vigabatrin']]],
+    ['RESPIRATORY', C.resp, 1260, [[7, 'Asthma: remit, no guarantee'], [7, 'MDI + spacer'], [7, 'Salbutamol → reassess'], [8, 'CF → bronchiectasis'], [9, 'Stable CAP → oral amox'], [9, 'Stony dull → effusion'], [10, 'Sinusitis >10 d → amox'], [10, 'Laryngomalacia → ENT']]],
+  ];
+  cols.forEach(([n, c, x, items]) => {
+    fadeUp(P(t, Q(items[0][0]) - .3, .5), () => {
+      card(x, 220, 560, 790, { fill: '#fff', stroke: c, lw: 4 });
+      rr(x, 220, 560, 84, 28); ctx.fillStyle = c; ctx.fill(); ctx.fillRect(x, 276, 560, 28);
+      txt(n, x + 280, 264, { size: 42, weight: 900, color: '#fff' });
+    }, 16);
+    let prev = -1, sub = 0;
+    items.forEach(([li, s], j) => {
+      sub = li === prev ? sub + 1 : 0; prev = li;
+      fadeUp(P(t, Q(li) + sub * 1.6, .4), () => txt(s, x + 26, 360 + j * 82, { size: 30, weight: 800, align: 'left', color: C.ink }), 10);
+    });
+  });
+};
+
+SC.rapidA = (t, D, Q) => {
+  header('Rapid recall · Nephrology', C.kid);
+  if (t < Q(1) - .3) {
+    pop(P(t, .1, .6), W / 2, 450, () => {
+      txt('Rapid Recall', W / 2, 330, { size: 110, weight: 900, color: C.navy });
+      txt('Sawal padho → ruko → khud jawab bolo → aage', W / 2, 470, { size: 48, weight: 800, color: C.warn });
+    });
+    return;
+  }
+  qaCards(t, Q, [
+    [1, 2, 'Subah periorbital swelling, BP normal, 5 saal?', 'Nephrotic syndrome'], [3, 4, '4 mahine ka well infant, UTI?', 'Oral cephalexin'],
+    [5, 6, 'IV kab?', 'Toxic · vomiting · < 2 mahine'], [7, 8, 'Renal scarring ka test?', 'DMSA'], [9, 10, 'Reflux ka test?', 'MCU'],
+  ], C.kid, { qLabel: 'Nephro' });
+};
+SC.rapidB = (t, D, Q) => {
+  header('Rapid recall · Neurology', C.neuro);
+  qaCards(t, Q, [
+    [0, 1, 'Kernicterus ke baad CP ka type?', 'Dyskinetic'], [2, 3, 'Sabse common CP overall?', 'Spastic'], [4, 5, 'Simple febrile seizure mein CT ya EEG?', 'Nahi · Reassure'],
+    [6, 7, 'Fatigable weakness + ptosis ka test?', 'AChR antibodies'], [8, 9, 'Myasthenia mein CK?', 'Normal'], [10, 11, 'Heliotrope rash + Gottron papules?', 'Juvenile dermatomyositis'],
+    [12, 13, 'Infantile spasms ka EEG?', 'Hypsarrhythmia'], [14, 15, 'Treatment?', 'ACTH ya vigabatrin'],
+  ], C.neuro, { qLabel: 'Neuro' });
+};
+SC.rapidC = (t, D, Q) => {
+  header('Rapid recall · Respiratory', C.resp);
+  qaCards(t, Q, [
+    [0, 1, 'Nebulizer ki jagah kya?', 'MDI + spacer with mask'], [2, 3, 'PEF 60%, poore sentences · 1st step?', 'Salbutamol via spacer, reassess'],
+    [4, 5, 'CF ka common complication?', 'Bronchiectasis'], [6, 7, 'Stable pneumonia, SpO₂ 97%?', 'Oral amoxicillin, discharge'],
+    [8, 9, 'Stony dull percussion?', 'Pleural effusion'], [10, 11, 'Hyperresonant percussion?', 'Pneumothorax'],
+    [12, 13, '12 din se purulent nasal discharge?', 'Oral amoxicillin'], [14, 15, 'Laryngomalacia + recurrent pneumonia?', 'ENT surgical evaluation'],
+  ], C.resp, { qLabel: 'Resp' });
+};
+
+SC.end = (t, D) => {
+  fadeUp(P(t, 0, .6), () => {
+    lungs(W / 2, 330, .9, {}, t);
+    txt('Respiratory · Part 3', W / 2, 560, { size: 72, weight: 900, color: C.navy });
+  });
+  fadeUp(P(t, .8, .6), () => txt('For education only · Follow current guidelines (IAP / GINA / AAP)', W / 2, 660, { size: 32, weight: 600, color: C.mute }));
+};
+
+/* ---------- timeline ---------- */
+let TL = [];
+window.setup = (timeline) => {
+  let acc = 0;
+  TL = timeline.map(s => { const o = { ...s, cues: s.cues || [], start: acc }; acc += s.dur; return o; });
+  return acc;
+};
+window.renderFrame = (T) => {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1;
+  background(T);
+  let sc = TL[TL.length - 1];
+  for (const s of TL) if (T >= s.start && T < s.start + s.dur) { sc = s; break; }
+  const t = T - sc.start, D = sc.dur;
+  const Q = i => { const c = sc.cues.find(c => c.line === i); return c ? c.t : 0; };
+  const R = i => sc.cues.filter(c => c.line === i).map(c => c.t);
+  const fin = clamp(t / .35), fout = clamp((D - t) / .3);
+  ctx.save(); ctx.globalAlpha = Math.min(fin, fout);
+  let cue = null; for (const c of sc.cues) if (t >= c.t) cue = c;
+  window.REPEAT = !!(cue && cue.of > 1);
+  SC[sc.id](t, D, Q, R);
+  ctx.restore();
+};
+</script>
+</body></html>

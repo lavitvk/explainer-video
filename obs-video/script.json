@@ -1,0 +1,404 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part one: early pregnancy।"
+   },
+   {
+    "say": "यह recall file है। एक जैसे सवाल एक साथ रखे हैं। हर topic में picture, answer, और so remember।"
+   },
+   {
+    "say": "चलिए, शुरू करते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "t1a",
+  "lines": [
+   {
+    "say": "Topic one: pregnancy पहचानना, और dating।"
+   },
+   {
+    "say": "Cervix dusky या blue: Chadwick sign। Next step: beta hCG।"
+   },
+   {
+    "say": "Period miss, obese, cervix dusky: पहले beta hCG।"
+   },
+   {
+    "say": "Galactorrhea, plus दो महीने amenorrhea: initial test भी, pregnancy test।"
+   }
+  ]
+ },
+ {
+  "id": "t1b",
+  "lines": [
+   {
+    "say": "Gestational age का सबसे accurate तरीका: first trimester में ultrasound, crown-rump length।"
+   },
+   {
+    "say": "LMP याद नहीं: transvaginal ultrasound, जितनी जल्दी हो सके।"
+   },
+   {
+    "say": "CRL option ना हो: head circumference, या biparietal diameter।"
+   },
+   {
+    "say": "Third trimester में weight के लिए: abdominal circumference।"
+   },
+   {
+    "say": "So remember: dating, early ultrasound, CRL। Weight, abdominal circumference।"
+   }
+  ]
+ },
+ {
+  "id": "t2a",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: Chadwick sign, beta hCG। Dating, early ultrasound। अब abortion।"
+   },
+   {
+    "say": "आठ weeks, spotting, os closed, normal sac: threatened abortion। Reassure।"
+   },
+   {
+    "say": "Os closed, fetus ठीक: threatened।"
+   },
+   {
+    "say": "Sac है पर embryo नहीं: pregnancy of unknown viability।"
+   },
+   {
+    "say": "Missed abortion: misoprostol।"
+   },
+   {
+    "say": "नौ weeks, severe bleeding, os खुला, tissue दिख रहा: incomplete। D and C।"
+   },
+   {
+    "say": "Stable, और moderate bleeding हो: expectant भी चल सकता है।"
+   }
+  ]
+ },
+ {
+  "id": "t2b",
+  "lines": [
+   {
+    "say": "First trimester miscarriage का सबसे common cause: chromosomal abnormalities।"
+   },
+   {
+    "say": "Spontaneous miscarriage कितना common? दस से पंद्रह percent।"
+   },
+   {
+    "say": "एक miscarriage के बाद: reassure, full workup नहीं।"
+   },
+   {
+    "say": "Heavy smoking, risk बढ़ाता है।"
+   },
+   {
+    "say": "Recurrent loss, plus thrombosis history, या prolonged aPTT: antiphospholipid syndrome।"
+   },
+   {
+    "say": "So remember: os closed, threatened। Missed, misoprostol। Most common cause, chromosomal।"
+   }
+  ]
+ },
+ {
+  "id": "t3a",
+  "lines": [
+   {
+    "say": "पिछला: threatened, os closed, reassure। Missed, misoprostol।"
+   },
+   {
+    "say": "Amenorrhea, पेट दर्द, shoulder तक। BP गिरा, pouch of Douglas में खून: ruptured ectopic।"
+   },
+   {
+    "say": "Unstable: surgery। Recall answer laparoscopy है, पर unstable patient में अक्सर laparotomy।"
+   },
+   {
+    "say": "IVF के चार हफ्ते बाद, sudden pain और hypotension: ectopic। Embryo transfer के बाद भी ectopic होता है।"
+   }
+  ]
+ },
+ {
+  "id": "t3b",
+  "lines": [
+   {
+    "say": "hCG positive, uterus में sac नहीं, adnexal mass, stable: stable ectopic।"
+   },
+   {
+    "say": "सात weeks, TVUS पर ना अंदर sac, ना बाहर: repeat ultrasound और hCG।"
+   },
+   {
+    "say": "Methotrexate के बाद hCG, 2900 से 6000: surgery।"
+   },
+   {
+    "say": "Repeat methotrexate तब, जब hCG 5000 से कम, और mass 4 cm से कम।"
+   },
+   {
+    "say": "IVF pregnancy, right tube में 4 cm mass, stable: right salpingotomy।"
+   },
+   {
+    "say": "पहले ectopic, अब फिर pregnant होना चाहती है: early ultrasound से location confirm करो। Recurrence लगभग दस percent।"
+   },
+   {
+    "say": "So remember: unstable, surgery। hCG बढ़ रहा methotrexate के बाद, surgery। पिछला ectopic, early ultrasound।"
+   }
+  ]
+ },
+ {
+  "id": "t4a",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: unstable ectopic, surgery। Previous ectopic, early ultrasound।"
+   },
+   {
+    "say": "Fundal height ज़्यादा, hCG बहुत high, snowstorm appearance: complete mole।"
+   },
+   {
+    "say": "Vesicles निकले: complete mole। Fetal parts दिखे: partial mole।"
+   },
+   {
+    "say": "Treatment: suction evacuation। Final diagnosis: histopathology।"
+   },
+   {
+    "say": "Evacuation के बाद immediate complication: perforation। बाद में: infection।"
+   },
+   {
+    "say": "hCG follow-up: weekly, जब तक तीन बार negative। फिर monthly, छह महीने।"
+   },
+   {
+    "say": "Hyperemesis gravidarum में urine में क्या? Ketones।"
+   },
+   {
+    "say": "So remember: snowstorm, vesicles, complete mole। Suction evacuation। hCG weekly, फिर monthly। Hyperemesis, ketones।"
+   }
+  ]
+ },
+ {
+  "id": "p1recap",
+  "lines": [
+   {
+    "say": "Part one का recap। सब एक साथ।"
+   },
+   {
+    "say": "Chadwick sign: beta hCG। Dating: early ultrasound, CRL।"
+   },
+   {
+    "say": "Os closed spotting: threatened, reassure। Missed: misoprostol। Most common miscarriage cause: chromosomal।"
+   },
+   {
+    "say": "Unstable ectopic: surgery। Methotrexate के बाद hCG बढ़ा: surgery। Previous ectopic: early ultrasound।"
+   },
+   {
+    "say": "Snowstorm: complete mole, suction। hCG weekly, फिर monthly।"
+   }
+  ]
+ },
+ {
+  "id": "p2intro",
+  "lines": [
+   {
+    "say": "Part two: antenatal care, physiology, और drugs।"
+   },
+   {
+    "say": "Part one वापस बुलाओ।"
+   },
+   {
+    "say": "Dating: early ultrasound। Missed abortion: misoprostol।"
+   },
+   {
+    "say": "Unstable ectopic: surgery। Complete mole: suction।"
+   },
+   {
+    "say": "अब, antenatal visits।"
+   }
+  ]
+ },
+ {
+  "id": "t5a",
+  "lines": [
+   {
+    "say": "Topic five: scans और screening का timing।"
+   },
+   {
+    "say": "Period miss हुआ, पहला ultrasound कब? ग्यारह से तेरह weeks।"
+   },
+   {
+    "say": "Detailed anomaly scan: अठारह से बीस weeks।"
+   },
+   {
+    "say": "Asymptomatic bacteriuria के लिए urine culture: बारह weeks के आस-पास।"
+   },
+   {
+    "say": "GBS vaginal swab: पैंतीस से सैंतीस weeks।"
+   },
+   {
+    "say": "75 gram OGTT क्यों? पिछली pregnancy में GDM।"
+   },
+   {
+    "say": "Visits: अट्ठाईस weeks तक हर चार हफ्ते, छत्तीस तक हर दो हफ्ते, फिर हर हफ्ते।"
+   },
+   {
+    "say": "चौंतीस weeks, सब normal: अगले हफ्ते बुलाओ।"
+   }
+  ]
+ },
+ {
+  "id": "t5b",
+  "lines": [
+   {
+    "say": "Down syndrome quad screen: inhibin high, hCG high। Estriol low, AFP low।"
+   },
+   {
+    "say": "Twin में nuchal translucency बढ़ी: cardiac malformation का risk।"
+   },
+   {
+    "say": "So remember: dating, ग्यारह से तेरह। Anomaly, अठारह से बीस। GBS, पैंतीस से सैंतीस। Down: hCG और inhibin high, AFP और estriol low।"
+   }
+  ]
+ },
+ {
+  "id": "t6",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: anomaly scan, अठारह से बीस। GBS, पैंतीस से सैंतीस।"
+   },
+   {
+    "say": "First trimester में BUN और creatinine: कम। GFR बढ़ता है, इसलिए।"
+   },
+   {
+    "say": "Pregnancy maintain करने वाला hormone: progesterone।"
+   },
+   {
+    "say": "Pregnancy का main estrogen: estriol।"
+   },
+   {
+    "say": "GDM क्यों होता है? Human placental lactogen, anti-insulin।"
+   },
+   {
+    "say": "Plasma volume बढ़ता है। MS वाली patient में heart failure, इसी से।"
+   },
+   {
+    "say": "Immunoglobulin जो breast milk में: IgA। माँ का IgG baby में: passive natural immunity।"
+   },
+   {
+    "say": "Breast पर areola में छोटे दाने: Montgomery tubercles।"
+   },
+   {
+    "say": "So remember: BUN creatinine कम। Estriol। hPL से GDM। Plasma volume बढ़े, MS fail।"
+   }
+  ]
+ },
+ {
+  "id": "t7",
+  "lines": [
+   {
+    "say": "पिछला: BUN कम, hPL।"
+   },
+   {
+    "say": "Sickle cell वाली pregnant: folic acid 5 mg, delivery तक।"
+   },
+   {
+    "say": "Oral iron बारह हफ्ते, फिर भी iron deficiency anemia: IV iron।"
+   },
+   {
+    "say": "Vegan breastfeeding माँ: B12 कम।"
+   },
+   {
+    "say": "Varicella antibody negative: vaccine नहीं, live है। Exposure से बचाओ।"
+   },
+   {
+    "say": "Rubella vaccine के एक महीने के अंदर pregnant हो गई: outcome favorable, termination नहीं।"
+   },
+   {
+    "say": "So remember: SCD, folic 5 mg, पूरी pregnancy। Live vaccine, pregnancy में नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "t8a",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: SCD folic 5 mg। Live vaccine नहीं। अब drugs।"
+   },
+   {
+    "say": "Hypothyroid, levothyroxine पर, controlled, pregnant हो गई: dose बढ़ाओ, लगभग तीस percent।"
+   },
+   {
+    "say": "Epilepsy, phenytoin, छह साल से attack नहीं: pregnancy में चलती दवा को अचानक नहीं रोकते।"
+   },
+   {
+    "say": "Antiepileptics से congenital malformation का risk।"
+   },
+   {
+    "say": "Isotretinoin: बंद करने के एक महीने बाद conceive।"
+   },
+   {
+    "say": "SLE, hydroxychloroquine: continue। Mycophenolate: बंद करके azathioprine।"
+   },
+   {
+    "say": "Controlled depression, paroxetine, pregnant हो चुकी: continue। Pregnancy plan कर रही हो, तो safe दवा पर switch।"
+   }
+  ]
+ },
+ {
+  "id": "t8b",
+  "lines": [
+   {
+    "say": "ACE inhibitor क्यों नहीं? Fetal kidney damage, renal agenesis।"
+   },
+   {
+    "say": "Preeclampsia में भी, captopril contraindicated।"
+   },
+   {
+    "say": "Hyperthyroid, methimazole पर symptoms: first trimester में PTU, second और third में methimazole।"
+   },
+   {
+    "say": "So remember: hypothyroid, dose बढ़ाओ। ACE inhibitor नहीं, fetal kidney। Mycophenolate से azathioprine।"
+   }
+  ]
+ },
+ {
+  "id": "t9",
+  "lines": [
+   {
+    "say": "पिछला: levothyroxine बढ़ाओ। ACE inhibitor नहीं। अब last one।"
+   },
+   {
+    "say": "पैंतीस साल या ज़्यादा: सबसे बड़ा risk factor, age।"
+   },
+   {
+    "say": "चौंतीस साल, और smoker: smoking।"
+   },
+   {
+    "say": "Smoking से fetus को: low birth weight।"
+   },
+   {
+    "say": "Aspirin से क्या कम होता है? Preeclampsia, और IUGR।"
+   },
+   {
+    "say": "So remember: पैंतीस से ऊपर, age। Smoker हो तो, smoking। Aspirin, preeclampsia रोकता है।"
+   }
+  ]
+ },
+ {
+  "id": "p2recap",
+  "lines": [
+   {
+    "say": "Part two का recap। सब एक साथ।"
+   },
+   {
+    "say": "Dating ग्यारह से तेरह। Anomaly अठारह से बीस। GBS पैंतीस से सैंतीस।"
+   },
+   {
+    "say": "Down screen: hCG और inhibin high। BUN creatinine कम। hPL से GDM।"
+   },
+   {
+    "say": "SCD folic 5 mg। Live vaccine नहीं।"
+   },
+   {
+    "say": "Hypothyroid, dose बढ़ाओ। ACE inhibitor नहीं, fetal kidney। Mycophenolate से azathioprine।"
+   },
+   {
+    "say": "Aspirin, preeclampsia।"
+   }
+  ]
+ }
+]

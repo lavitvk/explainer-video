@@ -1,0 +1,354 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Final revision: obstetrics और gynaecology, पूरी file एक साथ।"
+   },
+   {
+    "say": "अब पूरी file को शुरू से आखिर तक, एक कहानी की तरह दोहराते हैं। कुछ नया नहीं, सिर्फ वही जो पढ़ा है। ठीक है?"
+   }
+  ]
+ },
+ {
+  "id": "s1",
+  "lines": [
+   {
+    "say": "Pregnancy शुरू होती है। Cervix blue दिखा, Chadwick sign, तो पहले beta hCG। Dating के लिए early ultrasound, और crown-rump length।"
+   },
+   {
+    "say": "Bleeding हो, तो os देखो: बंद और baby ठीक, threatened, reassure। बंद और baby non-viable, missed, misoprostol।"
+   },
+   {
+    "say": "Miscarriage का most common cause, chromosomal।"
+   },
+   {
+    "say": "Pregnancy uterus के बाहर, tube में, तो ectopic। Unstable हो, तो surgery। Snowstorm और vesicles, complete mole, suction evacuation।"
+   }
+  ]
+ },
+ {
+  "id": "s2",
+  "lines": [
+   {
+    "say": "Antenatal visits में dating 11 से 13 हफ्ते, anomaly scan 18 से 20, GBS 35 से 37।"
+   },
+   {
+    "say": "Pregnancy में BUN और creatinine कम। GDM hPL से। और plasma volume बढ़ने से mitral stenosis वाली माँ fail होती है।"
+   },
+   {
+    "say": "Sickle cell में folic acid 5 mg। Live vaccine नहीं। Hypothyroid में dose बढ़ाओ। ACE inhibitor कभी नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "s3",
+  "lines": [
+   {
+    "say": "बीमारियों में: early HbA1c high, तो malformations। GDM में पहले diet।"
+   },
+   {
+    "say": "Preeclampsia में plasma volume कम। HELLP at term, deliver। Magnesium toxicity में calcium gluconate।"
+   },
+   {
+    "say": "खुजली और high ALP, cholestasis। DVT में compression ultrasound, और LMWH।"
+   },
+   {
+    "say": "Trait में UTI, disease में IUGR। Active herpes में CS।"
+   }
+  ]
+ },
+ {
+  "id": "s4",
+  "lines": [
+   {
+    "say": "Third trimester की bleeding: painless, previa, exam से पहले ultrasound। Painful tense uterus, abruption, HTN सबसे बड़ा risk।"
+   },
+   {
+    "say": "Preterm labour में steroid, RDS के लिए। और tocolytic, steroid का time देने के लिए।"
+   },
+   {
+    "say": "PPROM में steroids plus antibiotics। बुखार और tender uterus, chorioamnionitis, deliver।"
+   }
+  ]
+ },
+ {
+  "id": "s5",
+  "lines": [
+   {
+    "say": "Labour room: retraction ring, obstructed labour।"
+   },
+   {
+    "say": "CTG में early head, variable cord, late placenta। Sinusoidal में CS। Abnormal CTG पर पहले left lateral।"
+   },
+   {
+    "say": "Breech में भी lie longitudinal। पहला twin breech, तो CS।"
+   },
+   {
+    "say": "Delivery के बाद PPH के चार T। सबसे common atony। Earliest sign tachycardia। Asthma में carboprost नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "s6",
+  "lines": [
+   {
+    "say": "Gynae: सबसे common fibroid intramural, सबसे ज़्यादा bleeding submucosal। Fertility चाहिए, तो myomectomy।"
+   },
+   {
+    "say": "Bulky tender uterus, adenomyosis। Dysmenorrhea plus infertility, endometriosis, gold standard laparoscopy। 45 से ऊपर AUB में biopsy।"
+   },
+   {
+    "say": "Infertility में पहले semen analysis। दोनों tubes बंद, तो IVF। PCOS में pregnancy नहीं चाहिए, तो OCP। चाहिए, तो clomiphene। Young में high FSH, POI।"
+   },
+   {
+    "say": "Cheesy discharge candida, fishy BV। Ceftriaxone fail, तो chlamydia। सबसे common prolapse cystocele, unfit में pessary। Meigs syndrome, fibroma। ASCUS पर HPV test।"
+   }
+  ]
+ },
+ {
+  "id": "rapidA",
+  "lines": [
+   {
+    "say": "Rapid recall। सवाल पढ़ो, रुको, खुद जवाब बोलो, फिर आगे पढ़ो।"
+   },
+   {
+    "say": "Chadwick sign के बाद पहला test?"
+   },
+   {
+    "say": "Beta hCG।"
+   },
+   {
+    "say": "Os बंद, baby non-viable?"
+   },
+   {
+    "say": "Missed abortion, misoprostol।"
+   },
+   {
+    "say": "Ectopic सबसे ज़्यादा कहाँ?"
+   },
+   {
+    "say": "Fallopian tube।"
+   },
+   {
+    "say": "Mole का hCG follow-up?"
+   },
+   {
+    "say": "Weekly, जब तक 3 बार negative। फिर monthly, 6 महीने।"
+   }
+  ]
+ },
+ {
+  "id": "rapidB",
+  "lines": [
+   {
+    "say": "Anomaly scan कब?"
+   },
+   {
+    "say": "18 से 20 हफ्ते।"
+   },
+   {
+    "say": "GDM का hormone?"
+   },
+   {
+    "say": "hPL।"
+   },
+   {
+    "say": "Hypothyroid pregnant हो गई, तो dose?"
+   },
+   {
+    "say": "बढ़ाओ।"
+   },
+   {
+    "say": "Magnesium पर reflexes गए?"
+   },
+   {
+    "say": "Infusion रोको, calcium gluconate।"
+   },
+   {
+    "say": "Pregnancy में surgical abdomen का most common cause?"
+   },
+   {
+    "say": "Appendicitis।"
+   },
+   {
+    "say": "Sickle cell trait का most common complication?"
+   },
+   {
+    "say": "UTI।"
+   }
+  ]
+ },
+ {
+  "id": "rapidC",
+  "lines": [
+   {
+    "say": "Painless bleeding, और placenta os पर?"
+   },
+   {
+    "say": "Previa। Exam से पहले ultrasound।"
+   },
+   {
+    "say": "Steroids क्यों?"
+   },
+   {
+    "say": "RDS कम करने के लिए।"
+   },
+   {
+    "say": "Tocolytic क्यों?"
+   },
+   {
+    "say": "Steroid को काम करने का time देने के लिए।"
+   },
+   {
+    "say": "Variable deceleration का cause?"
+   },
+   {
+    "say": "Cord compression।"
+   },
+   {
+    "say": "Late deceleration?"
+   },
+   {
+    "say": "Uteroplacental insufficiency।"
+   },
+   {
+    "say": "Hip flex, knee extend?"
+   },
+   {
+    "say": "Frank breech।"
+   }
+  ]
+ },
+ {
+  "id": "rapidD",
+  "lines": [
+   {
+    "say": "PPH का most common cause?"
+   },
+   {
+    "say": "Atony।"
+   },
+   {
+    "say": "Asthma में कौन सी दवा नहीं?"
+   },
+   {
+    "say": "Carboprost।"
+   },
+   {
+    "say": "Submucosal fibroid, fertility चाहिए?"
+   },
+   {
+    "say": "Hysteroscopic resection।"
+   },
+   {
+    "say": "Endometriosis का gold standard?"
+   },
+   {
+    "say": "Laparoscopy।"
+   },
+   {
+    "say": "Ovulation confirm?"
+   },
+   {
+    "say": "Day 21 progesterone।"
+   },
+   {
+    "say": "दोनों tubes बंद?"
+   },
+   {
+    "say": "IVF।"
+   },
+   {
+    "say": "Ceftriaxone के बाद भी PID?"
+   },
+   {
+    "say": "Chlamydia।"
+   },
+   {
+    "say": "Ascites, pleural effusion, ovarian mass?"
+   },
+   {
+    "say": "Meigs syndrome।"
+   }
+  ]
+ },
+ {
+  "id": "warnA",
+  "lines": [
+   {
+    "say": "Recall answers, जिन पर शक है।"
+   },
+   {
+    "say": "यह file students की यादों से बनी है। नीचे वाले answers, standard textbook practice से अलग हैं। Exam से पहले अपने reference से ज़रूर मिला लेना।"
+   },
+   {
+    "say": "Asthma वाली patient में PPH: recall answer carboprost है।"
+   },
+   {
+    "say": "Carboprost, यानी PGF2 alpha, asthma में contraindicated है, क्योंकि bronchospasm करता है। Asthma में misoprostol या methylergonovine use करते हैं, BP normal हो तो।"
+   },
+   {
+    "say": "Azithromycin और contraception: recall कहता है combined pill affect होती है।"
+   },
+   {
+    "say": "Azithromycin जैसे non-enzyme-inducing antibiotics, combined pill को कम effective नहीं बनाते। Rifampicin जैसे enzyme inducers बनाते हैं।"
+   },
+   {
+    "say": "Fetal anemia का ultrasound sign: recall में low MCA, या MCA diastolic flow है।"
+   },
+   {
+    "say": "सही sign है, middle cerebral artery peak systolic velocity का बढ़ना।"
+   }
+  ]
+ },
+ {
+  "id": "warnB",
+  "lines": [
+   {
+    "say": "Abruption, plus DIC, plus IUFD, cervix 7 cm: recall answer CS है।"
+   },
+   {
+    "say": "Standard यह है कि blood products देकर coagulopathy ठीक करो, और vaginal delivery करो, amniotomy और oxytocin से। DIC में CS से bleeding का risk और बढ़ता है, इसलिए CS सिर्फ माँ की stability या obstetric reason के लिए।"
+   },
+   {
+    "say": "Atypical endometrial hyperplasia, most definitive: recall answer progesterone है।"
+   },
+   {
+    "say": "Definitive treatment hysterectomy है। Progestin तब, जब fertility बचानी हो, या patient surgery के लायक ना हो।"
+   },
+   {
+    "say": "Unstable ruptured ectopic: recall answer laparoscopy है।"
+   },
+   {
+    "say": "Hemodynamically unstable patient में अक्सर laparotomy करते हैं। Laparoscopy तब, जब team experienced हो, और patient को संभाला जा सके।"
+   }
+  ]
+ },
+ {
+  "id": "warnC",
+  "lines": [
+   {
+    "say": "Fully dilated, FHR 70, station minus 2: recall answer, encourage to push है।"
+   },
+   {
+    "say": "Head minus 2 पर instrumental delivery safe नहीं है। असल practice में यह emergency CS का case है, चाहे options में ना हो।"
+   },
+   {
+    "say": "Gush of fluid confirm करना: एक recall answer ultrasound है।"
+   },
+   {
+    "say": "Standard confirmation, sterile speculum exam पर pooling, nitrazine, और fern test से होता है। Ultrasound सिर्फ supporting है।"
+   },
+   {
+    "say": "Primi, 5 cm, 5 घंटे से बदलाव नहीं: recall answer 2 घंटे wait है।"
+   },
+   {
+    "say": "नए definition में active phase 6 cm से शुरू होता है, इसलिए 5 cm पर wait कर सकते हैं। 6 cm के बाद 4 घंटे अच्छे contractions में बदलाव ना हो, तो arrest मान कर CS।"
+   },
+   {
+    "say": "Prolonged latent phase: standard cutoff, nulliparous में 20 घंटे, और multiparous में 14 घंटे है। Recall में 18 घंटे, सिर्फ options में सबसे पास वाला number है।"
+   }
+  ]
+ }
+]

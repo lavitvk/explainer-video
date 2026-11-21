@@ -1,0 +1,361 @@
+[
+{
+"id": "intro",
+"lines": [
+{
+"say": "Part nine: macrocytic anemia aur vitamin B12 deficiency."
+},
+{
+"say": "Pichhla part ek line mein: warm AIHA mein steroids, G6PD mein bite cells, hereditary spherocytosis mein EMA. Theek hai?"
+},
+{
+"say": "Ab MCV ke teesre dibbe mein chalte hain: macrocytic anemia, jismein cells bade hote hain."
+}
+]
+},
+{
+"id": "m29",
+"lines": [
+{
+"say": "Topic twenty-nine: macrocytic anemia ke do types."
+},
+{
+"say": "Macrocytic anemia do tarah ka hai, aur unhe ek cheez se alag karte hain: smear par hypersegmented neutrophils hain ya nahi."
+},
+{
+"say": "Hypersegmented neutrophil matlab neutrophil ke nucleus mein 5 ya zyada lobes. Hypersegmented, hypersegmented."
+},
+{
+"say": "Megaloblastic anemia: DNA banane mein dikkat, isliye cells bade par adhoore. Hypersegmented neutrophils hote hain. Causes? Vitamin B12 deficiency aur folate deficiency, sirf yeh do."
+},
+{
+"say": "Non-megaloblastic anemia: cells bade hain par DNA ki problem nahi, isliye hypersegmented neutrophils nahi."
+},
+{
+"say": "Causes? Hemolysis, kyunki bade reticulocytes MCV badha dete hain; alcohol; liver disease; hypothyroidism; myelodysplastic syndrome; aur dawayein jaise methotrexate, hydroxyurea aur HIV ki zidovudine. Theek hai?"
+},
+{
+"say": "Yaad rakhna hai: Hypersegmented neutrophils, megaloblastic: B12 ya folate. Nahi, non-megaloblastic: alcohol, liver, hypothyroid, hemolysis, MDS, drugs."
+}
+]
+},
+{
+"id": "m30",
+"lines": [
+{
+"say": "Topic thirty: vitamin B12 deficiency."
+},
+{
+"say": "B12 deficiency mein MCV aksar bahut zyada hota hai, aksar 115 se upar."
+},
+{
+"say": "Causes chaar dibbon mein: diet, jaise strict vegan; pet ki problem, jaise pernicious anemia, gastrectomy ya bariatric surgery."
+},
+{
+"say": "Chhoti aant ki problem, jaise malabsorption ya ileum ka resection, kyunki B12 ileum mein absorb hota hai; aur dawayein, jaise lambe samay ka metformin aur proton pump inhibitors."
+},
+{
+"say": "Symptoms: anemia ke saare common symptoms, plus neurological symptoms, jaise pairon mein sunnpan, jhunjhunahat aur kam sensation."
+},
+{
+"say": "Ye point yaad rakhna hai: neuro symptoms B12 mein hote hain, folate mein nahi. Neuro, sirf B12."
+}
+]
+},
+{
+"id": "m30b",
+"lines": [
+{
+"say": "Pernicious anemia kya hai? Autoimmune bimari jismein intrinsic factor ya gastric parietal cells ke khilaf antibodies bante hain."
+},
+{
+"say": "Intrinsic factor ke bina B12 absorb nahi hota."
+},
+{
+"say": "Yeh doosri autoimmune bimariyon ke saath hota hai, jaise hypothyroidism aur vitiligo, aur gastric cancer ka risk badhata hai."
+},
+{
+"say": "Yaad rakhna hai: B12 ke causes: vegan, pernicious anemia, ileum ki problem, metformin aur PPI. Neuro symptoms B12 mein."
+}
+]
+},
+{
+"id": "m31",
+"lines": [
+{
+"say": "Topic thirty-one: work-up aur treatment."
+},
+{
+"say": "Lab mein macrocytic anemia, smear par hypersegmented neutrophils, aur B12 ya folate level kam."
+},
+{
+"say": "Ab B12 aur folate ko alag kaise karein? Do markers. Homocysteine dono mein badhta hai."
+},
+{
+"say": "Methylmalonic acid, MMA, sirf B12 mein badhta hai. MMA, MMA."
+},
+{
+"say": "Toh MMA high, B12; MMA normal aur homocysteine high, folate."
+}
+]
+},
+{
+"id": "m31b",
+"lines": [
+{
+"say": "File ka pehla MCQ: 73 saal ka aadmi, thakaan, saans phoolna, pairon mein sunnpan, Hb 7 aur MCV 114."
+},
+{
+"say": "Neuro symptoms plus macrocytic anemia, toh B12 socho. Next step? Vitamin B12 level, A. Answer: B12 level."
+},
+{
+"say": "MMA tab, jab B12 borderline aaye."
+},
+{
+"say": "Doosra MCQ: haath-pair mein sunnpan, pehle se vitiligo aur hypothyroidism, macrocytic anemia aur hypersegmented neutrophils."
+},
+{
+"say": "Autoimmune bimariyon ke saath B12, toh pernicious anemia. Best management? IM vitamin B12, C, kyunki intrinsic factor nahi hai aur neuro symptoms hain. IM B12."
+}
+]
+},
+{
+"id": "m31c",
+"lines": [
+{
+"say": "Teesra MCQ: diabetes aur hypertension, metformin par, sab theek par Hb 8."
+},
+{
+"say": "Kya add karein? Lambe samay ka metformin B12 kam karta hai, toh vitamin B12 replacement, D. Answer: B12 replacement."
+},
+{
+"say": "Asal practice mein pehle B12 level confirm karte hain. Theek hai?"
+},
+{
+"say": "Yaad rakhna hai: MMA sirf B12 mein high. Neuro plus macrocytic, pehle B12 level. Pernicious anemia, IM B12. Metformin, B12 kam."
+}
+]
+},
+{
+"id": "recap",
+"lines": [
+{
+"say": "Ek baar dobara dekhte hain: macrocytic anemia mein hypersegmented neutrophils ho toh megaloblastic, yaani B12 ya folate; na ho toh alcohol, liver, hypothyroid, hemolysis, MDS ya drugs."
+},
+{
+"say": "B12 ke causes vegan diet, pernicious anemia, ileum ki problem, metformin aur PPI; neuro symptoms sirf B12 mein."
+},
+{
+"say": "Homocysteine dono mein high, MMA sirf B12 mein."
+},
+{
+"say": "Pernicious anemia autoimmune, vitiligo aur hypothyroidism ke saath, treatment IM B12."
+}
+]
+},
+{
+"id": "full",
+"lines": [
+{
+"say": "Ab poori file ek saath. Anemia matlab hemoglobin kam: male mein 13.5 se kam, female mein 12 se kam."
+},
+{
+"say": "MCV se type: 80 se kam microcytic, jismein iron deficiency, chronic disease, sideroblastic aur thalassemia; 80 se 95 normocytic; 95 se upar macrocytic."
+},
+{
+"say": "Har anemia mein fatigue, saans phoolna, pallor, tachycardia aur systolic murmur; iron deficiency mein khaas pica, koilonychia aur restless legs; IDA plus dysphagia, Plummer-Vinson."
+},
+{
+"say": "IDA ke chaar raaste: blood loss, demand, absorption aur nutrition. Lab mein low ferritin, high TIBC, high RDW, pencil cells, aur Mentzer 13 se zyada."
+},
+{
+"say": "Elderly mein IDA, colonoscopy. Pehle oral iron, CKD aur intolerance mein IV, severe symptoms mein transfusion, oral iron fail toh celiac."
+},
+{
+"say": "Anemia of chronic disease mein iron hepcidin se band; ferritin normal ya high aur TIBC normal ya low; treatment underlying disease."
+},
+{
+"say": "Beta thalassemia mein bahut kam MCV, normal iron panel, target cells, Mentzer 13 se kam, aur confirm electrophoresis; major mein transfusion se iron overload, toh deferoxamine."
+},
+{
+"say": "Hereditary hemochromatosis mein HFE gene, cardiomyopathy, diabetes aur liver disease, aur treatment phlebotomy."
+},
+{
+"say": "Sickle cell mein HbS, vaso-occlusion aur hemolysis; painful crisis mein rehydration aur pain control, bukhar ho toh antibiotics."
+},
+{
+"say": "Acute chest syndrome mein transfusion; sequestration mein bada spleen aur transfusion; aplastic crisis mein retic kam aur parvovirus B19."
+},
+{
+"say": "Warm AIHA mein steroids, cold mein Mycoplasma aur rituximab; G6PD mein bite cells; hereditary spherocytosis mein EMA."
+},
+{
+"say": "Macrocytic mein hypersegmented neutrophils ho toh B12 ya folate; MMA sirf B12 mein high; pernicious anemia mein IM B12."
+}
+]
+},
+{
+"id": "quiz",
+"lines": [
+{
+"say": "Rapid recall, khud se poochho. Sawal suno, ruko, khud jawab bolo, phir answer suno."
+},
+{
+"say": "MCV 75, kaun sa dibba?"
+},
+{
+"say": "Microcytic. Microcytic."
+},
+{
+"say": "IDA ka sabse important test?"
+},
+{
+"say": "Ferritin. Ferritin."
+},
+{
+"say": "IDA mein TIBC?"
+},
+{
+"say": "High. High."
+},
+{
+"say": "Mentzer index 15?"
+},
+{
+"say": "Iron deficiency. Iron deficiency."
+},
+{
+"say": "IDA plus dysphagia?"
+},
+{
+"say": "Plummer-Vinson. Plummer-Vinson."
+},
+{
+"say": "65 saal ke aadmi mein IDA, next step?"
+},
+{
+"say": "Colonoscopy. Colonoscopy."
+},
+{
+"say": "Dialysis patient mein iron kaise?"
+},
+{
+"say": "IV iron. IV."
+},
+{
+"say": "Severe anemia ke saath heart failure?"
+},
+{
+"say": "Blood transfusion. Transfusion."
+},
+{
+"say": "Oral iron se fayda nahi?"
+},
+{
+"say": "Celiac test. Celiac."
+},
+{
+"say": "Ferritin high aur Hb low, rheumatoid arthritis ka patient?"
+},
+{
+"say": "Anemia of chronic disease. ACD."
+},
+{
+"say": "Microcytic anemia, iron panel normal, Mentzer 11?"
+},
+{
+"say": "Beta thalassemia trait. Thalassemia trait."
+},
+{
+"say": "Thalassemia major, transfusion par, ferritin high?"
+},
+{
+"say": "Deferoxamine. Deferoxamine."
+},
+{
+"say": "Hemochromatosis ka treatment?"
+},
+{
+"say": "Phlebotomy. Phlebotomy."
+},
+{
+"say": "Sickle cell smear par spleen na hone ka sign?"
+},
+{
+"say": "Howell-Jolly bodies. Howell-Jolly bodies."
+},
+{
+"say": "Sickle crisis plus bukhar?"
+},
+{
+"say": "Antibiotics. Antibiotics."
+},
+{
+"say": "Sickle cell, bada spleen, Hb 3?"
+},
+{
+"say": "Splenic sequestration, transfusion. Sequestration."
+},
+{
+"say": "Aplastic crisis ka virus?"
+},
+{
+"say": "Parvovirus B19. Parvovirus B19."
+},
+{
+"say": "Mycoplasma ke baad hemolysis aur agglutination?"
+},
+{
+"say": "Cold AIHA. Cold AIHA."
+},
+{
+"say": "Fava beans ke baad hemolysis aur bite cells?"
+},
+{
+"say": "G6PD deficiency. G6PD."
+},
+{
+"say": "MMA high?"
+},
+{
+"say": "B12 deficiency. B12."
+},
+{
+"say": "Vitiligo aur hypothyroidism ke saath macrocytic anemia?"
+},
+{
+"say": "Pernicious anemia, IM B12. Pernicious anemia."
+}
+]
+},
+{
+"id": "notes",
+"lines": [
+{
+"say": "Ab file ke points, jin par dhyan dena hai."
+},
+{
+"say": "File mein anemia ka cutoff male mein 13.5 gram per dL likha hai. WHO ka common cutoff male mein 13, aur non-pregnant female mein 12 hai; apne exam ke reference wala number yaad rakhna."
+},
+{
+"say": "File kehti hai ki elderly IDA mein colonoscopy next step hai. Standard practice mein adult men aur postmenopausal women mein bidirectional endoscopy, yaani upper GI endoscopy aur colonoscopy dono, ki jaati hai."
+},
+{
+"say": "Ibuprofen wale MCQ mein paracetamol sahi jawab hai. Agar options mein proton pump inhibitor ke saath NSAID ho, toh woh bhi practice mein ek raasta hai; par simple switch ke liye paracetamol."
+},
+{
+"say": "Hemochromatosis ke confirmation ke liye file liver biopsy aur HFE gene test likhti hai. Aaj ki practice mein pehle ferritin aur transferrin saturation, phir HFE gene test; liver biopsy ab sirf tab, jab liver damage ki severity jaanni ho, ya diagnosis pakka na ho."
+},
+{
+"say": "Hereditary spherocytosis ke treatment mein file EPO, iron aur folate likhti hai. Standard treatment folic acid, zaroorat par transfusion, aur severe disease mein splenectomy hai; EPO kuch newborns mein short time ke liye, aur iron routine nahi, kyunki hemolysis mein iron kam nahi hota."
+},
+{
+"say": "Aur yaad rahe: is file ke MCQs ke answers source mein nahi the; yahan diye gaye answers standard teaching ke hisaab se likhe gaye hain."
+}
+]
+},
+{
+"id": "end",
+"lines": []
+}
+]

@@ -1,0 +1,51 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part two: iron deficiency anemia।"},
+  {"say":"पिछला part एक line में: anemia मतलब hemoglobin कम, MCV 80 से कम तो microcytic, और pica या koilonychia हो तो iron deficiency सोचो। ठीक है?"},
+  {"say":"अब iron deficiency anemia, IDA, को detail में देखते हैं, क्योंकि exam में यही सबसे ज़्यादा आता है।"}]},
+ {"id":"b4","lines":[
+  {"say":"Topic four: IDA क्यों होता है।"},
+  {"say":"Iron deficiency anemia क्या है? जब body में iron इतना कम हो जाए, कि bone marrow काफ़ी hemoglobin न बना सके।"},
+  {"say":"Hemoglobin के बीच में iron होता है, तो iron नहीं, hemoglobin नहीं। Iron कम होने के चार रास्ते हैं। उन्हें एक-एक करके देखो।"},
+  {"say":"पहला, blood loss, और यह सबसे important है। हर खून के साथ iron भी जाता है। कहाँ से? GI bleeding, जैसे colon cancer से; menstruation, जो young females में सबसे common cause है; और hematuria।"},
+  {"say":"दूसरा, demand बढ़ना: pregnancy, जिसमें baby को भी iron चाहिए।"},
+  {"say":"तीसरा, absorption कम: celiac disease, atrophic यानी autoimmune gastritis, H. pylori infection, और bariatric surgery।"},
+  {"say":"चौथा, nutritional: खाने में iron कम। बच्चे को सिर्फ़ cow milk दिया जाए, तो भी IDA, क्योंकि cow milk में iron कम होता है। ठीक है?"},
+  {"say":"याद रखना है: IDA के चार रास्ते: blood loss, demand, absorption, nutrition। Young female में सबसे common menstruation। सिर्फ़ cow milk वाला बच्चा, IDA।"}]},
+ {"id":"b5a","lines":[
+  {"say":"Topic five: IDA का diagnosis।"},
+  {"say":"अब lab में IDA कैसा दिखता है? एक-एक report पढ़ो। CBC में microcytic और hypochromic anemia, यानी छोटे और पीले cells।"},
+  {"say":"Serum iron low। Ferritin low। Ferritin, ferritin: यह body का iron store बताता है, और IDA का सबसे important test यही है। Low ferritin मतलब store ख़ाली।"},
+  {"say":"TIBC क्या होगा? High। क्यों? Body को iron चाहिए, तो वह iron पकड़ने वाली capacity बढ़ा देती है।"},
+  {"say":"Reticulocyte count low, क्योंकि marrow के पास raw material नहीं। RDW high, क्योंकि नए और पुराने cells के size अलग हैं।"},
+  {"say":"Blood film पर pencil cells दिखते हैं।"}]},
+ {"id":"b5b","lines":[
+  {"say":"Thalassemia भी microcytic है, तो फ़र्क कैसे? Mentzer index: MCV को RBC count से divide करो।"},
+  {"say":"13 से ज़्यादा आए तो iron deficiency; 13 से कम तो thalassemia trait। Mentzer 13, Mentzer 13।"},
+  {"say":"और एक बहुत important point। बड़ी उम्र के patient में IDA मिला, तो खुद से पूछो: खून कहाँ से जा रहा है? Colon cancer छुपा हो सकता है।"},
+  {"say":"इसलिए हर adult man और postmenopausal woman में IDA हो, तो GI evaluation, ख़ासकर colonoscopy। ये point याद रखना है।"},
+  {"say":"याद रखना है: IDA: low ferritin, high TIBC, high RDW, pencil cells, Mentzer 13 से ज़्यादा। Elderly में IDA, colonoscopy।"}]},
+ {"id":"b6","lines":[
+  {"say":"Topic six: IDA का management।"},
+  {"say":"पहला rule: हर IDA में cause ढूँढना ज़रूरी है। सिर्फ़ iron देना काफ़ी नहीं।"},
+  {"say":"दूसरा rule: हमेशा oral iron से शुरू करो। Oral, oral।"},
+  {"say":"IV iron कब? जब patient oral iron बर्दाश्त न करे, जैसे nausea, vomiting, constipation; जब severe malabsorption हो, या inflammatory bowel disease हो; जब gastritis हो; और chronic kidney disease में, ख़ासकर dialysis वाले patients में।"},
+  {"say":"तीसरा rule, और यह trap है: severe anemia अपने आप में IV iron का indication नहीं है। अगर patient को severe symptoms हैं, जैसे heart failure या MI, तो blood transfusion।"},
+  {"say":"तो IV iron कब, transfusion कब: IV iron, oral fail या contraindicated होने पर; transfusion, जब patient की जान को ख़तरा हो। ठीक है?"},
+  {"say":"चौथा rule: oral iron दिया पर Hb नहीं सुधरा, और बाकी history normal है, तो celiac disease test करो, क्योंकि celiac में iron absorb ही नहीं होता।"},
+  {"say":"याद रखना है: पहले oral iron। CKD और dialysis में IV iron। Severe symptoms में transfusion। Oral iron fail, celiac test।"}]},
+ {"id":"b7","lines":[
+  {"say":"Topic seven: IDA के MCQs। अब file के MCQs को इसी सोच से हल करते हैं।"},
+  {"say":"बच्चा खिलौने चबाता है और दीवार का paint खाता है, और anemia है: यह pica है, तो iron deficiency anemia।"},
+  {"say":"26 साल की pregnant, पहले से IDA, oral iron पर, Hb 10 और microcytic: iron deficiency anemia। Physiological anemia क्यों नहीं? क्योंकि वह dilutional होता है, और अक्सर normocytic।"},
+  {"say":"9 साल का बच्चा, microcytic anemia, low ferritin और high TIBC; iron कैसे दें? Oral, क्योंकि यहाँ कोई contraindication नहीं।"},
+  {"say":"बच्चा सिर्फ़ cow milk पर, microcytic anemia: iron deficiency anemia।"},
+  {"say":"एक और सवाल, जो GI bleeding से जुड़ा है: rheumatoid arthritis का patient ibuprofen लेता है, और अब epigastric pain है। क्या advice? Paracetamol पर switch करो, क्योंकि NSAIDs पेट का ulcer बना सकते हैं, और ulcer से खून जाए, तो वही IDA का cause बनता है। ठीक है?"},
+  {"say":"याद रखना है: pica, IDA। Cow milk, IDA। Contraindication नहीं, तो oral। NSAID से epigastric pain, paracetamol।"}]},
+ {"id":"recap","lines":[
+  {"say":"एक बार दोबारा देखते हैं: IDA के चार रास्ते: blood loss, demand, absorption, और nutrition; young female में menstruation, बच्चे में cow milk।"},
+  {"say":"Lab: microcytic hypochromic, low ferritin, high TIBC, high RDW, pencil cells, Mentzer 13 से ज़्यादा।"},
+  {"say":"Elderly में IDA, तो colonoscopy।"},
+  {"say":"Treatment पहले oral iron; CKD और intolerance में IV; severe symptoms में transfusion; oral iron fail, तो celiac test।"}]},
+ {"id":"end","lines":[]}
+]

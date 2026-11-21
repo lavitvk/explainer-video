@@ -1,0 +1,58 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part four: Beta thalassemia."},
+  {"say":"Pichhla part ek line mein: anemia of chronic disease mein ferritin normal ya high, aur TIBC normal ya low. Theek hai?"},
+  {"say":"Ab ek aur microcytic anemia, jismein iron ki koi problem nahi. Problem hemoglobin banane ki machine mein hai."}]},
+ {"id":"t11","lines":[
+  {"say":"Topic eleven: thalassemia kya hai."},
+  {"say":"Thalassemia ek hereditary hemoglobin disorder hai. Hemoglobin do tarah ki chains se banta hai: alpha aur beta."},
+  {"say":"Beta thalassemia mein beta-globin chain ka gene kharab hota hai. Yeh gene chromosome 11 ke short arm par hai, point mutation ke saath. Ek baar aur: chromosome 11, short arm."},
+  {"say":"Beta chain kam bani, toh hemoglobin kam bana, toh cells chhote aur peele, yaani microcytic. Beta chain, beta chain. Theek hai?"},
+  {"say":"Kin logon mein zyada? Mediterranean descent ke logon mein, aur Middle East aur South Asia mein bhi common hai."},
+  {"say":"Yaad rakhna hai: Beta thalassemia, beta-globin gene, chromosome 11 ka short arm, point mutation."}]},
+ {"id":"t12","lines":[
+  {"say":"Topic twelve: thalassemia ka diagnosis."},
+  {"say":"Ab lab mein thalassemia kaisa dikhta hai? CBC mein microcytic anemia, aur MCV bahut kam, aksar anemia ke hisaab se zyada kam."},
+  {"say":"RBC count normal ya badha hua bhi ho sakta hai. Kyun? Kyunki marrow bahut saare chhote cells bana raha hai."},
+  {"say":"Iron panel? Normal. Normal, normal. Yahi IDA se sabse bada farq hai."},
+  {"say":"Blood film par target cells. Ek baar aur: target cells. Aur hemolysis ke features, kyunki kharab cells jaldi toot-te hain."},
+  {"say":"Mentzer index yaad hai? MCV ko RBC count se divide karo. 13 se kam aaye toh beta thalassemia; 13 se zyada toh iron deficiency. Ek baar aur: 13 se kam, thalassemia."},
+  {"say":"Thalassemia mein RBC count zyada hai, isliye index chhota aata hai."},
+  {"say":"Confirm kaise karein? Hemoglobin electrophoresis. Ek baar aur: hemoglobin electrophoresis. Theek hai?"},
+  {"say":"Yaad rakhna hai: bahut kam MCV, normal iron panel, target cells, Mentzer 13 se kam. Confirm hemoglobin electrophoresis."}]},
+ {"id":"t13","lines":[
+  {"say":"Topic thirteen: thalassemia ke teen types."},
+  {"say":"Beta thalassemia teen tarah ka hai, aur farq is par hai ki kitna gene kharab hai."},
+  {"say":"Pehla, thalassemia major: severe microcytic anemia aur target cells. Regular blood transfusion ke bina jee nahi sakte, isliye transfusion dependent."},
+  {"say":"Electrophoresis mein HbA bilkul nahi, HbF 95 percent tak, aur HbA2 5 percent ya zyada. Kyun HbF itna? Kyunki beta chain nahi, toh body fetal hemoglobin bana kar kaam chalaati hai."},
+  {"say":"Doosra, thalassemia intermedia: moderate anemia, regular transfusion ki zaroorat nahi. HbA2 4 percent ya zyada, aur HbF 50 percent tak."},
+  {"say":"Teesra, thalassemia minor, yaani trait ya carrier: mild microcytic anemia, aksar symptoms nahi. HbA2 4 percent ya zyada, aur HbF 5 percent tak."},
+  {"say":"Teeno mein ek cheez common hai: HbA2 badha hua. HbA2, HbA2."},
+  {"say":"Clinical hook: major mein marrow itna zyada kaam karta hai ki haddiyan phail jaati hain. Chehre par chipmunk facies: oonchi forehead, ubhri hui cheekbones aur maxilla. Ek baar aur: chipmunk facies."},
+  {"say":"Yaad rakhna hai: major, transfusion dependent, HbA nahi, HbF 95 percent tak. Minor, mild, HbF 5 percent tak. Teeno mein HbA2 high. Major mein chipmunk facies."}]},
+ {"id":"t14","lines":[
+  {"say":"Topic fourteen: transfusion se iron overload. Ab file ka MCQ."},
+  {"say":"27 saal ki aurat, thalassemia major, regular blood transfusion par. Lambe samay se pet dard, skin par pigmentation, liver thoda bada, aur ferritin high. Kya ho raha hai?"},
+  {"say":"Har unit blood ke saath body mein iron aata hai, aur body ke paas iron nikaalne ka koi raasta nahi. Toh iron jama hota hai: skin mein, liver mein, heart mein."},
+  {"say":"Ise transfusional iron overload kehte hain, yaani secondary hemochromatosis. Ek baar aur: transfusional iron overload."},
+  {"say":"Next step? Iron chelation, deferoxamine. Answer: deferoxamine. Ek baar aur: deferoxamine."},
+  {"say":"Phlebotomy kyun nahi? Kyunki patient pehle se anemic hai aur transfusion par jee raha hai; khoon nikaalna ulta hoga. Transfusion interval kam karna? Usse aur iron aayega. Theek hai?"},
+  {"say":"Yaad rakhna hai: thalassemia major mein transfusion se iron overload. Treatment deferoxamine; phlebotomy nahi."}]},
+ {"id":"recap","lines":[
+  {"say":"Ek baar dobara dekhte hain: beta thalassemia mein beta-globin gene kharab, chromosome 11."},
+  {"say":"Bahut kam MCV, normal iron panel, target cells, Mentzer 13 se kam; confirm hemoglobin electrophoresis."},
+  {"say":"Major transfusion dependent, HbA nahi, HbF 95 percent tak; minor mild; teeno mein HbA2 high. Major mein chipmunk facies."},
+  {"say":"Transfusion se ferritin high, pigmentation aur bada liver, toh deferoxamine, phlebotomy nahi."}]},
+ {"id":"quiz","lines":[
+  {"say":"Ab chhota sa quiz. Sawal suno, ruko, khud jawab socho, phir answer suno."},
+  {"say":"Sawal ek: beta-globin gene kis chromosome par hai?"},{"say":"Chromosome 11, short arm. Chromosome 11."},
+  {"say":"Sawal do: thalassemia aur IDA mein sabse bada lab farq kya hai?"},{"say":"Thalassemia mein iron panel normal. Iron panel normal."},
+  {"say":"Sawal teen: Mentzer index 13 se kam aaye toh kya?"},{"say":"Beta thalassemia trait. Thalassemia."},
+  {"say":"Sawal chaar: thalassemia confirm karne ka test?"},{"say":"Hemoglobin electrophoresis. Electrophoresis."},
+  {"say":"Sawal paanch: teeno types mein kaun sa hemoglobin hamesha badha hota hai?"},{"say":"HbA2. HbA2."},
+  {"say":"Sawal chhe: kis type mein HbA bilkul nahi aur HbF 95 percent tak?"},{"say":"Thalassemia major. Major."},
+  {"say":"Sawal saat: ubhri cheekbones aur oonchi forehead ko kya kehte hain?"},{"say":"Chipmunk facies. Chipmunk facies."},
+  {"say":"Sawal aath: thalassemia major, ferritin high, pigmentation aur bada liver. Treatment?"},{"say":"Deferoxamine, iron chelation. Deferoxamine."},
+  {"say":"Sawal nau: is patient mein phlebotomy kyun nahi?"},{"say":"Kyunki patient pehle se anemic hai. Phlebotomy nahi."}]},
+ {"id":"end","lines":[]}
+]

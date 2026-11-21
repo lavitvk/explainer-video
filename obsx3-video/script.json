@@ -1,0 +1,267 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part three: medical problems in pregnancy।"
+   },
+   {
+    "say": "पिछला part एक line में: anomaly scan 18 से 20, GBS 35 से 37, hypothyroid में dose बढ़ाओ, ACE inhibitor नहीं।"
+   },
+   {
+    "say": "ठीक है? अब देखते हैं कि माँ को पहले से, या pregnancy में कोई बीमारी हो, तो क्या होता है।"
+   }
+  ]
+ },
+ {
+  "id": "t10a",
+  "lines": [
+   {
+    "say": "Topic ten: diabetes in pregnancy।"
+   },
+   {
+    "say": "Diabetes in pregnancy दो तरह का होता है। पहला, pre-existing diabetes, जो pregnancy से पहले से है।"
+   },
+   {
+    "say": "दूसरा, gestational diabetes mellitus, GDM, जो पहली बार pregnancy में पकड़ा जाता है।"
+   },
+   {
+    "say": "GDM क्यों होता है? Placenta का hormone hPL, insulin के against काम करता है। यह हमने Part two में पढ़ा।"
+   },
+   {
+    "say": "अब एक important बात। अगर early pregnancy में HbA1c high है, यानी organ बनने के time sugar खराब थी, तो baby को सबसे बड़ा risk क्या? Congenital malformations। Malformations, malformations।"
+   },
+   {
+    "say": "इसलिए uncontrolled diabetes का most common complication भी, congenital anomalies है।"
+   }
+  ]
+ },
+ {
+  "id": "t10b",
+  "lines": [
+   {
+    "say": "Diabetes में और क्या होता है? Polyhydramnios, क्योंकि baby की sugar high, baby ज़्यादा urine बनाता है।"
+   },
+   {
+    "say": "और माँ में vaginal candida ज़्यादा होता है।"
+   },
+   {
+    "say": "Routine visit पर sugar control कैसे देखते हैं? HbA1c।"
+   },
+   {
+    "say": "GDM का treatment कहाँ से शुरू? पहले diet और lifestyle। अगर control ना हो, तब दवा।"
+   },
+   {
+    "say": "Clinical hook: जिस औरत को GDM हुआ, उसका type 2 diabetes का risk आगे बढ़ जाता है।"
+   },
+   {
+    "say": "इसलिए delivery के 6 महीने बाद fasting sugar 7.1 आए, तो यह overt diabetes है, और दवा metformin।"
+   },
+   {
+    "say": "याद रखना है: early HbA1c high, congenital malformations। GDM में पहले diet।"
+   }
+  ]
+ },
+ {
+  "id": "t11a",
+  "lines": [
+   {
+    "say": "Topic eleven: preeclampsia, और HELLP।"
+   },
+   {
+    "say": "Preeclampsia क्या है? 20 हफ्ते के बाद नया high BP, साथ में proteinuria या organ damage।"
+   },
+   {
+    "say": "इसकी जड़ placenta में है: placenta की blood vessels ठीक से नहीं बनतीं, तो माँ की पूरी body की vessels पर असर पड़ता है।"
+   },
+   {
+    "say": "अब step by step। Vessels leaky हो जाती हैं, तो plasma volume क्या होगा? कम। हाँ, BP high है, फिर भी plasma volume कम।"
+   },
+   {
+    "say": "Baby पर असर? Placenta का blood कम, तो IUGR और oligohydramnios।"
+   },
+   {
+    "say": "Liver पर असर? Liver सूज जाता है, उसकी capsule खिंचती है, तो RUQ pain। इसे कहते हैं liver capsule distension।"
+   },
+   {
+    "say": "Antihypertensive दवा क्यों देते हैं? माँ की mortality कम करने के लिए, खासकर stroke से बचाने के लिए। Baby के लिए नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "t11b",
+  "lines": [
+   {
+    "say": "Severity के हिसाब से management।"
+   },
+   {
+    "say": "Preeclampsia without severe features, 32 से 33 हफ्ते: outpatient follow-up।"
+   },
+   {
+    "say": "Severe features, जैसे headache, vision change, RUQ pain: stabilize करो, magnesium sulfate दो seizure रोकने के लिए, और delivery।"
+   },
+   {
+    "say": "HELLP syndrome, यानी hemolysis, elevated liver enzymes, और low platelets, 38 हफ्ते पर: immediate delivery। Cervix favourable हो, तो induction।"
+   },
+   {
+    "say": "Magnesium का एक खतरा याद रखना। Magnesium पर deep tendon reflexes गायब हो जाएँ, तो यह toxicity है।"
+   },
+   {
+    "say": "क्या करें? Infusion रोको, और calcium gluconate दो। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: preeclampsia में plasma volume कम। HELLP at term, deliver। Mg पर reflexes गए, infusion रोको, calcium gluconate।"
+   }
+  ]
+ },
+ {
+  "id": "t12",
+  "lines": [
+   {
+    "say": "Topic twelve: liver, gallbladder, और appendix।"
+   },
+   {
+    "say": "Intrahepatic cholestasis of pregnancy क्या है? Pregnancy के hormones, liver से bile का flow धीमा कर देते हैं।"
+   },
+   {
+    "say": "Picture: third trimester, बहुत खुजली, खासकर हाथ-पैर में, थोड़ा jaundice, ALP बहुत high, platelets normal।"
+   },
+   {
+    "say": "Platelets normal हैं, इसलिए HELLP नहीं। Cholestasis, cholestasis।"
+   },
+   {
+    "say": "Pregnancy में right side पेट दर्द हो, और obstetric cause rule out हो गया, तो सबसे common surgical cause? Appendicitis।"
+   },
+   {
+    "say": "Gallstones में दर्द बार-बार हो रहा है, तो surgery कब? Lap chole second trimester में, जब सबसे safe होता है।"
+   },
+   {
+    "say": "सिर्फ gallstones हैं, कोई complication नहीं, तो conservative। Surgery delivery के बाद।"
+   },
+   {
+    "say": "याद रखना है: खुजली plus high ALP, cholestasis। Surgical abdomen में appendicitis। Lap chole, second trimester।"
+   }
+  ]
+ },
+ {
+  "id": "t13a",
+  "lines": [
+   {
+    "say": "Topic thirteen: DVT, PE, और heart।"
+   },
+   {
+    "say": "Pregnancy एक hypercoagulable state है, मतलब खून जल्दी जमता है। क्यों? ताकि delivery के time bleeding कम हो। पर इसी से DVT का risk बढ़ता है।"
+   },
+   {
+    "say": "DVT के symptoms, जैसे calf में दर्द और सूजन, तो पहला test? Compression Doppler ultrasound।"
+   },
+   {
+    "say": "अगर DVT के साथ PE के symptoms भी हैं? तब भी पहले leg Doppler। अगर वहाँ clot मिला, तो treatment शुरू।"
+   },
+   {
+    "say": "Doppler negative आया, तो chest X-ray, फिर V/Q scan या CTPA।"
+   },
+   {
+    "say": "पहले कभी DVT हो चुका है? Pregnancy में LMWH, warfarin नहीं, क्योंकि warfarin teratogenic है।"
+   }
+  ]
+ },
+ {
+  "id": "t13b",
+  "lines": [
+   {
+    "say": "Heart की एक special बीमारी: peripartum cardiomyopathy। Last महीने या delivery के बाद, heart कमज़ोर हो जाता है।"
+   },
+   {
+    "say": "Picture: dyspnea, लेटे हुए साँस फूलना, crackles, X-ray पर बड़ा heart shadow।"
+   },
+   {
+    "say": "और pregnancy में एक soft systolic murmur, जो diastolic नहीं, और symptoms नहीं? Physiological flow murmur, plasma volume बढ़ने से।"
+   },
+   {
+    "say": "याद रखना है: DVT, compression ultrasound। पिछला DVT, LMWH। Delivery के पास साँस फूलना और बड़ा heart, peripartum cardiomyopathy।"
+   }
+  ]
+ },
+ {
+  "id": "t14a",
+  "lines": [
+   {
+    "say": "Topic fourteen: sickle cell, UTI, और infections।"
+   },
+   {
+    "say": "Sickle cell trait और sickle cell disease में confuse मत होना। Trait का most common complication? UTI। Disease का? IUGR।"
+   },
+   {
+    "say": "SCD में साल में सिर्फ 1 या 2 crisis, और Hb 9: close follow-up। अगर hemolysis भी चल रही है: RBC transfusion।"
+   },
+   {
+    "say": "UTI और asymptomatic bacteriuria। Pregnancy में इसे क्यों treat करते हैं? क्योंकि pregnancy में ureters ढीले होते हैं, और infection ऊपर kidney तक जल्दी पहुँचता है।"
+   },
+   {
+    "say": "26 से 28 हफ्ते पर nitrofurantoin चलता है।"
+   },
+   {
+    "say": "Term के पास, जैसे 38 हफ्ते, nitrofurantoin नहीं, क्योंकि baby में hemolysis का risk। तब cephalexin, या amoxicillin-clavulanate।"
+   },
+   {
+    "say": "Ciprofloxacin pregnancy में नहीं।"
+   },
+   {
+    "say": "बुखार, rigors और loin pain, यानी pyelonephritis: septic screen और IV antibiotics।"
+   },
+   {
+    "say": "बार-बार UTI या renal colic: renal ultrasound। Delivery के बाद asymptomatic bacteriuria: treatment नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "t14b",
+  "lines": [
+   {
+    "say": "Herpes की history है, और membranes rupture हो गईं: पहले speculum exam करके active lesion ढूँढो।"
+   },
+   {
+    "say": "Active lesion मिला, तो CS, क्योंकि vaginal delivery में baby को herpes लग सकता है।"
+   },
+   {
+    "say": "Acyclovir क्यों देते हैं? Virus की shedding, और बीमारी का duration कम करने के लिए।"
+   },
+   {
+    "say": "GBS positive माँ labour में: intrapartum ampicillin या penicillin।"
+   },
+   {
+    "say": "GBS से baby को सबसे ज़्यादा risk कब? Preterm baby में।"
+   },
+   {
+    "say": "Chlamydia baby को कहाँ लगता है? आँख में, conjunctivitis। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: trait में UTI, disease में IUGR। Term पर nitrofurantoin नहीं। Active herpes, CS।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "Early HbA1c high, malformations। GDM में पहले diet।"
+   },
+   {
+    "say": "Preeclampsia में plasma volume कम। HELLP at term, deliver। Mg toxicity में calcium gluconate।"
+   },
+   {
+    "say": "खुजली और high ALP, cholestasis। Surgical abdomen, appendicitis।"
+   },
+   {
+    "say": "DVT, compression ultrasound। पिछला DVT, LMWH। बड़ा heart, peripartum cardiomyopathy।"
+   },
+   {
+    "say": "Trait में UTI, disease में IUGR। Term पर cephalexin। Active herpes, CS।"
+   }
+  ]
+ }
+]

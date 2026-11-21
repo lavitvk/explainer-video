@@ -1,0 +1,42 @@
+[
+ {"id":"intro","lines":[
+  {"say":"Part one: anemia — definition, classification, और picture।"},
+  {"say":"आज तीन चीज़ें: anemia क्या है, MCV से उसके तीन डिब्बे, और anemia के signs और symptoms।"}]},
+ {"id":"a1","lines":[
+  {"say":"Topic one: anemia क्या है।"},
+  {"say":"Anemia क्या है? जब blood में hemoglobin normal से कम हो जाता है, तो उसे anemia कहते हैं।"},
+  {"say":"Hemoglobin का काम क्या है? Oxygen को lungs से पूरी body तक ले जाना।"},
+  {"say":"तो hemoglobin कम, मतलब oxygen कम, और यहीं से anemia के सारे symptoms आते हैं। ठीक है?"},
+  {"say":"Cutoff क्या है? इस file के हिसाब से male में 13.5 g/dL से कम, और female में 12 g/dL से कम।"},
+  {"say":"Male 13.5, female 12। एक बार और: male 13.5, female 12।"},
+  {"say":"याद रखना है: anemia मतलब hemoglobin कम। Male में 13.5 से कम, female में 12 से कम।"}]},
+ {"id":"a2","lines":[
+  {"say":"Topic two: MCV से classification।"},
+  {"say":"Anemia का type कैसे पहचानें? सबसे पहले एक number देखो: MCV।"},
+  {"say":"MCV क्या है? Mean corpuscular volume, यानी एक red cell का average size। MCV, MCV। इसी एक number से anemia तीन डिब्बों में बँट जाता है।"},
+  {"say":"पहला डिब्बा, microcytic anemia, जब MCV 80 से कम हो। मतलब cells छोटे हैं।"},
+  {"say":"कौन-कौन आते हैं? Iron deficiency anemia, anemia of chronic disease, sideroblastic anemia, और thalassemia। इनको एक sentence में याद रखो: iron, chronic disease, sideroblastic, thalassemia।"},
+  {"say":"दूसरा डिब्बा, normocytic anemia, जब MCV 80 से 95 के बीच हो। Cells normal size के हैं। कौन आते हैं? Anemia of inflammation, और hemolytic anemia।"},
+  {"say":"तीसरा डिब्बा, macrocytic anemia, जब MCV 95 से ज़्यादा हो। Cells बड़े हैं। इसके दो type: megaloblastic, जैसे B12 और folate deficiency, और non-megaloblastic। ठीक है?"},
+  {"say":"एक clinical hook: anemia of chronic disease दोनों डिब्बों में आ सकता है, normocytic भी, और microcytic भी।"},
+  {"say":"इसलिए सिर्फ MCV से फैसला नहीं होता; iron studies चाहिए, जो हम Part 3 में देखेंगे।"},
+  {"say":"याद रखना है: MCV 80 से कम, microcytic: iron, chronic disease, sideroblastic, thalassemia। 80 से 95, normocytic। 95 से ऊपर, macrocytic।"}]},
+ {"id":"a3a","lines":[
+  {"say":"Topic three: anemia के signs और symptoms।"},
+  {"say":"अब सोचो, oxygen कम है, तो body क्या करेगी? Heart तेज़ चलेगा, ताकि कम oxygen को ज़्यादा जल्दी घुमा सके। इसी सोच से सारे symptoms निकलते हैं।"},
+  {"say":"Symptoms, जो patient बताता है: थकान, यानी fatigue, सिर दर्द, साँस फूलना, chest pain, और palpitations।"},
+  {"say":"Signs, जो doctor देखता है: pallor, यानी पीलापन; tachycardia, यानी तेज़ pulse; systolic murmur, क्योंकि तेज़ बहता खून murmur बनाता है; और severe हो, तो cardiac failure, जैसे पैरों में सूजन और fluid overload।"}]},
+ {"id":"a3b","lines":[
+  {"say":"अब कुछ signs सिर्फ iron deficiency के हैं, इन्हें अलग याद रखो।"},
+  {"say":"Pica, यानी अजीब चीज़ें खाना, जैसे मिट्टी, दीवार का paint, या बर्फ़।"},
+  {"say":"Restless legs syndrome। बाल झड़ना। Koilonychia, यानी चम्मच जैसे nails। और conjunctiva के किनारे का पीलापन।"},
+  {"say":"Iron deficiency के साथ निगलने में मुश्किल, dysphagia, हो तो क्या? Plummer–Vinson syndrome। Plummer–Vinson, Plummer–Vinson। ठीक है?"},
+  {"say":"याद रखना है: सब anemia में pallor, tachycardia, systolic murmur। Pica और koilonychia, iron deficiency। IDA plus dysphagia, Plummer–Vinson।"}]},
+ {"id":"recap","lines":[
+  {"say":"एक बार दोबारा देखते हैं: anemia मतलब hemoglobin कम, male में 13.5 से कम, female में 12 से कम।"},
+  {"say":"MCV से तीन डिब्बे: 80 से कम microcytic, 80 से 95 normocytic, 95 से ऊपर macrocytic।"},
+  {"say":"Microcytic में iron, chronic disease, sideroblastic, thalassemia।"},
+  {"say":"सब anemia में fatigue, साँस फूलना, pallor, और tachycardia; iron deficiency में ख़ास pica, koilonychia, और restless legs।"},
+  {"say":"IDA plus dysphagia, Plummer–Vinson।"}]},
+ {"id":"end","lines":[]}
+]

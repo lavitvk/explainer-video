@@ -1,0 +1,254 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part two: antenatal care, physiology, और drugs।"
+   },
+   {
+    "say": "पहले Part one को एक line में बुलाओ: Chadwick sign पर beta hCG, dating के लिए early ultrasound, missed abortion में misoprostol, unstable ectopic में surgery।"
+   },
+   {
+    "say": "ठीक है? अब pregnancy confirm हो गई। अब हम antenatal care पर आते हैं, यानी delivery से पहले माँ और baby की देखभाल।"
+   }
+  ]
+ },
+ {
+  "id": "t5a",
+  "lines": [
+   {
+    "say": "Topic five: scans और screening का timing।"
+   },
+   {
+    "say": "Antenatal care का एक बड़ा हिस्सा, सही time पर सही test करना है। इसको एक timeline की तरह सोचो, एक-एक step।"
+   },
+   {
+    "say": "पहला scan कब? 11 से 13 weeks, जिसमें dating और nuchal translucency देखते हैं।"
+   },
+   {
+    "say": "दूसरा, detailed anomaly scan कब? 18 से 20 weeks, क्योंकि तब तक baby के organs इतने बने होते हैं कि structural defect दिख सके।"
+   },
+   {
+    "say": "Asymptomatic bacteriuria के लिए urine culture कब? लगभग 12 weeks पर, पहली visit में।"
+   },
+   {
+    "say": "Group B Streptococcus, यानी GBS, का vaginal swab कब? 35 से 37 weeks।"
+   },
+   {
+    "say": "क्यों इतना late? क्योंकि हमें delivery के वक्त का status चाहिए।"
+   }
+  ]
+ },
+ {
+  "id": "t5b",
+  "lines": [
+   {
+    "say": "Visits कितनी बार? 28 weeks तक हर 4 हफ्ते, 36 तक हर 2 हफ्ते, फिर हर हफ्ते।"
+   },
+   {
+    "say": "इसलिए 34 हफ्ते की normal patient को अगले हफ्ते नहीं, दो हफ्ते बाद बुलाया जाता है। Recall में see next week दिया है।"
+   },
+   {
+    "say": "और 75 gram OGTT कब order करते हैं? जब पिछली pregnancy में gestational diabetes हुआ हो।"
+   }
+  ]
+ },
+ {
+  "id": "t5c",
+  "lines": [
+   {
+    "say": "Down syndrome का quadruple screen कैसे पढ़ते हैं? दो चीज़ें high, दो low।"
+   },
+   {
+    "say": "High कौन? hCG और inhibin। Low कौन? AFP और estriol।"
+   },
+   {
+    "say": "और twins में एक baby की nuchal translucency बढ़ी हो, तो सबसे ज़्यादा किस चीज़ का risk? Congenital heart disease, क्योंकि ज़्यादातर chromosomal syndromes में heart defect होता है।"
+   },
+   {
+    "say": "ठीक है? याद रखना है: dating 11 से 13, anomaly 18 से 20, GBS 35 से 37।"
+   },
+   {
+    "say": "Down screen में hCG और inhibin high, AFP और estriol low।"
+   }
+  ]
+ },
+ {
+  "id": "t6a",
+  "lines": [
+   {
+    "say": "Topic six: pregnancy की physiology।"
+   },
+   {
+    "say": "Pregnancy में माँ की body बहुत बदलती है, और exam यही बदलाव पूछता है। एक-एक system लेते हैं।"
+   },
+   {
+    "say": "Kidney: GFR बढ़ जाता है। तो blood में BUN और creatinine क्या होंगे? कम। कम, कम।"
+   },
+   {
+    "say": "Blood: plasma volume बढ़ता है, RBC mass से ज़्यादा, इसलिए physiological anemia जैसा दिखता है।"
+   },
+   {
+    "say": "यही plasma volume और stroke volume का बढ़ना, mitral stenosis वाली patient के लिए खतरनाक है, क्योंकि उसका heart इतना extra load नहीं संभाल पाता, और failure हो जाता है।"
+   },
+   {
+    "say": "Clinical hook: इसलिए MS वाली pregnant को second stage में push नहीं करवाते, forceps लगाते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "t6b",
+  "lines": [
+   {
+    "say": "Hormones: pregnancy को maintain कौन करता है? Progesterone।"
+   },
+   {
+    "say": "Pregnancy का main estrogen कौन सा है? Estriol।"
+   },
+   {
+    "say": "Gestational diabetes क्यों होता है? Human placental lactogen, hPL, जो insulin के against काम करता है। hPL, hPL।"
+   },
+   {
+    "say": "Immunity: माँ का IgG placenta cross करके baby में जाता है। इसे passive natural immunity कहते हैं।"
+   },
+   {
+    "say": "Breast milk में कौन सा immunoglobulin? IgA।"
+   },
+   {
+    "say": "और pregnancy में areola पर छोटे-छोटे दाने दिखते हैं, Montgomery tubercles। यह normal हैं।"
+   },
+   {
+    "say": "याद रखना है: BUN और creatinine कम। GDM का hormone hPL। Plasma volume बढ़ने से MS वाली patient fail होती है।"
+   }
+  ]
+ },
+ {
+  "id": "t7a",
+  "lines": [
+   {
+    "say": "Topic seven: supplements और vaccines।"
+   },
+   {
+    "say": "Folic acid normally 400 microgram होता है। पर sickle cell disease वाली pregnant को कितना? 5 mg, और पूरी pregnancy, delivery तक।"
+   },
+   {
+    "say": "क्यों? क्योंकि hemolysis में folate जल्दी खत्म होता है।"
+   },
+   {
+    "say": "Oral iron 12 हफ्ते लेने पर भी iron deficiency anemia ठीक नहीं हुआ, तो? IV iron।"
+   },
+   {
+    "say": "Vegan माँ breastfeed कर रही है, तो milk में किस चीज़ की कमी? Vitamin B12।"
+   }
+  ]
+ },
+ {
+  "id": "t7b",
+  "lines": [
+   {
+    "say": "Vaccines में एक ही rule पकड़ो: live vaccine pregnancy में नहीं।"
+   },
+   {
+    "say": "Varicella antibody negative है? Vaccine नहीं देंगे, क्योंकि live है। Advice है exposure से बचना, vaccine delivery के बाद।"
+   },
+   {
+    "say": "गलती से rubella vaccine लगने के एक महीने के अंदर pregnant हो गई? घबराना नहीं। Outcome favorable होता है, termination की ज़रूरत नहीं।"
+   },
+   {
+    "say": "ठीक है? याद रखना है: SCD में folic acid 5 mg, पूरी pregnancy। Live vaccine, pregnancy में नहीं।"
+   }
+  ]
+ },
+ {
+  "id": "t8a",
+  "lines": [
+   {
+    "say": "Topic eight: medicines in pregnancy।"
+   },
+   {
+    "say": "Pregnancy में दवा का सवाल, हमेशा दो बातें तोलता है: माँ की बीमारी control रहे, और baby को नुकसान ना हो।"
+   },
+   {
+    "say": "Hypothyroidism से शुरू करते हैं। Levothyroxine पर controlled patient pregnant हो गई, तो dose का क्या? बढ़ाओ, लगभग 30 percent।"
+   },
+   {
+    "say": "क्यों? Pregnancy में thyroid hormone की demand बढ़ती है, और baby के brain को शुरुआत में माँ का hormone चाहिए।"
+   },
+   {
+    "say": "Hyperthyroidism में, first trimester में PTU। Second और third में methimazole।"
+   },
+   {
+    "say": "Epilepsy, phenytoin पर, 6 साल से attack नहीं: pregnancy के बीच में चलती दवा अचानक नहीं रोकते। Antiepileptics से congenital malformation का risk ज़रूर है, इसलिए counselling।"
+   }
+  ]
+ },
+ {
+  "id": "t8b",
+  "lines": [
+   {
+    "say": "Isotretinoin पर acne वाली औरत conceive करना चाहती है? दवा बंद करने के 1 महीने बाद।"
+   },
+   {
+    "say": "SLE में hydroxychloroquine continue। Mycophenolate बंद करके azathioprine।"
+   },
+   {
+    "say": "Depression controlled है paroxetine पर, और वह pregnant हो चुकी है? Continue, क्योंकि relapse का नुकसान बड़ा है। अगर सिर्फ plan कर रही है, तो safe दवा पर switch।"
+   },
+   {
+    "say": "और एक दवा जो बिल्कुल नहीं: ACE inhibitor। क्यों? Baby की kidney damage करता है, renal agenesis और oligohydramnios। ACE inhibitor, ACE inhibitor।"
+   },
+   {
+    "say": "इसलिए preeclampsia में भी captopril contraindicated है। ठीक है?"
+   },
+   {
+    "say": "याद रखना है: hypothyroid में dose बढ़ाओ। ACE inhibitor नहीं, fetal kidney। Mycophenolate बंद, azathioprine शुरू।"
+   }
+  ]
+ },
+ {
+  "id": "t9",
+  "lines": [
+   {
+    "say": "Topic nine: risk factors, और antenatal counselling।"
+   },
+   {
+    "say": "Pregnancy complications का सबसे बड़ा risk factor कौन सा है? माँ की उमर, अगर 35 या ज़्यादा।"
+   },
+   {
+    "say": "अगर उमर 34 है और वह smoker है, तो smoking।"
+   },
+   {
+    "say": "Smoking से baby पर सबसे common असर? Low birth weight।"
+   },
+   {
+    "say": "और कौन सी दवा preeclampsia का risk कम करती है? Low-dose aspirin। Aspirin preeclampsia और उसके साथ IUGR, दोनों का risk घटाता है।"
+   },
+   {
+    "say": "याद रखना है: 35 से ऊपर age, सबसे बड़ा risk। Aspirin preeclampsia रोकता है।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "एक बार दोबारा देखते हैं।"
+   },
+   {
+    "say": "Dating 11 से 13, anomaly 18 से 20, GBS 35 से 37। Down screen में hCG और inhibin high।"
+   },
+   {
+    "say": "Pregnancy में BUN और creatinine कम। GDM hPL से। MS वाली patient plasma volume से fail।"
+   },
+   {
+    "say": "SCD में folic acid 5 mg। Live vaccine नहीं।"
+   },
+   {
+    "say": "Hypothyroid, dose बढ़ाओ। ACE inhibitor नहीं। Mycophenolate से azathioprine।"
+   },
+   {
+    "say": "35 से ऊपर age। Aspirin, preeclampsia के लिए।"
+   }
+  ]
+ }
+]

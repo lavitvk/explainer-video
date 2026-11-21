@@ -1,0 +1,344 @@
+[
+ {
+  "id": "intro",
+  "lines": [
+   {
+    "say": "Part one: Neonatology।"
+   },
+   {
+    "say": "यह recall file है। हर case में, picture पहचानो, answer, और so remember।"
+   },
+   {
+    "say": "चलिए, शुरू करते हैं।"
+   }
+  ]
+ },
+ {
+  "id": "n1",
+  "lines": [
+   {
+    "say": "Case one. दो दिन का baby। Seizures, और feeding कम।"
+   },
+   {
+    "say": "Inactive, generalized increased tone। CSF normal।"
+   },
+   {
+    "say": "CSF normal, तो meningitis नहीं। Day 2 है, तो tetanus नहीं। वह तीन से चौदह दिन में आता है।"
+   },
+   {
+    "say": "So: seizures, plus tone, plus normal CSF, on day 2: hypoxic ischemic encephalopathy। HIE।"
+   }
+  ]
+ },
+ {
+  "id": "n2",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: day 2 seizures, normal CSF: HIE।"
+   },
+   {
+    "say": "Case two. Forceps गलत जगह लगी। Stylomastoid foramen पर चोट।"
+   },
+   {
+    "say": "वहाँ से कौन निकलता है? Facial nerve।"
+   },
+   {
+    "say": "Result क्या? Baby आँख बंद नहीं कर पाता।"
+   },
+   {
+    "say": "Taste क्यों बचा? Chorda tympani, foramen से पहले ही निकल जाती है।"
+   },
+   {
+    "say": "So remember: stylomastoid foramen, facial nerve। Eye closure गया, taste बचा।"
+   }
+  ]
+ },
+ {
+  "id": "n3",
+  "lines": [
+   {
+    "say": "पिछला एक line में: stylomastoid, facial nerve।"
+   },
+   {
+    "say": "Case three. Ventouse के बाद सिर पर swelling।"
+   },
+   {
+    "say": "Periosteum के नीचे। Sutures की line के अंदर, cross नहीं करती।"
+   },
+   {
+    "say": "यह क्या है? Cephalohematoma।"
+   },
+   {
+    "say": "Caput क्या है? Skin के नीचे, sutures cross करता है।"
+   },
+   {
+    "say": "So remember: sutures cross करे, caput। Sutures के अंदर, subperiosteal, cephalohematoma।"
+   }
+  ]
+ },
+ {
+  "id": "n4",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: sutures के अंदर, cephalohematoma।"
+   },
+   {
+    "say": "Case four. Baby sleepy है, jaundice लंबा चल रहा है, feeding poor।"
+   },
+   {
+    "say": "Umbilical hernia, पेट फूला।"
+   },
+   {
+    "say": "यह congenital hypothyroidism की picture है।"
+   },
+   {
+    "say": "Next step: baby का TSH और T4। माँ का नहीं, baby का।"
+   },
+   {
+    "say": "So remember: sleepy, plus prolonged jaundice, plus umbilical hernia: baby का TSH और T4।"
+   }
+  ]
+ },
+ {
+  "id": "n5",
+  "lines": [
+   {
+    "say": "पिछला: sleepy jaundiced baby, TSH, T4।"
+   },
+   {
+    "say": "Case five. 38 weeks, weight 1.8 kg। Small baby।"
+   },
+   {
+    "say": "Jittery, hypotonic, छोटे seizures। बाकी labs normal, glucose 2.5।"
+   },
+   {
+    "say": "क्या करें? Glucose दो। Diazepam नहीं, antibiotics नहीं।"
+   },
+   {
+    "say": "Cause hypoglycemia है, तो treatment glucose।"
+   },
+   {
+    "say": "So remember: small baby, jittery, seizure, low glucose: glucose पहले।"
+   }
+  ]
+ },
+ {
+  "id": "n6",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: jittery small baby, glucose।"
+   },
+   {
+    "say": "Case six. Diabetic माँ का baby। Ruddy, लाल सा, irritable, cyanosis।"
+   },
+   {
+    "say": "Hb बहुत high, hematocrit 75 percent।"
+   },
+   {
+    "say": "यह क्या है? Polycythemia। Hematocrit 65 percent से ऊपर।"
+   },
+   {
+    "say": "Management: next step, hydration और monitor। Best treatment, symptomatic हो तो, partial exchange transfusion।"
+   },
+   {
+    "say": "So remember: ruddy baby, hematocrit 75: polycythemia। Symptomatic में, partial exchange।"
+   }
+  ]
+ },
+ {
+  "id": "n7",
+  "lines": [
+   {
+    "say": "पिछला: ruddy baby, polycythemia।"
+   },
+   {
+    "say": "Case seven. Meconium aspiration।"
+   },
+   {
+    "say": "Preductal saturation 88 percent, postductal 77 percent। ऊपर वाला ज़्यादा, नीचे वाला कम।"
+   },
+   {
+    "say": "यह क्या है? Persistent pulmonary hypertension, PPHN।"
+   },
+   {
+    "say": "Best treatment: inhaled nitric oxide।"
+   },
+   {
+    "say": "So remember: preductal ज़्यादा, postductal कम: PPHN। Inhaled nitric oxide।"
+   }
+  ]
+ },
+ {
+  "id": "n8",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: PPHN, nitric oxide।"
+   },
+   {
+    "say": "Case eight. Congenital diaphragmatic hernia।"
+   },
+   {
+    "say": "Stabilization के बाद पहला काम? Large NG tube।"
+   },
+   {
+    "say": "क्यों? पेट और आँतों की हवा निकालो, ताकि lung पर दबाव कम हो।"
+   },
+   {
+    "say": "Surgery तुरंत नहीं। पहले stabilize।"
+   },
+   {
+    "say": "So remember: CDH, large NGT for decompression।"
+   }
+  ]
+ },
+ {
+  "id": "n9",
+  "lines": [
+   {
+    "say": "पिछला: CDH, large NGT।"
+   },
+   {
+    "say": "Case nine. Newborn में complete heart block। माँ की कौन सी बीमारी? SLE।"
+   },
+   {
+    "say": "Anti-Ro antibodies, baby के heart का conduction खराब करती हैं।"
+   },
+   {
+    "say": "So remember: congenital heart block, maternal SLE।"
+   }
+  ]
+ },
+ {
+  "id": "n10",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: heart block, maternal SLE।"
+   },
+   {
+    "say": "Case ten. Apgar score।"
+   },
+   {
+    "say": "Heart rate 120: 2।"
+   },
+   {
+    "say": "Irregular breathing: 1।"
+   },
+   {
+    "say": "थोड़ा flexion: 1।"
+   },
+   {
+    "say": "Cough: 2।"
+   },
+   {
+    "say": "Body rosy, extremities blue: 1।"
+   },
+   {
+    "say": "Total: 7।"
+   },
+   {
+    "say": "So remember: Apgar, पाँच चीज़ें। Heart rate, breathing, tone, reflex, colour। हर एक, 0 से 2।"
+   }
+  ]
+ },
+ {
+  "id": "n11",
+  "lines": [
+   {
+    "say": "पिछला: Apgar, 7।"
+   },
+   {
+    "say": "Case eleven. लड़का है। Pectus excavatum या carinatum, wide-set nipples, short webbed neck।"
+   },
+   {
+    "say": "Turner जैसा दिखता है, पर लड़का है। तो क्या? Noonan syndrome।"
+   },
+   {
+    "say": "So remember: Turner जैसा लड़का, Noonan। लड़की, Turner।"
+   }
+  ]
+ },
+ {
+  "id": "n12",
+  "lines": [
+   {
+    "say": "पहले दोहरा लो: Turner जैसा लड़का, Noonan।"
+   },
+   {
+    "say": "Case twelve. Pregnancy में polyhydramnios। Baby निगल नहीं पा रहा, या GI obstruction।"
+   },
+   {
+    "say": "Options में से: trisomy 21। Duodenal atresia की वजह से।"
+   },
+   {
+    "say": "Renal agenesis और IUGR में, oligohydramnios होता है।"
+   },
+   {
+    "say": "So remember: polyhydramnios, trisomy 21। Renal agenesis, oligo।"
+   }
+  ]
+ },
+ {
+  "id": "n13",
+  "lines": [
+   {
+    "say": "पिछला: polyhydramnios, trisomy 21।"
+   },
+   {
+    "say": "Case thirteen. Baby पर लाल round patches। एक बड़ा, eyelid पर।"
+   },
+   {
+    "say": "Reassure कर दें? नहीं। Eyelid वाला आँख बंद कर सकता है। Amblyopia हो सकता है।"
+   },
+   {
+    "say": "तो refer to ophthalmologist। और cheek पर vascular lesion: hemangioma।"
+   },
+   {
+    "say": "So remember: eyelid hemangioma, ophthalmology refer।"
+   }
+  ]
+ },
+ {
+  "id": "recap",
+  "lines": [
+   {
+    "say": "Part one का recap। सब एक साथ।"
+   },
+   {
+    "say": "Day 2 seizure, normal CSF: HIE।"
+   },
+   {
+    "say": "Stylomastoid: facial nerve, आँख बंद नहीं।"
+   },
+   {
+    "say": "Sutures के अंदर: cephalohematoma।"
+   },
+   {
+    "say": "Sleepy, jaundiced, hernia: baby का TSH, T4।"
+   },
+   {
+    "say": "Jittery, low glucose: glucose दो।"
+   },
+   {
+    "say": "Ruddy, hematocrit 75: polycythemia।"
+   },
+   {
+    "say": "Pre-post ductal gap: PPHN, nitric oxide।"
+   },
+   {
+    "say": "CDH: large NGT।"
+   },
+   {
+    "say": "Heart block: maternal SLE।"
+   },
+   {
+    "say": "Turner जैसा लड़का: Noonan।"
+   },
+   {
+    "say": "Polyhydramnios: trisomy 21।"
+   },
+   {
+    "say": "Eyelid hemangioma: ophthalmology।"
+   }
+  ]
+ }
+]

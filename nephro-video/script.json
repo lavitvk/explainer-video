@@ -1,0 +1,66 @@
+[
+ {"id":"intro","lines":[
+  {"say":"इस chapter में, हर case एक सवाल है।"},
+  {"say":"पहले picture पहचानो। फिर answer। फिर, बाकी options क्यों गलत हैं।"},
+  {"say":"चलिए, शुरू करते हैं।"}]},
+ {"id":"q1case","lines":[
+  {"say":"Case one. पाँच साल का बच्चा।"},
+  {"say":"दो हफ्ते पहले, flu जैसी illness हुई थी।"},
+  {"say":"अब एक हफ्ते से, सुबह आँखों के आस-पास swelling है।"},
+  {"say":"सुबह, periorbital puffiness।"},
+  {"say":"बच्चा well है। BP normal है, 100 by 70।"}]},
+ {"id":"q1ans","lines":[
+  {"say":"Morning periorbital swelling, BP normal, छोटा बच्चा। यह क्या है?"},
+  {"say":"Nephrotic syndrome।"},
+  {"say":"इस age में कौन सा? Minimal change disease।"},
+  {"say":"Urine में heavy protein, और blood में albumin low।"},
+  {"say":"Protein बहुत, albumin कम।"}]},
+ {"id":"q1why","lines":[
+  {"say":"Nephritic क्यों नहीं? Nephritic में hematuria, hypertension, और oliguria होता है।"},
+  {"say":"यहाँ BP normal है। BP normal, तो nephritic नहीं।"},
+  {"say":"Hereditary angioedema episodic होता है। Non-pitting swelling, abdominal pain, और family history।"},
+  {"say":"Protein-losing enteropathy में diarrhea जैसे GI symptoms होते हैं, और urine में protein नहीं होता।"}]},
+ {"id":"q1rem","lines":[
+  {"say":"So remember: morning periorbital puffiness, plus normal BP, मतलब nephrotic syndrome, minimal change।"}]},
+ {"id":"q2case","lines":[
+  {"say":"पहले वाला याद है? सुबह आँखों की swelling, BP normal, nephrotic।"},
+  {"say":"Case two. चार महीने का uncircumcised boy।"},
+  {"say":"दो दिन से fever, 39.1 degree।"},
+  {"say":"Vomiting नहीं, feeding normal।"},
+  {"say":"Mildly ill, पर alert।"},
+  {"say":"Catheter urine में UTI आया।"}]},
+ {"id":"q2ans","lines":[
+  {"say":"Treatment क्या? Oral cephalexin।"},
+  {"say":"Oral क्यों? बच्चा दो महीने से बड़ा है, well दिख रहा है, और feeding अच्छी है।"},
+  {"say":"तो oral antibiotic, IV जितना ही effective है।"}]},
+ {"id":"q2why","lines":[
+  {"say":"IV ceftriaxone कब? जब बच्चा toxic हो, vomiting हो, दो महीने से छोटा हो, या oral न ले सके।"},
+  {"say":"Azithromycin क्यों नहीं? यह E. coli को cover नहीं करता।"},
+  {"say":"Cefepime, Pseudomonas और hospital infections के लिए है। यहाँ overkill है।"}]},
+ {"id":"q2rem","lines":[
+  {"say":"So remember: well infant, दो महीने से बड़ा, UTI के साथ, मतलब oral cephalexin।"}]},
+ {"id":"q3case","lines":[
+  {"say":"पहले दोहरा लो: well infant, UTI, oral cephalexin।"},
+  {"say":"Case three. बच्चे को recurrent UTI है।"},
+  {"say":"अब देखना है, कि kidney में scar बना या नहीं।"}]},
+ {"id":"q3ans","lines":[
+  {"say":"Renal scarring का best test? DMSA scan।"},
+  {"say":"यह cortical scars दिखाता है।"},
+  {"say":"कब करना है? Infection के चार से छह महीने बाद।"}]},
+ {"id":"q3why","lines":[
+  {"say":"Ultrasound क्यों नहीं? Ultrasound anatomy और hydronephrosis देखता है, पर scars miss कर देता है।"},
+  {"say":"MCU किसके लिए? Reflux के लिए, यानी VUR। Scarring के लिए नहीं।"}]},
+ {"id":"q3rem","lines":[
+  {"say":"So remember: scar देखना है, तो DMSA।"},
+  {"say":"Reflux देखना है, तो MCU।"},
+  {"say":"Anatomy देखनी है, तो ultrasound।"}]},
+ {"id":"recap","lines":[
+  {"say":"Part one का recap। तीनों एक साथ।"},
+  {"say":"Morning periorbital swelling, normal BP: nephrotic, minimal change।"},
+  {"say":"Well infant, दो महीने से बड़ा, UTI: oral cephalexin।"},
+  {"say":"Renal scarring: DMSA, चार से छह महीने बाद। Reflux: MCU।"}]},
+ {"id":"think","lines":[
+  {"say":"Think about it: nephrotic और nephritic में BP कैसा होता है?"},
+  {"say":"Nephrotic में, अक्सर normal।"},
+  {"say":"Nephritic में high, और साथ में hematuria।"}]}
+]
